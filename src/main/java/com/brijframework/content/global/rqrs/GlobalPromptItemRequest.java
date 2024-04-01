@@ -10,8 +10,6 @@ public class GlobalPromptItemRequest implements Serializable {
 	public String name;
 	public String desc;
 	public String typeId;
-	public long glbImageDetailId;
-	public long glbCategoryGroupId;
 
 	public long getId() {
 		return id;
@@ -51,22 +49,6 @@ public class GlobalPromptItemRequest implements Serializable {
 
 	public void setTypeId(String typeId) {
 		this.typeId = typeId;
-	}
-
-	public long getGlbImageDetailId() {
-		return glbImageDetailId;
-	}
-
-	public void setGlbImageDetailId(long glbImageDetailId) {
-		this.glbImageDetailId = glbImageDetailId;
-	}
-
-	public long getGlbCategoryGroupId() {
-		return glbCategoryGroupId;
-	}
-
-	public void setGlbCategoryGroupId(long glbCategoryGroupId) {
-		this.glbCategoryGroupId = glbCategoryGroupId;
 	}
 
 }

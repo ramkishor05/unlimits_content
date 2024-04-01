@@ -16,13 +16,13 @@ public interface CustPromptItemRepository extends JpaRepository<EOCustPromptItem
 	
 	EOCustPromptItem findOneByTypeId(String typeId);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Prompt_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
+	@Query(nativeQuery = true, value = "select * from EOCUST_PROMPT_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
 	Optional<EOCustPromptItem> findByCustAppAndName(Long id, String name);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Prompt_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
+	@Query(nativeQuery = true, value = "select * from EOCUST_PROMPT_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
 	List<EOCustPromptItem> findAllByType(Long custAppId, String typeId);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Prompt_ITEM where CUST_BUSINESS_APP_ID= ?1")
+	@Query(nativeQuery = true, value = "select * from EOCUST_PROMPT_ITEM where CUST_BUSINESS_APP_ID= ?1")
 	List<EOCustPromptItem>  findAllByCustAppId(long custAppId);
 
 }

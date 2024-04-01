@@ -16,13 +16,13 @@ public interface CustTagItemRepository extends JpaRepository<EOCustTagItem, Long
 	
 	EOCustTagItem findOneByTypeId(String typeId);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Tag_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
+	@Query(nativeQuery = true, value = "select * from EOCUST_TAG_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
 	Optional<EOCustTagItem> findByCustAppAndName(Long id, String name);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Tag_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
+	@Query(nativeQuery = true, value = "select * from EOCUST_TAG_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
 	List<EOCustTagItem> findAllByType(Long custAppId, String typeId);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Tag_ITEM where CUST_BUSINESS_APP_ID= ?1")
+	@Query(nativeQuery = true, value = "select * from EOCUST_TAG_ITEM where CUST_BUSINESS_APP_ID= ?1")
 	List<EOCustTagItem>  findAllByCustAppId(long custAppId);
 
 }

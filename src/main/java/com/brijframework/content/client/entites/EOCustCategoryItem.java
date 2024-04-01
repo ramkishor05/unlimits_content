@@ -1,10 +1,12 @@
 package com.brijframework.content.client.entites;
 
+import static com.brijframework.content.constants.Constants.COLOR;
 import static com.brijframework.content.constants.Constants.CUST_BUSINESS_APP_ID;
 import static com.brijframework.content.constants.Constants.EOCUST_CATEGORY_ITEM;
 import static com.brijframework.content.constants.Constants.GROUP_ID;
 import static com.brijframework.content.constants.Constants.NAME;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -22,6 +24,9 @@ public class EOCustCategoryItem extends EOCustItem {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name=COLOR)
+	private String color;
 
 	@JoinColumn(name = CUST_BUSINESS_APP_ID, nullable = false)
 	@ManyToOne
@@ -30,6 +35,15 @@ public class EOCustCategoryItem extends EOCustItem {
 	@ManyToOne
 	@JoinColumn(name = GROUP_ID, nullable = false)
 	private EOCustCategoryGroup custCategoryGroup;
+	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 
 	public EOCustBusinessApp getCustBusinessApp() {
 		return custBusinessApp;

@@ -2,8 +2,6 @@ package com.brijframework.content.global.rqrs;
 
 import java.io.Serializable;
 
-import com.brijframework.content.global.model.UIGlobalCategoryGroup;
-
 public class GlobalPromptItemResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -12,7 +10,6 @@ public class GlobalPromptItemResponse implements Serializable {
 	public String name;
 	public String desc;
 	public String typeId;
-	public UIGlobalCategoryGroup globalCategoryGroup;
 
 	public long getId() {
 		return id;
@@ -54,11 +51,4 @@ public class GlobalPromptItemResponse implements Serializable {
 		this.typeId = typeId;
 	}
 
-	public UIGlobalCategoryGroup getGlobalCategoryGroup() {
-		return globalCategoryGroup;
-	}
-
-	public void setGlobalCategoryGroup(UIGlobalCategoryGroup globalCategoryGroup) {
-		this.globalCategoryGroup = globalCategoryGroup;
-	}
 }

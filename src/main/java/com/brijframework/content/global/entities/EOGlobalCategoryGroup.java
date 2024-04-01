@@ -1,10 +1,8 @@
 package com.brijframework.content.global.entities;
 
-import static com.brijframework.content.constants.Constants.DESCRIPTION;
 import static com.brijframework.content.constants.Constants.EOGLOBAL_CATEGORY_GROUP;
 import static com.brijframework.content.constants.Constants.GLB_CATEGORY_GROUP;
-import static com.brijframework.content.constants.Constants.NAME;
-import static com.brijframework.content.constants.Constants.TYPE_ID;
+import static com.brijframework.content.constants.Constants.*;
 
 import java.util.Set;
 
@@ -25,41 +23,19 @@ public class EOGlobalCategoryGroup extends EOGlobalItem {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Column(name = NAME)
-	private String name;
-
-	@Column(name = DESCRIPTION)
-	private String desc;
-
-	@Column(name = TYPE_ID)
-	private String typeId;
 	
+	@Column(name=COLOR)
+	private String color;
+
 	@OneToMany(mappedBy = GLB_CATEGORY_GROUP)
 	public Set<EOGlobalCategoryItem> globalCategories;
 
-	public String getName() {
-		return name;
+	public String getColor() {
+		return color;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	public String getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public Set<EOGlobalCategoryItem> getGlobalCategories() {

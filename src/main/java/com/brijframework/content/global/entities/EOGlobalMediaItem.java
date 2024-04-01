@@ -5,8 +5,6 @@ import static com.brijframework.content.constants.Constants.EOGLOBAL_MEDIA_ITEM;
 import static com.brijframework.content.constants.Constants.TYPE;
 import static com.brijframework.content.constants.Constants.URL;
 
-import com.brijframework.content.entities.EOEntityObject;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -17,7 +15,7 @@ import jakarta.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = EOGLOBAL_MEDIA_ITEM)
-public class EOGlobalMediaItem extends EOEntityObject{
+public class EOGlobalMediaItem extends EOGlobalItem{
 
 	/**
 	 * 

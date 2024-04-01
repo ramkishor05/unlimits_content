@@ -3,7 +3,6 @@ import static com.brijframework.content.constants.Constants.APP_GLOBAL_PACKAGE_I
 import static com.brijframework.content.constants.Constants.SPRING;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.brijframework.content.global.entities.EOGlobalPromptItem;
 import com.brijframework.content.global.rqrs.GlobalPromptItemRequest;
@@ -13,10 +12,8 @@ import com.brijframework.content.mapper.GenericMapper;
 public interface GlobalPromptItemRequestMapper  extends GenericMapper<EOGlobalPromptItem, GlobalPromptItemRequest>{
 
 	@Override
-	@Mapping(target = "globalPromptGroup.id", source = "glbPromptGroupId")
 	EOGlobalPromptItem mapToDAO(GlobalPromptItemRequest globalPromptRequest);
 	
 	@Override
-	@Mapping(source = "globalPromptGroup.id", target = "glbPromptGroupId")
 	GlobalPromptItemRequest mapToDTO(EOGlobalPromptItem eoGlobalPrompt);
 }

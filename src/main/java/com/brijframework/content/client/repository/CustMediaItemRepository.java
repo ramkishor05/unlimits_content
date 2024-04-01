@@ -16,13 +16,13 @@ public interface CustMediaItemRepository extends JpaRepository<EOCustMediaItem, 
 	
 	EOCustMediaItem findOneByTypeId(String typeId);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Media_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
+	@Query(nativeQuery = true, value = "select * from EOCUST_MEDIA_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
 	Optional<EOCustMediaItem> findByCustAppAndName(Long id, String name);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Media_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
+	@Query(nativeQuery = true, value = "select * from EOCUST_MEDIA_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
 	List<EOCustMediaItem> findAllByType(Long custAppId, String typeId);
 
-	@Query(nativeQuery = true, value = "select * from EOCUST_Media_ITEM where CUST_BUSINESS_APP_ID= ?1")
+	@Query(nativeQuery = true, value = "select * from EOCUST_MEDIA_ITEM where CUST_BUSINESS_APP_ID= ?1")
 	List<EOCustMediaItem>  findAllByCustAppId(long custAppId);
 
 }

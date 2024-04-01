@@ -2,6 +2,7 @@ package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.DESCRIPTION;
 import static com.brijframework.content.constants.Constants.IDEN_NO;
+import static com.brijframework.content.constants.Constants.INSTRUCTIONS;
 import static com.brijframework.content.constants.Constants.LOGO_URL;
 import static com.brijframework.content.constants.Constants.NAME;
 import static com.brijframework.content.constants.Constants.TYPE_ID;
@@ -36,6 +37,10 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	
 	@Column(name=TYPE_ID)
 	private String typeId;
+	
+	@Lob
+	@Column(name=INSTRUCTIONS)
+	private String instructions;
 
 	public void setLogoUrl(String logoUrl) {
 		this.logoUrl = logoUrl;
@@ -44,9 +49,6 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	public String getLogoUrl() {
 		return this.logoUrl;
 	}
-
-	@Lob
-	private String instructions;
 
 	public String getIdenNo() {
 		return idenNo;

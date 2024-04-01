@@ -8,7 +8,7 @@ spring:
    sql.init.mode: always
    datasource:
      driverClassName: com.mysql.cj.jdbc.Driver
-     url: jdbc:mysql://localhost:3306/unlimits_auth
+     url: jdbc:mysql://localhost:3306/unlimits_content
      username: root
      password: root
      show-sql: true
@@ -43,7 +43,7 @@ spring:
 #      defaultZone: http://localhost:1111/eureka/
 # HTTP Server (Tomcat) Port
 server: 
-  port: 3333
+  port: 4444
 logging.level.org.hibernate.SQL: DEBUG
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
