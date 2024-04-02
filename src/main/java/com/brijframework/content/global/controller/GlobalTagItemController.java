@@ -19,35 +19,35 @@ import com.brijframework.content.global.service.GlobalTagItemService;
 
 
 @RestController
-@RequestMapping("/api/global/Tag/item")
+@RequestMapping("/api/global/tag/item")
 public class GlobalTagItemController {
 
 	@Autowired
 	private GlobalTagItemService GlobalTagItemService;
 	
 	@PostMapping
-	public GlobalTagItemResponse addTag(@RequestBody GlobalTagItemRequest GlobalTagItemRequest) {
-		return GlobalTagItemService.saveTag(GlobalTagItemRequest);
+	public GlobalTagItemResponse addTagItem(@RequestBody GlobalTagItemRequest GlobalTagItemRequest) {
+		return GlobalTagItemService.saveTagItem(GlobalTagItemRequest);
 	}
 	
 	@PutMapping
 	public GlobalTagItemResponse updateTag(@RequestBody GlobalTagItemRequest GlobalTagItemRequest) {
-		return GlobalTagItemService.saveTag(GlobalTagItemRequest);
+		return GlobalTagItemService.saveTagItem(GlobalTagItemRequest);
 	}
 	
 	@GetMapping
-	public List<GlobalTagItemResponse> getTagList() {
-		return GlobalTagItemService.getTagList();
+	public List<GlobalTagItemResponse> getTagItemList() {
+		return GlobalTagItemService.getTagItemList();
 	}
 	
 	@GetMapping("/{id}")
-	public GlobalTagItemResponse getTagList(@PathVariable("id") Long id) {
-		return GlobalTagItemService.getTag(id);
+	public GlobalTagItemResponse getTagItemList(@PathVariable("id") Long id) {
+		return GlobalTagItemService.getTagItem(id);
 	}
 	
 	@DeleteMapping("/{id}")
 	public boolean deleteTagList(@PathVariable("id") Long id) {
-		return GlobalTagItemService.deleteTag(id);
+		return GlobalTagItemService.deleteTagItem(id);
 	}
 	
 	@GetMapping("/type/{typeId}")

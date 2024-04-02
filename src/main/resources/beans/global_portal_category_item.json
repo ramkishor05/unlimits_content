@@ -1,0 +1,119 @@
+{
+	"id": "Global_Portal_CategoryItem",
+	"orderSequence": 2,
+	"objects": [
+		{
+			"id": "Global_Portal_CategoryItem_Work_Career",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Career",
+				"idenNo": "Global_Portal_CategoryItem_Work_Career",
+				"typeId": "Career",
+				"logoUrl": "",
+				"color": "Career",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Work",
+				"orderSequence": 1.1
+			}
+		}
+		,
+		{
+			"id": "Global_Portal_CategoryItem_Work_Wealth_Luxury",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Wealth & Luxury",
+				"idenNo": "Global_Portal_CategoryItem_Work_Wealth_Luxury",
+				"typeId": "Wealth & Luxury",
+				"logoUrl": "",
+				"color": "Wealth & Luxury",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Work",
+				"orderSequence": 1.2
+			}
+		},
+		{
+			"id": "Global_Portal_CategoryItem_Play_Bucketlist",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Bucketlist",
+				"idenNo": "Global_Portal_CategoryItem_Play_Bucketlist",
+				"typeId": "Bucketlist",
+				"logoUrl": "",
+				"color": "Bucketlist",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
+				"orderSequence": 2.1
+			}
+		},
+		{
+			"id": "Global_Portal_CategoryItem_Play_Home_Recreation",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Home & Recreation",
+				"idenNo": "Global_Portal_CategoryItem_Play_Home_Recreation",
+				"typeId": "Home & Recreation",
+				"logoUrl": "",
+				"color": "Home & Recreation",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
+				"orderSequence": 2.2
+			}
+		},
+		{
+			"id": "Global_Portal_CategoryItem_Self_Self_Growth",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Self Growth",
+				"idenNo": "Global_Portal_CategoryItem_Self_Self_Growth",
+				"typeId": "Self Growth",
+				"logoUrl": "",
+				"color": "Self Growth",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
+				"orderSequence": 3.1
+			}
+		},
+		{
+			"id": "Global_Portal_CategoryItem_Self_Health_Spirituality",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Health & Spirituality",
+				"idenNo": "Global_Portal_CategoryItem_Self_Health_Spirituality",
+				"typeId": "Health & Spirituality",
+				"logoUrl": "",
+				"color": "Health & Spirituality",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Self",
+				"orderSequence": 3.0
+			}
+		},
+		{
+			"id": "Global_Portal_CategoryItem_Love_Romance",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Romance",
+				"idenNo": "Global_Portal_CategoryItem_Love_Romance",
+				"typeId": "Romance",
+				"logoUrl": "",
+				"color": "Romance",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Love",
+				"orderSequence": 3.1
+			}
+		},
+		{
+			"id": "Global_Portal_CategoryItem_Love_Relations_Charity",
+			"type": "com.brijframework.content.global.entities.EOGlobalCategoryItem",
+			"name": "Global_Portal_CategoryItem",
+			"properties": {
+				"name": "Relations & Charity",
+				"idenNo": "Global_Portal_CategoryItem_Love_Relations_Charity",
+				"typeId": "Relations & Charity",
+				"logoUrl": "",
+				"color": "Relations & Charity",
+				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Love",
+				"orderSequence": 3.0
+			}
+		}
+	]
+}

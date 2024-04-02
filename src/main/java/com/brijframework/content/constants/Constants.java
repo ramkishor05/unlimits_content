@@ -255,7 +255,9 @@ public class Constants {
 
 	public static final String CLOSING_BALANCE = "CLOSING_BALANCE";
 	
-	public static final String EOGLOBAL_TAG = "EOGLOBAL_TAG_ITEM";
+	public static final String EOGLOBAL_TAG_GROUP = "EOGLOBAL_TAG_GROUP";
+	
+	public static final String EOGLOBAL_TAG_ITEM = "EOGLOBAL_TAG_ITEM";
 	
 	public static final String EOGLOBAL_PROMPT = "EOGLOBAL_PROMPT_ITEM";
 	
@@ -263,9 +265,10 @@ public class Constants {
 	
 	public static final String EOCUST_MEDIA_ITEM = "EOCUST_MEDIA_ITEM";
 	
+	public static final String EOCUST_TAG_GROUP = "EOCUST_TAG_GROUP";
+	
+	public static final String CATEGORY_ITEM_ID="CATEGORY_ITEM_ID";
+
 	public static final String EOCUST_TAG_ITEM = "EOCUST_TAG_ITEM";
-
-
-
 
 }

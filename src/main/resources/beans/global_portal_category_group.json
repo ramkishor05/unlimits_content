@@ -3,54 +3,55 @@
 	"orderSequence": 2,
 	"objects": [
 		{
-			"id": "Global_Portal_CategoryGroup_SearchBox",
+			"id": "Global_Portal_CategoryGroup_Work",
 			"type": "com.brijframework.content.global.entities.EOGlobalCategoryGroup",
 			"name": "Global_Portal_CategoryGroup",
 			"properties": {
-				"name": "SearchBox",
-				"idenNo": "Global_Portal_CategoryGroup_SearchBox",
-				"typeId": "SearchBox",
+				"name": "Work",
+				"idenNo": "Global_Portal_CategoryGroup_Work",
+				"typeId": "Work",
 				"logoUrl": "",
-				"color": "SearchBox",
+				"color": "Work",
 				"orderSequence": 1.0
 			}
-		},
+		}
+		,
 		{
-			"id": "Global_Portal_CategoryGroup_BusinessOptions",
+			"id": "Global_Portal_CategoryGroup_Play",
 			"type": "com.brijframework.content.global.entities.EOGlobalCategoryGroup",
 			"name": "Global_Portal_CategoryGroup",
 			"properties": {
-				"name": "BusinessOptions",
-				"idenNo": "Global_Portal_CategoryGroup_BusinessOptions",
-				"typeId": "BusinessOptions",
+				"name": "Play",
+				"idenNo": "Global_Portal_CategoryGroup_Play",
+				"typeId": "Play",
 				"logoUrl": "",
-				"color": "BusinessOptions",
+				"color": "Play",
 				"orderSequence": 2.0
 			}
 		},
 		{
-			"id": "Global_Portal_CategoryGroup_ProfileSection",
+			"id": "Global_Portal_CategoryGroup_Self",
 			"type": "com.brijframework.content.global.entities.EOGlobalCategoryGroup",
 			"name": "Global_Portal_CategoryGroup",
 			"properties": {
-				"name": "ProfileSection",
-				"idenNo": "Global_Portal_CategoryGroup_ProfileSection",
-				"typeId": "ProfileSection",
+				"name": "Self",
+				"idenNo": "Global_Portal_CategoryGroup_Self",
+				"typeId": "Self",
 				"logoUrl": "",
-				"color": "ProfileSection",
+				"color": "Self",
 				"orderSequence": 4.0
 			}
 		},
 		{
-			"id": "Global_Portal_CategoryGroup_NotificationSection",
+			"id": "Global_Portal_CategoryGroup_Love",
 			"type": "com.brijframework.content.global.entities.EOGlobalCategoryGroup",
 			"name": "Global_Portal_CategoryGroup",
 			"properties": {
-				"name": "NotificationSection",
-				"idenNo": "Global_Portal_CategoryGroup_NotificationSection",
-				"typeId": "NotificationSection",
+				"name": "Love",
+				"idenNo": "Global_Portal_CategoryGroup_Love",
+				"typeId": "Love",
 				"logoUrl": "",
-				"color": "NotificationSection",
+				"color": "Love",
 				"orderSequence": 3.0
 			}
 		}

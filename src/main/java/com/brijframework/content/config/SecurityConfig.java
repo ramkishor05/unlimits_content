@@ -28,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
     	log.debug("SecurityConfig :: securityFilterChain() started");
         return http.csrf((csrf)->csrf.disable()).cors(cors->cors.disable()) 
-                .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/auth/**").permitAll().anyRequest()
+                .authorizeHttpRequests(authorize->authorize.requestMatchers("/**").permitAll().anyRequest()
                         .authenticated()) 
                 .sessionManagement(Customizer.withDefaults()) 
                 .authenticationProvider(authenticationProvider) 

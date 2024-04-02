@@ -8,14 +8,14 @@ import com.brijframework.content.global.rqrs.GlobalTagItemResponse;
 
 public interface GlobalTagItemService {
 
-	GlobalTagItemResponse saveTag(GlobalTagItemRequest GlobalTagItemRequest);
+	GlobalTagItemResponse saveTagItem(GlobalTagItemRequest GlobalTagItemRequest);
 
-	GlobalTagItemResponse getTag(Long id);
+	GlobalTagItemResponse getTagItem(Long id);
 
-	List<GlobalTagItemResponse> getTagList();
+	List<GlobalTagItemResponse> getTagItemList();
 
 	List<GlobalTagItemResponse> findAllByType(String typeId);
 
-	boolean deleteTag(Long id);
+	boolean deleteTagItem(Long id);
 
 }

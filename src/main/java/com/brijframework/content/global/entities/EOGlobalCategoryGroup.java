@@ -6,6 +6,7 @@ import static com.brijframework.content.constants.Constants.*;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -27,7 +28,7 @@ public class EOGlobalCategoryGroup extends EOGlobalItem {
 	@Column(name=COLOR)
 	private String color;
 
-	@OneToMany(mappedBy = GLB_CATEGORY_GROUP)
+	@OneToMany(mappedBy = GLB_CATEGORY_GROUP, cascade = CascadeType.ALL)
 	public Set<EOGlobalCategoryItem> globalCategories;
 
 	public String getColor() {

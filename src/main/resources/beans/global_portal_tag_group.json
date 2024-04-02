@@ -1,0 +1,71 @@
+{
+	"id": "Global_Portal_TagGroup",
+	"orderSequence": 2,
+	"objects": [
+		{
+			"id": "Global_Portal_TagGroup_My_Career_Business",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagGroup",
+			"name": "Global_Portal_TagGroup",
+			"properties": {
+				"idenNo": "Global_Portal_TagGroup_My_Career_Business",
+				"name": "my career business",
+				"typeId": "my career business",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 1.0
+			}
+		},
+		{
+			"id": "Global_Portal_TagGroup_My_Wealth",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagGroup",
+			"name": "Global_Portal_Group",
+			"properties": {
+				"idenNo": "Global_Portal_TagGroup_My_Wealth",
+				"name": "my wealth",
+				"typeId": "my wealth",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 3.0
+			}
+		},
+		{
+			"id": "Global_Portal_TagGroup_My_Luxury",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagGroup",
+			"name": "Global_Portal_Group",
+			"properties": {
+				"idenNo": "Global_Portal_TagGroup_My_Luxury",
+				"name": "my luxury",
+				"typeId": "my luxury",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 3.0
+			}
+		},
+		{
+			"id": "Global_Portal_TagGroup_my_Bucketlist",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagGroup",
+			"name": "Global_Portal_Group",
+			"properties": {
+				"idenNo": "Global_Portal_TagGroup_My_Bucketlist",
+				"name": "my bucketlist",
+				"typeId": "my bucketlist",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 4.0
+			}
+		},
+		{
+			"id": "Global_Portal_TagGroup_My_Recreation",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagGroup",
+			"name": "Global_Portal_Group",
+			"properties": {
+				"idenNo": "Global_Portal_TagGroup_My_Recreation",
+				"name": "my recreation",
+				"typeId": "my recreation",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 5.0
+			}
+		}
+	]
+}

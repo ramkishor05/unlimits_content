@@ -17,39 +17,39 @@ import com.brijframework.content.global.service.GlobalTagItemService;
 public class GlobalTagItemServiceImpl implements GlobalTagItemService {
 	
 	@Autowired
-	private GlobalTagItemRepository globalTagRepository;
+	private GlobalTagItemRepository globalTagItemRepository;
 	
 	@Autowired
-	private GlobalTagItemRequestMapper globalTagRequestMapper;
+	private GlobalTagItemRequestMapper globalTagItemRequestMapper;
 	
 	@Autowired
-	private GlobalTagItemResponseMapper globalTagResponseMapper;
+	private GlobalTagItemResponseMapper globalTagItemResponseMapper;
 
 	@Override
-	public GlobalTagItemResponse saveTag(GlobalTagItemRequest uiGlobalTag) {
-		EOGlobalTagItem eoGlobalTag = globalTagRequestMapper.mapToDAO(uiGlobalTag);
-		eoGlobalTag=globalTagRepository.saveAndFlush(eoGlobalTag);
-		return globalTagResponseMapper.mapToDTO(eoGlobalTag);
+	public GlobalTagItemResponse saveTagItem(GlobalTagItemRequest uiGlobalTag) {
+		EOGlobalTagItem eoGlobalTag = globalTagItemRequestMapper.mapToDAO(uiGlobalTag);
+		eoGlobalTag=globalTagItemRepository.saveAndFlush(eoGlobalTag);
+		return globalTagItemResponseMapper.mapToDTO(eoGlobalTag);
 	}
 
 	@Override
-	public GlobalTagItemResponse getTag(Long id) {
-	    return globalTagResponseMapper.mapToDTO(globalTagRepository.findById(id).orElse(null));
+	public GlobalTagItemResponse getTagItem(Long id) {
+	    return globalTagItemResponseMapper.mapToDTO(globalTagItemRepository.findById(id).orElse(null));
 	}
 
 	@Override
-	public List<GlobalTagItemResponse> getTagList() {
-		return globalTagResponseMapper.mapToDTO(globalTagRepository.findAll());
+	public List<GlobalTagItemResponse> getTagItemList() {
+		return globalTagItemResponseMapper.mapToDTO(globalTagItemRepository.findAll());
 	}
 
 	@Override
 	public List<GlobalTagItemResponse> findAllByType(String typeId) {
-		return globalTagResponseMapper.mapToDTO(globalTagRepository.findOneByTypeId(typeId));
+		return globalTagItemResponseMapper.mapToDTO(globalTagItemRepository.findOneByTypeId(typeId));
 	}
 	
 	@Override
-	public boolean deleteTag(Long id) {
-		globalTagRepository.deleteById(id);
+	public boolean deleteTagItem(Long id) {
+		globalTagItemRepository.deleteById(id);
 		return true;
 	}
 

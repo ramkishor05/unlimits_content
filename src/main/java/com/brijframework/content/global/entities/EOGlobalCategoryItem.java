@@ -31,6 +31,7 @@ public class EOGlobalCategoryItem extends EOGlobalItem {
 	@JoinColumn(name = GROUP_ID, nullable = false)
 	private EOGlobalCategoryGroup globalCategoryGroup;
 	
+	
 	public String getColor() {
 		return color;
 	}
