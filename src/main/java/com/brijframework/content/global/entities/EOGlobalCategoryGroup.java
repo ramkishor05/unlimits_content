@@ -29,7 +29,7 @@ public class EOGlobalCategoryGroup extends EOGlobalItem {
 	private String color;
 
 	@OneToMany(mappedBy = GLB_CATEGORY_GROUP, cascade = CascadeType.ALL)
-	public Set<EOGlobalCategoryItem> globalCategories;
+	public Set<EOGlobalCategoryItem> globalCategoryItemList;
 
 	public String getColor() {
 		return color;
@@ -39,12 +39,11 @@ public class EOGlobalCategoryGroup extends EOGlobalItem {
 		this.color = color;
 	}
 
-	public Set<EOGlobalCategoryItem> getGlobalCategories() {
-		return globalCategories;
+	public Set<EOGlobalCategoryItem> getGlobalCategoryItemList() {
+		return globalCategoryItemList;
 	}
 
-	public void setGlobalCategories(Set<EOGlobalCategoryItem> globalCategories) {
-		this.globalCategories = globalCategories;
+	public void setGlobalCategoryItemList(Set<EOGlobalCategoryItem> globalCategoryItemList) {
+		this.globalCategoryItemList = globalCategoryItemList;
 	}
-
 }

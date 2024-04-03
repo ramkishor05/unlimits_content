@@ -14,59 +14,78 @@ import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
 import com.brijframework.content.global.entities.EOGlobalTagGroup;
+import com.brijframework.content.global.entities.EOGlobalTagItem;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.repository.GlobalTagGroupRepository;
+import com.brijframework.content.global.repository.GlobalTagItemRepository;
 
 @Component
 public class ContentListener implements ApplicationListener<ContextRefreshedEvent> {
-	
+
 	@Autowired
 	private GlobalCategoryGroupRepository glbCategoryGroupRepository;
-	
+
 	@Autowired
 	private GlobalCategoryItemRepository glbCategoryRepository;
-	
+
 	@Autowired
 	private GlobalTagGroupRepository glbTagGroupRepository;
 	
+	@Autowired
+	private GlobalTagItemRepository glbTagItemRepository;
+
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
-	
-    @Override
-    public void onApplicationEvent(final ContextRefreshedEvent event) {
-    	if(upload) {
-    		
-    		JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
-    		glbCategoryGroupRepository.deleteAll();
-    		glbTagGroupRepository.deleteAll();
-	    	List<EOGlobalCategoryGroup> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalCategoryGroup.class);
-	    	
-	    	eoGlobalCategoryGroupJson.forEach(eoGlobalCategoryGroup->{
-	    		EOGlobalCategoryGroup findGlobalCategoryGroup = glbCategoryGroupRepository.findByTypeId(eoGlobalCategoryGroup.getTypeId()).orElse(eoGlobalCategoryGroup);
-	    		BeanUtils.copyProperties(eoGlobalCategoryGroup, findGlobalCategoryGroup, "id");
-	    		findGlobalCategoryGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
-	    		EOGlobalCategoryGroup eoGlobalCategoryGroupSave= glbCategoryGroupRepository.saveAndFlush(findGlobalCategoryGroup);
-	    		eoGlobalCategoryGroup.setId(eoGlobalCategoryGroupSave.getId());
-	    	});
-	    	
-	    	List<EOGlobalCategoryItem> eoGlobalCategoryJson = instance.getAll(EOGlobalCategoryItem.class);
-	    	
-	    	eoGlobalCategoryJson.forEach(eoGlobalCategory->{
-    			eoGlobalCategory.setRecordState(RecordStatus.ACTIVETED.getStatus());
-    			EOGlobalCategoryItem eoGlobalCategorySave= glbCategoryRepository.saveAndFlush(eoGlobalCategory);
-	    		eoGlobalCategory.setId(eoGlobalCategorySave.getId());
-	    	});
-	    	
-	    	List<EOGlobalTagGroup> eoGlobalTagGroupJson = instance.getAll(EOGlobalTagGroup.class);
-	    	
-	    	eoGlobalTagGroupJson.forEach(eoGlobalTagGroup->{
-	    		EOGlobalTagGroup findGlobalTagGroup = glbTagGroupRepository.findByTypeId(eoGlobalTagGroup.getTypeId()).orElse(eoGlobalTagGroup);
-	    		BeanUtils.copyProperties(eoGlobalTagGroup, findGlobalTagGroup, "id");
-	    		findGlobalTagGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
-	    		EOGlobalTagGroup eoGlobalTagGroupSave= glbTagGroupRepository.saveAndFlush(findGlobalTagGroup);
-	    		eoGlobalTagGroup.setId(eoGlobalTagGroupSave.getId());
-	    	});
-    	}
-    }
+
+	@Override
+	public void onApplicationEvent(final ContextRefreshedEvent event) {
+		if (upload) {
+
+			JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
+			glbCategoryGroupRepository.deleteAll();
+			glbTagGroupRepository.deleteAll();
+			List<EOGlobalCategoryGroup> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalCategoryGroup.class);
+
+			eoGlobalCategoryGroupJson.forEach(eoGlobalCategoryGroup -> {
+				EOGlobalCategoryGroup findGlobalCategoryGroup = glbCategoryGroupRepository
+						.findByTypeId(eoGlobalCategoryGroup.getTypeId()).orElse(eoGlobalCategoryGroup);
+				BeanUtils.copyProperties(eoGlobalCategoryGroup, findGlobalCategoryGroup, "id");
+				findGlobalCategoryGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalCategoryGroup eoGlobalCategoryGroupSave = glbCategoryGroupRepository
+						.saveAndFlush(findGlobalCategoryGroup);
+				eoGlobalCategoryGroup.setId(eoGlobalCategoryGroupSave.getId());
+			});
+
+			List<EOGlobalCategoryItem> eoGlobalCategoryJson = instance.getAll(EOGlobalCategoryItem.class);
+
+			eoGlobalCategoryJson.forEach(eoGlobalCategory -> {
+				eoGlobalCategory.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalCategoryItem eoGlobalCategorySave = glbCategoryRepository.saveAndFlush(eoGlobalCategory);
+				eoGlobalCategory.setId(eoGlobalCategorySave.getId());
+			});
+
+			List<EOGlobalTagGroup> eoGlobalTagGroupJson = instance.getAll(EOGlobalTagGroup.class);
+
+			eoGlobalTagGroupJson.forEach(eoGlobalTagGroup -> {
+				EOGlobalTagGroup findGlobalTagGroup = glbTagGroupRepository.findByTypeId(eoGlobalTagGroup.getTypeId())
+						.orElse(eoGlobalTagGroup);
+				BeanUtils.copyProperties(eoGlobalTagGroup, findGlobalTagGroup, "id");
+				findGlobalTagGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalTagGroup eoGlobalTagGroupSave = glbTagGroupRepository.saveAndFlush(findGlobalTagGroup);
+				eoGlobalTagGroup.setId(eoGlobalTagGroupSave.getId());
+			});
+
+			List<EOGlobalTagItem> eoGlobalTagItemJson = instance.getAll(EOGlobalTagItem.class);
+
+			eoGlobalTagItemJson.forEach(eoGlobalTagItem -> {
+				EOGlobalTagItem findGlobalTagItem = glbTagItemRepository.findByIdenNo(eoGlobalTagItem.getIdenNo())
+						.orElse(eoGlobalTagItem);
+				BeanUtils.copyProperties(eoGlobalTagItem, findGlobalTagItem, "id");
+				findGlobalTagItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalTagItem eoGlobalTagItemSave = glbTagItemRepository.saveAndFlush(findGlobalTagItem);
+				eoGlobalTagItem.setId(eoGlobalTagItemSave.getId());
+			});
+		}
+	}
 }

@@ -31,6 +31,14 @@ public class EOGlobalTagItem extends EOGlobalItem {
 	@JoinColumn(name = GROUP_ID, nullable = false)
 	private EOGlobalTagGroup globalTagGroup;
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 	public EOGlobalTagGroup getGlobalTagGroup() {
 		return globalTagGroup;
 	}

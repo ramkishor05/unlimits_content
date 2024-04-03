@@ -270,5 +270,8 @@ public class Constants {
 	public static final String CATEGORY_ITEM_ID="CATEGORY_ITEM_ID";
 
 	public static final String EOCUST_TAG_ITEM = "EOCUST_TAG_ITEM";
+	
+	public static final String GLB_TAG_GROUP = "globalTagGroup";
+
 
 }

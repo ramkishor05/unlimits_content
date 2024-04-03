@@ -1,0 +1,76 @@
+{
+	"id": "Global_Portal_TagItem",
+	"orderSequence":3,
+	"objects": [
+		{
+			"id": "Global_Portal_TagItem_My_savings_grow_exponentially",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagItem",
+			"name": "Global_Portal_TagItem",
+			"properties": {
+				"idenNo": "Global_Portal_TagItem_My_savings_grow_exponentially",
+				"name": "My savings grow exponentially.",
+				"typeId": "Savings",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 11.0,
+				"globalTagGroup": "LK@Global_Portal_TagGroup_My_Wealth"
+			}
+		},
+		{
+			"id": "Global_Portal_TagItem_I_have_a_solid_emergency_fund.",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagItem",
+			"name": "Global_Portal_TagItem",
+			"properties": {
+				"idenNo": "Global_Portal_TagItem_I_have_a_solid_emergency_fund.",
+				"name": "I have a solid emergency fund.",
+				"typeId": "Savings",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 11.0,
+				"globalTagGroup": "LK@Global_Portal_TagGroup_My_Wealth"
+			}
+		},
+		{
+			"id": "Global_Portal_TagItem_My_savings_rate_is_high.",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagItem",
+			"name": "Global_Portal_TagItem",
+			"properties": {
+				"idenNo": "Global_Portal_TagItem_My_savings_rate_is_high.",
+				"name": "My savings rate is high.",
+				"typeId": "Savings",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 11.0,
+				"globalTagGroup": "LK@Global_Portal_TagGroup_My_Wealth"
+			}
+		},
+		{
+			"id": "Global_Portal_TagItem_I_save_for_multiple_goals.",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagItem",
+			"name": "Global_Portal_TagItem",
+			"properties": {
+				"idenNo": "Global_Portal_TagItem_I_save_for_multiple_goals.",
+				"name": "I save for multiple goals.",
+				"typeId": "Savings",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 11.0,
+				"globalTagGroup": "LK@Global_Portal_TagGroup_My_Wealth"
+			}
+		},
+		{
+			"id": "Global_Portal_TagItem_I_rely_on_fixed_deposits.",
+			"type": "com.brijframework.content.global.entities.EOGlobalTagItem",
+			"name": "Global_Portal_TagItem",
+			"properties": {
+				"idenNo": "Global_Portal_TagItem_I_rely_on_fixed_deposits.",
+				"name": "I rely on fixed deposits.",
+				"typeId": "Savings",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 11.0,
+				"globalTagGroup": "LK@Global_Portal_TagGroup_My_Wealth"
+			}
+		}
+	]
+}

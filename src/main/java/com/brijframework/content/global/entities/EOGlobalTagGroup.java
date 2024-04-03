@@ -2,12 +2,17 @@ package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.COLOR;
 import static com.brijframework.content.constants.Constants.EOGLOBAL_TAG_GROUP;
+import static com.brijframework.content.constants.Constants.GLB_TAG_GROUP;
 import static com.brijframework.content.constants.Constants.NAME;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -23,6 +28,9 @@ public class EOGlobalTagGroup extends EOGlobalItem {
 	
 	@Column(name=COLOR)
 	private String color;
+	
+	@OneToMany(mappedBy = GLB_TAG_GROUP, cascade = CascadeType.ALL)
+	public Set<EOGlobalTagItem> globalTagItemList;
 
 	public String getColor() {
 		return color;
@@ -31,4 +39,13 @@ public class EOGlobalTagGroup extends EOGlobalItem {
 	public void setColor(String color) {
 		this.color = color;
 	}
+
+	public Set<EOGlobalTagItem> getGlobalTagItemList() {
+		return globalTagItemList;
+	}
+
+	public void setGlobalTagItemList(Set<EOGlobalTagItem> globalTagItemList) {
+		this.globalTagItemList = globalTagItemList;
+	}
+	
 }
