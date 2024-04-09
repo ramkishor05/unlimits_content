@@ -43,7 +43,7 @@ spring:
 #      defaultZone: http://localhost:1111/eureka/
 # HTTP Server (Tomcat) Port
 server: 
-  port: 4444
+  port: 5555
 logging.level.org.hibernate.SQL: DEBUG
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
