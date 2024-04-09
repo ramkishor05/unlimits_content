@@ -1,5 +1,6 @@
 package com.brijframework.content.constants;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +22,10 @@ public enum DataStatus {
 
 	public List<Integer> getStatusIds() {
 		return statusIds;
+	}
+	
+	public List<String> getStatusList() {
+		return Arrays.asList(status);
 	}
 	
 }

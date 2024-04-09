@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brijframework.content.global.rqrs.GlobalCategoryItemRequest;
+import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.rqrs.GlobalCategoryItemResponse;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
 
@@ -28,17 +28,17 @@ public class GlobalCategoryItemController {
 	private GlobalCategoryItemService GlobalCategoryItemService;
 	
 	@PostMapping
-	public GlobalCategoryItemResponse addCategory(@RequestBody GlobalCategoryItemRequest GlobalCategoryItemRequest) {
+	public UIGlobalCategoryItem addCategory(@RequestBody UIGlobalCategoryItem GlobalCategoryItemRequest) {
 		return GlobalCategoryItemService.saveCategory(GlobalCategoryItemRequest);
 	}
 	
 	@PutMapping
-	public GlobalCategoryItemResponse updateCategory(@RequestBody GlobalCategoryItemRequest GlobalCategoryItemRequest) {
+	public UIGlobalCategoryItem updateCategory(@RequestBody UIGlobalCategoryItem GlobalCategoryItemRequest) {
 		return GlobalCategoryItemService.saveCategory(GlobalCategoryItemRequest);
 	}
 	
 	@GetMapping
-	public List<GlobalCategoryItemResponse> getCategoryList() {
+	public List<UIGlobalCategoryItem> getCategoryList() {
 		return GlobalCategoryItemService.getCategoryList();
 	}
 	

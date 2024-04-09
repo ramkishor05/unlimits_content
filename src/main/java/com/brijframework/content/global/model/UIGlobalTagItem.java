@@ -10,6 +10,7 @@ public class UIGlobalTagItem implements Serializable {
 	public String name;
 	public String desc;
 	public String typeId;
+	public Long groupId;
 	
 	public long getId() {
 		return id;
@@ -51,4 +52,11 @@ public class UIGlobalTagItem implements Serializable {
 		this.typeId = typeId;
 	}
 
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
 }

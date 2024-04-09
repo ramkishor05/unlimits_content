@@ -2,17 +2,17 @@ package com.brijframework.content.global.service;
 
 import java.util.List;
 
-import com.brijframework.content.global.rqrs.GlobalCategoryItemRequest;
+import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.rqrs.GlobalCategoryItemResponse;
 
 
 public interface GlobalCategoryItemService {
 
-	GlobalCategoryItemResponse saveCategory(GlobalCategoryItemRequest GlobalCategoryItemRequest);
+	UIGlobalCategoryItem saveCategory(UIGlobalCategoryItem globalCategoryItem);
 
 	GlobalCategoryItemResponse getCategory(Long id);
 
-	List<GlobalCategoryItemResponse> getCategoryList();
+	List<UIGlobalCategoryItem> getCategoryList();
 
 	List<GlobalCategoryItemResponse> findAllByType(String typeId);
 

@@ -169,7 +169,7 @@ public class Constants {
 	public static final String CUST_UNIT_GROUP = "custUnitGroup";
 	public static final String CUST_CURRENCY_GROUP = "custCurrencyGroup";
 
-	public static final String EOGLOBAL_CATEGORY = "EOGLOBAL_CATEGORY";
+	public static final String EOGLOBAL_CATEGORY_ITEM = "EOGLOBAL_CATEGORY_ITEM";
 	public static final String EOGLOBAL_CATEGORY_GROUP = "EOGLOBAL_CATEGORY_GROUP";
 	public static final String EOGLOBAL_COUNT_FREQ = "EOGLOBAL_COUNT_FREQ";
 	public static final String EOGLOBAL_MANUFACTURER = "EOGLOBAL_MANUFACTURER";

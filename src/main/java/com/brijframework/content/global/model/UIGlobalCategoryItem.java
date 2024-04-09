@@ -10,6 +10,7 @@ public class UIGlobalCategoryItem implements Serializable {
 	public String name;
 	public String desc;
 	public String typeId;
+	private Long groupId;
 	
 	public long getId() {
 		return id;
@@ -51,4 +52,12 @@ public class UIGlobalCategoryItem implements Serializable {
 		this.typeId = typeId;
 	}
 
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
 }

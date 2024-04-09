@@ -1,7 +1,7 @@
 package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.COLOR;
-import static com.brijframework.content.constants.Constants.EOGLOBAL_CATEGORY;
+import static com.brijframework.content.constants.Constants.EOGLOBAL_CATEGORY_ITEM;
 import static com.brijframework.content.constants.Constants.GROUP_ID;
 import static com.brijframework.content.constants.Constants.NAME;
 
@@ -16,7 +16,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name=EOGLOBAL_CATEGORY ,  uniqueConstraints = { @UniqueConstraint (columnNames = {GROUP_ID, NAME})} )
+@Table(name=EOGLOBAL_CATEGORY_ITEM ,  uniqueConstraints = { @UniqueConstraint (columnNames = {GROUP_ID, NAME})} )
 public class EOGlobalCategoryItem extends EOGlobalItem {
 
 	/**

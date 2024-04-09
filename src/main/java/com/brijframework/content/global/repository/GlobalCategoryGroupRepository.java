@@ -26,4 +26,8 @@ public interface GlobalCategoryGroupRepository extends JpaRepository<EOGlobalCat
 
 	@Query(nativeQuery = true, value = "select * from EOGLOBAL_CATEGORY_GROUP where TYPE_ID = ?1")
 	Optional<EOGlobalCategoryGroup> findByTypeId(String typeId);
+
+	Optional<EOGlobalCategoryGroup> findByName(String name);
+
+	Optional<EOGlobalCategoryGroup> findByIdenNo(String idenNo);
 }

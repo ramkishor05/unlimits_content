@@ -18,4 +18,6 @@ public interface GlobalTagGroupRepository extends JpaRepository<EOGlobalTagGroup
 	int countByTypeId(String typeId);
 
 	Optional<EOGlobalTagGroup> findByTypeId(String typeId);
+
+	Optional<EOGlobalTagGroup> findByIdenNo(String typeId);
 }

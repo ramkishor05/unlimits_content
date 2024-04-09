@@ -1,15 +1,18 @@
 package com.brijframework.content.global.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
+import com.brijframework.content.global.mapper.GlobalCategoryItemMapper;
 import com.brijframework.content.global.mapper.GlobalCategoryItemRequestMapper;
 import com.brijframework.content.global.mapper.GlobalCategoryItemResponseMapper;
+import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
-import com.brijframework.content.global.rqrs.GlobalCategoryItemRequest;
 import com.brijframework.content.global.rqrs.GlobalCategoryItemResponse;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
 
@@ -24,12 +27,16 @@ public class GlobalCategoryItemServiceImpl implements GlobalCategoryItemService 
 	
 	@Autowired
 	private GlobalCategoryItemResponseMapper globalCategoryResponseMapper;
+	
+	@Autowired
+	private GlobalCategoryItemMapper globalCategoryMapper;
 
 	@Override
-	public GlobalCategoryItemResponse saveCategory(GlobalCategoryItemRequest uiGlobalCategory) {
-		EOGlobalCategoryItem eoGlobalCategory = globalCategoryRequestMapper.mapToDAO(uiGlobalCategory);
+	public UIGlobalCategoryItem saveCategory(UIGlobalCategoryItem uiGlobalCategory) {
+		EOGlobalCategoryItem eoGlobalCategory = globalCategoryMapper.mapToDAO(uiGlobalCategory);
+		eoGlobalCategory.setRecordState(DataStatus.ACTIVETED.getStatus());
 		eoGlobalCategory=globalCategoryRepository.saveAndFlush(eoGlobalCategory);
-		return globalCategoryResponseMapper.mapToDTO(eoGlobalCategory);
+		return globalCategoryMapper.mapToDTO(eoGlobalCategory);
 	}
 
 	@Override
@@ -38,8 +45,8 @@ public class GlobalCategoryItemServiceImpl implements GlobalCategoryItemService 
 	}
 
 	@Override
-	public List<GlobalCategoryItemResponse> getCategoryList() {
-		return globalCategoryResponseMapper.mapToDTO(globalCategoryRepository.findAll());
+	public List<UIGlobalCategoryItem> getCategoryList() {
+		return globalCategoryMapper.mapToDTO(globalCategoryRepository.findAllByStatus(DataStatus.ACTIVETED.getStatusList()));
 	}
 
 	@Override
@@ -49,8 +56,14 @@ public class GlobalCategoryItemServiceImpl implements GlobalCategoryItemService 
 	
 	@Override
 	public boolean deleteCategory(Long id) {
-		globalCategoryRepository.deleteById(id);
-		return true;
+		Optional<EOGlobalCategoryItem> findById = globalCategoryRepository.findById(id);
+		if(findById.isPresent()) {
+			EOGlobalCategoryItem eoGlobalCategoryItem = findById.get();
+			eoGlobalCategoryItem.setRecordState(DataStatus.DACTIVETED.getStatus());
+			globalCategoryRepository.save(eoGlobalCategoryItem);
+			return true;
+		}
+		return false;
 	}
 
 }
