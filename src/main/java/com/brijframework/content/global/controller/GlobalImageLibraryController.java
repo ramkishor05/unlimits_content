@@ -19,8 +19,8 @@ import com.brijframework.content.global.service.GlobalPromptItemService;
 
 
 @RestController
-@RequestMapping("/api/global/prompt/tag")
-public class GlobalPromptItemController {
+@RequestMapping("/api/global/image/library")
+public class GlobalImageLibraryController {
 
 	@Autowired
 	private GlobalPromptItemService GlobalPromptItemService;
