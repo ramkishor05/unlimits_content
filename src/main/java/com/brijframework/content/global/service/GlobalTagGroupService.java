@@ -2,20 +2,13 @@ package com.brijframework.content.global.service;
 
 import java.util.List;
 
-import com.brijframework.content.global.rqrs.GlobalTagGroupRequest;
-import com.brijframework.content.global.rqrs.GlobalTagGroupResponse;
+import com.brijframework.content.global.entities.EOGlobalTagGroup;
+import com.brijframework.content.global.model.UIGlobalTagGroup;
+import com.brijframework.content.service.CrudService;
 
 
-public interface GlobalTagGroupService {
+public interface GlobalTagGroupService extends CrudService<UIGlobalTagGroup, EOGlobalTagGroup, Long>{
 
-	GlobalTagGroupResponse saveTagGroup(GlobalTagGroupRequest GlobalTagGroupRequest);
-
-	GlobalTagGroupResponse getTagGroup(Long id);
-
-	List<GlobalTagGroupResponse> getTagGroupList();
-
-	List<GlobalTagGroupResponse> findAllByType(String typeId);
-
-	boolean deleteTagGroup(Long id);
+	List<UIGlobalTagGroup> findAllByType(String typeId);
 
 }

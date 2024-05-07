@@ -2,20 +2,13 @@ package com.brijframework.content.global.service;
 
 import java.util.List;
 
-import com.brijframework.content.global.rqrs.GlobalMediaItemRequest;
-import com.brijframework.content.global.rqrs.GlobalMediaItemResponse;
+import com.brijframework.content.global.entities.EOGlobalMediaItem;
+import com.brijframework.content.global.model.UIGlobalMediaItem;
+import com.brijframework.content.service.CrudService;
 
 
-public interface GlobalMediaItemService {
+public interface GlobalMediaItemService extends CrudService<UIGlobalMediaItem, EOGlobalMediaItem, Long>{
 
-	GlobalMediaItemResponse saveMedia(GlobalMediaItemRequest GlobalMediaItemRequest);
-
-	GlobalMediaItemResponse getMedia(Long id);
-
-	List<GlobalMediaItemResponse> getMediaList();
-
-	List<GlobalMediaItemResponse> findAllByType(String typeId);
-
-	boolean deleteMedia(Long id);
+	List<UIGlobalMediaItem> findAllByType(String typeId);
 
 }

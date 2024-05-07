@@ -3,20 +3,14 @@ package com.brijframework.content.global.service;
 import java.util.List;
 
 import com.brijframework.content.constants.RecordStatus;
+import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.model.UIGlobalCategoryGroup;
+import com.brijframework.content.service.CrudService;
 
-public interface GlobalCategoryGroupService {
-
-	UIGlobalCategoryGroup saveCategoryGroup(UIGlobalCategoryGroup unitGroup);
-
-	UIGlobalCategoryGroup getCategoryGroup(long id);
-
-	List<UIGlobalCategoryGroup> getCategoryGroupList();
-
-	List<UIGlobalCategoryGroup> getCategoryGroup( String typeId);
+public interface GlobalCategoryGroupService  extends CrudService<UIGlobalCategoryGroup, EOGlobalCategoryGroup, Long>{
 
 	List<UIGlobalCategoryGroup> getCategoryGroupList(RecordStatus dataStatus);
 
-	boolean deleteCategoryGroup(Long id);
+	List<UIGlobalCategoryGroup> getCategoryGroup(String typeId);
 
 }

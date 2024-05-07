@@ -4,54 +4,32 @@ import static com.brijframework.content.constants.Constants.TYPE_ID;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brijframework.content.global.rqrs.GlobalPromptItemRequest;
-import com.brijframework.content.global.rqrs.GlobalPromptItemResponse;
+import com.brijframework.content.controller.CrudController;
+import com.brijframework.content.global.entities.EOGlobalPromptItem;
+import com.brijframework.content.global.model.UIGlobalPromptItem;
 import com.brijframework.content.global.service.GlobalPromptItemService;
+import com.brijframework.content.service.CrudService;
 
 
 @RestController
 @RequestMapping("/api/global/mindset/library")
-public class GlobalMindSetLibraryController {
+public class GlobalMindSetLibraryController extends CrudController<UIGlobalPromptItem, EOGlobalPromptItem, Long>{
 
 	@Autowired
-	private GlobalPromptItemService GlobalPromptItemService;
-	
-	@PostMapping
-	public GlobalPromptItemResponse addPrompt(@RequestBody GlobalPromptItemRequest GlobalPromptItemRequest) {
-		return GlobalPromptItemService.savePrompt(GlobalPromptItemRequest);
-	}
-	
-	@PutMapping
-	public GlobalPromptItemResponse updatePrompt(@RequestBody GlobalPromptItemRequest GlobalPromptItemRequest) {
-		return GlobalPromptItemService.savePrompt(GlobalPromptItemRequest);
-	}
-	
-	@GetMapping
-	public List<GlobalPromptItemResponse> getPromptList() {
-		return GlobalPromptItemService.getPromptList();
-	}
-	
-	@GetMapping("/{id}")
-	public GlobalPromptItemResponse getPromptList(@PathVariable("id") Long id) {
-		return GlobalPromptItemService.getPrompt(id);
-	}
-	
-	@DeleteMapping("/{id}")
-	public boolean deletePromptList(@PathVariable("id") Long id) {
-		return GlobalPromptItemService.deletePrompt(id);
-	}
+	private GlobalPromptItemService globalPromptItemService;
 	
 	@GetMapping("/type/{typeId}")
-	public List<GlobalPromptItemResponse> getPromptList(@PathVariable(TYPE_ID) String typeId) {
-		return GlobalPromptItemService.findAllByType(typeId);
+	public List<UIGlobalPromptItem> getPromptList(@PathVariable(TYPE_ID) String typeId) {
+		return globalPromptItemService.findAllByType(typeId);
+	}
+
+	@Override
+	public CrudService<UIGlobalPromptItem, EOGlobalPromptItem, Long> getService() {
+		return globalPromptItemService;
 	}
 }

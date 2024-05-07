@@ -4,54 +4,32 @@ import static com.brijframework.content.constants.Constants.TYPE_ID;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brijframework.content.global.rqrs.GlobalTagItemRequest;
-import com.brijframework.content.global.rqrs.GlobalTagItemResponse;
+import com.brijframework.content.controller.CrudController;
+import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.model.UIGlobalTagItem;
 import com.brijframework.content.global.service.GlobalTagItemService;
+import com.brijframework.content.service.CrudService;
 
 
 @RestController
 @RequestMapping("/api/global/tag/item")
-public class GlobalTagItemController {
+public class GlobalTagItemController extends CrudController<UIGlobalTagItem, EOGlobalTagItem, Long>{
 
 	@Autowired
-	private GlobalTagItemService GlobalTagItemService;
-	
-	@PostMapping
-	public GlobalTagItemResponse addTagItem(@RequestBody GlobalTagItemRequest GlobalTagItemRequest) {
-		return GlobalTagItemService.saveTagItem(GlobalTagItemRequest);
-	}
-	
-	@PutMapping
-	public GlobalTagItemResponse updateTag(@RequestBody GlobalTagItemRequest GlobalTagItemRequest) {
-		return GlobalTagItemService.saveTagItem(GlobalTagItemRequest);
-	}
-	
-	@GetMapping
-	public List<GlobalTagItemResponse> getTagItemList() {
-		return GlobalTagItemService.getTagItemList();
-	}
-	
-	@GetMapping("/{id}")
-	public GlobalTagItemResponse getTagItemList(@PathVariable("id") Long id) {
-		return GlobalTagItemService.getTagItem(id);
-	}
-	
-	@DeleteMapping("/{id}")
-	public boolean deleteTagList(@PathVariable("id") Long id) {
-		return GlobalTagItemService.deleteTagItem(id);
-	}
+	private GlobalTagItemService globalTagItemService;
 	
 	@GetMapping("/type/{typeId}")
-	public List<GlobalTagItemResponse> getTagList(@PathVariable(TYPE_ID) String typeId) {
-		return GlobalTagItemService.findAllByType(typeId);
+	public List<UIGlobalTagItem> getTagList(@PathVariable(TYPE_ID) String typeId) {
+		return globalTagItemService.findAllByType(typeId);
+	}
+
+	@Override
+	public CrudService<UIGlobalTagItem, EOGlobalTagItem, Long> getService() {
+		return globalTagItemService;
 	}
 }

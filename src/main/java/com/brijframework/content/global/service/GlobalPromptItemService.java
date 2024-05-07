@@ -2,20 +2,13 @@ package com.brijframework.content.global.service;
 
 import java.util.List;
 
-import com.brijframework.content.global.rqrs.GlobalPromptItemRequest;
-import com.brijframework.content.global.rqrs.GlobalPromptItemResponse;
+import com.brijframework.content.global.entities.EOGlobalPromptItem;
+import com.brijframework.content.global.model.UIGlobalPromptItem;
+import com.brijframework.content.service.CrudService;
 
 
-public interface GlobalPromptItemService {
+public interface GlobalPromptItemService extends CrudService<UIGlobalPromptItem, EOGlobalPromptItem, Long>{
 
-	GlobalPromptItemResponse savePrompt(GlobalPromptItemRequest GlobalPromptItemRequest);
-
-	GlobalPromptItemResponse getPrompt(Long id);
-
-	List<GlobalPromptItemResponse> getPromptList();
-
-	List<GlobalPromptItemResponse> findAllByType(String typeId);
-
-	boolean deletePrompt(Long id);
+	List<UIGlobalPromptItem> findAllByType(String typeId);
 
 }

@@ -2,20 +2,13 @@ package com.brijframework.content.global.service;
 
 import java.util.List;
 
-import com.brijframework.content.global.rqrs.GlobalTagItemRequest;
-import com.brijframework.content.global.rqrs.GlobalTagItemResponse;
+import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.model.UIGlobalTagItem;
+import com.brijframework.content.service.CrudService;
 
 
-public interface GlobalTagItemService {
+public interface GlobalTagItemService extends CrudService<UIGlobalTagItem, EOGlobalTagItem, Long>{
 
-	GlobalTagItemResponse saveTagItem(GlobalTagItemRequest GlobalTagItemRequest);
-
-	GlobalTagItemResponse getTagItem(Long id);
-
-	List<GlobalTagItemResponse> getTagItemList();
-
-	List<GlobalTagItemResponse> findAllByType(String typeId);
-
-	boolean deleteTagItem(Long id);
+	List<UIGlobalTagItem> findAllByType(String typeId);
 
 }

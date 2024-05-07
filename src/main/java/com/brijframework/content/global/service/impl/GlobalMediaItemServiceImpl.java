@@ -3,54 +3,39 @@ package com.brijframework.content.global.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.brijframework.content.global.entities.EOGlobalMediaItem;
-import com.brijframework.content.global.mapper.GlobalMediaItemRequestMapper;
-import com.brijframework.content.global.mapper.GlobalMediaItemResponseMapper;
+import com.brijframework.content.global.mapper.GlobalMediaItemMapper;
+import com.brijframework.content.global.model.UIGlobalMediaItem;
 import com.brijframework.content.global.repository.GlobalMediaItemRepository;
-import com.brijframework.content.global.rqrs.GlobalMediaItemRequest;
-import com.brijframework.content.global.rqrs.GlobalMediaItemResponse;
 import com.brijframework.content.global.service.GlobalMediaItemService;
+import com.brijframework.content.mapper.GenericMapper;
+import com.brijframework.content.service.CrudServiceImpl;
 
 @Service
-public class GlobalMediaItemServiceImpl implements GlobalMediaItemService {
+public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaItem, EOGlobalMediaItem, Long> implements GlobalMediaItemService {
 	
 	@Autowired
 	private GlobalMediaItemRepository globalMediaRepository;
 	
 	@Autowired
-	private GlobalMediaItemRequestMapper globalMediaRequestMapper;
-	
-	@Autowired
-	private GlobalMediaItemResponseMapper globalMediaResponseMapper;
-
-	@Override
-	public GlobalMediaItemResponse saveMedia(GlobalMediaItemRequest uiGlobalMedia) {
-		EOGlobalMediaItem eoGlobalMedia = globalMediaRequestMapper.mapToDAO(uiGlobalMedia);
-		eoGlobalMedia=globalMediaRepository.saveAndFlush(eoGlobalMedia);
-		return globalMediaResponseMapper.mapToDTO(eoGlobalMedia);
-	}
-
-	@Override
-	public GlobalMediaItemResponse getMedia(Long id) {
-	    return globalMediaResponseMapper.mapToDTO(globalMediaRepository.findById(id).orElse(null));
-	}
-
-	@Override
-	public List<GlobalMediaItemResponse> getMediaList() {
-		return globalMediaResponseMapper.mapToDTO(globalMediaRepository.findAll());
-	}
-
-	@Override
-	public List<GlobalMediaItemResponse> findAllByType(String typeId) {
-		return globalMediaResponseMapper.mapToDTO(globalMediaRepository.findOneByTypeId(typeId));
-	}
+	private GlobalMediaItemMapper globalMediaMapper;
 	
 	@Override
-	public boolean deleteMedia(Long id) {
-		globalMediaRepository.deleteById(id);
-		return true;
+	public List<UIGlobalMediaItem> findAllByType(String typeId) {
+		return globalMediaMapper.mapToDTO(globalMediaRepository.findOneByTypeId(typeId));
 	}
 
+	@Override
+	public JpaRepository<EOGlobalMediaItem, Long> getRepository() {
+		return globalMediaRepository;
+	}
+
+	@Override
+	public GenericMapper<EOGlobalMediaItem, UIGlobalMediaItem> getMapper() {
+		return globalMediaMapper;
+	}
+	
 }

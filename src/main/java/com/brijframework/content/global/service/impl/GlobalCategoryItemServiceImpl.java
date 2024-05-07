@@ -4,63 +4,55 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
 import com.brijframework.content.global.mapper.GlobalCategoryItemMapper;
-import com.brijframework.content.global.mapper.GlobalCategoryItemRequestMapper;
 import com.brijframework.content.global.mapper.GlobalCategoryItemResponseMapper;
 import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.rqrs.GlobalCategoryItemResponse;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
+import com.brijframework.content.mapper.GenericMapper;
+import com.brijframework.content.service.CrudServiceImpl;
 
 @Service
-public class GlobalCategoryItemServiceImpl implements GlobalCategoryItemService {
+public class GlobalCategoryItemServiceImpl extends CrudServiceImpl<UIGlobalCategoryItem, EOGlobalCategoryItem, Long> implements GlobalCategoryItemService {
 	
 	@Autowired
-	private GlobalCategoryItemRepository globalCategoryRepository;
-	
-	@Autowired
-	private GlobalCategoryItemRequestMapper globalCategoryRequestMapper;
+	private GlobalCategoryItemRepository globalCategoryItemRepository;
 	
 	@Autowired
 	private GlobalCategoryItemResponseMapper globalCategoryResponseMapper;
 	
 	@Autowired
-	private GlobalCategoryItemMapper globalCategoryMapper;
+	private GlobalCategoryItemMapper globalCategoryItemMapper;
 
 	@Override
-	public UIGlobalCategoryItem saveCategory(UIGlobalCategoryItem uiGlobalCategory) {
-		EOGlobalCategoryItem eoGlobalCategory = globalCategoryMapper.mapToDAO(uiGlobalCategory);
-		eoGlobalCategory.setRecordState(DataStatus.ACTIVETED.getStatus());
-		eoGlobalCategory=globalCategoryRepository.saveAndFlush(eoGlobalCategory);
-		return globalCategoryMapper.mapToDTO(eoGlobalCategory);
+	public JpaRepository<EOGlobalCategoryItem, Long> getRepository() {
+		return globalCategoryItemRepository;
 	}
 
 	@Override
-	public GlobalCategoryItemResponse getCategory(Long id) {
-	    return globalCategoryResponseMapper.mapToDTO(globalCategoryRepository.findById(id).orElse(null));
+	public GenericMapper<EOGlobalCategoryItem, UIGlobalCategoryItem> getMapper() {
+		return globalCategoryItemMapper;
 	}
 
-	@Override
-	public List<UIGlobalCategoryItem> getCategoryList() {
-		return globalCategoryMapper.mapToDTO(globalCategoryRepository.findAllByStatus(DataStatus.ACTIVETED.getStatusList()));
-	}
-
+	
 	@Override
 	public List<GlobalCategoryItemResponse> findAllByType(String typeId) {
-		return globalCategoryResponseMapper.mapToDTO(globalCategoryRepository.findOneByTypeId(typeId));
+		return globalCategoryResponseMapper.mapToDTO(globalCategoryItemRepository.findOneByTypeId(typeId));
 	}
 	
 	@Override
-	public boolean deleteCategory(Long id) {
-		Optional<EOGlobalCategoryItem> findById = globalCategoryRepository.findById(id);
+	public Boolean delete(Long id) {
+		Optional<EOGlobalCategoryItem> findById = globalCategoryItemRepository.findById(id);
 		if(findById.isPresent()) {
 			EOGlobalCategoryItem eoGlobalCategoryItem = findById.get();
 			eoGlobalCategoryItem.setRecordState(DataStatus.DACTIVETED.getStatus());
-			globalCategoryRepository.save(eoGlobalCategoryItem);
+			globalCategoryItemRepository.save(eoGlobalCategoryItem);
 			return true;
 		}
 		return false;
