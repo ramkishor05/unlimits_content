@@ -8,7 +8,7 @@ public class UIGlobalPromptItem implements Serializable {
 	public long id;
 	public String idenNo;
 	public String name;
-	public String desc;
+	public String description;
 	public String typeId;
 	
 	public long getId() {
@@ -35,12 +35,12 @@ public class UIGlobalPromptItem implements Serializable {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getTypeId() {
