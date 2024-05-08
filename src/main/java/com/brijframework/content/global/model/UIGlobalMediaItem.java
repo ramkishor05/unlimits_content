@@ -10,6 +10,7 @@ public class UIGlobalMediaItem implements Serializable {
 	public String name;
 	public String description;
 	public String typeId;
+	public String content;
 	
 	public long getId() {
 		return id;
@@ -51,4 +52,11 @@ public class UIGlobalMediaItem implements Serializable {
 		this.typeId = typeId;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }
