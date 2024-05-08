@@ -35,8 +35,7 @@ public class GlobalTagItemServiceImpl extends CrudServiceImpl<UIGlobalTagItem, E
 
 	@Override
 	public GenericMapper<EOGlobalTagItem, UIGlobalTagItem> getMapper() {
-		// TODO Auto-generated method stub
-		return null;
+		return globalTagItemMapper;
 	}
 	
 }
