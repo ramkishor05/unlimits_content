@@ -172,7 +172,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>
-						com.brijframework.authorization.AuthorizationApplication</mainClass>
+						com.brijframework.content.ContentApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
