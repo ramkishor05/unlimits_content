@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.unlimits.rest.crud.mapper.GenericMapper;
+import org.unlimits.rest.crud.service.CrudServiceImpl;
 
 import com.brijframework.content.global.entities.EOGlobalTagGroup;
 import com.brijframework.content.global.mapper.GlobalTagGroupMapper;
 import com.brijframework.content.global.model.UIGlobalTagGroup;
 import com.brijframework.content.global.repository.GlobalTagGroupRepository;
 import com.brijframework.content.global.service.GlobalTagGroupService;
-import com.brijframework.content.mapper.GenericMapper;
-import com.brijframework.content.service.CrudServiceImpl;
 
 @Service
 public class GlobalTagGroupServiceImpl extends CrudServiceImpl<UIGlobalTagGroup, EOGlobalTagGroup, Long> implements GlobalTagGroupService {

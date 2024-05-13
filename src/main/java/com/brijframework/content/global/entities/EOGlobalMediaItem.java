@@ -28,9 +28,8 @@ public class EOGlobalMediaItem extends EOGlobalItem{
 	@Column(name=URL)
 	public String url;
 	
-	@Column(name=DETAIL)
-	@Lob
-	public byte[] detail;
+	@Column(name=DETAIL, columnDefinition = "LONGTEXT")
+	public String content;
 
 	public String getType() {
 		return type;
@@ -48,14 +47,13 @@ public class EOGlobalMediaItem extends EOGlobalItem{
 		this.url = url;
 	}
 
-	public byte[] getDetail() {
-		return detail;
+	public String getContent() {
+		return content;
 	}
 
-	public void setDetail(byte[] detail) {
-		this.detail = detail;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	
-	
+
 	
 }

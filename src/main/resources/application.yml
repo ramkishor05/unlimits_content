@@ -8,7 +8,7 @@ spring:
    sql.init.mode: always
    datasource:
      driverClassName: com.mysql.cj.jdbc.Driver
-     url: jdbc:mysql://localhost:3306/unlimits_content
+     url: jdbc:mysql://localhost:3306/unlimits_content?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
      username: root
      password: root
      show-sql: true
@@ -36,9 +36,16 @@ spring:
    db:
      datajson:
        upload: true
+openapi:
+  service:
+    title: content
+    version: 1.0.0
+    url: http://localhost:8080 #api gateway url
 springdoc:
-   swagger-ui:
-      path: /api/swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /api/swagger-ui.html
 # Discovery Server Access
 #eureka:
 #  client:

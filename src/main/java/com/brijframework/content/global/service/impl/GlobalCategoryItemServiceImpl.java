@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.unlimits.rest.crud.mapper.GenericMapper;
+import org.unlimits.rest.crud.service.CrudServiceImpl;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
@@ -15,8 +17,6 @@ import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.rqrs.GlobalCategoryItemResponse;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
-import com.brijframework.content.mapper.GenericMapper;
-import com.brijframework.content.service.CrudServiceImpl;
 
 @Service
 public class GlobalCategoryItemServiceImpl extends CrudServiceImpl<UIGlobalCategoryItem, EOGlobalCategoryItem, Long> implements GlobalCategoryItemService {

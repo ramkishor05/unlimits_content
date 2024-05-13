@@ -6,10 +6,10 @@ import static com.brijframework.content.constants.Constants.SPRING;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.unlimits.rest.crud.mapper.GenericMapper;
 
 import com.brijframework.content.client.entites.EOCustTagGroup;
 import com.brijframework.content.client.model.UICustTagGroup;
-import com.brijframework.content.mapper.GenericMapper;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_CLIENT_PACKAGE_IMPL)
 public interface CustTagGroupMapper  extends GenericMapper<EOCustTagGroup, UICustTagGroup>{

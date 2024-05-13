@@ -33,6 +33,12 @@
 		</dependency>
 -->
 		<dependency>
+			<groupId>com.brijframework</groupId>
+			<artifactId>unlimits-rest</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
@@ -64,7 +70,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		
+
 		<!-- Spring mail -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -96,7 +102,7 @@
 			</exclusions>
 		</dependency>
 
-			<!-- JWT Library -->
+		<!-- JWT Library -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -121,7 +127,7 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${org.mapstruct.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -155,8 +161,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<!-- or newer version -->
 				<configuration>
-					<source>${maven.compiler.source}</source> <!-- depending on your project -->
-					<target>${maven.compiler.target}</target> <!-- depending on your project -->
+					<source>${maven.compiler.source}</source> <!-- depending on
+					your project -->
+					<target>${maven.compiler.target}</target> <!-- depending on
+					your project -->
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.mapstruct</groupId>
