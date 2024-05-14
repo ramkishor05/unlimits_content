@@ -174,6 +174,7 @@ public class Constants {
 	public static final String EOGLOBAL_COUNT_FREQ = "EOGLOBAL_COUNT_FREQ";
 	public static final String EOGLOBAL_MANUFACTURER = "EOGLOBAL_MANUFACTURER";
 	public static final String EOGLOBAL_MEDIA_ITEM = "EOGLOBAL_MEDIA_ITEM";
+	public static final String EOGLOBAL_MINDSET_ITEM = "EOGLOBAL_MINDSET_ITEM";
 	public static final String EOGLOBAL_CURRENCY_ITEM = "EOGLOBAL_CURRENCY_ITEM";
 	public static final String EOGLOBAL_CURRENCY_GROUP = "EOGLOBAL_CURRENCY_GROUP";
 	public static final String UNIT_GROUP = "unitGroup";

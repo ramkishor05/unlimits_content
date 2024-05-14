@@ -17,7 +17,7 @@ import com.brijframework.content.global.service.GlobalMediaItemService;
 
 
 @RestController
-@RequestMapping("/api/global/Media/item")
+@RequestMapping("/api/global/media/item")
 public class GlobalMediaItemController extends CrudController<UIGlobalMediaItem, EOGlobalMediaItem, Long>{
 
 	@Autowired

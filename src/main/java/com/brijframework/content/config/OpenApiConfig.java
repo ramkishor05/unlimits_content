@@ -1,8 +1,11 @@
 package com.brijframework.content.config;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.brijframework.content.constants.Constants;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -13,24 +16,23 @@ import io.swagger.v3.oas.models.servers.Server;
 @Configuration
 public class OpenApiConfig {
 
-	/**
-	 * 
-	 */
-	private  String openApiServer = "http://localhost:8080/content";
-	private final String moduleName = "Auth";
+	private final String moduleName = "Content";
 	private final String apiVersion = "1.1";
+	
+	@Value("${openapi.service.url}")
+	private String serverUrl;
 
 	@Bean
 	public OpenAPI customOpenAPI() {
-		final String securitySchemeName = com.brijframework.content.constants.Constants.AUTHORIZATION;
+		final String securitySchemeName = Constants.AUTHORIZATION;
 		final String apiTitle = String.format("%s API", StringUtils.capitalize(moduleName));
 
-		return new OpenAPI().addServersItem(new Server().url(openApiServer))
-				.components(
-						new Components().addSecuritySchemes(securitySchemeName,
-								new SecurityScheme().name(securitySchemeName).type(SecurityScheme.Type.HTTP)
-										.scheme("bearer").bearerFormat("JWT")))
-				
+		return new OpenAPI().addServersItem(new Server().url(serverUrl))
+				.components(new Components().addSecuritySchemes(securitySchemeName,
+						new SecurityScheme().name(securitySchemeName).type(SecurityScheme.Type.HTTP).scheme("bearer")
+								.bearerFormat("JWT")))
+
 				.info(new Info().title(apiTitle).version(apiVersion));
 	}
+
 }

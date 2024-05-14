@@ -1,7 +1,7 @@
 package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.DETAIL;
-import static com.brijframework.content.constants.Constants.EOGLOBAL_MEDIA_ITEM;
+import static com.brijframework.content.constants.Constants.EOGLOBAL_MINDSET_ITEM;
 import static com.brijframework.content.constants.Constants.TYPE;
 import static com.brijframework.content.constants.Constants.URL;
 
@@ -13,8 +13,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = EOGLOBAL_MEDIA_ITEM)
-public class EOGlobalMediaItem extends EOGlobalItem{
+@Table(name = EOGLOBAL_MINDSET_ITEM)
+public class EOGlobalMindSetItem extends EOGlobalItem{
 
 	/**
 	 * 
