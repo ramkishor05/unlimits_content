@@ -40,7 +40,7 @@ openapi:
   service:
     title: content
     version: 1.0.0
-    url: http://localhost:8080/content #api gateway url
+    url: http://51.79.159.7:8080/content #api gateway url
 springdoc:
   api-docs:
     path: /v3/api-docs
