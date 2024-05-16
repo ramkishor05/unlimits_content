@@ -19,8 +19,11 @@ import com.brijframework.content.client.model.UICustCategoryGroup;
 import com.brijframework.content.client.service.CustCategoryGroupService;
 import com.brijframework.content.constants.RecordStatus;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("api/client/category/group")
+@Hidden
 public class CustCategoryGroupController {
 
 	@Autowired

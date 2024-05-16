@@ -19,8 +19,11 @@ import com.brijframework.content.client.rqrs.CustCategoryItemRequest;
 import com.brijframework.content.client.rqrs.CustCategoryItemResponse;
 import com.brijframework.content.client.service.CustCategoryItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("/api/client/category/item")
+@Hidden
 public class CustCategoryItemController {
 
 	@Autowired

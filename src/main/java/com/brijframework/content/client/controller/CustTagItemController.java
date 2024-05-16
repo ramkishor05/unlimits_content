@@ -19,8 +19,11 @@ import com.brijframework.content.client.rqrs.CustTagItemRequest;
 import com.brijframework.content.client.rqrs.CustTagItemResponse;
 import com.brijframework.content.client.service.CustTagItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("/api/client/Tag/item")
+@Hidden
 public class CustTagItemController {
 
 	@Autowired

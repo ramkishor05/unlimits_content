@@ -24,4 +24,7 @@ public interface GlobalCategoryItemRepository extends JpaRepository<EOGlobalCate
 	Optional<EOGlobalCategoryItem> findByName(String name);
 
 	Optional<EOGlobalCategoryItem> findByIdenNo(String idenNo);
+
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_CATEGORY_ITEM GCI INNER JOIN EOGLOBAL_CATEGORY_GROUP GCG ON GCG.ID=  GCI.GROUP_ID WHERE GCI.GROUP_ID IN (?) ORDER BY GCG.NAME, GCI.NAME ")
+	List<EOGlobalCategoryItem>  findAllByGroupId(Long categoryId);
 }

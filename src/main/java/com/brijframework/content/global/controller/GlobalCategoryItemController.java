@@ -17,10 +17,13 @@ import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.rqrs.GlobalCategoryItemResponse;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 
 @RestController
 @RequestMapping("/api/global/category/item")
 @CrossOrigin("*")
+@Hidden
 public class GlobalCategoryItemController extends CrudController<UIGlobalCategoryItem, EOGlobalCategoryItem, Long>{
 
 	@Autowired

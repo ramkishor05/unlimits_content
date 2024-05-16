@@ -19,8 +19,11 @@ import com.brijframework.content.client.rqrs.CustMediaItemRequest;
 import com.brijframework.content.client.rqrs.CustMediaItemResponse;
 import com.brijframework.content.client.service.CustMediaItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("/api/client/Media/item")
+@Hidden
 public class CustMediaItemController {
 
 	@Autowired

@@ -15,9 +15,12 @@ import com.brijframework.content.global.entities.EOGlobalPromptItem;
 import com.brijframework.content.global.model.UIGlobalPromptItem;
 import com.brijframework.content.global.service.GlobalPromptItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 
 @RestController
 @RequestMapping("/api/global/prompt")
+@Hidden
 public class GlobalPromptItemController extends CrudController<UIGlobalPromptItem, EOGlobalPromptItem, Long> {
 
 	@Autowired

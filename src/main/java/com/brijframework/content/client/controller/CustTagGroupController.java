@@ -19,8 +19,11 @@ import com.brijframework.content.client.rqrs.CustTagGroupRequest;
 import com.brijframework.content.client.rqrs.CustTagGroupResponse;
 import com.brijframework.content.client.service.CustTagGroupService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("/api/client/tag/group")
+@Hidden
 public class CustTagGroupController {
 
 	@Autowired

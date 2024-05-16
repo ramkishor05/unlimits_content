@@ -15,9 +15,12 @@ import com.brijframework.content.global.entities.EOGlobalTagItem;
 import com.brijframework.content.global.model.UIGlobalTagItem;
 import com.brijframework.content.global.service.GlobalTagItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 
 @RestController
 @RequestMapping("/api/global/tag/item")
+@Hidden
 public class GlobalTagItemController extends CrudController<UIGlobalTagItem, EOGlobalTagItem, Long>{
 
 	@Autowired

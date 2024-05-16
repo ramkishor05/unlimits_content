@@ -11,7 +11,7 @@
 				"idenNo": "Global_Portal_CategoryGroup_Work",
 				"typeId": "Work",
 				"logoUrl": "",
-				"color": "Work",
+				"color": "red",
 				"orderSequence": 1.0
 			}
 		}
@@ -25,7 +25,7 @@
 				"idenNo": "Global_Portal_CategoryGroup_Play",
 				"typeId": "Play",
 				"logoUrl": "",
-				"color": "Play",
+				"color": "red",
 				"orderSequence": 2.0
 			}
 		},
@@ -38,7 +38,7 @@
 				"idenNo": "Global_Portal_CategoryGroup_Self",
 				"typeId": "Self",
 				"logoUrl": "",
-				"color": "Self",
+				"color": "red",
 				"orderSequence": 4.0
 			}
 		},
@@ -51,7 +51,7 @@
 				"idenNo": "Global_Portal_CategoryGroup_Love",
 				"typeId": "Love",
 				"logoUrl": "",
-				"color": "Love",
+				"color": "red",
 				"orderSequence": 3.0
 			}
 		}

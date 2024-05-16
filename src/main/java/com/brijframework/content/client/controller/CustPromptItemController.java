@@ -19,8 +19,11 @@ import com.brijframework.content.client.rqrs.CustPromptItemRequest;
 import com.brijframework.content.client.rqrs.CustPromptItemResponse;
 import com.brijframework.content.client.service.CustPromptItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("/api/client/Prompt/item")
+@Hidden
 public class CustPromptItemController {
 
 	@Autowired

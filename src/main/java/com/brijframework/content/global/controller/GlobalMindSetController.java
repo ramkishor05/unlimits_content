@@ -15,9 +15,12 @@ import com.brijframework.content.global.entities.EOGlobalMindSetItem;
 import com.brijframework.content.global.model.UIGlobalMindSetItem;
 import com.brijframework.content.global.service.GlobalMindSetItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 
 @RestController
 @RequestMapping("/api/global/mindset/item")
+@Hidden
 public class GlobalMindSetController extends CrudController<UIGlobalMindSetItem, EOGlobalMindSetItem, Long>{
 
 	@Autowired

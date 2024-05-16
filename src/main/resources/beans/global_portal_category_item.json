@@ -11,7 +11,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Work_Career",
 				"typeId": "Career",
 				"logoUrl": "",
-				"color": "Career",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Work",
 				"orderSequence": 1.1
 			}
@@ -26,7 +26,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Work_Wealth_Luxury",
 				"typeId": "Wealth & Luxury",
 				"logoUrl": "",
-				"color": "Wealth & Luxury",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Work",
 				"orderSequence": 1.2
 			}
@@ -40,7 +40,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Play_Bucketlist",
 				"typeId": "Bucketlist",
 				"logoUrl": "",
-				"color": "Bucketlist",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
 				"orderSequence": 2.1
 			}
@@ -54,7 +54,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Play_Home_Recreation",
 				"typeId": "Home & Recreation",
 				"logoUrl": "",
-				"color": "Home & Recreation",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
 				"orderSequence": 2.2
 			}
@@ -68,7 +68,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Self_Self_Growth",
 				"typeId": "Self Growth",
 				"logoUrl": "",
-				"color": "Self Growth",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
 				"orderSequence": 3.1
 			}
@@ -82,7 +82,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Self_Health_Spirituality",
 				"typeId": "Health & Spirituality",
 				"logoUrl": "",
-				"color": "Health & Spirituality",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Self",
 				"orderSequence": 3.0
 			}
@@ -96,7 +96,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Love_Romance",
 				"typeId": "Romance",
 				"logoUrl": "",
-				"color": "Romance",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Love",
 				"orderSequence": 3.1
 			}
@@ -110,7 +110,7 @@
 				"idenNo": "Global_Portal_CategoryItem_Love_Relations_Charity",
 				"typeId": "Relations & Charity",
 				"logoUrl": "",
-				"color": "Relations & Charity",
+				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Love",
 				"orderSequence": 3.0
 			}

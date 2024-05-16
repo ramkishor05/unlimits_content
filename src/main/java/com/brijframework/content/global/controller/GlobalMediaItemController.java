@@ -15,9 +15,12 @@ import com.brijframework.content.global.entities.EOGlobalMediaItem;
 import com.brijframework.content.global.model.UIGlobalMediaItem;
 import com.brijframework.content.global.service.GlobalMediaItemService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 
 @RestController
 @RequestMapping("/api/global/media/item")
+@Hidden
 public class GlobalMediaItemController extends CrudController<UIGlobalMediaItem, EOGlobalMediaItem, Long>{
 
 	@Autowired

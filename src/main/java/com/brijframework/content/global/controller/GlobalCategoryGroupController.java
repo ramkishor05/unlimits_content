@@ -16,9 +16,12 @@ import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.model.UIGlobalCategoryGroup;
 import com.brijframework.content.global.service.GlobalCategoryGroupService;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 @RestController
 @RequestMapping("api/global/category/group")
 @CrossOrigin("*")
+@Hidden
 public class GlobalCategoryGroupController extends CrudController<UIGlobalCategoryGroup, EOGlobalCategoryGroup, Long> {
 
 	@Autowired
