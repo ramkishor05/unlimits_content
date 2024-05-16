@@ -6,16 +6,16 @@ public class UIDeviceSubTag extends UIDeviceItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long tagId;
-	
+	private Long mainTagId;
+
 	private String color;
 
-	public Long getTagId() {
-		return tagId;
+	public Long getMainTagId() {
+		return mainTagId;
 	}
 
-	public void setTagId(Long tagId) {
-		this.tagId = tagId;
+	public void setMainTagId(Long mainTagId) {
+		this.mainTagId = mainTagId;
 	}
 
 	public String getColor() {
@@ -25,6 +25,5 @@ public class UIDeviceSubTag extends UIDeviceItem implements Serializable {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
-	
+
 }

@@ -12,6 +12,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -29,6 +31,10 @@ public class EOGlobalTagGroup extends EOGlobalItem {
 	@Column(name=COLOR)
 	private String color;
 	
+	@JoinColumn(name = "SUB_CATEGORY_ID")
+	@ManyToOne
+	private EOGlobalCategoryItem globalCategoryItem;
+	
 	@OneToMany(mappedBy = GLB_TAG_GROUP, cascade = CascadeType.ALL)
 	public Set<EOGlobalTagItem> globalTagItemList;
 
@@ -38,6 +44,14 @@ public class EOGlobalTagGroup extends EOGlobalItem {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public EOGlobalCategoryItem getGlobalCategoryItem() {
+		return globalCategoryItem;
+	}
+
+	public void setGlobalCategoryItem(EOGlobalCategoryItem globalCategoryItem) {
+		this.globalCategoryItem = globalCategoryItem;
 	}
 
 	public Set<EOGlobalTagItem> getGlobalTagItemList() {

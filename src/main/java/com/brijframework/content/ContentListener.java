@@ -43,6 +43,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 		if (upload) {
 
 			try {
+				
 			JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
 			List<EOGlobalCategoryGroup> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalCategoryGroup.class);
 

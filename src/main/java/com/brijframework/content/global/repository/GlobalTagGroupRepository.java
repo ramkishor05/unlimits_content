@@ -20,4 +20,10 @@ public interface GlobalTagGroupRepository extends JpaRepository<EOGlobalTagGroup
 	Optional<EOGlobalTagGroup> findByTypeId(String typeId);
 
 	Optional<EOGlobalTagGroup> findByIdenNo(String typeId);
+
+	/**
+	 * @param subcategoryId
+	 * @return
+	 */
+	List<EOGlobalTagGroup> findAllByGlobalCategoryItemId(Long subcategoryId);
 }

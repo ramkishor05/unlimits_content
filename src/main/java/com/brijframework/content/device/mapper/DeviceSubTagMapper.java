@@ -14,10 +14,10 @@ import com.brijframework.content.global.entities.EOGlobalTagItem;
 public interface DeviceSubTagMapper  extends GenericMapper<EOGlobalTagItem, UIDeviceSubTag>{
 
 	@Override
-	@Mapping(source = "globalTagGroup.id", target = "tagId")
+	@Mapping(source = "globalTagGroup.id", target = "mainTagId")
     UIDeviceSubTag mapToDTO(EOGlobalTagItem eoGlobalTagGroup);
 	
 	@Override
-	@Mapping(target = "globalTagGroup.id", source = "tagId")
+	@Mapping(target = "globalTagGroup.id", source = "mainTagId")
     EOGlobalTagItem mapToDAO(UIDeviceSubTag uiDeviceMainTag);
 }

@@ -1,5 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,11 @@ public class DeviceMainTagServiceImpl extends QueryServiceImpl<UIDeviceMainTag, 
 	@Override
 	public GenericMapper<EOGlobalTagGroup, UIDeviceMainTag> getMapper() {
 		return deviceMainTagMapper;
+	}
+
+	@Override
+	public List<UIDeviceMainTag> findAllBySubCategoryId(Long subcategoryId) {
+		return deviceMainTagMapper.mapToDTO(globalTagGroupRepository.findAllByGlobalCategoryItemId(subcategoryId));
 	}
 	
 

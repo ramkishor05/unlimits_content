@@ -21,9 +21,9 @@ public class DeviceSubTagController extends QueryController<UIDeviceSubTag, EOGl
 	@Autowired
 	private DeviceSubTagService deviceSubTagService;
 	
-	@GetMapping("/tag/{tagId}")
-	public List<UIDeviceSubTag> getTagList(@PathVariable("tagId") Long tagId) {
-		return deviceSubTagService.findAllByTagId(tagId);
+	@GetMapping("/findby/maintag/{maintagId}")
+	public List<UIDeviceSubTag> getSubTagList(@PathVariable("maintagId") Long maintagId) {
+		return deviceSubTagService.findAllByTagId(maintagId);
 	}
 
 	@Override

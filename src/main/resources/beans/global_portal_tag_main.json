@@ -12,7 +12,8 @@
 				"typeId": "my career business",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 1.0
+				"orderSequence": 1.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -25,7 +26,8 @@
 				"typeId": "my wealth",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 3.0
+				"orderSequence": 3.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -38,7 +40,8 @@
 				"typeId": "my luxury",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 3.0
+				"orderSequence": 3.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -51,7 +54,8 @@
 				"typeId": "my bucketlist",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 4.0
+				"orderSequence": 4.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -64,7 +68,8 @@
 				"typeId": "my recreation",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 5.0
+				"orderSequence": 5.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -77,7 +82,8 @@
 				"typeId": "my self growth ",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 6.0
+				"orderSequence": 6.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -90,7 +96,8 @@
 				"typeId": " my health",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 7.0
+				"orderSequence": 7.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -103,7 +110,8 @@
 				"typeId": "my spirituality",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 8.0
+				"orderSequence": 8.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -116,7 +124,8 @@
 				"typeId": " My romance",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 9.0
+				"orderSequence": 9.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -129,7 +138,8 @@
 				"typeId": "My relationships",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 10.0
+				"orderSequence": 10.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		},
 		{
@@ -142,7 +152,8 @@
 				"typeId": "My charity",
 				"logoUrl": "",
 				"color": "red",
-				"orderSequence": 11.0
+				"orderSequence": 11.0,
+				"globalCategoryItem": "LK@Global_Portal_CategoryItem_Work_Career"
 			}
 		}
 	]
