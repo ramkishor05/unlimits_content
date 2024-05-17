@@ -35,4 +35,5 @@ public class GlobalMediaItemController extends CrudController<UIGlobalMediaItem,
 	public CrudService<UIGlobalMediaItem, EOGlobalMediaItem, Long> getService() {
 		return globalMediaItemService;
 	}
+	
 }
