@@ -61,3 +61,4 @@ error:
   whitelabel:
     enabled: true
 spring.resources.static-locations: classpath:/    
+server.resource.location: file:c:/images/
