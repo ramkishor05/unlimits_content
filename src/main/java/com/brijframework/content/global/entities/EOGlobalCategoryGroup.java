@@ -25,19 +25,8 @@ public class EOGlobalCategoryGroup extends EOGlobalItem {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name=COLOR)
-	private String color;
-
 	@OneToMany(mappedBy = GLB_CATEGORY_GROUP, cascade = CascadeType.ALL)
 	public Set<EOGlobalCategoryItem> globalCategoryItemList;
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
 
 	public Set<EOGlobalCategoryItem> getGlobalCategoryItemList() {
 		return globalCategoryItemList;

@@ -14,6 +14,8 @@ public class UIDeviceItem extends UIEntityObject{
 
 	private String instructions;
 
+	private String color;
+
 	public String getIdenNo() {
 		return idenNo;
 	}
@@ -53,4 +55,13 @@ public class UIDeviceItem extends UIEntityObject{
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 }

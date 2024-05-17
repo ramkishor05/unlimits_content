@@ -1,5 +1,6 @@
 package com.brijframework.content.global.entities;
 
+import static com.brijframework.content.constants.Constants.COLOR;
 import static com.brijframework.content.constants.Constants.DESCRIPTION;
 import static com.brijframework.content.constants.Constants.IDEN_NO;
 import static com.brijframework.content.constants.Constants.INSTRUCTIONS;
@@ -41,6 +42,10 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	@Lob
 	@Column(name=INSTRUCTIONS)
 	private String instructions;
+
+	@Column(name=COLOR)
+	private String color;
+
 
 	public void setLogoUrl(String logoUrl) {
 		this.logoUrl = logoUrl;
@@ -89,5 +94,14 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
 
 }

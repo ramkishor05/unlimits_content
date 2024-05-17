@@ -28,7 +28,7 @@ public class DeviceSubCategoryController extends QueryController<UIDeviceSubCate
 		return deviceSubCategoryService;
 	}
 	
-	@GetMapping("/category/{categoryId}")
+	@GetMapping("/findby/category/{categoryId}")
 	public List<UIDeviceSubCategory> getCategoryListByCategoryId(@PathVariable("categoryId") Long categoryId) {
 		return deviceSubCategoryService.findAllByCategoryId(categoryId);
 	}
