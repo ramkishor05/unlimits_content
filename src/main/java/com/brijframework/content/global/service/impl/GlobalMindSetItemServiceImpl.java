@@ -1,7 +1,5 @@
 package com.brijframework.content.global.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -23,11 +21,6 @@ public class GlobalMindSetItemServiceImpl extends CrudServiceImpl<UIGlobalMindSe
 	@Autowired
 	private GlobalMindSetItemMapper globalMindSetMapper;
 	
-	@Override
-	public List<UIGlobalMindSetItem> findAllByType(String typeId) {
-		return globalMindSetMapper.mapToDTO(globalMindSetRepository.findOneByTypeId(typeId));
-	}
-
 	@Override
 	public JpaRepository<EOGlobalMindSetItem, Long> getRepository() {
 		return globalMindSetRepository;

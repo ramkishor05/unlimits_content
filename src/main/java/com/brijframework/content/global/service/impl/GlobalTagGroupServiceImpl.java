@@ -1,7 +1,5 @@
 package com.brijframework.content.global.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -22,11 +20,6 @@ public class GlobalTagGroupServiceImpl extends CrudServiceImpl<UIGlobalTagGroup,
 	
 	@Autowired
 	private GlobalTagGroupMapper globalTagGroupMapper;
-
-	@Override
-	public List<UIGlobalTagGroup> findAllByType(String typeId) {
-		return globalTagGroupMapper.mapToDTO(globalTagGroupRepository.findOneByTypeId(typeId));
-	}
 
 	@Override
 	public JpaRepository<EOGlobalTagGroup, Long> getRepository() {

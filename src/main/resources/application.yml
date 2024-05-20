@@ -61,4 +61,4 @@ error:
   whitelabel:
     enabled: true
 spring.resources.static-locations: classpath:/    
-server.resource.location: file:c:/images/
+server.resource.location: file:C:/app_runs/unlimits-resources

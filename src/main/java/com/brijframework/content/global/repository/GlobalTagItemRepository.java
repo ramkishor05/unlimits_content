@@ -13,12 +13,6 @@ import com.brijframework.content.global.entities.EOGlobalTagItem;
 @Repository
 @Transactional
 public interface GlobalTagItemRepository extends JpaRepository<EOGlobalTagItem, Long>{
-	
-	List<EOGlobalTagItem> findOneByTypeId(String typeId);
-
-	int countByTypeId(String typeId);
-
-	Optional<EOGlobalTagItem> findByTypeId(String typeId);
 
 	Optional<EOGlobalTagItem> findByIdenNo(String idenNo);
 

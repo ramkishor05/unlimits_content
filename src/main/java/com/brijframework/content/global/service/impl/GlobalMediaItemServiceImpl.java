@@ -3,7 +3,6 @@ package com.brijframework.content.global.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -30,11 +29,6 @@ public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaIte
 	
 	@Autowired
 	private ResourceService resourceService;
-	
-	@Override
-	public List<UIGlobalMediaItem> findAllByType(String typeId) {
-		return globalMediaMapper.mapToDTO(globalMediaRepository.findOneByTypeId(typeId));
-	}
 
 	@Override
 	public JpaRepository<EOGlobalMediaItem, Long> getRepository() {

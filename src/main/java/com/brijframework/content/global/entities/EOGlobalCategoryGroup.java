@@ -2,12 +2,11 @@ package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.EOGLOBAL_CATEGORY_GROUP;
 import static com.brijframework.content.constants.Constants.GLB_CATEGORY_GROUP;
-import static com.brijframework.content.constants.Constants.*;
+import static com.brijframework.content.constants.Constants.NAME;
 
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;

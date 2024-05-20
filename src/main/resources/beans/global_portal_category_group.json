@@ -9,7 +9,6 @@
 			"properties": {
 				"name": "Work",
 				"idenNo": "Global_Portal_CategoryGroup_Work",
-				"typeId": "Work",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 1.0
@@ -23,7 +22,6 @@
 			"properties": {
 				"name": "Play",
 				"idenNo": "Global_Portal_CategoryGroup_Play",
-				"typeId": "Play",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 2.0
@@ -36,7 +34,6 @@
 			"properties": {
 				"name": "Self",
 				"idenNo": "Global_Portal_CategoryGroup_Self",
-				"typeId": "Self",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 4.0
@@ -49,7 +46,6 @@
 			"properties": {
 				"name": "Love",
 				"idenNo": "Global_Portal_CategoryGroup_Love",
-				"typeId": "Love",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 3.0

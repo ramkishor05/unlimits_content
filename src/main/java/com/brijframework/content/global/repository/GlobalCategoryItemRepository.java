@@ -14,10 +14,6 @@ import com.brijframework.content.global.entities.EOGlobalCategoryItem;
 @Transactional
 public interface GlobalCategoryItemRepository extends JpaRepository<EOGlobalCategoryItem, Long>{
 	
-	List<EOGlobalCategoryItem> findOneByTypeId(String typeId);
-
-	int countByTypeId(String typeId);
-
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_CATEGORY_ITEM GCI INNER JOIN EOGLOBAL_CATEGORY_GROUP GCG ON GCG.ID=  GCI.GROUP_ID WHERE GCI.RECORD_STATUS IN (?) ORDER BY GCG.NAME, GCI.NAME ")
 	List<EOGlobalCategoryItem> findAllByStatus(List<String> status);
 

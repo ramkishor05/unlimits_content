@@ -36,9 +36,4 @@ public class GlobalCategoryGroupController extends CrudController<UIGlobalCatego
 	public List<UIGlobalCategoryGroup> getCategoryGroupList(@PathVariable("status") RecordStatus  dataStatus) {
 		return globalCategoryGroupService.getCategoryGroupList(dataStatus);
 	}
-	
-	@GetMapping("/type/{typeId}")
-	public List<UIGlobalCategoryGroup> getCategoryGroupList(@PathVariable("typeId") String typeId) {
-		return globalCategoryGroupService.getCategoryGroup(typeId);
-	}
 }

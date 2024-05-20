@@ -9,7 +9,6 @@
 			"properties": {
 				"name": "Career",
 				"idenNo": "Global_Portal_CategoryItem_Work_Career",
-				"typeId": "Career",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Work",
@@ -24,7 +23,6 @@
 			"properties": {
 				"name": "Wealth & Luxury",
 				"idenNo": "Global_Portal_CategoryItem_Work_Wealth_Luxury",
-				"typeId": "Wealth & Luxury",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Work",
@@ -38,7 +36,6 @@
 			"properties": {
 				"name": "Bucketlist",
 				"idenNo": "Global_Portal_CategoryItem_Play_Bucketlist",
-				"typeId": "Bucketlist",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
@@ -52,7 +49,6 @@
 			"properties": {
 				"name": "Home & Recreation",
 				"idenNo": "Global_Portal_CategoryItem_Play_Home_Recreation",
-				"typeId": "Home & Recreation",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Play",
@@ -80,7 +76,6 @@
 			"properties": {
 				"name": "Health & Spirituality",
 				"idenNo": "Global_Portal_CategoryItem_Self_Health_Spirituality",
-				"typeId": "Health & Spirituality",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Self",
@@ -94,7 +89,6 @@
 			"properties": {
 				"name": "Romance",
 				"idenNo": "Global_Portal_CategoryItem_Love_Romance",
-				"typeId": "Romance",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Love",
@@ -108,7 +102,6 @@
 			"properties": {
 				"name": "Relations & Charity",
 				"idenNo": "Global_Portal_CategoryItem_Love_Relations_Charity",
-				"typeId": "Relations & Charity",
 				"logoUrl": "",
 				"color": "red",
 				"globalCategoryGroup": "LK@Global_Portal_CategoryGroup_Love",

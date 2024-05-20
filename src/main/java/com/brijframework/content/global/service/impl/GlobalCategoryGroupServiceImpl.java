@@ -39,9 +39,4 @@ public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCate
 		return globalCategoryGroupMapper.mapToDTO(globalCategoryGroupRepository.getCategoryGroupListByStatus(dataStatus.getStatusIds()));
 	}
 
-	@Override
-	public List<UIGlobalCategoryGroup> getCategoryGroup(String typeId) {
-		return globalCategoryGroupMapper.mapToDTO(globalCategoryGroupRepository.findAllByTypeId(typeId));
-	}
-	
 }

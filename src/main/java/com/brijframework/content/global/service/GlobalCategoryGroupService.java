@@ -12,6 +12,4 @@ public interface GlobalCategoryGroupService  extends CrudService<UIGlobalCategor
 
 	List<UIGlobalCategoryGroup> getCategoryGroupList(RecordStatus dataStatus);
 
-	List<UIGlobalCategoryGroup> getCategoryGroup(String typeId);
-
 }

@@ -6,7 +6,6 @@ import static com.brijframework.content.constants.Constants.IDEN_NO;
 import static com.brijframework.content.constants.Constants.INSTRUCTIONS;
 import static com.brijframework.content.constants.Constants.LOGO_URL;
 import static com.brijframework.content.constants.Constants.NAME;
-import static com.brijframework.content.constants.Constants.TYPE_ID;
 
 import com.brijframework.content.entities.EOEntityObject;
 
@@ -28,32 +27,20 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	@Column(name=NAME)
 	private String name;
 	
-	@Column(name=LOGO_URL)
+	@Column(name=LOGO_URL , columnDefinition = "LONGTEXT")
 	@Lob
 	private String logoUrl;
-	
-	@Column(name=DESCRIPTION)
+		
+	@Column(name=DESCRIPTION, columnDefinition = "LONGTEXT")
 	@Lob
 	private String description;
 	
-	@Column(name=TYPE_ID)
-	private String typeId;
-	
 	@Lob
-	@Column(name=INSTRUCTIONS)
+	@Column(name=INSTRUCTIONS, columnDefinition = "LONGTEXT")
 	private String instructions;
 
 	@Column(name=COLOR)
 	private String color;
-
-
-	public void setLogoUrl(String logoUrl) {
-		this.logoUrl = logoUrl;
-	}
-
-	public String getLogoUrl() {
-		return this.logoUrl;
-	}
 
 	public String getIdenNo() {
 		return idenNo;
@@ -71,20 +58,20 @@ public abstract class EOGlobalItem extends EOEntityObject{
 		this.name = name;
 	}
 
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(String typeId) {
-		this.typeId = typeId;
 	}
 
 	public String getInstructions() {
@@ -102,6 +89,5 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	public void setColor(String color) {
 		this.color = color;
 	}
-
-
+	
 }

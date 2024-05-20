@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.brijframework.content.constants.RecordStatus;
@@ -18,10 +17,8 @@ import com.brijframework.content.global.entities.EOGlobalTagGroup;
 import com.brijframework.content.global.entities.EOGlobalTagItem;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
-import com.brijframework.content.global.repository.GlobalMediaItemRepository;
 import com.brijframework.content.global.repository.GlobalTagGroupRepository;
 import com.brijframework.content.global.repository.GlobalTagItemRepository;
-import com.brijframework.content.service.ResourceService;
 
 @Component
 public class ContentListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -41,12 +38,6 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
 	
-	@Autowired
-	private ResourceService resourceService;
-	
-	@Autowired
-	private GlobalMediaItemRepository globalMediaItemRepository;
-
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
 		if (upload) {
@@ -80,7 +71,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 			List<EOGlobalTagGroup> eoGlobalTagGroupJson = instance.getAll(EOGlobalTagGroup.class);
 
 			eoGlobalTagGroupJson.forEach(eoGlobalTagGroup -> {
-				EOGlobalTagGroup findGlobalTagGroup = glbTagGroupRepository.findByIdenNo(eoGlobalTagGroup.getTypeId())
+				EOGlobalTagGroup findGlobalTagGroup = glbTagGroupRepository.findByIdenNo(eoGlobalTagGroup.getIdenNo())
 						.orElse(eoGlobalTagGroup);
 				BeanUtils.copyProperties(eoGlobalTagGroup, findGlobalTagGroup, "id");
 				findGlobalTagGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
