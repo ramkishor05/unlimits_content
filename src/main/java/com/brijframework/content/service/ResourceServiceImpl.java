@@ -21,11 +21,11 @@ public class ResourceServiceImpl implements ResourceService {
 	private String rootDir;
 
 	@Autowired
-	ResourceLoader resourceLoader;
-
+	private ResourceLoader resourceLoader;
+	
 	@Override
 	public Resource getResource(String url) {
-		return resourceLoader.getResource(rootDir + url);
+		return resourceLoader.getResource(rootDir+"/" + url);
 	}
 
 	@Override
@@ -34,13 +34,17 @@ public class ResourceServiceImpl implements ResourceService {
 			String[] strings = base64String.split(",");
 			byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
 			Resource resource = resourceLoader.getResource(rootDir);
-			File file2 = new File(resource.getURL().toURI().getPath(), name);
-			try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file2))) {
+			File parentFile = resource.getFile();
+			if(!parentFile.exists()) {
+				parentFile.mkdirs();
+			}
+			File dataFile = new File(parentFile, name);
+			try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(dataFile))) {
 				outputStream.write(data);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return resourceLoader.getResource(rootDir + name);
+			return resourceLoader.getResource(rootDir +"/" + name);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
