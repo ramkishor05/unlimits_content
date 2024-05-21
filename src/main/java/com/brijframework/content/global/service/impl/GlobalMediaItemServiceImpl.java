@@ -42,19 +42,14 @@ public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaIte
 	
 	@Override
 	protected void preUpdate(UIGlobalMediaItem dtoObject) {
-		Resource resource = resourceService.addResource(dtoObject.getName(),dtoObject.getContent());
-		try {
-			dtoObject.setLogoUrl(new File(resource.getURL().toURI()).getPath());
-		} catch (URISyntaxException | IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println(resource);
+		System.out.println(dtoObject.getName());
+		resourceService.addResource(dtoObject.getName(),dtoObject.getContent());
+		dtoObject.setLogoUrl("/images/"+dtoObject.getName());
 	}
 	
 	@Override
 	protected void postFind(EOGlobalMediaItem findObject, UIGlobalMediaItem dtoObject) {
 		Resource resource = resourceService.addResource(findObject.getName(),findObject.getContent());
-		System.out.println(resource);
 		dtoObject.setLogoUrl(resource.toString());
 		findObject.setLogoUrl(resource.toString());
 		globalMediaRepository.save(findObject);
