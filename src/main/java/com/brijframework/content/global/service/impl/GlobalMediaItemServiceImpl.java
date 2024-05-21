@@ -1,11 +1,6 @@
 package com.brijframework.content.global.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
@@ -42,17 +37,8 @@ public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaIte
 	
 	@Override
 	protected void preUpdate(UIGlobalMediaItem dtoObject) {
-		System.out.println(dtoObject.getName());
 		resourceService.addResource(dtoObject.getName(),dtoObject.getContent());
 		dtoObject.setLogoUrl("/images/"+dtoObject.getName());
-	}
-	
-	@Override
-	protected void postFind(EOGlobalMediaItem findObject, UIGlobalMediaItem dtoObject) {
-		Resource resource = resourceService.addResource(findObject.getName(),findObject.getContent());
-		dtoObject.setLogoUrl(resource.toString());
-		findObject.setLogoUrl(resource.toString());
-		globalMediaRepository.save(findObject);
 	}
 	
 }
