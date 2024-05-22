@@ -56,6 +56,7 @@ public class Constants {
 	public static final String APP_CLIENT_PACKAGE_IMPL = "com.brijframework.content.client.mapper.impl";
 	public static final String APP_GLOBAL_PACKAGE_IMPL = "com.brijframework.content.global.mapper.impl";
 	public static final String APP_DEVICE_PACKAGE_IMPL = "com.brijframework.content.device.mapper.impl";
+	public static final String APP_RESOURCE_PACKAGE_IMPL = "com.brijframework.content.resource.mapper.impl";
 
 	// for entity
 	public static final String EOGLOBAL_UNIT = "EOGLOBAL_UNIT";

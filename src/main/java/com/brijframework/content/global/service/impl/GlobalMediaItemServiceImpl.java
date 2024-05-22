@@ -14,7 +14,6 @@ import com.brijframework.content.global.mapper.GlobalMediaItemMapper;
 import com.brijframework.content.global.model.UIGlobalMediaItem;
 import com.brijframework.content.global.repository.GlobalMediaItemRepository;
 import com.brijframework.content.global.service.GlobalMediaItemService;
-import com.brijframework.content.service.ResourceService;
 
 @Service
 public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaItem, EOGlobalMediaItem, Long> implements GlobalMediaItemService {
@@ -24,9 +23,6 @@ public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaIte
 	
 	@Autowired
 	private GlobalMediaItemMapper globalMediaMapper;
-	
-	@Autowired
-	private ResourceService resourceService;
 
 	@Override
 	public JpaRepository<EOGlobalMediaItem, Long> getRepository() {
@@ -38,9 +34,4 @@ public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaIte
 		return globalMediaMapper;
 	}
 	
-	@Override
-	protected void preUpdate(UIGlobalMediaItem dtoObject, EOGlobalMediaItem entity, Map<String, List<String>> headers) {
-		resourceService.addResource(dtoObject.getName(),dtoObject.getContent());
-		dtoObject.setLogoUrl("/images/"+dtoObject.getName());
-	}
 }
