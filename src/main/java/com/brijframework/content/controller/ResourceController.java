@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brijframework.content.adptor.EnvironmentUtil;
 import com.brijframework.content.service.ResourceService;
 
 @RestController
@@ -20,10 +19,6 @@ public class ResourceController {
 	@Autowired
 	private ResourceService resourceService;
 	
-	@Autowired
-	private EnvironmentUtil environmentUtil;
-
-
 	@GetMapping("/images/{url}")
 	public Resource getImage(@PathVariable String url) {
 		return resourceService.getResource(url);
