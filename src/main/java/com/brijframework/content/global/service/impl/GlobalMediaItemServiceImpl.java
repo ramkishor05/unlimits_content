@@ -1,5 +1,8 @@
 package com.brijframework.content.global.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -36,7 +39,7 @@ public class GlobalMediaItemServiceImpl extends CrudServiceImpl<UIGlobalMediaIte
 	}
 	
 	@Override
-	protected void preUpdate(UIGlobalMediaItem dtoObject) {
+	protected void preUpdate(UIGlobalMediaItem dtoObject, EOGlobalMediaItem eoGlobalMediaItem, Map<String, List<String>> headers ) {
 		resourceService.addResource(dtoObject.getName(),dtoObject.getContent());
 		dtoObject.setLogoUrl("/images/"+dtoObject.getName());
 	}
