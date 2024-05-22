@@ -1,0 +1,58 @@
+{
+	"id": "Global_Portal_Tenure",
+	"orderSequence": 2,
+	"objects": [
+		{
+			"id": "Global_Portal_Tenure_One",
+			"type": "com.brijframework.content.global.entities.EOGlobalTenure",
+			"name": "Global_Portal_Tenure",
+			"properties": {
+				"name": "1",
+				"idenNo": "Global_Portal_Tenure_One",
+				"description": "1 Year",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 1.0
+			}
+		},
+		{
+			"id": "Global_Portal_Tenure_Three",
+			"type": "com.brijframework.content.global.entities.EOGlobalTenure",
+			"name": "Global_Portal_Tenure",
+			"properties": {
+				"name": "3",
+				"idenNo": "Global_Portal_Tenure_Three",
+				"description": "3 Years",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 2.0
+			}
+		},
+		{
+			"id": "Global_Portal_Tenure_Five",
+			"type": "com.brijframework.content.global.entities.EOGlobalTenure",
+			"name": "Global_Portal_Tenure",
+			"properties": {
+				"name": "5",
+				"idenNo": "Global_Portal_Tenure_Five",
+				"description": "5 Years",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 3.0
+			}
+		},
+		{
+			"id": "Global_Portal_Tenure_Ten",
+			"type": "com.brijframework.content.global.entities.EOGlobalTenure",
+			"name": "Global_Portal_Tenure",
+			"properties": {
+				"name": "10",
+				"idenNo": "Global_Portal_Tenure_Ten",
+				"description": "10 Years",
+				"logoUrl": "",
+				"color": "red",
+				"orderSequence": 4.0
+			}
+		}
+	]
+}

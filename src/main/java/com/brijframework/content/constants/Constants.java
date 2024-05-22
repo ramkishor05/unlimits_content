@@ -269,6 +269,8 @@ public class Constants {
 	
 	public static final String EOCUST_TAG_GROUP = "EOCUST_TAG_GROUP";
 	
+	public static final String EOGLOBAL_TENURE = "EOGLOBAL_TENURE";
+	
 	public static final String CATEGORY_ITEM_ID="CATEGORY_ITEM_ID";
 
 	public static final String EOCUST_TAG_ITEM = "EOCUST_TAG_ITEM";

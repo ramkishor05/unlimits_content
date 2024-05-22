@@ -15,10 +15,12 @@ import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
 import com.brijframework.content.global.entities.EOGlobalTagGroup;
 import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.repository.GlobalTagGroupRepository;
 import com.brijframework.content.global.repository.GlobalTagItemRepository;
+import com.brijframework.content.global.repository.GlobalTenureRepository;
 
 @Component
 public class ContentListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -34,6 +36,9 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	
 	@Autowired
 	private GlobalTagItemRepository glbTagItemRepository;
+	
+	@Autowired
+	private GlobalTenureRepository glbTenureRepository;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
@@ -88,6 +93,17 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				findGlobalTagItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
 				EOGlobalTagItem eoGlobalTagItemSave = glbTagItemRepository.saveAndFlush(findGlobalTagItem);
 				eoGlobalTagItem.setId(eoGlobalTagItemSave.getId());
+			});
+			
+			List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
+
+			eoGlobalTenureJson.forEach(eoGlobalTenure -> {
+				EOGlobalTenure findGlobalTenure = glbTenureRepository.findByIdenNo(eoGlobalTenure.getIdenNo())
+						.orElse(eoGlobalTenure);
+				BeanUtils.copyProperties(eoGlobalTenure, findGlobalTenure, "id");
+				findGlobalTenure.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalTenure eoGlobalTenureSave = glbTenureRepository.saveAndFlush(findGlobalTenure);
+				eoGlobalTenure.setId(eoGlobalTenureSave.getId());
 			});
 		}catch (Exception e) {
 			e.printStackTrace();
