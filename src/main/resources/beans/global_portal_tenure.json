@@ -16,19 +16,6 @@
 			}
 		},
 		{
-			"id": "Global_Portal_Tenure_Three",
-			"type": "com.brijframework.content.global.entities.EOGlobalTenure",
-			"name": "Global_Portal_Tenure",
-			"properties": {
-				"name": "3",
-				"idenNo": "Global_Portal_Tenure_Three",
-				"description": "3 Years",
-				"logoUrl": "",
-				"color": "red",
-				"orderSequence": 2.0
-			}
-		},
-		{
 			"id": "Global_Portal_Tenure_Five",
 			"type": "com.brijframework.content.global.entities.EOGlobalTenure",
 			"name": "Global_Portal_Tenure",

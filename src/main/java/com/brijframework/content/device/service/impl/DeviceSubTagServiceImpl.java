@@ -37,5 +37,4 @@ public class DeviceSubTagServiceImpl extends QueryServiceImpl<UIDeviceSubTag, EO
 	public List<UIDeviceSubTag> findAllByTagId(Long tagId) {
 		return deviceSubTagMapper.mapToDTO(globalTagItemRepository.findAllByGroupId(tagId));
 	}
-	
 }

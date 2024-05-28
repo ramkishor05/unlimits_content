@@ -1,0 +1,45 @@
+{
+	"id": "Global_Portal_Prompt",
+	"orderSequence": 3,
+	"objects": [
+		{
+			"id": "Global_Portal_Prompt_One_Years",
+			"type": "com.brijframework.content.global.entities.EOGlobalPrompt",
+			"name": "Global_Portal_Prompt",
+			"properties": {
+				"name": "1 Year",
+				"idenNo": "Global_Portal_Prompt_One_Years",
+				"description": "Describe the actions the reader has already taken in the next year in an already achieved state. Add energy and focus and determination and changes in mindset taken to get to the state In the description. The reader is working towards their future vision of a perfect life and becoming the best version of themselves in the next 5 and 10 years and this year is the pillar and foundation of taking action, changing mindset, having confidence and aligning with the right people and taking efforts to make their dream a reality. Write the vision in an already achieved state. Write it in a language that's simple, engages and inspires. Add descriptions of all the senses as they take action to accentuate the experience and make the reader experience it as close to reality and get transported to the describes scenario. Describe the scene in the future with the reader there, add the emotions of achievement the person feels and give vivid details of the future in an already achieved language. Inspire reader to begin immediate because otherwise even the best plans stay as plans and dreams unless you take action. Write this in a first person account.",
+				"type": "YEARS",
+				"color": "red",
+				"orderSequence": 1.0
+			}
+		},
+		{
+			"id": "Global_Portal_Prompt_Five_Years",
+			"type": "com.brijframework.content.global.entities.EOGlobalPrompt",
+			"name": "Global_Portal_Prompt",
+			"properties": {
+				"name": "5 years",
+				"idenNo": "Global_Portal_Prompt_Five_Years",
+				"description": "Write a vision for the next 5 years in an already achieved state. Write it in a language that's simple, engages and inspires. Add descriptions of all the senses to accentuate the experience and make the reader experience it as close to reality and get transported to the describes scenario. Describe the scene in the future with the reader there, add the emotions of achievement the person feels and give vivid details of the future in an already achieved language.  Inspire reader to begin immediate because otherwise even the best plans stay as plans and dreams unless you take action. Write this in a first person account.",
+				"type": "YEARS",
+				"color": "red",
+				"orderSequence": 3.0
+			}
+		},
+		{
+			"id": "Global_Portal_Prompt_Ten_Years",
+			"type": "com.brijframework.content.global.entities.EOGlobalPrompt",
+			"name": "Global_Portal_Prompt",
+			"properties": {
+				"name": "10 years",
+				"idenNo": "Global_Portal_Prompt_Ten_Years",
+				"description": "Write a vision for the next 10 years in an already achieved state. Write it in a language that's simple, engages and inspires. Add descriptions of all the senses to accentuate the experience and make the reader experience it as close to reality and get transported to the describes scenario. Describe the scene in the future with the reader there, add the emotions of achievement the person feels and give vivid details of the future in an already achieved language. Expand the already achieved part with vivid descriptions about the day and expanding on the emotions being felt in the present in an already achieved state. Inspire reader to begin immediate because otherwise even the best plans stay as plans and dreams unless you take action. Write this in a first person account.",
+				"type": "YEARS",
+				"color": "red",
+				"orderSequence": 4.0
+			}
+		}
+	]
+}

@@ -10,7 +10,6 @@ import com.brijframework.content.global.entities.EOGlobalMediaItem;
 
 public interface DeviceMediaItemService extends QueryService<UIDeviceMediaItem, EOGlobalMediaItem, Long>{
 
-	
 	List<UIDeviceMediaItem> search(String name);
 
 }

@@ -262,7 +262,9 @@ public class Constants {
 	
 	public static final String EOGLOBAL_TAG_ITEM = "EOGLOBAL_TAG_ITEM";
 	
-	public static final String EOGLOBAL_PROMPT = "EOGLOBAL_PROMPT_ITEM";
+	public static final String EOGLOBAL_TAGE_PROMPT_MAPPING = "EOGLOBAL_TAGE_PROMPT_MAPPING";
+	
+	public static final String EOGLOBAL_PROMPT="EOGLOBAL_PROMPT";
 	
 	public static final String EOCUST_PROMPT_ITEM = "EOCUST_PROMPT_ITEM";
 	

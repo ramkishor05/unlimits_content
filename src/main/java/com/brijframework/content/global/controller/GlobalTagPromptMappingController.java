@@ -13,9 +13,9 @@ import io.swagger.v3.oas.annotations.Hidden;
 
 
 @RestController
-@RequestMapping("/api/global/prompt")
+@RequestMapping("/api/global/tagprompt/mapping")
 @Hidden
-public class GlobalPromptItemController extends CrudController<UIGlobalPrompt, EOGlobalPrompt, Long> {
+public class GlobalTagPromptMappingController extends CrudController<UIGlobalPrompt, EOGlobalPrompt, Long> {
 
 	@Autowired
 	private GlobalPromptItemService globalPromptItemService;
