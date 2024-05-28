@@ -22,7 +22,7 @@ import com.brijframework.content.client.service.CustPromptItemService;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @RestController
-@RequestMapping("/api/client/Prompt/item")
+@RequestMapping("/api/client/prompt")
 @Hidden
 public class CustPromptItemController {
 

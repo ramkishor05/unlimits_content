@@ -22,9 +22,4 @@ public class UserAccountRepository {
 		authorities.add(new SimpleGrantedAuthority(roleId));
 		return authorities;
 	}
-
-	Optional<UIUserAccount> findById(Long id) {
-		return null;
-	}
-
 }

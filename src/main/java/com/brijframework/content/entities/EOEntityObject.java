@@ -6,14 +6,11 @@ import java.util.Date;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.brijframework.content.constants.RecordStatus;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
 
 @MappedSuperclass
 public abstract class EOEntityObject implements Serializable {
@@ -26,34 +23,26 @@ public abstract class EOEntityObject implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
-
+	
 	@Column(name = "CREATED_UID")
 	private String createdUid;
-
+	
 	@Column(name = "CREATED_AT")
 	@CreationTimestamp
 	private Date createdAt;
-
+	
 	@Column(name = "UPDATED_UID")
 	private String updatedUid;
 
 	@Column(name = "UPDATED_AT")
 	@UpdateTimestamp
 	private Date updatedAt;
-
+	
 	@Column(name = "RECORD_STATUS")
 	private String recordState;
-
+	
 	@Column(name = "ORDER_SEQUENCE")
-	private Double orderSequence;
-
-	@PrePersist
-	public void init() {
-		if (this.orderSequence == null)
-			this.orderSequence = 1d;
-		if (this.recordState == null)
-			this.recordState = RecordStatus.ACTIVETED.getStatus();
-	}
+	private Float orderSequence;
 
 	public Long getId() {
 		return id;
@@ -103,12 +92,12 @@ public abstract class EOEntityObject implements Serializable {
 		this.recordState = recordState;
 	}
 
-	public Double getOrderSequence() {
+	public Float getOrderSequence() {
 		return orderSequence;
 	}
 
-	public void setOrderSequence(Double orderSequence) {
+	public void setOrderSequence(Float orderSequence) {
 		this.orderSequence = orderSequence;
 	}
-
+	
 }

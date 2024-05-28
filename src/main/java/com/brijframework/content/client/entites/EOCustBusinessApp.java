@@ -39,6 +39,20 @@ public class EOCustBusinessApp extends EOCustObject {
 	@OneToMany(mappedBy = CUST_BUSINESS_APP)
 	public Set<EOCustCategoryItem> custCategoryList;
 
+	/**
+	 * 
+	 */
+	public EOCustBusinessApp() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public EOCustBusinessApp(long appId, long custId, long businessId) {
+		super();
+		this.appId = appId;
+		this.custId = custId;
+		this.businessId = businessId;
+	}
+
 	public long getAppId() {
 		return appId;
 	}

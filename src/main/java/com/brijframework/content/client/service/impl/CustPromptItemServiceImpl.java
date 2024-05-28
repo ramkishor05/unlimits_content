@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brijframework.content.client.entites.EOCustBusinessApp;
-import com.brijframework.content.client.entites.EOCustPromptItem;
+import com.brijframework.content.client.entites.EOCustPrompt;
 import com.brijframework.content.client.mapper.CustPromptItemRequestMapper;
 import com.brijframework.content.client.mapper.CustPromptItemResponseMapper;
 import com.brijframework.content.client.repository.CustBusinessAppRepository;
@@ -42,7 +42,7 @@ public class CustPromptItemServiceImpl implements CustPromptItemService {
 
 	@Override
 	public CustPromptItemResponse savePrompt(EOCustBusinessApp eoCustBusinessApp, CustPromptItemRequest custPromptRequest) {
-		EOCustPromptItem eoCustPrompt = custPromptRequestMapper.mapToDAO(custPromptRequest);
+		EOCustPrompt eoCustPrompt = custPromptRequestMapper.mapToDAO(custPromptRequest);
 		eoCustPrompt.setCustBusinessApp(eoCustBusinessApp);
 		custPromptRepository.save(eoCustPrompt);
 		return custPromptResponseMapper.mapToDTO(eoCustPrompt);

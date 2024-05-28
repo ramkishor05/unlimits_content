@@ -17,7 +17,7 @@ import jakarta.persistence.UniqueConstraint;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = EOCUST_PROMPT_ITEM, uniqueConstraints = {
 		@UniqueConstraint(columnNames = { CUST_BUSINESS_APP_ID, GROUP_ID, NAME }) })
-public class EOCustPromptItem extends EOCustItem {
+public class EOCustPrompt extends EOCustItem {
 	/**
 	 * 
 	 */

@@ -8,18 +8,18 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
-import com.brijframework.content.client.entites.EOCustPromptItem;
+import com.brijframework.content.client.entites.EOCustPrompt;
 import com.brijframework.content.client.model.UICustPromptItem;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_CLIENT_PACKAGE_IMPL)
-public interface CustPromptItemMapper  extends GenericMapper<EOCustPromptItem, UICustPromptItem>{
+public interface CustPromptItemMapper  extends GenericMapper<EOCustPrompt, UICustPromptItem>{
 	
 
 	@Mapping(target=CUST_PROD_APP_ID_ENTITY, source=CUST_PROD_APP_ID_UI)
 	@Override
-	EOCustPromptItem mapToDAO(UICustPromptItem uiPrompt);
+	EOCustPrompt mapToDAO(UICustPromptItem uiPrompt);
 	
 	@Mapping(source=CUST_PROD_APP_ID_ENTITY, target=CUST_PROD_APP_ID_UI)
 	@Override
-	UICustPromptItem mapToDTO(EOCustPromptItem eoCustPrompt);
+	UICustPromptItem mapToDTO(EOCustPrompt eoCustPrompt);
 }

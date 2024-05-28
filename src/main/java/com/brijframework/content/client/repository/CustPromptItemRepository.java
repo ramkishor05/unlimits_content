@@ -8,21 +8,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.brijframework.content.client.entites.EOCustPromptItem;
+import com.brijframework.content.client.entites.EOCustPrompt;
 
 @Repository
 @Transactional
-public interface CustPromptItemRepository extends JpaRepository<EOCustPromptItem, Long>{
+public interface CustPromptItemRepository extends JpaRepository<EOCustPrompt, Long>{
 	
-	EOCustPromptItem findOneByTypeId(String typeId);
+	EOCustPrompt findOneByTypeId(String typeId);
 
 	@Query(nativeQuery = true, value = "select * from EOCUST_PROMPT_ITEM where CUST_BUSINESS_APP_ID= ?1 and NAME=?2")
-	Optional<EOCustPromptItem> findByCustAppAndName(Long id, String name);
+	Optional<EOCustPrompt> findByCustAppAndName(Long id, String name);
 
 	@Query(nativeQuery = true, value = "select * from EOCUST_PROMPT_ITEM where CUST_BUSINESS_APP_ID= ?1 and TYPE_ID=?2")
-	List<EOCustPromptItem> findAllByType(Long custAppId, String typeId);
+	List<EOCustPrompt> findAllByType(Long custAppId, String typeId);
 
 	@Query(nativeQuery = true, value = "select * from EOCUST_PROMPT_ITEM where CUST_BUSINESS_APP_ID= ?1")
-	List<EOCustPromptItem>  findAllByCustAppId(long custAppId);
+	List<EOCustPrompt>  findAllByCustAppId(long custAppId);
 
 }
