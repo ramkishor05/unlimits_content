@@ -32,9 +32,9 @@ public class ResourceController extends CrudController<UIResource, EOResource, L
 		return resourceService;
 	}
 	
-	@GetMapping("/{type}/{url}")
-	public Resource getImage(@PathVariable String type, @PathVariable String url) {
-		return resourceService.getResource(type, url);
+	@GetMapping("/{url}")
+	public Resource getImage(@PathVariable String url) {
+		return resourceService.getResource(url);
 	}
 	
 	@PostMapping(value = "/{type}/{name}", consumes = {MediaType.TEXT_PLAIN_VALUE}, produces = {MediaType.TEXT_PLAIN_VALUE})

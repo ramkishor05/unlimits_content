@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
@@ -20,17 +18,15 @@ import com.brijframework.content.resource.entities.EOResource;
 import com.brijframework.content.resource.mapper.ResourceMapper;
 import com.brijframework.content.resource.modal.UIResource;
 import com.brijframework.content.resource.repository.ResourceRepository;
+import com.brijframework.content.util.ResourceUtil;
 
 import jakarta.xml.bind.DatatypeConverter;
 
 @Service
 public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource, Long> implements ResourceService {
-
-	@Value("${server.resource.location}")
-	private String rootDir;
-
+	
 	@Autowired
-	private ResourceLoader resourceLoader;
+	private ResourceUtil resourceUtil;
 	
 	@Autowired
 	private ResourceMapper resourceMapper;
@@ -50,7 +46,12 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource,
 	
 	@Override
 	public Resource getResource(String type, String url) {
-		return resourceLoader.getResource(rootDir+"/"+type+"/" + url);
+		return resourceUtil.getResource(type, url);
+	}
+	
+	@Override
+	public Resource getResource(String url) {
+		return resourceUtil.getResource(url);
 	}
 	
 	@Override
@@ -58,7 +59,7 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource,
 		try {
 			String[] strings = uiResource.getFileContent().split(",");
 			byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
-			Resource resource = resourceLoader.getResource(rootDir);
+			Resource resource = resourceUtil.getResource();
 			File resourceFile = resource.getFile();
 			if(!resourceFile.exists()) {
 				resourceFile.mkdirs();
@@ -75,5 +76,6 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource,
 			e.printStackTrace();
 		}
 	}
+	
 
 }

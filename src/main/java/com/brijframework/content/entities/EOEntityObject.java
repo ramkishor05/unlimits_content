@@ -42,7 +42,7 @@ public abstract class EOEntityObject implements Serializable {
 	private String recordState;
 	
 	@Column(name = "ORDER_SEQUENCE")
-	private Float orderSequence;
+	private Double orderSequence;
 
 	public Long getId() {
 		return id;
@@ -92,11 +92,11 @@ public abstract class EOEntityObject implements Serializable {
 		this.recordState = recordState;
 	}
 
-	public Float getOrderSequence() {
+	public Double getOrderSequence() {
 		return orderSequence;
 	}
 
-	public void setOrderSequence(Float orderSequence) {
+	public void setOrderSequence(Double orderSequence) {
 		this.orderSequence = orderSequence;
 	}
 	

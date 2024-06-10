@@ -13,14 +13,17 @@ import org.springframework.stereotype.Component;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
+import com.brijframework.content.global.entities.EOGlobalPrompt;
 import com.brijframework.content.global.entities.EOGlobalTagGroup;
 import com.brijframework.content.global.entities.EOGlobalTagItem;
 import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
+import com.brijframework.content.global.repository.GlobalPromptRepository;
 import com.brijframework.content.global.repository.GlobalTagGroupRepository;
 import com.brijframework.content.global.repository.GlobalTagItemRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
+import com.brijframework.content.global.service.GlobalCategoryImageService;
 
 @Component
 public class ContentListener implements ApplicationListener<ContextRefreshedEvent> {
@@ -38,7 +41,13 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	private GlobalTagItemRepository glbTagItemRepository;
 	
 	@Autowired
+	private GlobalPromptRepository glbPromptRepository;
+	
+	@Autowired
 	private GlobalTenureRepository glbTenureRepository;
+	
+	@Autowired
+	private GlobalCategoryImageService categoryImageService;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
@@ -105,6 +114,20 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				EOGlobalTenure eoGlobalTenureSave = glbTenureRepository.saveAndFlush(findGlobalTenure);
 				eoGlobalTenure.setId(eoGlobalTenureSave.getId());
 			});
+			
+			List<EOGlobalPrompt> eoGlobalPromptJson = instance.getAll(EOGlobalPrompt.class);
+
+			eoGlobalPromptJson.forEach(eoGlobalPrompt -> {
+				EOGlobalPrompt findGlobalPrompt = glbPromptRepository.findByIdenNo(eoGlobalPrompt.getIdenNo())
+						.orElse(eoGlobalPrompt);
+				BeanUtils.copyProperties(eoGlobalPrompt, findGlobalPrompt, "id");
+				findGlobalPrompt.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalPrompt eoGlobalPromptSave = glbPromptRepository.saveAndFlush(findGlobalPrompt);
+				eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
+			});
+			
+			categoryImageService.init();
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
