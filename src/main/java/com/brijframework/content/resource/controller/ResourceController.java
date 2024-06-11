@@ -13,28 +13,53 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.unlimits.rest.crud.controller.CrudController;
-import org.unlimits.rest.crud.service.CrudService;
 
-import com.brijframework.content.resource.entities.EOResource;
 import com.brijframework.content.resource.modal.UIResource;
 import com.brijframework.content.resource.service.ResourceService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/resource")
-public class ResourceController extends CrudController<UIResource, EOResource, Long>{
+public class ResourceController{
 
 	@Autowired
 	private ResourceService resourceService;
 	
-	@Override
-	public CrudService<UIResource, EOResource, Long> getService() {
-		return resourceService;
+	
+	@GetMapping("/{type}/{name}")
+	public Resource getTagsImage(@PathVariable String type, @PathVariable String name, HttpServletRequest request) {
+		String test = request.getRequestURI();
+		System.out.println("test URL :"+test);
+		return resourceService.getResource(test.split("resource")[1]);
 	}
 	
-	@GetMapping("/{url}")
-	public Resource getImage(@PathVariable String url) {
-		return resourceService.getResource(url);
+	@GetMapping("/{type}/{name}/{param1}")
+	public Resource getTagsImage(@PathVariable String type, @PathVariable String name, @PathVariable String param1, HttpServletRequest request) {
+		String test = request.getRequestURI();
+		System.out.println("test URL :"+test);
+		return resourceService.getResource(test.split("resource")[1]);
+	}
+	
+	@GetMapping("/{type}/{name}/{param1}/{param2}")
+	public Resource getTagsImage(@PathVariable String type, @PathVariable String name, @PathVariable String param1, @PathVariable String param2, HttpServletRequest request) {
+		String test = request.getRequestURI();
+		System.out.println("test URL :"+test);
+		return resourceService.getResource(test.split("resource")[1]);
+	}
+	
+	@GetMapping("/{type}/{name}/{param1}/{param2}/{param3}")
+	public Resource getTagsImage(@PathVariable String type, @PathVariable String name, @PathVariable String param1 , @PathVariable String param2, @PathVariable String param3, HttpServletRequest request) {
+		String test = request.getRequestURI();
+		System.out.println("test URL :"+test);
+		return resourceService.getResource(test.split("resource")[1]);
+	}
+	
+	@GetMapping("/{type}/{name}/{param1}/{param2}/{param3}/{param4}")
+	public Resource getTagsImage(@PathVariable String type, @PathVariable String name, @PathVariable String param1 , @PathVariable String param2, @PathVariable String param3, @PathVariable String param4, HttpServletRequest request) {
+		String test = request.getRequestURI();
+		System.out.println("test URL :"+test);
+		return resourceService.getResource(test.split("resource")[1]);
 	}
 	
 	@PostMapping(value = "/{type}/{name}", consumes = {MediaType.TEXT_PLAIN_VALUE}, produces = {MediaType.TEXT_PLAIN_VALUE})

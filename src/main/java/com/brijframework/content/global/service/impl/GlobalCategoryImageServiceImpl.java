@@ -115,7 +115,7 @@ public class GlobalCategoryImageServiceImpl extends CrudServiceImpl<UIGlobalCate
 	 * @param categoryImgUrlMap 
 	 */
 	private void loadResourceFile(File file, EOGlobalCategoryItem globalCategoryItem, Map<String, EOGlobalCategoryImage> categoryImgUrlMap) {
-		String url = file.getAbsolutePath().split(TAGS_WITH_IMAGES)[1].replace("\\", "/");
+		String url = "resource/"+TAGS_WITH_IMAGES+file.getAbsolutePath().split(TAGS_WITH_IMAGES)[1].replace("\\", "/");
 		EOGlobalCategoryImage globalCategoryImage = categoryImgUrlMap.getOrDefault(url, new EOGlobalCategoryImage());
 		globalCategoryImage.setIdenNo(url.replace("/", "_").replace(",", "_").toUpperCase().split("\\.")[0].replaceFirst("_", ""));
 		globalCategoryImage.setGlobalCategoryItem(globalCategoryItem);

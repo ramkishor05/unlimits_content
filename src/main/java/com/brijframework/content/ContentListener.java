@@ -45,8 +45,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	
 	@Autowired
 	private GlobalTenureRepository glbTenureRepository;
-    @Autowired
-	private GlobalPromptRepository glbPromptRepository;	
+	
 	@Autowired
 	private GlobalCategoryImageService categoryImageService;
 
