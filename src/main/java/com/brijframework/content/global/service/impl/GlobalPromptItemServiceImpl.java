@@ -9,14 +9,14 @@ import org.unlimits.rest.crud.service.CrudServiceImpl;
 import com.brijframework.content.global.entities.EOGlobalPrompt;
 import com.brijframework.content.global.mapper.GlobalPromptItemMapper;
 import com.brijframework.content.global.model.UIGlobalPrompt;
-import com.brijframework.content.global.repository.GlobalPromptItemRepository;
+import com.brijframework.content.global.repository.GlobalPromptRepository;
 import com.brijframework.content.global.service.GlobalPromptItemService;
 
 @Service
 public class GlobalPromptItemServiceImpl  extends CrudServiceImpl<UIGlobalPrompt, EOGlobalPrompt, Long> implements GlobalPromptItemService {
 	
 	@Autowired
-	private GlobalPromptItemRepository globalPromptRepository;
+	private GlobalPromptRepository globalPromptRepository;
 	
 	@Autowired
 	private GlobalPromptItemMapper globalPromptMapper;

@@ -13,11 +13,13 @@ import org.springframework.stereotype.Component;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
+import com.brijframework.content.global.entities.EOGlobalPrompt;
 import com.brijframework.content.global.entities.EOGlobalTagGroup;
 import com.brijframework.content.global.entities.EOGlobalTagItem;
 import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
+import com.brijframework.content.global.repository.GlobalPromptRepository;
 import com.brijframework.content.global.repository.GlobalTagGroupRepository;
 import com.brijframework.content.global.repository.GlobalTagItemRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
@@ -39,6 +41,9 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	
 	@Autowired
 	private GlobalTenureRepository glbTenureRepository;
+	
+	@Autowired
+	private GlobalPromptRepository glbPromptRepository;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
@@ -104,6 +109,17 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				findGlobalTenure.setRecordState(RecordStatus.ACTIVETED.getStatus());
 				EOGlobalTenure eoGlobalTenureSave = glbTenureRepository.saveAndFlush(findGlobalTenure);
 				eoGlobalTenure.setId(eoGlobalTenureSave.getId());
+			});
+			
+			List<EOGlobalPrompt> eoGlobalPromptJson = instance.getAll(EOGlobalPrompt.class);
+
+			eoGlobalPromptJson.forEach(eoGlobalPrompt -> {
+				EOGlobalPrompt findGlobalPrompt = glbPromptRepository.findByIdenNo(eoGlobalPrompt.getIdenNo())
+						.orElse(eoGlobalPrompt);
+				BeanUtils.copyProperties(eoGlobalPrompt, findGlobalPrompt, "id");
+				findGlobalPrompt.setRecordState(RecordStatus.ACTIVETED.getStatus());
+				EOGlobalPrompt eoGlobalPromptSave = glbPromptRepository.saveAndFlush(findGlobalPrompt);
+				eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
 			});
 		}catch (Exception e) {
 			e.printStackTrace();

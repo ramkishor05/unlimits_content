@@ -38,15 +38,19 @@ public class TransactionFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     	System.out.println("TransactionFilter start");
-        HttpServletRequest req = (HttpServletRequest) request;
-        String ownerId = TokenUtil.getUserId(req.getHeader(ClientConstants.AUTHORIZATION)); //req.getHeader(OWNER_ID_KEY);
-        String userRole = TokenUtil.getUserRole(req.getHeader(ClientConstants.AUTHORIZATION)); 
+    	 HttpServletRequest req = (HttpServletRequest) request;
+    	TransactionRequest requestWrapper = new TransactionRequest(req);
+    	try {
+       
+        String token =req.getHeader(ClientConstants.AUTHORIZATION);
+        String ownerId = TokenUtil.getUserId(token);
+        String userRole = TokenUtil.getUserRole(token); 
         System.out.println("ownerId="+ownerId);
         String appId = req.getHeader(APP_ID_KEY);
         System.out.println("appId="+appId);
         String businessId = req.getHeader(BUSINESS_ID_KEY);
         System.out.println("businessId="+businessId);
-        TransactionRequest requestWrapper = new TransactionRequest(req);
+        
         requestWrapper.setAttribute("USER_ROLE", userRole);
         requestWrapper.putHeader("USER_ROLE", userRole);
         if(USER.equalsIgnoreCase(userRole)) {
@@ -75,6 +79,9 @@ public class TransactionFilter implements Filter {
 	        	}
 	         }
         }
+    	}catch (Exception e) {
+			e.printStackTrace();
+		}
         chain.doFilter(requestWrapper, response);
         System.out.println("TransactionFilter end");
     }
