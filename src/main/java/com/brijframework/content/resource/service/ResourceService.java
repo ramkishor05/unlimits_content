@@ -10,4 +10,10 @@ public interface ResourceService extends CrudService<UIResource, EOResource, Lon
 
 	Resource getResource(String type, String url);
 
+	/**
+	 * @param url
+	 * @return
+	 */
+	Resource getResource(String url);
+
 }

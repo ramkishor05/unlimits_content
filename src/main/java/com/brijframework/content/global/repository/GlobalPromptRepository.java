@@ -1,5 +1,6 @@
 package com.brijframework.content.global.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,16 @@ import com.brijframework.content.global.entities.EOGlobalPrompt;
 @Transactional
 public interface GlobalPromptRepository extends JpaRepository<EOGlobalPrompt, Long>{
 
+	/**
+	 * @param type
+	 * @return
+	 */
+	List<EOGlobalPrompt> findAllByType(String type);
+
+	/**
+	 * @param idenNo
+	 * @return
+	 */
 	Optional<EOGlobalPrompt> findByIdenNo(String idenNo);
 	
 }

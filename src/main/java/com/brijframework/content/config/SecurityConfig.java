@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.brijframework.content.filters.TransactionFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,17 +25,21 @@ public class SecurityConfig {
 	private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
   
     @Autowired
+    private TransactionFilter authFilter; 
+    
+    @Autowired
     private AuthenticationProvider authenticationProvider;
       
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
-    	log.debug("SecurityConfig :: securityFilterChain() started");
-        return http.csrf((csrf)->csrf.disable()).cors(cors->cors.disable()) 
-                .authorizeHttpRequests(authorize->authorize.requestMatchers("/**").permitAll().anyRequest()
-                        .authenticated()) 
-                .sessionManagement(Customizer.withDefaults()) 
-                .authenticationProvider(authenticationProvider) 
-                .build(); 
+    	log.info("SecurityConfig :: securityFilterChain() started");
+        return http.csrf((csrf)->csrf.disable()).cors(cors->cors.disable())
+                .authorizeHttpRequests(authorize->authorize.requestMatchers("/auth/**","/swagger-ui.html","/swagger-ui/**", "/v3/api-docs/**","/**").permitAll().anyRequest()
+                        .authenticated())
+                .sessionManagement(Customizer.withDefaults())
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     } 
   
     @Bean

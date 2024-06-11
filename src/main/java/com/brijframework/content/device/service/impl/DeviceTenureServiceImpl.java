@@ -20,7 +20,7 @@ public class DeviceTenureServiceImpl extends QueryServiceImpl<UIDeviceTenure, EO
 	
 	@Autowired
 	private DeviceTenureMapper deviceTenureMapper;
-
+	
 	@Override
 	public JpaRepository<EOGlobalTenure, Long> getRepository() {
 		return globalTenureRepository;

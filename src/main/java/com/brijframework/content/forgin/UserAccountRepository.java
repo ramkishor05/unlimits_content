@@ -1,25 +1,14 @@
 package com.brijframework.content.forgin;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Component;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.brijframework.content.modal.UIUserAccount;
 
-@Component
-public class UserAccountRepository {
+@FeignClient(name= "UNLIMITS-AUTH" , url = "http://host.docker.internal:2222")
+public interface UserAccountRepository {
 
-	 public Optional<UIUserAccount> findByUsername(String username){
-		UIUserAccount uiUserAccount=new UIUserAccount("Admin","$2a$12$MIbZKMMedyp1qD53ISvGV.XQZkEn/0z4p.HboxPYdDrah.dQCpWZ2", getAuthority("ADMIN"));
-		return Optional.ofNullable(uiUserAccount);
-	}
-	
-	private Set<SimpleGrantedAuthority> getAuthority(String roleId) {
-		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority(roleId));
-		return authorities;
-	}
+	@GetMapping(value = "/api/auth/userdetail")
+	public UIUserAccount findByToken(@RequestHeader String token) ;;
 }

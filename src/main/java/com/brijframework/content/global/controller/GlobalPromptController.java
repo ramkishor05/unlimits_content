@@ -14,13 +14,10 @@ import com.brijframework.content.global.entities.EOGlobalPrompt;
 import com.brijframework.content.global.model.UIGlobalPrompt;
 import com.brijframework.content.global.service.GlobalPromptService;
 
-import io.swagger.v3.oas.annotations.Hidden;
-
 
 @RestController
-@RequestMapping("/api/global/tagprompt/mapping")
-@Hidden
-public class GlobalTagPromptMappingController extends CrudController<UIGlobalPrompt, EOGlobalPrompt, Long> {
+@RequestMapping("/api/global/prompt")
+public class GlobalPromptController extends CrudController<UIGlobalPrompt, EOGlobalPrompt, Long> {
 
 	@Autowired
 	private GlobalPromptService globalPromptItemService;
