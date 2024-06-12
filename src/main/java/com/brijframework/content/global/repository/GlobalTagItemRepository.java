@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.entities.EOGlobalCategoryTag;
 
 @Repository
 @Transactional
-public interface GlobalTagItemRepository extends JpaRepository<EOGlobalTagItem, Long>{
+public interface GlobalTagItemRepository extends JpaRepository<EOGlobalCategoryTag, Long>{
 
-	Optional<EOGlobalTagItem> findByIdenNo(String idenNo);
+	Optional<EOGlobalCategoryTag> findByIdenNo(String idenNo);
 
-	@Query(nativeQuery = true, value="Select GTI.* from EOGLOBAL_TAG_ITEM GTI INNER JOIN EOGLOBAL_TAG_GROUP GTG ON GTG.ID=  GTI.GROUP_ID WHERE GTI.GROUP_ID IN (?) ORDER BY GTG.NAME, GTI.NAME ")
-	List<EOGlobalTagItem> findAllByGroupId(Long tagId);
+	@Query(nativeQuery = true, value="Select GTI.* from EOGLOBAL_TAG_ITEM GTI INNER JOIN EOGLOBAL_TAG_GROUP GTG ON GTG.ID=  GTI.GROUP_ID WHERE GTI.SUB_CATEGORY_ID IN (?) ORDER BY GTG.NAME, GTI.NAME ")
+	List<EOGlobalCategoryTag> findAllByGroupId(Long subCategoryId);
 }

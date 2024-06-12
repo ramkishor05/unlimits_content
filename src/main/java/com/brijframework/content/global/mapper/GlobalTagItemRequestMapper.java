@@ -5,15 +5,15 @@ import static com.brijframework.content.constants.Constants.SPRING;
 import org.mapstruct.Mapper;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
-import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.entities.EOGlobalCategoryTag;
 import com.brijframework.content.global.rqrs.GlobalTagItemRequest;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_GLOBAL_PACKAGE_IMPL)
-public interface GlobalTagItemRequestMapper  extends GenericMapper<EOGlobalTagItem, GlobalTagItemRequest>{
+public interface GlobalTagItemRequestMapper  extends GenericMapper<EOGlobalCategoryTag, GlobalTagItemRequest>{
 
 	@Override
-	EOGlobalTagItem mapToDAO(GlobalTagItemRequest globalTagRequest);
+	EOGlobalCategoryTag mapToDAO(GlobalTagItemRequest globalTagRequest);
 	
 	@Override
-	GlobalTagItemRequest mapToDTO(EOGlobalTagItem eoGlobalTag);
+	GlobalTagItemRequest mapToDTO(EOGlobalCategoryTag eoGlobalTag);
 }

@@ -11,11 +11,11 @@ import org.unlimits.rest.crud.service.QueryServiceImpl;
 import com.brijframework.content.device.mapper.DeviceSubTagMapper;
 import com.brijframework.content.device.model.UIDeviceSubTag;
 import com.brijframework.content.device.service.DeviceSubTagService;
-import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.entities.EOGlobalCategoryTag;
 import com.brijframework.content.global.repository.GlobalTagItemRepository;
 
 @Service
-public class DeviceSubTagServiceImpl extends QueryServiceImpl<UIDeviceSubTag, EOGlobalTagItem, Long> implements DeviceSubTagService {
+public class DeviceSubTagServiceImpl extends QueryServiceImpl<UIDeviceSubTag, EOGlobalCategoryTag, Long> implements DeviceSubTagService {
 	
 	@Autowired
 	private GlobalTagItemRepository globalTagItemRepository;
@@ -24,17 +24,17 @@ public class DeviceSubTagServiceImpl extends QueryServiceImpl<UIDeviceSubTag, EO
 	private DeviceSubTagMapper deviceSubTagMapper;
 
 	@Override
-	public JpaRepository<EOGlobalTagItem, Long> getRepository() {
+	public JpaRepository<EOGlobalCategoryTag, Long> getRepository() {
 		return globalTagItemRepository;
 	}
 
 	@Override
-	public GenericMapper<EOGlobalTagItem, UIDeviceSubTag> getMapper() {
+	public GenericMapper<EOGlobalCategoryTag, UIDeviceSubTag> getMapper() {
 		return deviceSubTagMapper;
 	}
 
 	@Override
-	public List<UIDeviceSubTag> findAllByTagId(Long tagId) {
-		return deviceSubTagMapper.mapToDTO(globalTagItemRepository.findAllByGroupId(tagId));
+	public List<UIDeviceSubTag> findAllBySubCategoryId(Long subCategoryId) {
+		return deviceSubTagMapper.mapToDTO(globalTagItemRepository.findAllByGroupId(subCategoryId));
 	}
 }

@@ -8,16 +8,16 @@ import org.mapstruct.Mapping;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
 import com.brijframework.content.device.model.UIDeviceSubTag;
-import com.brijframework.content.global.entities.EOGlobalTagItem;
+import com.brijframework.content.global.entities.EOGlobalCategoryTag;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_GLOBAL_PACKAGE_IMPL)
-public interface DeviceSubTagMapper  extends GenericMapper<EOGlobalTagItem, UIDeviceSubTag>{
+public interface DeviceSubTagMapper  extends GenericMapper<EOGlobalCategoryTag, UIDeviceSubTag>{
 
 	@Override
-	@Mapping(source = "globalTagGroup.id", target = "mainTagId")
-    UIDeviceSubTag mapToDTO(EOGlobalTagItem eoGlobalTagGroup);
+	@Mapping(source = "globalCategoryItem.id", target = "subCategoryId")
+    UIDeviceSubTag mapToDTO(EOGlobalCategoryTag eoGlobalTagGroup);
 	
 	@Override
-	@Mapping(target = "globalTagGroup.id", source = "mainTagId")
-    EOGlobalTagItem mapToDAO(UIDeviceSubTag uiDeviceMainTag);
+	@Mapping(target = "globalCategoryItem.id", source = "subCategoryId")
+    EOGlobalCategoryTag mapToDAO(UIDeviceSubTag uiDeviceMainTag);
 }

@@ -261,7 +261,7 @@ public class Constants {
 	
 	public static final String EOGLOBAL_TAG_GROUP = "EOGLOBAL_TAG_GROUP";
 	
-	public static final String EOGLOBAL_TAG_ITEM = "EOGLOBAL_TAG_ITEM";
+	public static final String EOGLOBAL_CATEGORY_TAG = "EOGLOBAL_CATEGORY_TAG";
 	
 	public static final String EOGLOBAL_TAGE_PROMPT_MAPPING = "EOGLOBAL_TAGE_PROMPT_MAPPING";
 	

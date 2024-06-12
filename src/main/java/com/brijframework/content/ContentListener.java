@@ -13,14 +13,12 @@ import org.springframework.stereotype.Component;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
 import com.brijframework.content.global.entities.EOGlobalCategoryItem;
+import com.brijframework.content.global.entities.EOGlobalCategoryTag;
 import com.brijframework.content.global.entities.EOGlobalPrompt;
-import com.brijframework.content.global.entities.EOGlobalTagGroup;
-import com.brijframework.content.global.entities.EOGlobalTagItem;
 import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.repository.GlobalPromptRepository;
-import com.brijframework.content.global.repository.GlobalTagGroupRepository;
 import com.brijframework.content.global.repository.GlobalTagItemRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
 import com.brijframework.content.global.service.GlobalCategoryImageService;
@@ -34,9 +32,6 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	@Autowired
 	private GlobalCategoryItemRepository glbCategoryRepository;
 
-	@Autowired
-	private GlobalTagGroupRepository glbTagGroupRepository;
-	
 	@Autowired
 	private GlobalTagItemRepository glbTagItemRepository;
 	
@@ -82,25 +77,14 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				eoGlobalCategoryItem.setId(eoGlobalCategorySave.getId());
 			});
 
-			List<EOGlobalTagGroup> eoGlobalTagGroupJson = instance.getAll(EOGlobalTagGroup.class);
-
-			eoGlobalTagGroupJson.forEach(eoGlobalTagGroup -> {
-				EOGlobalTagGroup findGlobalTagGroup = glbTagGroupRepository.findByIdenNo(eoGlobalTagGroup.getIdenNo())
-						.orElse(eoGlobalTagGroup);
-				BeanUtils.copyProperties(eoGlobalTagGroup, findGlobalTagGroup, "id");
-				findGlobalTagGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalTagGroup eoGlobalTagGroupSave = glbTagGroupRepository.saveAndFlush(findGlobalTagGroup);
-				eoGlobalTagGroup.setId(eoGlobalTagGroupSave.getId());
-			});
-
-			List<EOGlobalTagItem> eoGlobalTagItemJson = instance.getAll(EOGlobalTagItem.class);
+			List<EOGlobalCategoryTag> eoGlobalTagItemJson = instance.getAll(EOGlobalCategoryTag.class);
 
 			eoGlobalTagItemJson.forEach(eoGlobalTagItem -> {
-				EOGlobalTagItem findGlobalTagItem = glbTagItemRepository.findByIdenNo(eoGlobalTagItem.getIdenNo())
+				EOGlobalCategoryTag findGlobalTagItem = glbTagItemRepository.findByIdenNo(eoGlobalTagItem.getIdenNo())
 						.orElse(eoGlobalTagItem);
 				BeanUtils.copyProperties(eoGlobalTagItem, findGlobalTagItem, "id");
 				findGlobalTagItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalTagItem eoGlobalTagItemSave = glbTagItemRepository.saveAndFlush(findGlobalTagItem);
+				EOGlobalCategoryTag eoGlobalTagItemSave = glbTagItemRepository.saveAndFlush(findGlobalTagItem);
 				eoGlobalTagItem.setId(eoGlobalTagItemSave.getId());
 			});
 			

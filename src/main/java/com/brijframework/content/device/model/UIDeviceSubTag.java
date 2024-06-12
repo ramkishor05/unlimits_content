@@ -6,15 +6,13 @@ public class UIDeviceSubTag extends UIDeviceItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long mainTagId;
+	private Long subCategoryId;
 
-
-	public Long getMainTagId() {
-		return mainTagId;
+	public Long getSubCategoryId() {
+		return subCategoryId;
 	}
 
-	public void setMainTagId(Long mainTagId) {
-		this.mainTagId = mainTagId;
+	public void setSubCategoryId(Long subCategoryId) {
+		this.subCategoryId = subCategoryId;
 	}
-
 }
