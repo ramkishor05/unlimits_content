@@ -9,6 +9,8 @@ public class UIGlobalCategoryImage extends UIGlobalItem implements Serializable 
 	private Long groupId;
 	
 	private String url;
+	
+	private String content;
 
 	public Long getGroupId() {
 		return groupId;
@@ -24,6 +26,14 @@ public class UIGlobalCategoryImage extends UIGlobalItem implements Serializable 
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

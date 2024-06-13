@@ -3,6 +3,7 @@ package com.brijframework.content.global.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,6 +25,8 @@ import com.brijframework.content.global.model.UIGlobalCategoryImage;
 import com.brijframework.content.global.repository.GlobalCategoryImageRepository;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.service.GlobalCategoryImageService;
+import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.service.ResourceService;
 import com.brijframework.content.util.ResourceUtil;
 
 @Service
@@ -45,6 +48,9 @@ public class GlobalCategoryImageServiceImpl extends CrudServiceImpl<UIGlobalCate
 
 	@Autowired
 	private ResourceUtil resourceUtil;
+	
+	@Autowired
+	private ResourceService resourceService;
 
 	@Override
 	public JpaRepository<EOGlobalCategoryImage, Long> getRepository() {
@@ -127,6 +133,30 @@ public class GlobalCategoryImageServiceImpl extends CrudServiceImpl<UIGlobalCate
 		globalCategoryImage=globalCategoryImageRepository.save(globalCategoryImage);
 		categoryImgUrlMap.put(url, globalCategoryImage);
 		
+	}
+	
+	@Override
+	protected void preAdd(UIGlobalCategoryImage data, EOGlobalCategoryImage entity, Map<String, List<String>> headers) {
+		if(data.getContent()!=null) {
+			UIResource uiResource=new UIResource();
+			uiResource.setFileContent(data.getContent());
+			uiResource.setFileName(data.getName());
+			uiResource.setFolderName(TAGS_WITH_IMAGES);
+			resourceService.add(uiResource, new HashMap<String, List<String>>());
+			data.setUrl(uiResource.getFileUrl());
+		}
+	}
+	
+	@Override
+	protected void preUpdate(UIGlobalCategoryImage data, EOGlobalCategoryImage entity, Map<String, List<String>> headers) {
+		if(data.getContent()!=null) {
+			UIResource uiResource=new UIResource();
+			uiResource.setFileContent(data.getContent());
+			uiResource.setFileName(data.getName());
+			uiResource.setFolderName(TAGS_WITH_IMAGES);
+			resourceService.add(uiResource, new HashMap<String, List<String>>());
+			data.setUrl(uiResource.getFileUrl());
+		}
 	}
 
 }
