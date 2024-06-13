@@ -1,6 +1,8 @@
 package com.brijframework.content.global.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,15 +16,22 @@ import com.brijframework.content.global.mapper.GlobalCategoryGroupMapper;
 import com.brijframework.content.global.model.UIGlobalCategoryGroup;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.service.GlobalCategoryGroupService;
+import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.service.ResourceService;
 
 @Service
 public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCategoryGroup, EOGlobalCategoryGroup, Long> implements GlobalCategoryGroupService {
+	
+	private static final String MAIN_CATEGORY = "MainCategory";
 	
 	@Autowired
 	private GlobalCategoryGroupRepository globalCategoryGroupRepository;
 	
 	@Autowired
 	private GlobalCategoryGroupMapper globalCategoryGroupMapper;
+	
+	@Autowired
+	private ResourceService resourceService;
 
 	@Override
 	public JpaRepository<EOGlobalCategoryGroup, Long> getRepository() {
@@ -37,6 +46,30 @@ public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCate
 	@Override
 	public List<UIGlobalCategoryGroup> getCategoryGroupList(RecordStatus dataStatus) {
 		return globalCategoryGroupMapper.mapToDTO(globalCategoryGroupRepository.getCategoryGroupListByStatus(dataStatus.getStatusIds()));
+	}
+	
+	@Override
+	protected void preAdd(UIGlobalCategoryGroup data, EOGlobalCategoryGroup entity, Map<String, List<String>> headers) {
+		if(data.getContent()!=null) {
+			UIResource uiResource=new UIResource();
+			uiResource.setFileContent(data.getContent());
+			uiResource.setFileName(data.getName());
+			uiResource.setFolderName(MAIN_CATEGORY);
+			resourceService.add(uiResource, new HashMap<String, List<String>>());
+			data.setLogoUrl(uiResource.getFileUrl());
+		}
+	}
+	
+	@Override
+	protected void preUpdate(UIGlobalCategoryGroup data, EOGlobalCategoryGroup entity, Map<String, List<String>> headers) {
+		if(data.getContent()!=null) {
+			UIResource uiResource=new UIResource();
+			uiResource.setFileContent(data.getContent());
+			uiResource.setFileName(data.getName());
+			uiResource.setFolderName(MAIN_CATEGORY);
+			resourceService.add(uiResource, new HashMap<String, List<String>>());
+			data.setLogoUrl(uiResource.getFileUrl());
+		}
 	}
 	
 }

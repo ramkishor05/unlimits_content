@@ -1,5 +1,8 @@
 package com.brijframework.content.global.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +17,23 @@ import com.brijframework.content.global.mapper.GlobalCategoryItemMapper;
 import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
+import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.service.ResourceService;
 
 @Service
 public class GlobalCategoryItemServiceImpl extends CrudServiceImpl<UIGlobalCategoryItem, EOGlobalCategoryItem, Long> implements GlobalCategoryItemService {
 	
+	private static final String SUB_CATEGORY = "SubCategory";
+
 	@Autowired
 	private GlobalCategoryItemRepository globalCategoryItemRepository;
 
 	@Autowired
 	private GlobalCategoryItemMapper globalCategoryItemMapper;
+	
+	@Autowired
+	private ResourceService resourceService;
+
 
 	@Override
 	public JpaRepository<EOGlobalCategoryItem, Long> getRepository() {
@@ -46,4 +57,27 @@ public class GlobalCategoryItemServiceImpl extends CrudServiceImpl<UIGlobalCateg
 		return false;
 	}
 
+	@Override
+	protected void preAdd(UIGlobalCategoryItem data, EOGlobalCategoryItem entity, Map<String, List<String>> headers) {
+		if(data.getContent()!=null) {
+			UIResource uiResource=new UIResource();
+			uiResource.setFileContent(data.getContent());
+			uiResource.setFileName(data.getName());
+			uiResource.setFolderName(SUB_CATEGORY);
+			resourceService.add(uiResource, new HashMap<String, List<String>>());
+			data.setLogoUrl(uiResource.getFileUrl());
+		}
+	}
+	
+	@Override
+	protected void preUpdate(UIGlobalCategoryItem data, EOGlobalCategoryItem entity, Map<String, List<String>> headers) {
+		if(data.getContent()!=null) {
+			UIResource uiResource=new UIResource();
+			uiResource.setFileContent(data.getContent());
+			uiResource.setFileName(data.getName());
+			uiResource.setFolderName(SUB_CATEGORY);
+			resourceService.add(uiResource, new HashMap<String, List<String>>());
+			data.setLogoUrl(uiResource.getFileUrl());
+		}
+	}
 }
