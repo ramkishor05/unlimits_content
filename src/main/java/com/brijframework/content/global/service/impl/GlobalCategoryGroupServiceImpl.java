@@ -16,13 +16,10 @@ import com.brijframework.content.global.mapper.GlobalCategoryGroupMapper;
 import com.brijframework.content.global.model.UIGlobalCategoryGroup;
 import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
 import com.brijframework.content.global.service.GlobalCategoryGroupService;
-import com.brijframework.content.resource.modal.UIResource;
 import com.brijframework.content.resource.service.ResourceService;
 
 @Service
 public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCategoryGroup, EOGlobalCategoryGroup, Long> implements GlobalCategoryGroupService {
-	
-	private static final String MAIN_CATEGORY = "MainCategory";
 	
 	@Autowired
 	private GlobalCategoryGroupRepository globalCategoryGroupRepository;
@@ -51,24 +48,16 @@ public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCate
 	@Override
 	protected void preAdd(UIGlobalCategoryGroup data, EOGlobalCategoryGroup entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
-			UIResource uiResource=new UIResource();
-			uiResource.setFileContent(data.getContent());
-			uiResource.setFileName(data.getName());
-			uiResource.setFolderName(MAIN_CATEGORY);
-			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setLogoUrl(uiResource.getFileUrl());
+			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
+			entity.setLogoUrl(data.getContent().getFileUrl());
 		}
 	}
 	
 	@Override
 	protected void preUpdate(UIGlobalCategoryGroup data, EOGlobalCategoryGroup entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
-			UIResource uiResource=new UIResource();
-			uiResource.setFileContent(data.getContent());
-			uiResource.setFileName(data.getName());
-			uiResource.setFolderName(MAIN_CATEGORY);
-			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setLogoUrl(uiResource.getFileUrl());
+			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
+			entity.setLogoUrl(data.getContent().getFileUrl());
 		}
 	}
 	

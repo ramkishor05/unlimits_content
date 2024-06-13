@@ -138,24 +138,27 @@ public class GlobalCategoryImageServiceImpl extends CrudServiceImpl<UIGlobalCate
 	@Override
 	protected void preAdd(UIGlobalCategoryImage data, EOGlobalCategoryImage entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
-			UIResource uiResource=new UIResource();
-			uiResource.setFileContent(data.getContent());
-			uiResource.setFileName(data.getName());
-			uiResource.setFolderName(TAGS_WITH_IMAGES);
-			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setUrl(uiResource.getFileUrl());
+			saveResource(data, entity);
 		}
+	}
+
+	private void saveResource(UIGlobalCategoryImage data, EOGlobalCategoryImage entity) {
+		StringBuilder dir=new StringBuilder(TAGS_WITH_IMAGES);
+		globalCategoryItemRepository.findById(data.getGroupId()).ifPresent(globalCategoryItem->{
+			dir.append("/"+globalCategoryItem.getName());
+		});;
+		UIResource uiResource=new UIResource();
+		uiResource.setFileContent(data.getContent());
+		uiResource.setFileName(data.getName());
+		uiResource.setFolderName(dir.toString());
+		resourceService.add(uiResource, new HashMap<String, List<String>>());
+		entity.setUrl(uiResource.getFileUrl());
 	}
 	
 	@Override
 	protected void preUpdate(UIGlobalCategoryImage data, EOGlobalCategoryImage entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
-			UIResource uiResource=new UIResource();
-			uiResource.setFileContent(data.getContent());
-			uiResource.setFileName(data.getName());
-			uiResource.setFolderName(TAGS_WITH_IMAGES);
-			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setUrl(uiResource.getFileUrl());
+			saveResource(data, entity);
 		}
 	}
 
