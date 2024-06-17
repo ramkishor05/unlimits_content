@@ -17,14 +17,11 @@ import com.brijframework.content.global.mapper.GlobalCategoryItemMapper;
 import com.brijframework.content.global.model.UIGlobalCategoryItem;
 import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
 import com.brijframework.content.global.service.GlobalCategoryItemService;
-import com.brijframework.content.resource.modal.UIResource;
 import com.brijframework.content.resource.service.ResourceService;
 
 @Service
 public class GlobalCategoryItemServiceImpl extends CrudServiceImpl<UIGlobalCategoryItem, EOGlobalCategoryItem, Long> implements GlobalCategoryItemService {
 	
-	private static final String SUB_CATEGORY = "SubCategory";
-
 	@Autowired
 	private GlobalCategoryItemRepository globalCategoryItemRepository;
 
@@ -60,24 +57,16 @@ public class GlobalCategoryItemServiceImpl extends CrudServiceImpl<UIGlobalCateg
 	@Override
 	protected void preAdd(UIGlobalCategoryItem data, EOGlobalCategoryItem entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
-			UIResource uiResource=new UIResource();
-			uiResource.setFileContent(data.getContent());
-			uiResource.setFileName(data.getName());
-			uiResource.setFolderName(SUB_CATEGORY);
-			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			entity.setLogoUrl(uiResource.getFileUrl());
+			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
+			entity.setLogoUrl(data.getContent().getFileUrl());
 		}
 	}
 	
 	@Override
 	protected void preUpdate(UIGlobalCategoryItem data, EOGlobalCategoryItem entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
-			UIResource uiResource=new UIResource();
-			uiResource.setFileContent(data.getContent());
-			uiResource.setFileName(data.getName());
-			uiResource.setFolderName(SUB_CATEGORY);
-			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			entity.setLogoUrl(uiResource.getFileUrl());
+			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
+			entity.setLogoUrl(data.getContent().getFileUrl());
 		}
 	}
 }
