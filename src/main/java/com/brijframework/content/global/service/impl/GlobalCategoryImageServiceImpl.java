@@ -143,7 +143,7 @@ public class GlobalCategoryImageServiceImpl extends CrudServiceImpl<UIGlobalCate
 			uiResource.setFileName(data.getName());
 			uiResource.setFolderName(TAGS_WITH_IMAGES);
 			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setUrl(uiResource.getFileUrl());
+			entity.setUrl(uiResource.getFileUrl());
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class GlobalCategoryImageServiceImpl extends CrudServiceImpl<UIGlobalCate
 			uiResource.setFileName(data.getName());
 			uiResource.setFolderName(TAGS_WITH_IMAGES);
 			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setUrl(uiResource.getFileUrl());
+			entity.setUrl(uiResource.getFileUrl());
 		}
 	}
 

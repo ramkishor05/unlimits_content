@@ -56,7 +56,7 @@ public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCate
 			uiResource.setFileName(data.getName());
 			uiResource.setFolderName(MAIN_CATEGORY);
 			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setLogoUrl(uiResource.getFileUrl());
+			entity.setLogoUrl(uiResource.getFileUrl());
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class GlobalCategoryGroupServiceImpl extends CrudServiceImpl<UIGlobalCate
 			uiResource.setFileName(data.getName());
 			uiResource.setFolderName(MAIN_CATEGORY);
 			resourceService.add(uiResource, new HashMap<String, List<String>>());
-			data.setLogoUrl(uiResource.getFileUrl());
+			entity.setLogoUrl(uiResource.getFileUrl());
 		}
 	}
 	

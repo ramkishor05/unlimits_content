@@ -267,6 +267,8 @@ public class Constants {
 	
 	public static final String EOGLOBAL_PROMPT="EOGLOBAL_PROMPT";
 	
+	public static final String EOGLOBAL_JOURNAL="EOGLOBAL_JOURNAL";
+
 	public static final String EOCUST_PROMPT_ITEM = "EOCUST_PROMPT_ITEM";
 	
 	public static final String EOCUST_MEDIA_ITEM = "EOCUST_MEDIA_ITEM";
