@@ -2,7 +2,7 @@ package com.brijframework.content.global.rqrs;
 
 import java.io.Serializable;
 
-import com.brijframework.content.global.model.UIGlobalCategoryGroup;
+import com.brijframework.content.global.model.UIGlobalMainCategory;
 
 public class GlobalCategoryItemResponse implements Serializable {
 
@@ -12,7 +12,7 @@ public class GlobalCategoryItemResponse implements Serializable {
 	public String name;
 	public String desc;
 	public String typeId;
-	public UIGlobalCategoryGroup globalCategoryGroup;
+	public UIGlobalMainCategory globalCategoryGroup;
 
 	public long getId() {
 		return id;
@@ -54,11 +54,11 @@ public class GlobalCategoryItemResponse implements Serializable {
 		this.typeId = typeId;
 	}
 
-	public UIGlobalCategoryGroup getGlobalCategoryGroup() {
+	public UIGlobalMainCategory getGlobalCategoryGroup() {
 		return globalCategoryGroup;
 	}
 
-	public void setGlobalCategoryGroup(UIGlobalCategoryGroup globalCategoryGroup) {
+	public void setGlobalCategoryGroup(UIGlobalMainCategory globalCategoryGroup) {
 		this.globalCategoryGroup = globalCategoryGroup;
 	}
 }

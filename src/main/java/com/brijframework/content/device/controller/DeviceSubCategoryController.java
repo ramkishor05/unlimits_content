@@ -11,19 +11,19 @@ import org.unlimits.rest.crud.service.QueryService;
 
 import com.brijframework.content.device.model.UIDeviceSubCategory;
 import com.brijframework.content.device.service.DeviceSubCategoryService;
-import com.brijframework.content.global.entities.EOGlobalCategoryItem;
+import com.brijframework.content.global.entities.EOGlobalSubCategory;
 
 
 @RestController
 @RequestMapping("/api/device/sub/category")
 @CrossOrigin("*")
-public class DeviceSubCategoryController extends QueryController<UIDeviceSubCategory, EOGlobalCategoryItem, Long>{
+public class DeviceSubCategoryController extends QueryController<UIDeviceSubCategory, EOGlobalSubCategory, Long>{
 
 	@Autowired
 	private DeviceSubCategoryService deviceSubCategoryService;
 	
 	@Override
-	public QueryService<UIDeviceSubCategory, EOGlobalCategoryItem, Long> getService() {
+	public QueryService<UIDeviceSubCategory, EOGlobalSubCategory, Long> getService() {
 		return deviceSubCategoryService;
 	}
 	

@@ -1,0 +1,112 @@
+{
+	"id": "Global_Portal_SubCategory",
+	"orderSequence": 2,
+	"objects": [
+		{
+			"id": "Global_Portal_SubCategory_Work_Career",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Career",
+				"idenNo": "Global_Portal_SubCategory_Work_Career",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Work",
+				"orderSequence": 1.1
+			}
+		}
+		,
+		{
+			"id": "Global_Portal_SubCategory_Work_Wealth_Luxury",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Wealth & Luxury",
+				"idenNo": "Global_Portal_SubCategory_Work_Wealth_Luxury",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Work",
+				"orderSequence": 1.2
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Play_Bucketlist",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Bucketlist",
+				"idenNo": "Global_Portal_SubCategory_Play_Bucketlist",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"orderSequence": 2.1
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Play_Home_Recreation",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Home & Recreation",
+				"idenNo": "Global_Portal_SubCategory_Play_Home_Recreation",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"orderSequence": 2.2
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Self_Self_Growth",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Self Growth",
+				"idenNo": "Global_Portal_SubCategory_Self_Self_Growth",
+				"typeId": "Self Growth",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"orderSequence": 3.1
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Self_Health_Spirituality",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Health & Spirituality",
+				"idenNo": "Global_Portal_SubCategory_Self_Health_Spirituality",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Self",
+				"orderSequence": 3.0
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Love_Romance",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Romance",
+				"idenNo": "Global_Portal_SubCategory_Love_Romance",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Love",
+				"orderSequence": 3.1
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Love_Relations_Charity",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Relations & Charity",
+				"idenNo": "Global_Portal_SubCategory_Love_Relations_Charity",
+				"logoUrl": "",
+				"color": "red",
+				"mainCategory": "LK@Global_Portal_MainCategory_Love",
+				"orderSequence": 3.0
+			}
+		}
+	]
+}

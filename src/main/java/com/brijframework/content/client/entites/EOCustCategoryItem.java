@@ -3,7 +3,7 @@ package com.brijframework.content.client.entites;
 import static com.brijframework.content.constants.Constants.COLOR;
 import static com.brijframework.content.constants.Constants.CUST_BUSINESS_APP_ID;
 import static com.brijframework.content.constants.Constants.EOCUST_CATEGORY_ITEM;
-import static com.brijframework.content.constants.Constants.GROUP_ID;
+import static com.brijframework.content.constants.Constants.MAIN_CATEGORY_ID;
 import static com.brijframework.content.constants.Constants.NAME;
 
 import jakarta.persistence.Column;
@@ -18,7 +18,7 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = EOCUST_CATEGORY_ITEM, uniqueConstraints = {
-		@UniqueConstraint(columnNames = { CUST_BUSINESS_APP_ID, GROUP_ID, NAME }) })
+		@UniqueConstraint(columnNames = { CUST_BUSINESS_APP_ID, MAIN_CATEGORY_ID, NAME }) })
 public class EOCustCategoryItem extends EOCustItem {
 	/**
 	 * 
@@ -33,7 +33,7 @@ public class EOCustCategoryItem extends EOCustItem {
 	private EOCustBusinessApp custBusinessApp;
 
 	@ManyToOne
-	@JoinColumn(name = GROUP_ID, nullable = false)
+	@JoinColumn(name = MAIN_CATEGORY_ID, nullable = false)
 	private EOCustCategoryGroup custCategoryGroup;
 	
 	public String getColor() {

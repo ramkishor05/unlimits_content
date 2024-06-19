@@ -11,38 +11,38 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.brijframework.content.constants.RecordStatus;
-import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
-import com.brijframework.content.global.entities.EOGlobalCategoryItem;
-import com.brijframework.content.global.entities.EOGlobalCategoryTag;
-import com.brijframework.content.global.entities.EOGlobalPrompt;
+import com.brijframework.content.global.entities.EOGlobalMainCategory;
+import com.brijframework.content.global.entities.EOGlobalPromptLibarary;
+import com.brijframework.content.global.entities.EOGlobalSubCategory;
+import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.entities.EOGlobalTenure;
-import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
-import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
-import com.brijframework.content.global.repository.GlobalPromptRepository;
-import com.brijframework.content.global.repository.GlobalTagItemRepository;
+import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
+import com.brijframework.content.global.repository.GlobalPromptLibararyRepository;
+import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
+import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
-import com.brijframework.content.global.service.GlobalCategoryImageService;
+import com.brijframework.content.global.service.GlobalImageLibararyService;
 
 @Component
 public class ContentListener implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private GlobalCategoryGroupRepository glbCategoryGroupRepository;
+	private GlobalMainCategoryRepository globalMainCategoryRepository;
 
 	@Autowired
-	private GlobalCategoryItemRepository glbCategoryRepository;
+	private GlobalSubCategoryRepository globalSubCategoryRepository;
 
 	@Autowired
-	private GlobalTagItemRepository glbTagItemRepository;
+	private GlobalTagLibararyRepository globalTagLibararyRepository;
 	
 	@Autowired
-	private GlobalPromptRepository glbPromptRepository;
+	private GlobalPromptLibararyRepository globalPromptLibararyRepository;
 	
 	@Autowired
-	private GlobalTenureRepository glbTenureRepository;
+	private GlobalTenureRepository globalTenureRepository;
 	
 	@Autowired
-	private GlobalCategoryImageService categoryImageService;
+	private GlobalImageLibararyService globalImageLibararyService;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
@@ -54,63 +54,63 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 			try {
 				
 			JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
-			List<EOGlobalCategoryGroup> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalCategoryGroup.class);
+			List<EOGlobalMainCategory> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalMainCategory.class);
 
 			eoGlobalCategoryGroupJson.forEach(eoGlobalCategoryGroup -> {
-				EOGlobalCategoryGroup findGlobalCategoryGroup = glbCategoryGroupRepository
+				EOGlobalMainCategory findGlobalCategoryGroup = globalMainCategoryRepository
 						.findByIdenNo(eoGlobalCategoryGroup.getIdenNo()).orElse(eoGlobalCategoryGroup);
 				BeanUtils.copyProperties(eoGlobalCategoryGroup, findGlobalCategoryGroup, "id");
 				findGlobalCategoryGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalCategoryGroup eoGlobalCategoryGroupSave = glbCategoryGroupRepository
+				EOGlobalMainCategory eoGlobalCategoryGroupSave = globalMainCategoryRepository
 						.saveAndFlush(findGlobalCategoryGroup);
 				eoGlobalCategoryGroup.setId(eoGlobalCategoryGroupSave.getId());
 			});
 
-			List<EOGlobalCategoryItem> eoGlobalCategoryItemJson = instance.getAll(EOGlobalCategoryItem.class);
+			List<EOGlobalSubCategory> eoGlobalCategoryItemJson = instance.getAll(EOGlobalSubCategory.class);
 
 			eoGlobalCategoryItemJson.forEach(eoGlobalCategoryItem -> {
-				EOGlobalCategoryItem findGlobalCategoryItem = glbCategoryRepository
+				EOGlobalSubCategory findGlobalCategoryItem = globalSubCategoryRepository
 						.findByIdenNo(eoGlobalCategoryItem.getIdenNo()).orElse(eoGlobalCategoryItem);
 				BeanUtils.copyProperties(eoGlobalCategoryItem, findGlobalCategoryItem, "id");
 				findGlobalCategoryItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalCategoryItem eoGlobalCategorySave = glbCategoryRepository.saveAndFlush(findGlobalCategoryItem);
+				EOGlobalSubCategory eoGlobalCategorySave = globalSubCategoryRepository.saveAndFlush(findGlobalCategoryItem);
 				eoGlobalCategoryItem.setId(eoGlobalCategorySave.getId());
 			});
 
-			List<EOGlobalCategoryTag> eoGlobalTagItemJson = instance.getAll(EOGlobalCategoryTag.class);
+			List<EOGlobalTagLibarary> eoGlobalTagItemJson = instance.getAll(EOGlobalTagLibarary.class);
 
 			eoGlobalTagItemJson.forEach(eoGlobalTagItem -> {
-				EOGlobalCategoryTag findGlobalTagItem = glbTagItemRepository.findByIdenNo(eoGlobalTagItem.getIdenNo())
+				EOGlobalTagLibarary findGlobalTagItem = globalTagLibararyRepository.findByIdenNo(eoGlobalTagItem.getIdenNo())
 						.orElse(eoGlobalTagItem);
 				BeanUtils.copyProperties(eoGlobalTagItem, findGlobalTagItem, "id");
 				findGlobalTagItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalCategoryTag eoGlobalTagItemSave = glbTagItemRepository.saveAndFlush(findGlobalTagItem);
+				EOGlobalTagLibarary eoGlobalTagItemSave = globalTagLibararyRepository.saveAndFlush(findGlobalTagItem);
 				eoGlobalTagItem.setId(eoGlobalTagItemSave.getId());
 			});
 			
 			List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
 			eoGlobalTenureJson.forEach(eoGlobalTenure -> {
-				EOGlobalTenure findGlobalTenure = glbTenureRepository.findByIdenNo(eoGlobalTenure.getIdenNo())
+				EOGlobalTenure findGlobalTenure = globalTenureRepository.findByIdenNo(eoGlobalTenure.getIdenNo())
 						.orElse(eoGlobalTenure);
 				BeanUtils.copyProperties(eoGlobalTenure, findGlobalTenure, "id");
 				findGlobalTenure.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalTenure eoGlobalTenureSave = glbTenureRepository.saveAndFlush(findGlobalTenure);
+				EOGlobalTenure eoGlobalTenureSave = globalTenureRepository.saveAndFlush(findGlobalTenure);
 				eoGlobalTenure.setId(eoGlobalTenureSave.getId());
 			});
 			
-			List<EOGlobalPrompt> eoGlobalPromptJson = instance.getAll(EOGlobalPrompt.class);
+			List<EOGlobalPromptLibarary> eoGlobalPromptJson = instance.getAll(EOGlobalPromptLibarary.class);
 
 			eoGlobalPromptJson.forEach(eoGlobalPrompt -> {
-				EOGlobalPrompt findGlobalPrompt = glbPromptRepository.findByIdenNo(eoGlobalPrompt.getIdenNo())
+				EOGlobalPromptLibarary findGlobalPrompt = globalPromptLibararyRepository.findByIdenNo(eoGlobalPrompt.getIdenNo())
 						.orElse(eoGlobalPrompt);
 				BeanUtils.copyProperties(eoGlobalPrompt, findGlobalPrompt, "id");
 				findGlobalPrompt.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				EOGlobalPrompt eoGlobalPromptSave = glbPromptRepository.saveAndFlush(findGlobalPrompt);
+				EOGlobalPromptLibarary eoGlobalPromptSave = globalPromptLibararyRepository.saveAndFlush(findGlobalPrompt);
 				eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
 			});
 			
-			categoryImageService.init();
+			globalImageLibararyService.init();
 			
 		}catch (Exception e) {
 			e.printStackTrace();

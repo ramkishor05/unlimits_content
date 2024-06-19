@@ -11,25 +11,25 @@ import org.unlimits.rest.crud.service.QueryServiceImpl;
 import com.brijframework.content.device.mapper.DeviceSubCategoryMapper;
 import com.brijframework.content.device.model.UIDeviceSubCategory;
 import com.brijframework.content.device.service.DeviceSubCategoryService;
-import com.brijframework.content.global.entities.EOGlobalCategoryItem;
-import com.brijframework.content.global.repository.GlobalCategoryItemRepository;
+import com.brijframework.content.global.entities.EOGlobalSubCategory;
+import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 
 @Service
-public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCategory, EOGlobalCategoryItem, Long> implements DeviceSubCategoryService {
+public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCategory, EOGlobalSubCategory, Long> implements DeviceSubCategoryService {
 	
 	@Autowired
-	private GlobalCategoryItemRepository globalCategoryItemRepository;
+	private GlobalSubCategoryRepository globalCategoryItemRepository;
 	
 	@Autowired
 	private DeviceSubCategoryMapper deviceSubCategoryMapper;
 
 	@Override
-	public JpaRepository<EOGlobalCategoryItem, Long> getRepository() {
+	public JpaRepository<EOGlobalSubCategory, Long> getRepository() {
 		return globalCategoryItemRepository;
 	}
 
 	@Override
-	public GenericMapper<EOGlobalCategoryItem, UIDeviceSubCategory> getMapper() {
+	public GenericMapper<EOGlobalSubCategory, UIDeviceSubCategory> getMapper() {
 		return deviceSubCategoryMapper;
 	}
 

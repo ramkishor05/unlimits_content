@@ -68,7 +68,7 @@ public class Constants {
 	public static final String CUST_BUSINESS_APP_ID = "CUST_BUSINESS_APP_ID";
 	public static final String CUST_PRODUCT_ID="CUST_PRODUCT_ID";
 	
-	public static final String GROUP_ID = "GROUP_ID";
+	public static final String MAIN_CATEGORY_ID = "MAIN_CATEGORY_ID";
 	public static final String BRAND = "BRAND";
 	public static final String GTIN = "GTIN";
 	public static final String MPN = "MPN";
@@ -84,7 +84,7 @@ public class Constants {
 	public static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
 	public static final String MOBILE_NUMBER = "MOBILE_NUMBER";
 	public static final String PHONE_NUMBER = "PHONE_NUMBER";
-	public static final String GLB_CATEGORY_GROUP = "globalCategoryGroup";
+	public static final String GLB_MAIN_CATEGORY = "mainCategory";
 	public static final String VENDOR = "vendor";
 	public static final String CUST_CATEGORY_GROUP = "custCategoryGroup";
 	public static final String EOCUST_COUNT_FREQ = "EOCUST_COUNT_FREQ";
@@ -171,13 +171,13 @@ public class Constants {
 	public static final String CUST_UNIT_GROUP = "custUnitGroup";
 	public static final String CUST_CURRENCY_GROUP = "custCurrencyGroup";
 
-	public static final String EOGLOBAL_CATEGORY_ITEM = "EOGLOBAL_CATEGORY_ITEM";
-	public static final String EOGLOBAL_CATEGORY_GROUP = "EOGLOBAL_CATEGORY_GROUP";
+	public static final String EOGLOBAL_SUB_CATEGORY = "EOGLOBAL_SUB_CATEGORY";
+	public static final String EOGLOBAL_MAIN_CATEGORY = "EOGLOBAL_MAIN_CATEGORY";
 	public static final String EOGLOBAL_COUNT_FREQ = "EOGLOBAL_COUNT_FREQ";
 	public static final String EOGLOBAL_MANUFACTURER = "EOGLOBAL_MANUFACTURER";
 	public static final String EOGLOBAL_MEDIA_ITEM = "EOGLOBAL_MEDIA_ITEM";
-	public static final String EOGLOBAL_CATEGORY_IMAGE = "EOGLOBAL_CATEGORY_IMAGE";
-	public static final String EOGLOBAL_MINDSET_ITEM = "EOGLOBAL_MINDSET_ITEM";
+	public static final String EOGLOBAL_IMAGE_LIBARARY = "EOGLOBAL_IMAGE_LIBARARY";
+	public static final String EOGLOBAL_MINDSET_LIBARARY = "EOGLOBAL_MINDSET_LIBARARY";
 	public static final String EOGLOBAL_CURRENCY_ITEM = "EOGLOBAL_CURRENCY_ITEM";
 	public static final String EOGLOBAL_CURRENCY_GROUP = "EOGLOBAL_CURRENCY_GROUP";
 	public static final String UNIT_GROUP = "unitGroup";
@@ -261,13 +261,13 @@ public class Constants {
 	
 	public static final String EOGLOBAL_TAG_GROUP = "EOGLOBAL_TAG_GROUP";
 	
-	public static final String EOGLOBAL_CATEGORY_TAG = "EOGLOBAL_CATEGORY_TAG";
+	public static final String EOGLOBAL_TAG_LIBARARY = "EOGLOBAL_TAG_LIBARARY";
 	
 	public static final String EOGLOBAL_TAGE_PROMPT_MAPPING = "EOGLOBAL_TAGE_PROMPT_MAPPING";
 	
-	public static final String EOGLOBAL_PROMPT="EOGLOBAL_PROMPT";
+	public static final String EOGLOBAL_PROMPT_LIBARARY="EOGLOBAL_PROMPT_LIBARARY";
 	
-	public static final String EOGLOBAL_JOURNAL="EOGLOBAL_JOURNAL";
+	public static final String EOGLOBAL_JOURNAL_LIBARARY="EOGLOBAL_JOURNAL_LIBARARY";
 
 	public static final String EOCUST_PROMPT_ITEM = "EOCUST_PROMPT_ITEM";
 	

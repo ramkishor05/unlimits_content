@@ -2,7 +2,7 @@ package com.brijframework.content.client.entites;
 
 import static com.brijframework.content.constants.Constants.CUST_BUSINESS_APP_ID;
 import static com.brijframework.content.constants.Constants.EOCUST_PROMPT_ITEM;
-import static com.brijframework.content.constants.Constants.GROUP_ID;
+import static com.brijframework.content.constants.Constants.MAIN_CATEGORY_ID;
 import static com.brijframework.content.constants.Constants.NAME;
 
 import jakarta.persistence.Entity;
@@ -16,7 +16,7 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = EOCUST_PROMPT_ITEM, uniqueConstraints = {
-		@UniqueConstraint(columnNames = { CUST_BUSINESS_APP_ID, GROUP_ID, NAME }) })
+		@UniqueConstraint(columnNames = { CUST_BUSINESS_APP_ID, MAIN_CATEGORY_ID, NAME }) })
 public class EOCustPrompt extends EOCustItem {
 	/**
 	 * 
@@ -28,7 +28,7 @@ public class EOCustPrompt extends EOCustItem {
 	private EOCustBusinessApp custBusinessApp;
 
 	@ManyToOne
-	@JoinColumn(name = GROUP_ID, nullable = false)
+	@JoinColumn(name = MAIN_CATEGORY_ID, nullable = false)
 	private EOCustCategoryGroup custCategoryGroup;
 
 	public EOCustBusinessApp getCustBusinessApp() {

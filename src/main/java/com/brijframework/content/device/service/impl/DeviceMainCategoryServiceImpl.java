@@ -12,26 +12,26 @@ import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceMainCategoryMapper;
 import com.brijframework.content.device.model.UIDeviceMainCategory;
 import com.brijframework.content.device.service.DeviceMainCategoryService;
-import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
-import com.brijframework.content.global.repository.GlobalCategoryGroupRepository;
+import com.brijframework.content.global.entities.EOGlobalMainCategory;
+import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 
 @Service
-public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMainCategory, EOGlobalCategoryGroup, Long>
+public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMainCategory, EOGlobalMainCategory, Long>
 		implements DeviceMainCategoryService {
 
 	@Autowired
-	private GlobalCategoryGroupRepository globalCategoryGroupRepository;
+	private GlobalMainCategoryRepository globalCategoryGroupRepository;
 
 	@Autowired
 	private DeviceMainCategoryMapper globalCategoryGroupMapper;
 
 	@Override
-	public JpaRepository<EOGlobalCategoryGroup, Long> getRepository() {
+	public JpaRepository<EOGlobalMainCategory, Long> getRepository() {
 		return globalCategoryGroupRepository;
 	}
 
 	@Override
-	public GenericMapper<EOGlobalCategoryGroup, UIDeviceMainCategory> getMapper() {
+	public GenericMapper<EOGlobalMainCategory, UIDeviceMainCategory> getMapper() {
 		return globalCategoryGroupMapper;
 	}
 

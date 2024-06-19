@@ -13,18 +13,18 @@ import org.unlimits.rest.crud.service.QueryService;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.model.UIDeviceMainCategory;
 import com.brijframework.content.device.service.DeviceMainCategoryService;
-import com.brijframework.content.global.entities.EOGlobalCategoryGroup;
+import com.brijframework.content.global.entities.EOGlobalMainCategory;
 
 @RestController
 @RequestMapping("api/device/main/category")
 @CrossOrigin("*")
-public class DeviceMainCategoryController extends QueryController<UIDeviceMainCategory, EOGlobalCategoryGroup, Long> {
+public class DeviceMainCategoryController extends QueryController<UIDeviceMainCategory, EOGlobalMainCategory, Long> {
 
 	@Autowired
 	private DeviceMainCategoryService deviceMainCategoryService;
 	
 	@Override
-	public QueryService<UIDeviceMainCategory, EOGlobalCategoryGroup, Long> getService() {
+	public QueryService<UIDeviceMainCategory, EOGlobalMainCategory, Long> getService() {
 		return deviceMainCategoryService;
 	}
 	
