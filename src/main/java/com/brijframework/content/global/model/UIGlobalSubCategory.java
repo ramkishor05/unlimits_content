@@ -7,7 +7,7 @@ import com.brijframework.content.resource.modal.UIResource;
 public class UIGlobalSubCategory extends UIGlobalItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Long groupId;
+	private Long mainCategoryId;
 	private UIResource content;
 
 	public UIResource getContent() {
@@ -18,12 +18,12 @@ public class UIGlobalSubCategory extends UIGlobalItem implements Serializable {
 		this.content = content;
 	}
 
-	public Long getGroupId() {
-		return groupId;
+	public Long getMainCategoryId() {
+		return mainCategoryId;
 	}
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
+	public void setMainCategoryId(Long mainCategoryId) {
+		this.mainCategoryId = mainCategoryId;
 	}
 
 }

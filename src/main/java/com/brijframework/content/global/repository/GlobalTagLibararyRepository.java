@@ -16,6 +16,6 @@ public interface GlobalTagLibararyRepository extends JpaRepository<EOGlobalTagLi
 
 	Optional<EOGlobalTagLibarary> findByIdenNo(String idenNo);
 
-	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?) ORDER BY GTG.NAME, GTL.NAME ")
+	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?) ORDER BY GTL.NAME ")
 	List<EOGlobalTagLibarary> findAllBSubCategoryId(Long subCategoryId);
 }

@@ -21,7 +21,12 @@ import com.brijframework.content.filters.TransactionFilter;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig { 
-	
+	String[] patterns = { 
+			"/api/swagger-ui/**", 
+			"/v3/api-docs/**",
+			"/resource/**"
+			};
+
 	private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
   
     @Autowired
@@ -32,14 +37,14 @@ public class SecurityConfig {
       
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
-    	log.info("SecurityConfig :: securityFilterChain() started");
-        return http.csrf((csrf)->csrf.disable()).cors(cors->cors.disable())
-                .authorizeHttpRequests(authorize->authorize.requestMatchers("/auth/**","/swagger-ui.html","/swagger-ui/**", "/v3/api-docs/**","/**").permitAll().anyRequest()
-                        .authenticated())
-                .sessionManagement(Customizer.withDefaults())
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+    	log.debug("SecurityConfig :: securityFilterChain() started");
+        return http.csrf((csrf)->csrf.disable()).cors(cors->cors.disable()) 
+                .authorizeHttpRequests(authorize->authorize.requestMatchers(patterns).permitAll().anyRequest()
+                        .authenticated()) 
+                .sessionManagement(Customizer.withDefaults()) 
+                .authenticationProvider(authenticationProvider) 
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) 
+                .build(); 
     } 
   
     @Bean

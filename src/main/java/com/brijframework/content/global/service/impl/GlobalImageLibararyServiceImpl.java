@@ -24,6 +24,7 @@ import com.brijframework.content.global.mapper.GlobalImageLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalImageLibarary;
 import com.brijframework.content.global.repository.GlobalImageLibararyRepository;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
+import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.resource.modal.UIResource;
 import com.brijframework.content.resource.service.ResourceService;
@@ -42,6 +43,9 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	
 	@Autowired
 	private GlobalSubCategoryRepository globalCategoryItemRepository;
+	
+	@Autowired
+	private GlobalTagLibararyRepository globalTagLibararyRepository;
 
 	@Autowired
 	private GlobalImageLibararyMapper globalImageLibararyMapper;
@@ -144,9 +148,12 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 
 	private void saveResource(UIGlobalImageLibarary data, EOGlobalImageLibarary entity) {
 		StringBuilder dir=new StringBuilder(TAGS_WITH_IMAGES);
-		globalCategoryItemRepository.findById(data.getGroupId()).ifPresent(globalCategoryItem->{
+		globalCategoryItemRepository.findById(data.getSubCategoryId()).ifPresent(globalCategoryItem->{
 			dir.append("/"+globalCategoryItem.getName());
-		});;
+		});
+		globalTagLibararyRepository.findById(data.getTagLibararyId()).ifPresent(globalTagLibarary->{
+			dir.append("/"+globalTagLibarary.getName());
+		});
 		UIResource uiResource=new UIResource();
 		uiResource.setFileContent(data.getContent());
 		uiResource.setFileName(data.getName());

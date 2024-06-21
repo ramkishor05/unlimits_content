@@ -25,4 +25,17 @@ public class ClientConstants {
 	public static final String SPRING = "spring";
 	
 	public static final String APP_CLIENT_PACKAGE_IMPL = "com.brijframework.client.mapper.impl";
+	
+	/**
+	 * 
+	 */
+	public static final String SUCCESSFULLY_PROCCEED = "Successfully procceed";
+	/**
+	 * 
+	 */
+	public static final String FAILED = "0";
+	/**
+	 * 
+	 */
+	public static final String SUCCESS = "1";
 }

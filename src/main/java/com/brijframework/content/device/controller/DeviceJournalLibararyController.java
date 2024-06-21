@@ -1,28 +1,22 @@
 package com.brijframework.content.device.controller;
+import static com.brijframework.content.constants.ClientConstants.FAILED;
+import static com.brijframework.content.constants.ClientConstants.SUCCESS;
+import static com.brijframework.content.constants.ClientConstants.SUCCESSFULLY_PROCCEED;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.unlimits.rest.crud.beans.Response;
-import org.unlimits.rest.crud.controller.QueryController;
-import org.unlimits.rest.crud.service.QueryService;
 
-import com.brijframework.content.device.model.UIDeviceJournalLibarary;
 import com.brijframework.content.device.service.DeviceJournalLibararyService;
-import com.brijframework.content.global.entities.EOGlobalJournalLibarary;
-
 
 @RestController
 @RequestMapping("/api/device/journal/libarary")
-public class DeviceJournalLibararyController extends QueryController<UIDeviceJournalLibarary, EOGlobalJournalLibarary, Long>{
+public class DeviceJournalLibararyController {
 
 	@Autowired
 	private DeviceJournalLibararyService deviceJournalLibararyService;
-	
-	@Override
-	public QueryService<UIDeviceJournalLibarary, EOGlobalJournalLibarary, Long> getService() {
-		return deviceJournalLibararyService;
-	}
 	
 	@GetMapping("/today")
 	public Response findTodayJournalLibarary(){

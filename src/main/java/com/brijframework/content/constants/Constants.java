@@ -1,5 +1,11 @@
 package com.brijframework.content.constants;
 public class Constants {
+	public static final String CLIENT_USER_ID = "clientUserId";
+	public static final String CLIENT_USER_ROLE = "clientUserRole";
+	public static final String CLIENT_TOKEN =  "token";
+	public static final String CLIENT_USER_NAME =  "clientUserName";
+
+
 	public static final String OWNER_ID = "ownerId";
     public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5*60*60;
     public static final String SIGNING_KEY = "sssshhhh!";

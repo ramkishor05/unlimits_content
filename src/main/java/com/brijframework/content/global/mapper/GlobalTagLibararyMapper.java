@@ -13,10 +13,10 @@ import com.brijframework.content.global.model.UIGlobalTagLibarary;
 public interface GlobalTagLibararyMapper  extends GenericMapper<EOGlobalTagLibarary, UIGlobalTagLibarary>{
 
 	@Override
-	@Mapping(target = "subCategory.id", source = "groupId")
+	@Mapping(target = "subCategory.id", source = "subCategoryId")
 	EOGlobalTagLibarary mapToDAO(UIGlobalTagLibarary uiGlobalTagItem);
 	
 	@Override
-	@Mapping(target = "groupId", source = "subCategory.id")
+	@Mapping(target = "subCategoryId", source = "subCategory.id")
 	UIGlobalTagLibarary mapToDTO(EOGlobalTagLibarary eoGlobalTagItem);
 }

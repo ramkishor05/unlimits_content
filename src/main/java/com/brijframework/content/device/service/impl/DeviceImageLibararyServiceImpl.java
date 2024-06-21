@@ -32,10 +32,15 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	public GenericMapper<EOGlobalImageLibarary, UIDeviceImageLibarary> getMapper() {
 		return deviceImageLibararyMapper;
 	}
+	
+	@Override
+	public List<UIDeviceImageLibarary> search(Long subCategoryId, Long tagLibararyId) {
+		return deviceImageLibararyMapper.mapToDTO(globalImageLibararyRepository.filter(subCategoryId, tagLibararyId));
+	}
 
 	@Override
-	public List<UIDeviceImageLibarary> search(Long subCategoryId, String name) {
-		return deviceImageLibararyMapper.mapToDTO(globalImageLibararyRepository.filter(subCategoryId, name));
+	public List<UIDeviceImageLibarary> search(Long subCategoryId, Long tagLibararyId, String name) {
+		return deviceImageLibararyMapper.mapToDTO(globalImageLibararyRepository.filter(subCategoryId, tagLibararyId, name));
 	}
 	
 }

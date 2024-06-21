@@ -5,18 +5,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.unlimits.rest.crud.beans.Response;
-import org.unlimits.rest.crud.controller.QueryController;
-import org.unlimits.rest.crud.service.QueryService;
 
-import com.brijframework.content.device.model.UIDeviceTagLibarary;
 import com.brijframework.content.device.service.DeviceTagLibararyService;
-import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 
+import static com.brijframework.content.constants.ClientConstants.FAILED;
+import static com.brijframework.content.constants.ClientConstants.SUCCESS;
+import static com.brijframework.content.constants.ClientConstants.SUCCESSFULLY_PROCCEED;
 
 @RestController
 @RequestMapping("/api/device/tag/libarary")
-public class DeviceTagLibararyController extends QueryController<UIDeviceTagLibarary, EOGlobalTagLibarary, Long>{
-
+public class DeviceTagLibararyController {
+	
 	@Autowired
 	private DeviceTagLibararyService deviceTagLibararyService;
 	
@@ -35,8 +34,4 @@ public class DeviceTagLibararyController extends QueryController<UIDeviceTagLiba
 		}
 	}
 
-	@Override
-	public QueryService<UIDeviceTagLibarary, EOGlobalTagLibarary, Long> getService() {
-		return deviceTagLibararyService;
-	}
 }

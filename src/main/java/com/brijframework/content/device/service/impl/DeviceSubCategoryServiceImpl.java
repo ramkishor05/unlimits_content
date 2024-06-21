@@ -34,8 +34,8 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 	}
 
 	@Override
-	public List<UIDeviceSubCategory> findAllByCategoryId(Long categoryId) {
-		return deviceSubCategoryMapper.mapToDTO(globalCategoryItemRepository.findAllByGroupId(categoryId));
+	public List<UIDeviceSubCategory> findAllByMainCategoryId(Long mainCategoryId) {
+		return deviceSubCategoryMapper.mapToDTO(globalCategoryItemRepository.findAllByMainCategoryId(mainCategoryId));
 	}
 
 }

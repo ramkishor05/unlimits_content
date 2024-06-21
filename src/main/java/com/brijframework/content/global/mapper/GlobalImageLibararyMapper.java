@@ -13,10 +13,12 @@ import com.brijframework.content.global.model.UIGlobalImageLibarary;
 public interface GlobalImageLibararyMapper  extends GenericMapper<EOGlobalImageLibarary, UIGlobalImageLibarary>{
 
 	@Override
-	@Mapping(source = "groupId", target = "subCategory.id")
+	@Mapping(source = "subCategoryId", target = "subCategory.id")
+	@Mapping(source = "tagLibararyId", target = "tagLibarary.id")
 	EOGlobalImageLibarary mapToDAO(UIGlobalImageLibarary uiGlobalCategoryImage);
 	
 	@Override
-	@Mapping(source = "subCategory.id", target = "groupId")
+	@Mapping(source = "subCategory.id", target = "subCategoryId")
+	@Mapping(source = "tagLibarary.id", target = "tagLibararyId")
 	UIGlobalImageLibarary mapToDTO(EOGlobalImageLibarary eoGlobalCategoryImage);
 }

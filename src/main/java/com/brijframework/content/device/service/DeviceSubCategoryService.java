@@ -9,6 +9,6 @@ import com.brijframework.content.global.entities.EOGlobalSubCategory;
 
 public interface DeviceSubCategoryService extends QueryService<UIDeviceSubCategory, EOGlobalSubCategory, Long>{
 
-	List<UIDeviceSubCategory> findAllByCategoryId(Long categoryId);
+	List<UIDeviceSubCategory> findAllByMainCategoryId(Long categoryId);
 
 }

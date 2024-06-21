@@ -24,6 +24,9 @@ public interface GlobalImageLibararyRepository extends JpaRepository<EOGlobalIma
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI INNER JOIN EOGLOBAL_CATEGORY_ITEM GCS ON GCS.ID=  GCI.SUB_CATEGORY_ID WHERE GCI.SUB_CATEGORY_ID IN (?) ORDER BY GCS.NAME, GCI.NAME ")
 	List<EOGlobalImageLibarary>  findAllByGroupId(Long categoryId);
 
-	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI WHERE GCI.SUB_CATEGORY_ID=?1 and GCI.NAME LIKE (%?2%) ORDER BY GCI.NAME")
-	List<EOGlobalImageLibarary> filter(Long subCategoryId, String name);
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI WHERE GCI.SUB_CATEGORY_ID=?1 AND GCI.TAG_LIBARARY_ID=?2 ORDER BY GCI.NAME")
+	List<EOGlobalImageLibarary> filter(Long subCategoryId, Long tagLibararyId);
+	
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI WHERE GCI.SUB_CATEGORY_ID=?1 AND GCI.TAG_LIBARARY_ID=?2 and GCI.NAME LIKE (%?3%) ORDER BY GCI.NAME")
+	List<EOGlobalImageLibarary> filter(Long subCategoryId, Long tagLibararyId, String name);
 }

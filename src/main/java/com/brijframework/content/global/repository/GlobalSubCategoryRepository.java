@@ -14,13 +14,13 @@ import com.brijframework.content.global.entities.EOGlobalSubCategory;
 @Transactional
 public interface GlobalSubCategoryRepository extends JpaRepository<EOGlobalSubCategory, Long>{
 	
-	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.GROUP_ID WHERE GCI.RECORD_STATUS IN (?) ORDER BY GCG.NAME, GCI.NAME ")
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.MAIN_CATEGORY_ID WHERE GCI.RECORD_STATUS IN (?) ORDER BY GCG.NAME, GCI.NAME ")
 	List<EOGlobalSubCategory> findAllByStatus(List<String> status);
 
 	Optional<EOGlobalSubCategory> findByName(String name);
 
 	Optional<EOGlobalSubCategory> findByIdenNo(String idenNo);
 
-	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.GROUP_ID WHERE GCI.GROUP_ID IN (?) ORDER BY GCG.NAME, GCI.NAME ")
-	List<EOGlobalSubCategory>  findAllByGroupId(Long categoryId);
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.MAIN_CATEGORY_ID WHERE GCI.MAIN_CATEGORY_ID IN (?) ORDER BY GCG.NAME, GCI.NAME ")
+	List<EOGlobalSubCategory>  findAllByMainCategoryId(Long mainCategoryId);
 }

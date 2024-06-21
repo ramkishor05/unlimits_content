@@ -13,10 +13,10 @@ import com.brijframework.content.global.model.UIGlobalSubCategory;
 public interface GlobalSubCategoryMapper  extends GenericMapper<EOGlobalSubCategory, UIGlobalSubCategory>{
 
 	@Override
-	@Mapping(source = "groupId", target = "mainCategory.id")
+	@Mapping(source = "mainCategoryId", target = "mainCategory.id")
 	EOGlobalSubCategory mapToDAO(UIGlobalSubCategory uiGlobalCategoryItem);
 	
 	@Override
-	@Mapping(source = "mainCategory.id", target = "groupId")
+	@Mapping(source = "mainCategory.id", target = "mainCategoryId")
 	UIGlobalSubCategory mapToDTO(EOGlobalSubCategory eoGlobalCategoryItem);
 }

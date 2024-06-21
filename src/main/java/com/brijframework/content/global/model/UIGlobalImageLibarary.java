@@ -6,18 +6,28 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long groupId;
+	private Long subCategoryId;
+	
+	private Long tagLibararyId;
 	
 	private String url;
 	
 	private String content;
 
-	public Long getGroupId() {
-		return groupId;
+	public Long getSubCategoryId() {
+		return subCategoryId;
 	}
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
+	public void setSubCategoryId(Long subCategoryId) {
+		this.subCategoryId = subCategoryId;
+	}
+
+	public Long getTagLibararyId() {
+		return tagLibararyId;
+	}
+
+	public void setTagLibararyId(Long tagLibararyId) {
+		this.tagLibararyId = tagLibararyId;
 	}
 
 	public String getUrl() {
