@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.unlimits.rest.token.TokenUtil;
+import org.unlimits.rest.context.ApiTokenContext;
 
 import com.brijframework.content.exceptions.InvalidTokenException;
 
@@ -38,26 +38,27 @@ public class TransactionFilter extends OncePerRequestFilter {
         HttpServletRequest req = (HttpServletRequest) request;
         TransactionRequest requestWrapper = new TransactionRequest(req);
         String authHeader = req.getHeader(AUTHORIZATION);
-        if(StringUtils.isNotEmpty(authHeader)) {
-       	 String token = authHeader.substring(7);
-       	 if (!TokenUtil.validateToken(token)) { 
-            	throw new InvalidTokenException("Invalid token !!");
-         }
-       	 String username = TokenUtil.getUsername(token); 
-       	 String userId = TokenUtil.getUserId(token);
-       	 String userRole = TokenUtil.getUserRole(token); 
-       	 requestWrapper.setAttribute(CLIENT_USER_ID, userId);
-            requestWrapper.putHeader(CLIENT_USER_ID, userId);
-            requestWrapper.setAttribute(CLIENT_USER_ROLE, userRole);
-            requestWrapper.putHeader(CLIENT_USER_ROLE, userRole);
-            requestWrapper.putHeader(CLIENT_TOKEN, token);
-            requestWrapper.putHeader(CLIENT_USER_NAME, username);
-            if (SecurityContextHolder.getContext().getAuthentication() == null) { 
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, getGrantedAuthority(userRole)); 
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); 
-                SecurityContextHolder.getContext().setAuthentication(authToken); 
-            } 
-       }
+		if (StringUtils.isNotEmpty(authHeader)) {
+			String token = authHeader.substring(7);
+			if (!ApiTokenContext.validateToken(token)) {
+				throw new InvalidTokenException("Invalid token !!");
+			}
+			String username = ApiTokenContext.getUsername(token);
+			String userId = ApiTokenContext.getUserId(token);
+			String userRole = ApiTokenContext.getUserRole(token);
+			requestWrapper.setAttribute(CLIENT_USER_ID, userId);
+			requestWrapper.putHeader(CLIENT_USER_ID, userId);
+			requestWrapper.setAttribute(CLIENT_USER_ROLE, userRole);
+			requestWrapper.putHeader(CLIENT_USER_ROLE, userRole);
+			requestWrapper.putHeader(CLIENT_TOKEN, token);
+			requestWrapper.putHeader(CLIENT_USER_NAME, username);
+			if (SecurityContextHolder.getContext().getAuthentication() == null) {
+				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null,
+						getGrantedAuthority(userRole));
+				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				SecurityContextHolder.getContext().setAuthentication(authToken);
+			}
+		}
         filterChain.doFilter(requestWrapper, response);
         System.out.println("TransactionFilter end");
     }

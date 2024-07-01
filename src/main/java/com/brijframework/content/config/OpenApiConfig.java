@@ -16,7 +16,7 @@ import io.swagger.v3.oas.models.servers.Server;
 @Configuration
 public class OpenApiConfig {
 
-	private final String moduleName = "Client";
+	private final String moduleName = "Content";
 	private final String apiVersion = "1.1";
 
 	@Value("${openapi.service.url}")

@@ -12,6 +12,4 @@ public interface DeviceImageLibararyService extends QueryService<UIDeviceImageLi
 
 	List<UIDeviceImageLibarary> search(Long subCategoryId, Long tagLibararyId, String name);
 
-	List<UIDeviceImageLibarary> search(Long subCategoryId, Long tagLibararyId);
-
 }

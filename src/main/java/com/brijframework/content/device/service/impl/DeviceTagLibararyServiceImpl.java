@@ -35,6 +35,6 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 
 	@Override
 	public List<UIDeviceTagLibarary> findAllBySubCategoryId(Long subCategoryId) {
-		return deviceTagLibararyMapper.mapToDTO(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId));
+		return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId));
 	}
 }

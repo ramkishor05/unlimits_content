@@ -12,4 +12,11 @@ public interface DeviceTagLibararyService extends QueryService<UIDeviceTagLibara
 
 	List<UIDeviceTagLibarary> findAllBySubCategoryId(Long subCategoryId);
 
+	/**
+	 * @param subCategoryId
+	 * @param name
+	 * @return
+	 */
+	List<UIDeviceTagLibarary> search(Long subCategoryId, String name);
+
 }

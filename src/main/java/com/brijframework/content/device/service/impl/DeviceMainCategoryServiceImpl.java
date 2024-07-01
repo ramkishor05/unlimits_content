@@ -2,7 +2,9 @@ package com.brijframework.content.device.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
@@ -18,6 +20,9 @@ import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 @Service
 public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMainCategory, EOGlobalMainCategory, Long>
 		implements DeviceMainCategoryService {
+	
+	@Value("${openapi.service.url}")
+	private String serverUrl;
 
 	@Autowired
 	private GlobalMainCategoryRepository globalCategoryGroupRepository;
@@ -37,8 +42,13 @@ public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMain
 
 	@Override
 	public List<UIDeviceMainCategory> getCategoryGroupList(RecordStatus dataStatus) {
-		return globalCategoryGroupMapper
-				.mapToDTO(globalCategoryGroupRepository.getCategoryGroupListByStatus(dataStatus.getStatusIds()));
+		return postFetch(globalCategoryGroupRepository.getCategoryGroupListByStatus(dataStatus.getStatusIds()));
 	}
 
+	@Override
+	protected void postFetch(EOGlobalMainCategory findObject, UIDeviceMainCategory dtoObject) {
+		if(StringUtils.isNotEmpty(dtoObject.getLogoUrl())) {
+			dtoObject.setLogoUrl(dtoObject.getLogoUrl().startsWith("/")? serverUrl+""+dtoObject.getLogoUrl() :  serverUrl+"/"+dtoObject.getLogoUrl());
+		}
+	}
 }

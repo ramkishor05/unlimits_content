@@ -9,7 +9,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_savings_grow_exponentially",
 				"name": "My savings grow exponentially.",
-				"typeId": "Savings",
+				"type": "Savings",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -23,7 +23,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_have_a_solid_emergency_fund.",
 				"name": "I have a solid emergency fund.",
-				"typeId": "Savings",
+				"type": "Savings",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -37,7 +37,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_savings_rate_is_high.",
 				"name": "My savings rate is high.",
-				"typeId": "Savings",
+				"type": "Savings",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -51,7 +51,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_save_for_multiple_goals.",
 				"name": "I save for multiple goals.",
-				"typeId": "Savings",
+				"type": "Savings",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -65,7 +65,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_rely_on_fixed_deposits.",
 				"name": "I rely on fixed deposits.",
-				"typeId": "Savings",
+				"type": "Savings",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -79,7 +79,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_stocks_consistently_outperform.",
 				"name": "My stocks consistently outperform.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -93,7 +93,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Investments_are_my_main_income.",
 				"name": "Investments are my main income.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -107,7 +107,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_regularly_invest.",
 				"name": "I regularly invest.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -121,7 +121,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_trade_stocks_profitably.",
 				"name": "I trade stocks profitably.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -135,7 +135,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_mutual_funds_have_doubled.",
 				"name": "My mutual funds have doubled.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -149,7 +149,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_own_Fortune_500_shares.",
 				"name": "I own Fortune 500 shares.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -163,7 +163,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Index_funds_secure_my_finances.",
 				"name": "Index funds secure my finances.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -177,7 +177,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Day_trading_made_me_rich.",
 				"name": "Day trading made me rich.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -191,7 +191,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_dividends_fund_vacations.",
 				"name": "My dividends fund vacations.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -205,7 +205,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_net worth_steadily_grows.",
 				"name": "My net worth steadily grows.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -219,7 +219,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Stock_savvy_funds_charity.",
 				"name": "Stock savvy funds charity.",
-				"typeId": "Stocks",
+				"type": "Stocks",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -233,7 +233,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_hold_global_properties.",
 				"name": "I hold global properties.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -247,7 +247,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_hold_global_properties.",
 				"name": "I hold global properties.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -261,7 +261,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I've_achieved_early_retirement.",
 				"name": "I've achieved early retirement.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -275,7 +275,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_investments_are_diversified.",
 				"name": "My_investments_are_diversified.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -289,7 +289,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_real_estate_is_diverse.",
 				"name": "My real estate is diverse.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -303,7 +303,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_own_prime_commercial_real_estate.",
 				"name": "I own prime commercial real estate.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -317,7 +317,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Real_estate_flipping_pays.",
 				"name": "Real estate flipping pays.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -331,7 +331,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_Annuities_provide_steady_income.",
 				"name": "Annuities provide steady income.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -345,7 +345,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_My_historic_properties_profit.",
 				"name": "My historic properties profit.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -359,7 +359,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_My_luxury_rentals_are_seasonal.",
 				"name": "My luxury rentals are seasonal.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -373,7 +373,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_Boutique_hotels_are_my_hotspots.",
 				"name": "Boutique hotels are my hotspots.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -387,7 +387,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_Real_estate_staging_is_profitable.",
 				"name": "Real estate staging is profitable.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -401,7 +401,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_vineyard_is_profitable.",
 				"name": "My vineyard is profitable.",
-				"typeId": "Real Estate",
+				"type": "Real Estate",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -415,7 +415,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_royalties_cover_my_expenses.",
 				"name": "My royalties cover my expenses.",
-				"typeId": "Royalties",
+				"type": "Royalties",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -429,7 +429,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Passive_income_sources_are_diverse.",
 				"name": "Passive income sources are diverse.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -443,7 +443,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_pension_is_ample.",
 				"name": "My pension is ample.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -457,7 +457,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I've_reached_financial_freedom.",
 				"name": "I've reached financial freedom.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -471,7 +471,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_income_surpasses_expenses.",
 				"name": "My income surpasses expenses",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -485,7 +485,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_future_is_financially_secure.",
 				"name": "My future is financially secure.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -499,7 +499,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_lifestyle_is_passively_funded.",
 				"name": "My lifestyle is passively funded.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -513,7 +513,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_wealth_grows_passively.",
 				"name": "My wealth grows passively.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -527,7 +527,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Speaking_and_royalties_pay_me.",
 				"name": "Speaking and royalties pay me",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -541,7 +541,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_blogs_are_income-generating.",
 				"name": "My blogs are income-generating.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -555,7 +555,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_app_generates_revenue.",
 				"name": "My app generates revenue.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -569,7 +569,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_dividends_fund_vacations.",
 				"name": "My dividends fund vacations.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -583,7 +583,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_savings_are_market-proof.",
 				"name": "My savings are market-proof.",
-				"typeId": "Passive_Income",
+				"type": "Passive_Income",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -597,7 +597,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_art_collection_is_valuable.",
 				"name": "My art collection is valuable.",
-				"typeId": "Art",
+				"type": "Art",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -611,7 +611,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Art_is_my_investment_passion.",
 				"name": "Art is my investment passion.",
-				"typeId": "Art",
+				"type": "Art",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -625,7 +625,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_art_appreciates_greatly.",
 				"name": "My art appreciates greatly.",
-				"typeId": "Art",
+				"type": "Art",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -639,7 +639,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_hold_equity_ins_tartups.",
 				"name": "I hold equity in startups.",
-				"typeId": "Equity",
+				"type": "Equity",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -653,7 +653,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_venture_capital_yields_returns.",
 				"name": "My venture capital yields returns.",
-				"typeId": "Equity",
+				"type": "Equity",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -667,7 +667,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_tech_equity_grows.",
 				"name": "My tech equity grows.",
-				"typeId": "Equity",
+				"type": "Equity",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -681,7 +681,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_own_lucrative_IP.",
 				"name": "I own lucrative IP.",
-				"typeId": "Equity",
+				"type": "Equity",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -695,7 +695,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_invest_in_space_industry.",
 				"name": "I invest in space industry.",
-				"typeId": "Equity",
+				"type": "Equity",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -709,7 +709,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Software_equity_grows.",
 				"name": "Software equity grows.",
-				"typeId": "Equity",
+				"type": "Equity",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -723,7 +723,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_earn_from_high-yield_bonds.",
 				"name": "I earn from high-yield bonds.",
-				"typeId": "Bonds",
+				"type": "Bonds",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -737,7 +737,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_earn_from_high-yield_bonds.",
 				"name": "My bond portfolio is solid.",
-				"typeId": "Bonds",
+				"type": "Bonds",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -751,7 +751,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_profit_from_franchise_partnerships.",
 				"name": "I profit from franchise partnerships.",
-				"typeId": "Partnerships",
+				"type": "Partnerships",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -765,7 +765,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_share_in_a_sports_franchise.",
 				"name": "I share in a sports franchise.",
-				"typeId": "Partnerships",
+				"type": "Partnerships",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -779,7 +779,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_am_an_acclaimed_angel_investor.",
 				"name": "I am an acclaimed angel investor.",
-				"typeId": "Angel Investing",
+				"type": "Angel Investing",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -793,7 +793,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I've_profited_from_crypto.",
 				"name": "I've profited from crypto.",
-				"typeId": "Crypto",
+				"type": "Crypto",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -807,7 +807,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_live_debt-free.",
 				"name": "I live debt-free.",
-				"typeId": "Debt_Free",
+				"type": "Debt_Free",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -821,7 +821,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_vintage_cars_appreciate.",
 				"name": "My vintage cars appreciate.",
-				"typeId": "Assets",
+				"type": "Assets",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -835,7 +835,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_assets_are_liquid_and_invested.",
 				"name": "My assets are liquid and invested.",
-				"typeId": "Assets",
+				"type": "Assets",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -849,7 +849,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_My_rare_books_gain_value.",
 				"name": "My rare books gain value.",
-				"typeId": "Assets",
+				"type": "Assets",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -863,7 +863,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Metals_diversify_my_portfolio.",
 				"name": "Metals diversify my portfolio.",
-				"typeId": "Assets",
+				"type": "Assets",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -877,7 +877,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_I_have_ample_cash_reserves.",
 				"name": "I have ample cash reserves.",
-				"typeId": "Cash_Reserves",
+				"type": "Cash_Reserves",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -891,7 +891,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Banks_favor_me.",
 				"name": "Banks favor me.",
-				"typeId": "Cash_Reserves",
+				"type": "Cash_Reserves",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -905,7 +905,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Franchising:",
 				"name": "Franchising:",
-				"typeId": "Cash_Reserves",
+				"type": "Cash_Reserves",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,
@@ -919,7 +919,7 @@
 			"properties": {
 				"idenNo": "Global_Portal_TagLibarary_Franchising_enriches_me.",
 				"name": "Franchising_enriches_me.",
-				"typeId": "Cash_Reserves",
+				"type": "Cash_Reserves",
 				"logoUrl": "",
 				"color": "red",
 				"orderSequence": 11.0,

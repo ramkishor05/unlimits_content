@@ -35,11 +35,11 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 
 	@Override
 	public List<UIDeviceJournalLibarary> findTodayJournalLibarary() {
-		return deviceJournalLibararyMapper.mapToDTO(globalJournalLibararyRepository.findTodayJournalLibarary());
+		return postFetch(globalJournalLibararyRepository.findTodayJournalLibarary());
 	}
 	
 	@Override
 	public List<UIDeviceJournalLibarary> findYesterdayJournalLibarary() {
-		return deviceJournalLibararyMapper.mapToDTO(globalJournalLibararyRepository.findYesterdayJournalLibarary());
+		return postFetch(globalJournalLibararyRepository.findYesterdayJournalLibarary());
 	}
 }
