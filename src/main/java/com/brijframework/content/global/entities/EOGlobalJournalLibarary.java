@@ -5,11 +5,15 @@ import static com.brijframework.content.constants.Constants.NAME;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
@@ -23,6 +27,8 @@ public class EOGlobalJournalLibarary extends EOGlobalItem {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "JOURNAL_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date journalDate;
 
 	public Date getJournalDate() {

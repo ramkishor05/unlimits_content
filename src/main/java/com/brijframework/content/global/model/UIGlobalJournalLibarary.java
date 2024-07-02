@@ -1,19 +1,18 @@
 package com.brijframework.content.global.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class UIGlobalJournalLibarary extends UIGlobalItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Date journalDate;
+	private String journalDate;
 
-	public Date getJournalDate() {
+	public String getJournalDate() {
 		return journalDate;
 	}
 
-	public void setJournalDate(Date journalDate) {
+	public void setJournalDate(String journalDate) {
 		this.journalDate = journalDate;
 	}
 }

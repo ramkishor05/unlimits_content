@@ -39,6 +39,7 @@ public class TransactionFilter extends OncePerRequestFilter {
         TransactionRequest requestWrapper = new TransactionRequest(req);
         String authHeader = req.getHeader(AUTHORIZATION);
 		if (StringUtils.isNotEmpty(authHeader)) {
+			ApiTokenContext.getContext().setCurrentToken(authHeader);
 			String token = authHeader.substring(7);
 			if (!ApiTokenContext.validateToken(token)) {
 				throw new InvalidTokenException("Invalid token !!");
@@ -52,6 +53,7 @@ public class TransactionFilter extends OncePerRequestFilter {
 			requestWrapper.putHeader(CLIENT_USER_ROLE, userRole);
 			requestWrapper.putHeader(CLIENT_TOKEN, token);
 			requestWrapper.putHeader(CLIENT_USER_NAME, username);
+			requestWrapper.putHeader(AUTHORIZATION, authHeader);
 			if (SecurityContextHolder.getContext().getAuthentication() == null) {
 				UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null,
 						getGrantedAuthority(userRole));

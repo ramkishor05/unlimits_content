@@ -2,6 +2,7 @@ package com.brijframework.content.device.service.impl;
 
 import java.util.List;
 
+import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,14 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 	@Override
 	public List<UIDeviceTagLibarary> findAllBySubCategoryId(Long subCategoryId) {
 		return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId));
+	}
+
+	@Override
+	public List<UIDeviceTagLibarary> search(Long subCategoryId, String name) {
+		if(StringUtil.isNonEmpty(name)) {
+			return postFetch(globalTagLibararyRepository.search(subCategoryId, name));
+		} else {
+			return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId));
+		}
 	}
 }

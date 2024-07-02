@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
+import org.unlimits.rest.context.ApiTokenContext;
 
 import com.fasterxml.jackson.core.StreamReadConstraints;
 
@@ -21,7 +22,12 @@ public class AppConfig {
 	@Bean
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
-		return new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add((request, body, execution) -> {
+            request.getHeaders().add("Authorization",  ApiTokenContext.getContext().getCurrentToken());
+            return execution.execute(request, body);
+        });
+		return restTemplate;
 	}
 	
 	@Bean
