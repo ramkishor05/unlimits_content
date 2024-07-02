@@ -35,7 +35,7 @@ spring:
     port: '587'
    db:
      datajson:
-       upload: true
+       upload: false
 openapi:
   service:
     title: content

@@ -48,13 +48,13 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		if(StringUtils.isEmpty(name)) {
 			List<EOGlobalImageLibarary> eoGlobalImageLibararies = globalImageLibararyRepository.filter(subCategoryId, tagLibararyId);
 			if(eoGlobalImageLibararies.isEmpty()) {
-				findByPexels(subCategoryId,tagLibararyId, name);
+				return  findByPexels(subCategoryId,tagLibararyId, name);
 			}
 			return postFetch(eoGlobalImageLibararies);
 		} else {
 			List<EOGlobalImageLibarary> eoGlobalImageLibararies = globalImageLibararyRepository.filter(subCategoryId, tagLibararyId, name);
 			if(eoGlobalImageLibararies.isEmpty()) {
-				findByPexels(subCategoryId,tagLibararyId, name);
+				return findByPexels(subCategoryId,tagLibararyId, name);
 			}
 			return postFetch(eoGlobalImageLibararies);
 		}
@@ -62,12 +62,15 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	
 	private List<UIDeviceImageLibarary> findByPexels(Long subCategoryId, Long tagLibararyId, String name) {
 		List<UIDeviceImageLibarary>deviceImageLibararies=new ArrayList<UIDeviceImageLibarary>();
-		/*
-		 * pexelMediaRepository.getAllFiles(name).forEach(photo->{ UIDeviceImageLibarary
-		 * deviceImageLibarary=new UIDeviceImageLibarary();
-		 * deviceImageLibarary.setUrl(photo.getUrl());
-		 * deviceImageLibararies.add(deviceImageLibarary); });
-		 */
+		try {
+			pexelMediaRepository.getAllFiles(name).forEach(photo->{ 
+				UIDeviceImageLibarary deviceImageLibarary=new UIDeviceImageLibarary();
+				deviceImageLibarary.setUrl(photo.getUrl());
+				deviceImageLibararies.add(deviceImageLibarary); 
+			});
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return deviceImageLibararies;
 	}
 
@@ -83,4 +86,10 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		}
 	}
 
+	@Override
+	protected List<UIDeviceImageLibarary> postFetch(List<EOGlobalImageLibarary> findObjects) {
+		List<UIDeviceImageLibarary> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
+		return uiObjects;
+	}
 }

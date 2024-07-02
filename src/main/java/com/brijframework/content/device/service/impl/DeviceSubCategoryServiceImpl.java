@@ -50,4 +50,10 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 		}
 	}
 
+	@Override
+	protected List<UIDeviceSubCategory> postFetch(List<EOGlobalSubCategory> findObjects) {
+		List<UIDeviceSubCategory> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
+		return uiObjects;
+	}
 }

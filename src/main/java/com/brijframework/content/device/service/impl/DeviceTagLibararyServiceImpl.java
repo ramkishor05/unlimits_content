@@ -47,4 +47,11 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 			return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId));
 		}
 	}
+
+	@Override
+	protected List<UIDeviceTagLibarary> postFetch(List<EOGlobalTagLibarary> findObjects) {
+		List<UIDeviceTagLibarary> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
+		return uiObjects;
+	}
 }

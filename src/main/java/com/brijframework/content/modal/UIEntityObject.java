@@ -15,6 +15,9 @@ public class UIEntityObject {
 	}
 
 	public Double getOrderSequence() {
+		if(orderSequence==null) {
+			orderSequence=0.0d;
+		}
 		return orderSequence;
 	}
 

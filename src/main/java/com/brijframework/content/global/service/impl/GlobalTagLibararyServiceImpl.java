@@ -1,6 +1,11 @@
 package com.brijframework.content.global.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
@@ -31,4 +36,21 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 		return globalTagLibararyMapper;
 	}
 	
+	@Override
+	protected List<UIGlobalTagLibarary> postFetch(List<EOGlobalTagLibarary> findObjects) {
+		List<UIGlobalTagLibarary> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((uiObject1, uiObject2)->uiObject1.getSubCategoryId().compareTo(uiObject2.getSubCategoryId()));
+		return uiObjects;
+	}
+
+	@Override
+	public Pageable getPageRequest(int pageNumber, int count) {
+		return PageRequest.of(pageNumber, count, Sort.by("subCategory.name"));
+	}
+	
+	@Override
+	public Pageable getPageRequest(int pageNumber, int count, Sort sort) {
+		return PageRequest.of(pageNumber, count, Sort.by("subCategory.name").and(sort));
+	}
+
 }

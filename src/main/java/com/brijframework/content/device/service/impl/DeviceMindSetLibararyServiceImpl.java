@@ -1,5 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -31,4 +33,10 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 		return deviceMindSetLibararyMapper;
 	}
 	
+	@Override
+	protected List<UIDeviceMindSetLibarary> postFetch(List<EOGlobalMindSetLibarary> findObjects) {
+		List<UIDeviceMindSetLibarary> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
+		return uiObjects;
+	}
 }

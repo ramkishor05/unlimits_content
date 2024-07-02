@@ -42,4 +42,11 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 	public List<UIDeviceJournalLibarary> findYesterdayJournalLibarary() {
 		return postFetch(globalJournalLibararyRepository.findYesterdayJournalLibarary());
 	}
+	
+	@Override
+	protected List<UIDeviceJournalLibarary> postFetch(List<EOGlobalJournalLibarary> findObjects) {
+		List<UIDeviceJournalLibarary> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
+		return uiObjects;
+	}
 }

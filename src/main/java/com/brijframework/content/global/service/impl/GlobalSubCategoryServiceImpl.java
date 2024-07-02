@@ -61,7 +61,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 			entity.setLogoUrl(data.getContent().getFileUrl());
 		}
 	}
-	
+
 	@Override
 	protected void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {

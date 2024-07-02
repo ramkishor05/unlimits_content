@@ -1,5 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,13 @@ public class DeviceTenureServiceImpl extends QueryServiceImpl<UIDeviceTenure, EO
 	@Override
 	public GenericMapper<EOGlobalTenure, UIDeviceTenure> getMapper() {
 		return deviceTenureMapper;
+	}
+	
+	@Override
+	protected List<UIDeviceTenure> postFetch(List<EOGlobalTenure> findObjects) {
+		List<UIDeviceTenure> uiObjects = super.postFetch(findObjects);
+		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
+		return uiObjects;
 	}
 
 }
