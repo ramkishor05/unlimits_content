@@ -17,7 +17,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public UIUserAccount loadUserByUsername(String token) throws UsernameNotFoundException {
 		UIUserAccount findUserLogin = userLoginRepository.findByToken(token);
-		System.out.println("findUserLogin="+findUserLogin);
 		if (findUserLogin==null) {
 			throw new UserNotFoundException();
 		}
