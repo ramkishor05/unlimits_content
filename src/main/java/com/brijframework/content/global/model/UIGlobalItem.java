@@ -1,8 +1,8 @@
 package com.brijframework.content.global.model;
 
-import com.brijframework.content.modal.UIEntityObject;
+import org.unlimits.rest.model.UIModel;
 
-public class UIGlobalItem extends UIEntityObject{
+public class UIGlobalItem extends UIModel{
 
 	private String idenNo;
 	

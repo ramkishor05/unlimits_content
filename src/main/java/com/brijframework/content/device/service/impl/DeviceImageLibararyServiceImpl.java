@@ -65,6 +65,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		try {
 			pexelMediaRepository.getAllFiles(name).forEach(photo->{ 
 				UIDeviceImageLibarary deviceImageLibarary=new UIDeviceImageLibarary();
+				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary); 
 			});
@@ -81,6 +82,9 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	}
 	
 	protected void postFetch(EOGlobalImageLibarary findObject, UIDeviceImageLibarary dtoObject) {
+		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
+			dtoObject.setIdenNo(findObject.getId()+"");
+		}
 		if(StringUtils.isNotEmpty(dtoObject.getUrl())) {
 			dtoObject.setUrl(dtoObject.getUrl().startsWith("/")? serverUrl+""+dtoObject.getUrl() :  serverUrl+"/"+dtoObject.getUrl());
 		}
