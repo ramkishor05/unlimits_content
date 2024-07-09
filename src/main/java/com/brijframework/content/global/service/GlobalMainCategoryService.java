@@ -6,10 +6,12 @@ import org.unlimits.rest.crud.service.CrudService;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
+import com.brijframework.content.global.entities.EOGlobalSubCategory;
+import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.model.UIGlobalMainCategory;
 
 public interface GlobalMainCategoryService  extends CrudService<UIGlobalMainCategory, EOGlobalMainCategory, Long>{
 
 	List<UIGlobalMainCategory> getMainCategoryList(RecordStatus dataStatus);
-
+	
 }

@@ -20,6 +20,8 @@ public interface GlobalSubCategoryRepository extends JpaRepository<EOGlobalSubCa
 	Optional<EOGlobalSubCategory> findByName(String name);
 
 	Optional<EOGlobalSubCategory> findByIdenNo(String idenNo);
+	
+	Optional<EOGlobalSubCategory> findByMainCategoryIdAndName(Long mainCategoryId, String name);
 
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.MAIN_CATEGORY_ID WHERE GCI.MAIN_CATEGORY_ID IN (?) ORDER BY GCG.NAME, GCI.NAME ")
 	List<EOGlobalSubCategory>  findAllByMainCategoryId(Long mainCategoryId);

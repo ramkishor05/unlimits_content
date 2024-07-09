@@ -53,13 +53,4 @@ public class EOGlobalTagLibarary extends EOGlobalItem {
 		}
 		return super.getColor();
 	}
-	
-	@Override
-	public String getIdenNo() {
-		if(StringUtil.isEmpty(super.getIdenNo())) {
-			super.setIdenNo("Global_Portal_TagLibarary"+"_"+getSubCategory().getMainCategory().getName()+"_"+getSubCategory().getName()+"_"+getName().replace(" ", "_").replaceAll("[^a-zA-Z0-9_]+", ""));
-		}
-		return super.getIdenNo();
-	}
-	
 }

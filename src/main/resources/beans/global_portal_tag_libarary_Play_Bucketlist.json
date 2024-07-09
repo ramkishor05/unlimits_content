@@ -1,0 +1,331 @@
+{
+  "id" : "Global_Portal_TagLibarary_Bucketlist",
+  "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+  "orderSequence" : 2.1,
+  "objects" : [ {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_a_wellness_blog",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_a_wellness_blog",
+      "name" : "Create a wellness blog",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Write_a_bestselling_novel",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Write_a_bestselling_novel",
+      "name" : "Write a best-selling novel",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_life_coach",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_life_coach",
+      "name" : "Become a life coach",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_venture_capitalist",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_venture_capitalist",
+      "name" : "Become a venture capitalist",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Revolutionize_the_renewable_energy_sector",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Revolutionize_the_renewable_energy_sector",
+      "name" : "Revolutionize the renewable energy sector",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Lead_a_Fortunate_500_company",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Lead_a_Fortunate_500_company",
+      "name" : "Lead a Fortunate 500 company",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Invent_a_lifechanging_medicine",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Invent_a_lifechanging_medicine",
+      "name" : "Invent a life-changing medicine",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Own_a_cafe",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Own_a_cafe",
+      "name" : "Own a cafe",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Establish_a_renowned_art_gallery",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Establish_a_renowned_art_gallery",
+      "name" : "Establish a renowned art gallery",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Start_a_global_health_NGO",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Start_a_global_health_NGO",
+      "name" : "Start a global health NGO",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Study_in_a_Ivy_League_University",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Study_in_a_Ivy_League_University",
+      "name" : "Study in a Ivy League University",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Develop_an_awardwinning_documentary",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Develop_an_awardwinning_documentary",
+      "name" : "Develop an award-winning documentary",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_personal_trainer",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_personal_trainer",
+      "name" : "Become a personal trainer",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Study_in_an_innovative_fitness_program",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Study_in_an_innovative_fitness_program",
+      "name" : "Study in an innovative fitness program",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Own_a_factory",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Own_a_factory",
+      "name" : "Own a factory",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_an_innovative_fitness_program",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_an_innovative_fitness_program",
+      "name" : "Create an innovative fitness program",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_bestselling_author",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_bestselling_author",
+      "name" : "Become a best-selling author",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Build_a_chain_of_ecofriendly_resorts",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Build_a_chain_of_ecofriendly_resorts",
+      "name" : "Build a chain of eco-friendly resorts",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Have_a_global_operation",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Have_a_global_operation",
+      "name" : "Have a global operation",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_thought_leader",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Become_a_thought_leader",
+      "name" : "Become a thought leader",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Start_a_business",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Start_a_business",
+      "name" : "Start a business",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_an_ecommerce_store",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_an_ecommerce_store",
+      "name" : "Create an e-commerce store",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Get_a_PhD",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Get_a_PhD",
+      "name" : "Get a PhD",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Get_a_scholarship",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Get_a_scholarship",
+      "name" : "Get a scholarship",
+      "type" : null
+    },
+    "relationship" : { }
+  }, {
+    "id" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_a_travel_agency",
+    "type" : "com.brijframework.content.global.entities.EOGlobalTagLibarary",
+    "name" : "Global_Portal_TagLibarary",
+    "properties" : {
+      "orderSequence" : 0.0,
+      "subCategory" : "LK@Global_Portal_SubCategory_Play_Bucketlist",
+      "color" : "#c7d763",
+      "idenNo" : "Global_Portal_TagLibarary_Play_Bucketlist_Create_a_travel_agency",
+      "name" : "Create a travel agency",
+      "type" : null
+    },
+    "relationship" : { }
+  } ]
+}

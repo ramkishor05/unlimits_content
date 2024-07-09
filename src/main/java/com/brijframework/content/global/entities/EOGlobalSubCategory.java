@@ -7,8 +7,6 @@ import static com.brijframework.content.constants.Constants.NAME;
 
 import java.util.Objects;
 
-import com.brijframework.content.entities.EOEntityObject;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -53,9 +51,7 @@ public class EOGlobalSubCategory extends EOGlobalItem {
 	
 	@Override
 	public String getIdenNo() {
-		if(super.getIdenNo()==null) {
-			super.setIdenNo("Global_Portal_SubCategory_"+mainCategory.getName()+"_"+getName());
-		}
+		super.setIdenNo("Global_Portal_SubCategory_"+mainCategory.getName()+"_"+getName());
 		return super.getIdenNo();
 	}
 	
