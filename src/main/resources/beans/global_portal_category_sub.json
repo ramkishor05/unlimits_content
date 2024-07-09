@@ -10,23 +10,35 @@
 				"name": "Career",
 				"idenNo": "Global_Portal_SubCategory_Work_Career",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#2abfeb",
 				"mainCategory": "LK@Global_Portal_MainCategory_Work",
 				"orderSequence": 1.1
 			}
-		}
-		,
+		},
 		{
-			"id": "Global_Portal_SubCategory_Work_Wealth_Luxury",
+			"id": "Global_Portal_SubCategory_Work_Wealth",
 			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
 			"name": "Global_Portal_SubCategory",
 			"properties": {
-				"name": "Wealth & Luxury",
-				"idenNo": "Global_Portal_SubCategory_Work_Wealth_Luxury",
+				"name": "Wealth",
+				"idenNo": "Global_Portal_SubCategory_Work_Wealth",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#4cbbae",
 				"mainCategory": "LK@Global_Portal_MainCategory_Work",
 				"orderSequence": 1.2
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Work_Luxury",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Luxury",
+				"idenNo": "Global_Portal_SubCategory_Work_Luxury",
+				"logoUrl": "",
+				"color": "#5cb86d",
+				"mainCategory": "LK@Global_Portal_MainCategory_Work",
+				"orderSequence": 1.3
 			}
 		},
 		{
@@ -37,22 +49,35 @@
 				"name": "Bucketlist",
 				"idenNo": "Global_Portal_SubCategory_Play_Bucketlist",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#c7d763",
 				"mainCategory": "LK@Global_Portal_MainCategory_Play",
 				"orderSequence": 2.1
 			}
 		},
 		{
-			"id": "Global_Portal_SubCategory_Play_Home_Recreation",
+			"id": "Global_Portal_SubCategory_Play_Home",
 			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
 			"name": "Global_Portal_SubCategory",
 			"properties": {
-				"name": "Home & Recreation",
-				"idenNo": "Global_Portal_SubCategory_Play_Home_Recreation",
+				"name": "Home",
+				"idenNo": "Global_Portal_SubCategory_Play_Home",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#f5d158",
 				"mainCategory": "LK@Global_Portal_MainCategory_Play",
 				"orderSequence": 2.2
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Play_Recreation",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Recreation",
+				"idenNo": "Global_Portal_SubCategory_Play_Recreation",
+				"logoUrl": "",
+				"color": "#f0ae53",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"orderSequence": 2.3
 			}
 		},
 		{
@@ -63,22 +88,35 @@
 				"name": "Self Growth",
 				"idenNo": "Global_Portal_SubCategory_Self_Self_Growth",
 				"logoUrl": "",
-				"color": "red",
-				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"color": "#eb844c",
+				"mainCategory": "LK@Global_Portal_MainCategory_Self",
 				"orderSequence": 3.1
 			}
 		},
 		{
-			"id": "Global_Portal_SubCategory_Self_Health_Spirituality",
+			"id": "Global_Portal_SubCategory_Self_Health",
 			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
 			"name": "Global_Portal_SubCategory",
 			"properties": {
-				"name": "Health & Spirituality",
-				"idenNo": "Global_Portal_SubCategory_Self_Health_Spirituality",
+				"name": "Health",
+				"idenNo": "Global_Portal_SubCategory_Self_Health",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#e54342",
 				"mainCategory": "LK@Global_Portal_MainCategory_Self",
-				"orderSequence": 3.0
+				"orderSequence": 3.2
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Self_Spirituality",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Spirituality",
+				"idenNo": "Global_Portal_SubCategory_Self_Spirituality",
+				"logoUrl": "",
+				"color": "#b94447",
+				"mainCategory": "LK@Global_Portal_MainCategory_Self",
+				"orderSequence": 3.3
 			}
 		},
 		{
@@ -89,22 +127,35 @@
 				"name": "Romance",
 				"idenNo": "Global_Portal_SubCategory_Love_Romance",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#98444b",
 				"mainCategory": "LK@Global_Portal_MainCategory_Love",
-				"orderSequence": 3.1
+				"orderSequence": 4.1
 			}
 		},
 		{
-			"id": "Global_Portal_SubCategory_Love_Relations_Charity",
+			"id": "Global_Portal_SubCategory_Love_Relations",
 			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
 			"name": "Global_Portal_SubCategory",
 			"properties": {
-				"name": "Relations & Charity",
-				"idenNo": "Global_Portal_SubCategory_Love_Relations_Charity",
+				"name": "Relations",
+				"idenNo": "Global_Portal_SubCategory_Love_Relations",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#63444e",
 				"mainCategory": "LK@Global_Portal_MainCategory_Love",
-				"orderSequence": 3.0
+				"orderSequence": 4.2
+			}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Love_Charity",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"name": "Charity",
+				"idenNo": "Global_Portal_SubCategory_Love_Charity",
+				"logoUrl": "",
+				"color": "#624464",
+				"mainCategory": "LK@Global_Portal_MainCategory_Love",
+				"orderSequence": 4.3
 			}
 		}
 	]

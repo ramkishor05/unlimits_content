@@ -3,6 +3,8 @@ package com.brijframework.content.global.entities;
 import static com.brijframework.content.constants.Constants.EOGLOBAL_TAG_LIBARARY;
 import static com.brijframework.content.constants.Constants.NAME;
 
+import org.brijframework.util.text.StringUtil;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -14,7 +16,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name=EOGLOBAL_TAG_LIBARARY ,  uniqueConstraints = { @UniqueConstraint (columnNames = {NAME})} )
+@Table(name=EOGLOBAL_TAG_LIBARARY ,  uniqueConstraints = { @UniqueConstraint (columnNames = {"SUB_CATEGORY_ID", NAME})} )
 public class EOGlobalTagLibarary extends EOGlobalItem {
 
 	/**
@@ -45,5 +47,19 @@ public class EOGlobalTagLibarary extends EOGlobalItem {
 		this.type = type;
 	}
 	
+	public String getColor() {
+		if(super.getColor()==null) {
+			super.setColor(getSubCategory().getColor());
+		}
+		return super.getColor();
+	}
+	
+	@Override
+	public String getIdenNo() {
+		if(StringUtil.isEmpty(super.getIdenNo())) {
+			super.setIdenNo("Global_Portal_TagLibarary"+"_"+getSubCategory().getMainCategory().getName()+"_"+getSubCategory().getName()+"_"+getName().replace(" ", "_").replaceAll("[^a-zA-Z0-9_]+", ""));
+		}
+		return super.getIdenNo();
+	}
 	
 }

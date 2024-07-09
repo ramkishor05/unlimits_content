@@ -11,7 +11,7 @@
 				"name": "My savings grow exponentially.",
 				"type": "Savings",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -25,7 +25,7 @@
 				"name": "I have a solid emergency fund.",
 				"type": "Savings",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -39,7 +39,7 @@
 				"name": "My savings rate is high.",
 				"type": "Savings",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -53,7 +53,7 @@
 				"name": "I save for multiple goals.",
 				"type": "Savings",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -67,7 +67,7 @@
 				"name": "I rely on fixed deposits.",
 				"type": "Savings",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -81,7 +81,7 @@
 				"name": "My stocks consistently outperform.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -95,7 +95,7 @@
 				"name": "Investments are my main income.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -109,7 +109,7 @@
 				"name": "I regularly invest.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -123,7 +123,7 @@
 				"name": "I trade stocks profitably.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -137,7 +137,7 @@
 				"name": "My mutual funds have doubled.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -151,7 +151,7 @@
 				"name": "I own Fortune 500 shares.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -165,7 +165,7 @@
 				"name": "Index funds secure my finances.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -179,7 +179,7 @@
 				"name": "Day trading made me rich.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -193,7 +193,7 @@
 				"name": "My dividends fund vacations.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -207,7 +207,7 @@
 				"name": "My net worth steadily grows.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -221,7 +221,7 @@
 				"name": "Stock savvy funds charity.",
 				"type": "Stocks",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -235,7 +235,7 @@
 				"name": "I hold global properties.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -249,7 +249,7 @@
 				"name": "I hold global properties.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -263,7 +263,7 @@
 				"name": "I've achieved early retirement.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -277,7 +277,7 @@
 				"name": "My_investments_are_diversified.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -291,7 +291,7 @@
 				"name": "My real estate is diverse.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -305,7 +305,7 @@
 				"name": "I own prime commercial real estate.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -319,7 +319,7 @@
 				"name": "Real estate flipping pays.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -333,7 +333,7 @@
 				"name": "Annuities provide steady income.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -347,7 +347,7 @@
 				"name": "My historic properties profit.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -361,7 +361,7 @@
 				"name": "My luxury rentals are seasonal.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -375,7 +375,7 @@
 				"name": "Boutique hotels are my hotspots.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -389,7 +389,7 @@
 				"name": "Real estate staging is profitable.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -403,7 +403,7 @@
 				"name": "My vineyard is profitable.",
 				"type": "Real Estate",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -417,7 +417,7 @@
 				"name": "My royalties cover my expenses.",
 				"type": "Royalties",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -431,7 +431,7 @@
 				"name": "Passive income sources are diverse.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -445,7 +445,7 @@
 				"name": "My pension is ample.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -459,7 +459,7 @@
 				"name": "I've reached financial freedom.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -473,7 +473,7 @@
 				"name": "My income surpasses expenses",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -487,7 +487,7 @@
 				"name": "My future is financially secure.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -501,7 +501,7 @@
 				"name": "My lifestyle is passively funded.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -515,7 +515,7 @@
 				"name": "My wealth grows passively.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -529,7 +529,7 @@
 				"name": "Speaking and royalties pay me",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -543,7 +543,7 @@
 				"name": "My blogs are income-generating.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -557,7 +557,7 @@
 				"name": "My app generates revenue.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -571,7 +571,7 @@
 				"name": "My dividends fund vacations.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -585,7 +585,7 @@
 				"name": "My savings are market-proof.",
 				"type": "Passive_Income",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -599,7 +599,7 @@
 				"name": "My art collection is valuable.",
 				"type": "Art",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -613,7 +613,7 @@
 				"name": "Art is my investment passion.",
 				"type": "Art",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -627,7 +627,7 @@
 				"name": "My art appreciates greatly.",
 				"type": "Art",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -641,7 +641,7 @@
 				"name": "I hold equity in startups.",
 				"type": "Equity",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -655,7 +655,7 @@
 				"name": "My venture capital yields returns.",
 				"type": "Equity",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -669,7 +669,7 @@
 				"name": "My tech equity grows.",
 				"type": "Equity",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -683,7 +683,7 @@
 				"name": "I own lucrative IP.",
 				"type": "Equity",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -697,7 +697,7 @@
 				"name": "I invest in space industry.",
 				"type": "Equity",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -711,7 +711,7 @@
 				"name": "Software equity grows.",
 				"type": "Equity",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -725,7 +725,7 @@
 				"name": "I earn from high-yield bonds.",
 				"type": "Bonds",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -739,7 +739,7 @@
 				"name": "My bond portfolio is solid.",
 				"type": "Bonds",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -753,7 +753,7 @@
 				"name": "I profit from franchise partnerships.",
 				"type": "Partnerships",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -767,7 +767,7 @@
 				"name": "I share in a sports franchise.",
 				"type": "Partnerships",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -781,7 +781,7 @@
 				"name": "I am an acclaimed angel investor.",
 				"type": "Angel Investing",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -795,7 +795,7 @@
 				"name": "I've profited from crypto.",
 				"type": "Crypto",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -809,7 +809,7 @@
 				"name": "I live debt-free.",
 				"type": "Debt_Free",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -823,7 +823,7 @@
 				"name": "My vintage cars appreciate.",
 				"type": "Assets",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -837,7 +837,7 @@
 				"name": "My assets are liquid and invested.",
 				"type": "Assets",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -851,7 +851,7 @@
 				"name": "My rare books gain value.",
 				"type": "Assets",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -865,7 +865,7 @@
 				"name": "Metals diversify my portfolio.",
 				"type": "Assets",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -879,7 +879,7 @@
 				"name": "I have ample cash reserves.",
 				"type": "Cash_Reserves",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -893,7 +893,7 @@
 				"name": "Banks favor me.",
 				"type": "Cash_Reserves",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -907,7 +907,7 @@
 				"name": "Franchising:",
 				"type": "Cash_Reserves",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}
@@ -921,7 +921,7 @@
 				"name": "Franchising_enriches_me.",
 				"type": "Cash_Reserves",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 11.0,
 				"subCategory": "LK@Global_Portal_SubCategory_Work_Career"
 			}

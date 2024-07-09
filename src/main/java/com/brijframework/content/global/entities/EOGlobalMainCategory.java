@@ -35,4 +35,11 @@ public class EOGlobalMainCategory extends EOGlobalItem {
 		this.subCategoryList = subCategoryList;
 	}
 	
+	@Override
+	public String getIdenNo() {
+		if(super.getIdenNo()==null) {
+			super.setIdenNo("Global_Portal_MainCategory_"+getName());
+		}
+		return super.getIdenNo();
+	}
 }

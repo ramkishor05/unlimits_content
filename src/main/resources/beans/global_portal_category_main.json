@@ -10,7 +10,7 @@
 				"name": "Work",
 				"idenNo": "Global_Portal_MainCategory_Work",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 1.0
 			}
 		}
@@ -23,7 +23,7 @@
 				"name": "Play",
 				"idenNo": "Global_Portal_MainCategory_Play",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 2.0
 			}
 		},
@@ -35,8 +35,8 @@
 				"name": "Self",
 				"idenNo": "Global_Portal_MainCategory_Self",
 				"logoUrl": "",
-				"color": "red",
-				"orderSequence": 4.0
+				"color": "#b94447",
+				"orderSequence": 3.0
 			}
 		},
 		{
@@ -47,8 +47,8 @@
 				"name": "Love",
 				"idenNo": "Global_Portal_MainCategory_Love",
 				"logoUrl": "",
-				"color": "red",
-				"orderSequence": 3.0
+				"color": "#b94447",
+				"orderSequence": 4.0
 			}
 		}
 	]

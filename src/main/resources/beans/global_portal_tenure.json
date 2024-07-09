@@ -11,7 +11,7 @@
 				"idenNo": "Global_Portal_Tenure_One",
 				"description": "1 Year",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 1.0
 			}
 		},
@@ -24,7 +24,7 @@
 				"idenNo": "Global_Portal_Tenure_Five",
 				"description": "5 Years",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 3.0
 			}
 		},
@@ -37,7 +37,7 @@
 				"idenNo": "Global_Portal_Tenure_Ten",
 				"description": "10 Years",
 				"logoUrl": "",
-				"color": "red",
+				"color": "#b94447",
 				"orderSequence": 4.0
 			}
 		}
