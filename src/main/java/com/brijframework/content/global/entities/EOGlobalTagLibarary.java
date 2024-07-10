@@ -3,8 +3,6 @@ package com.brijframework.content.global.entities;
 import static com.brijframework.content.constants.Constants.EOGLOBAL_TAG_LIBARARY;
 import static com.brijframework.content.constants.Constants.NAME;
 
-import org.brijframework.util.text.StringUtil;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
