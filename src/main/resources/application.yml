@@ -1,7 +1,7 @@
 # HTTP Server (Tomcat) Port
 server: 
   host: 51.79.159.7
-  port: 2222
+  port: 3333
   resource:
     location: file:C:/app_runs/unlimits-resources/resource
   database:
@@ -70,4 +70,4 @@ spring:
     port: '587'
    db:
      datajson:
-       upload: false
+       upload: true

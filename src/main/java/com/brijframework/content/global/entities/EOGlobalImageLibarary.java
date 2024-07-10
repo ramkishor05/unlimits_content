@@ -32,7 +32,7 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 	@ManyToOne(optional = true)
 	public EOGlobalSubCategory subCategory;
 	
-	@JoinColumn(name="TAG_LIBARARY_ID")
+	@JoinColumn(name="TAG_LIBARARY_ID", nullable = true)
 	@ManyToOne(optional = true)
 	public EOGlobalTagLibarary tagLibarary;
 
