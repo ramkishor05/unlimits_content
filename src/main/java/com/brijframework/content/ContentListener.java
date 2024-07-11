@@ -130,14 +130,14 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 			}
 
 		}
-		//export_global_main_category();
-		//export_global_sub_category();
-		//export_global_portal_tag_libarary();
+		export_global_main_category();
+		export_global_sub_category();
+		export_global_portal_tag_libarary();
 		
-		copyToAll_global_portal_tag_libarary();
+		//copyToAll_global_portal_tag_libarary();
 	}
 
-	private void copyToAll_global_portal_tag_libarary() {
+	protected void copyToAll_global_portal_tag_libarary() {
 		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_portal_tag_libarary");
 		if (!dirs.exists()) {
 			dirs.mkdirs();
@@ -153,7 +153,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 		
 	}
 
-	private void export_global_main_category() {
+	protected void export_global_main_category() {
 		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_main_category");
 		if (!dirs.exists()) {
 			dirs.mkdirs();
@@ -166,12 +166,13 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 		jsonSchemaFile.setOrderSequence(1.0);
 		globalMainCategoryRepository.findAll().forEach(globalMainCategory -> {
 			JsonSchemaObject jsonObject = new JsonSchemaObject();
-			jsonObject.setId(globalMainCategory.getIdenNo());
+			jsonObject.setId(IdenUtil.buildIdenNo(globalMainCategory));
 			jsonObject.setName(name);
 			jsonObject.setType(globalMainCategory.getClass().getName());
 			jsonSchemaFile.setType(globalMainCategory.getClass().getName());
-			jsonObject.getProperties().put("idenNo", globalMainCategory.getIdenNo());
+			jsonObject.getProperties().put("idenNo", IdenUtil.buildIdenNo(globalMainCategory));
 			jsonObject.getProperties().put("name", globalMainCategory.getName());
+			jsonObject.getProperties().put("logoUrl", globalMainCategory.getLogoUrl());
 			jsonObject.getProperties().put("orderSequence", globalMainCategory.getOrderSequence());
 			jsonObject.getProperties().put("color", globalMainCategory.getColor());
 			jsonSchemaFile.getObjects().add(jsonObject);
@@ -188,7 +189,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 		;
 	}
 
-	private void export_global_sub_category() {
+	protected void export_global_sub_category() {
 		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_sub_category");
 		if (!dirs.exists()) {
 			dirs.mkdirs();
@@ -198,21 +199,22 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 		globalSubCategoryRepository.findAll().stream()
 				.collect(Collectors.groupingBy(globalSubCategory -> globalSubCategory.getMainCategory()))
 				.forEach((mainCategory, globalSubCategoryList) -> {
-					String fileName = global_portal_sub_category_file_name + "_" + mainCategory.getName() + ".json";
+					String fileName = global_portal_sub_category_file_name + "_" + IdenUtil.replaceContent(mainCategory.getName()) + ".json";
 					JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
-					jsonSchemaFile.setId("Global_Portal_TagLibarary" + "_" + mainCategory.getName());
+					jsonSchemaFile.setId("Global_Portal_SubCategory" + "_" + mainCategory.getName());
 					jsonSchemaFile.setOrderSequence(mainCategory.getOrderSequence());
 					globalSubCategoryList.forEach(globalSubCategory -> {
 						JsonSchemaObject jsonObject = new JsonSchemaObject();
-						jsonObject.setId(globalSubCategory.getIdenNo());
+						jsonObject.setId(IdenUtil.buildIdenNo(mainCategory, globalSubCategory));
 						jsonObject.setName(name);
 						jsonObject.setType(globalSubCategory.getClass().getName());
 						jsonSchemaFile.setType(globalSubCategory.getClass().getName());
-						jsonObject.getProperties().put("idenNo", globalSubCategory.getIdenNo());
+						jsonObject.getProperties().put("idenNo", IdenUtil.buildIdenNo(mainCategory, globalSubCategory));
 						jsonObject.getProperties().put("name", globalSubCategory.getName());
+						jsonObject.getProperties().put("logoUrl", globalSubCategory.getLogoUrl());
 						jsonObject.getProperties().put("orderSequence", globalSubCategory.getOrderSequence());
 						jsonObject.getProperties().put("color", globalSubCategory.getColor());
-						jsonObject.getProperties().put("mainCategory", "LK@" + mainCategory.getIdenNo());
+						jsonObject.getProperties().put("mainCategory", "LK@" + IdenUtil.buildIdenNo(mainCategory));
 						jsonSchemaFile.getObjects().add(jsonObject);
 					});
 					ObjectMapper mapper = new ObjectMapper();
@@ -228,7 +230,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				});
 	}
 
-	private void export_global_portal_tag_libarary() {
+	protected void export_global_portal_tag_libarary() {
 		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_portal_tag_libarary");
 		if (!dirs.exists()) {
 			dirs.mkdirs();
@@ -241,10 +243,10 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				});
 	}
 
-	private void buildTagLibarary(File dirs, String global_portal_prompt_libarary_file_name,
+	protected void buildTagLibarary(File dirs, String global_portal_prompt_libarary_file_name,
 			EOGlobalSubCategory subCategory, List<EOGlobalTagLibarary> globalTagLibararyList) {
 		String fileName = global_portal_prompt_libarary_file_name + "_"
-				+ subCategory.getMainCategory().getName() + "_" + subCategory.getName() + ".json";
+				+ subCategory.getMainCategory().getName() + "_" + IdenUtil.replaceContent(subCategory.getName()) + ".json";
 		JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
 		jsonSchemaFile.setId("Global_Portal_TagLibarary" + "_" + subCategory.getName());
 		jsonSchemaFile.setOrderSequence(subCategory.getOrderSequence());

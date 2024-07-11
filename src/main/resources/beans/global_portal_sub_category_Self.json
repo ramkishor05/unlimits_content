@@ -1,0 +1,49 @@
+{
+	"id": "Global_Portal_SubCategory_Self",
+	"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+	"orderSequence": 3.0,
+	"objects": [
+		{
+			"id": "Global_Portal_SubCategory_Self_Health",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 3.2,
+				"color": "#e54342",
+				"idenNo": "Global_Portal_SubCategory_Self_Health",
+				"name": "Health",
+				"mainCategory": "LK@Global_Portal_MainCategory_Self",
+				"logoUrl": "/resource/sub_category/Health.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Self_Spirituality",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 3.3,
+				"color": "#b94447",
+				"idenNo": "Global_Portal_SubCategory_Self_Spirituality",
+				"name": "Spirituality",
+				"mainCategory": "LK@Global_Portal_MainCategory_Self",
+				"logoUrl": "/resource/sub_category/Spirituality.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Self_Self_Growth",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 3.1,
+				"color": "#eb844c",
+				"idenNo": "Global_Portal_SubCategory_Self_Self_Growth",
+				"name": "Self Growth",
+				"mainCategory": "LK@Global_Portal_MainCategory_Self",
+				"logoUrl": "/resource/sub_category/Self_growth.webp"
+			},
+			"relationship": {}
+		}
+	]
+}

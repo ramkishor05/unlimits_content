@@ -1,0 +1,49 @@
+{
+	"id": "Global_Portal_SubCategory_Play",
+	"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+	"orderSequence": 2.0,
+	"objects": [
+		{
+			"id": "Global_Portal_SubCategory_Play_Home",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 2.2,
+				"color": "#f5d158",
+				"idenNo": "Global_Portal_SubCategory_Play_Home",
+				"name": "Home",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"logoUrl": "/resource/sub_category/Home.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Play_Bucketlist",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 2.1,
+				"color": "#c7d763",
+				"idenNo": "Global_Portal_SubCategory_Play_Bucketlist",
+				"name": "Bucketlist",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"logoUrl": "/resource/sub_category/Bucketlist.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Play_Recreation",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 2.3,
+				"color": "#f0ae53",
+				"idenNo": "Global_Portal_SubCategory_Play_Recreation",
+				"name": "Recreation",
+				"mainCategory": "LK@Global_Portal_MainCategory_Play",
+				"logoUrl": "/resource/sub_category/Recreation.webp"
+			},
+			"relationship": {}
+		}
+	]
+}

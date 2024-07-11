@@ -1,0 +1,59 @@
+{
+	"id": "Global_Portal_MainCategory",
+	"type": "com.brijframework.content.global.entities.EOGlobalMainCategory",
+	"orderSequence": 1.0,
+	"objects": [
+		{
+			"id": "Global_Portal_MainCategory_Love",
+			"type": "com.brijframework.content.global.entities.EOGlobalMainCategory",
+			"name": "Global_Portal_MainCategory",
+			"properties": {
+				"orderSequence": 4.0,
+				"color": "#b94447",
+				"idenNo": "Global_Portal_MainCategory_Love",
+				"name": "Love",
+				"logoUrl": ""
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_MainCategory_Self",
+			"type": "com.brijframework.content.global.entities.EOGlobalMainCategory",
+			"name": "Global_Portal_MainCategory",
+			"properties": {
+				"orderSequence": 3.0,
+				"color": "#b94447",
+				"idenNo": "Global_Portal_MainCategory_Self",
+				"name": "Self",
+				"logoUrl": ""
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_MainCategory_Play",
+			"type": "com.brijframework.content.global.entities.EOGlobalMainCategory",
+			"name": "Global_Portal_MainCategory",
+			"properties": {
+				"orderSequence": 2.0,
+				"color": "#b94447",
+				"idenNo": "Global_Portal_MainCategory_Play",
+				"name": "Play",
+				"logoUrl": ""
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_MainCategory_Work",
+			"type": "com.brijframework.content.global.entities.EOGlobalMainCategory",
+			"name": "Global_Portal_MainCategory",
+			"properties": {
+				"orderSequence": 1.0,
+				"color": "#b94447",
+				"idenNo": "Global_Portal_MainCategory_Work",
+				"name": "Work",
+				"logoUrl": ""
+			},
+			"relationship": {}
+		}
+	]
+}

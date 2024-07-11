@@ -1,0 +1,49 @@
+{
+	"id": "Global_Portal_SubCategory_Work",
+	"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+	"orderSequence": 1.0,
+	"objects": [
+		{
+			"id": "Global_Portal_SubCategory_Work_Luxury",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 1.3,
+				"color": "#5cb86d",
+				"idenNo": "Global_Portal_SubCategory_Work_Luxury",
+				"name": "Luxury",
+				"mainCategory": "LK@Global_Portal_MainCategory_Work",
+				"logoUrl": "/resource/sub_category/Luxury.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Work_Career",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 1.1,
+				"color": "#2abfeb",
+				"idenNo": "Global_Portal_SubCategory_Work_Career",
+				"name": "Career",
+				"mainCategory": "LK@Global_Portal_MainCategory_Work",
+				"logoUrl": "/resource/sub_category/career.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Work_Wealth",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 1.2,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_SubCategory_Work_Wealth",
+				"name": "Wealth",
+				"mainCategory": "LK@Global_Portal_MainCategory_Work",
+				"logoUrl": "/resource/sub_category/Wealth.webp"
+			},
+			"relationship": {}
+		}
+	]
+}

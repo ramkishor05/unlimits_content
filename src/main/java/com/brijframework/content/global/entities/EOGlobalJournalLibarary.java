@@ -18,7 +18,8 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name=EOGLOBAL_JOURNAL_LIBARARY ,  uniqueConstraints = { @UniqueConstraint (columnNames = {NAME})} )
+@Table(name=EOGLOBAL_JOURNAL_LIBARARY ,  uniqueConstraints = { 
+		@UniqueConstraint (columnNames = {NAME,"JOURNAL_DATE"})} )
 public class EOGlobalJournalLibarary extends EOGlobalItem {
 
 	/**
@@ -27,7 +28,7 @@ public class EOGlobalJournalLibarary extends EOGlobalItem {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "JOURNAL_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@CreationTimestamp
 	private Date journalDate;
 

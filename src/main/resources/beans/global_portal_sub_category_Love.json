@@ -1,0 +1,49 @@
+{
+	"id": "Global_Portal_SubCategory_Love",
+	"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+	"orderSequence": 4.0,
+	"objects": [
+		{
+			"id": "Global_Portal_SubCategory_Love_Charity",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 4.3,
+				"color": "#624464",
+				"idenNo": "Global_Portal_SubCategory_Love_Charity",
+				"name": "Charity",
+				"mainCategory": "LK@Global_Portal_MainCategory_Love",
+				"logoUrl": "/resource/sub_category/Charity.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Love_Relations",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 4.2,
+				"color": "#63444e",
+				"idenNo": "Global_Portal_SubCategory_Love_Relations",
+				"name": "Relations",
+				"mainCategory": "LK@Global_Portal_MainCategory_Love",
+				"logoUrl": "/resource/sub_category/Relations.webp"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_SubCategory_Love_Romance",
+			"type": "com.brijframework.content.global.entities.EOGlobalSubCategory",
+			"name": "Global_Portal_SubCategory",
+			"properties": {
+				"orderSequence": 4.1,
+				"color": "#98444b",
+				"idenNo": "Global_Portal_SubCategory_Love_Romance",
+				"name": "Romance",
+				"mainCategory": "LK@Global_Portal_MainCategory_Love",
+				"logoUrl": "/resource/sub_category/romance.webp"
+			},
+			"relationship": {}
+		}
+	]
+}
