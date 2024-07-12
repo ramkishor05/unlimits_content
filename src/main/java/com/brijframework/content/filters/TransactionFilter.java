@@ -37,6 +37,9 @@ public class TransactionFilter extends OncePerRequestFilter {
     	System.out.println("TransactionFilter start");
         HttpServletRequest req = (HttpServletRequest) request;
         TransactionRequest requestWrapper = new TransactionRequest(req);
+        requestWrapper.putHeader("Access-Control-Allow-Origin", "*");
+		requestWrapper.putHeader("Access-Control-Allow-Headers", "Content-Type");
+		requestWrapper.putHeader("Accept", "*");
         String authHeader = req.getHeader(AUTHORIZATION);
 		if (StringUtils.isNotEmpty(authHeader)) {
 			ApiTokenContext.getContext().setCurrentToken(authHeader);
