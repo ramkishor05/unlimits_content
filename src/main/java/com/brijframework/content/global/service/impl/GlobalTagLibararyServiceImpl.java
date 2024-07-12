@@ -37,7 +37,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
-	protected List<UIGlobalTagLibarary> postFetch(List<EOGlobalTagLibarary> findObjects) {
+	public List<UIGlobalTagLibarary> postFetch(List<EOGlobalTagLibarary> findObjects) {
 		List<UIGlobalTagLibarary> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((uiObject1, uiObject2)->uiObject1.getSubCategoryId().compareTo(uiObject2.getSubCategoryId()));
 		return uiObjects;

@@ -46,7 +46,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	protected void preAdd(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
 			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(data.getContent().getFileUrl());
@@ -54,7 +54,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	protected void preUpdate(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
 			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(data.getContent().getFileUrl());

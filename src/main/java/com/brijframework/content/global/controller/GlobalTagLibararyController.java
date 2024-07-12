@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RestController
 @RequestMapping("/api/global/tag/library")
 @Hidden
-public class GlobalTagLibararyController extends CrudController<UIGlobalTagLibarary, EOGlobalTagLibarary, Long>{
+public class GlobalTagLibararyController implements CrudController<UIGlobalTagLibarary, EOGlobalTagLibarary, Long>{
 
 	@Autowired
 	private GlobalTagLibararyService globalTagLibararyService;

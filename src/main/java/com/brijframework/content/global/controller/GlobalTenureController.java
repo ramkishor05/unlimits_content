@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RestController
 @RequestMapping("/api/global/tenure")
 @Hidden
-public class GlobalTenureController extends CrudController<UIGlobalTenure, EOGlobalTenure, Long>{
+public class GlobalTenureController implements CrudController<UIGlobalTenure, EOGlobalTenure, Long>{
 
 	@Autowired
 	private GlobalTenureService globalTenureService;

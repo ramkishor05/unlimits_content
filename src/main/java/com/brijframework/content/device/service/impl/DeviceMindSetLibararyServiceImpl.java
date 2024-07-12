@@ -34,7 +34,7 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 	}
 	
 	@Override
-	protected List<UIDeviceMindSetLibarary> postFetch(List<EOGlobalMindSetLibarary> findObjects) {
+	public List<UIDeviceMindSetLibarary> postFetch(List<EOGlobalMindSetLibarary> findObjects) {
 		List<UIDeviceMindSetLibarary> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;

@@ -44,7 +44,7 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 	}
 	
 	@Override
-	protected List<UIDeviceJournalLibarary> postFetch(List<EOGlobalJournalLibarary> findObjects) {
+	public List<UIDeviceJournalLibarary> postFetch(List<EOGlobalJournalLibarary> findObjects) {
 		List<UIDeviceJournalLibarary> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;

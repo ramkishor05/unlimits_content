@@ -44,14 +44,14 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 	}
 	
 	@Override
-	protected void postFetch(EOGlobalSubCategory findObject, UIDeviceSubCategory dtoObject) {
+	public void postFetch(EOGlobalSubCategory findObject, UIDeviceSubCategory dtoObject) {
 		if(StringUtils.isNotEmpty(dtoObject.getLogoUrl())) {
 			dtoObject.setLogoUrl(dtoObject.getLogoUrl().startsWith("/")? serverUrl+""+dtoObject.getLogoUrl() :  serverUrl+"/"+dtoObject.getLogoUrl());
 		}
 	}
 
 	@Override
-	protected List<UIDeviceSubCategory> postFetch(List<EOGlobalSubCategory> findObjects) {
+	public List<UIDeviceSubCategory> postFetch(List<EOGlobalSubCategory> findObjects) {
 		List<UIDeviceSubCategory> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;

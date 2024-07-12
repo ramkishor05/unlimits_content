@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RequestMapping("/api/global/journal/libarary")
 @CrossOrigin("*")
 @Hidden
-public class GlobalJournalLibararyController extends CrudController<UIGlobalJournalLibarary, EOGlobalJournalLibarary, Long> {
+public class GlobalJournalLibararyController implements CrudController<UIGlobalJournalLibarary, EOGlobalJournalLibarary, Long> {
 
 	@Autowired
 	private GlobalJournalLibararyService globalJournalLibararyService;

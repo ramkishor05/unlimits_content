@@ -55,7 +55,7 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource,
 	}
 	
 	@Override
-	protected void preAdd(UIResource uiResource, EOResource eoResource, Map<String, List<String>> headers) {
+	public void preAdd(UIResource uiResource, EOResource eoResource, Map<String, List<String>> headers) {
 		try {
 			String[] strings = uiResource.getFileContent().split(",");
 			byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);

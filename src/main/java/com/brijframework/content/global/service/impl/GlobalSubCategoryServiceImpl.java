@@ -55,7 +55,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 
 	@Override
-	protected void preAdd(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
 			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(data.getContent().getFileUrl());
@@ -63,7 +63,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 
 	@Override
-	protected void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
 			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(data.getContent().getFileUrl());

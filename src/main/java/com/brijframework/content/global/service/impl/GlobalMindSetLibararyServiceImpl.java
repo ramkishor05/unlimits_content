@@ -44,7 +44,7 @@ public class GlobalMindSetLibararyServiceImpl extends CrudServiceImpl<UIGlobalMi
 	}
 	
 	@Override
-	protected void preAdd(UIGlobalMindSetLibarary data, EOGlobalMindSetLibarary entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalMindSetLibarary data, EOGlobalMindSetLibarary entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
 			data.getContent().setFolderName(MIND_SET_VEDIOS);
 			resourceService.add(data.getContent(), new HashMap<String, List<String>>());
@@ -53,7 +53,7 @@ public class GlobalMindSetLibararyServiceImpl extends CrudServiceImpl<UIGlobalMi
 	}
 	
 	@Override
-	protected void preUpdate(UIGlobalMindSetLibarary data, EOGlobalMindSetLibarary entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalMindSetLibarary data, EOGlobalMindSetLibarary entity, Map<String, List<String>> headers) {
 		if(data.getContent()!=null) {
 			data.getContent().setFolderName(MIND_SET_VEDIOS);
 			resourceService.add(data.getContent(), new HashMap<String, List<String>>());

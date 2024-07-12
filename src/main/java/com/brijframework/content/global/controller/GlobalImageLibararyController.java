@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RestController
 @RequestMapping("/api/global/image/libarary")
 @Hidden
-public class GlobalImageLibararyController extends CrudController<UIGlobalImageLibarary, EOGlobalImageLibarary, Long>{
+public class GlobalImageLibararyController implements CrudController<UIGlobalImageLibarary, EOGlobalImageLibarary, Long>{
 
 	@Autowired
 	private GlobalImageLibararyService globalImageLibararyService;

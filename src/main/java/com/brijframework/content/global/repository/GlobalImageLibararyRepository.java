@@ -3,16 +3,16 @@ package com.brijframework.content.global.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.unlimits.rest.repository.CustomRepository;
 
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 
 @Repository
 @Transactional
-public interface GlobalImageLibararyRepository extends JpaRepository<EOGlobalImageLibarary, Long>{
+public interface GlobalImageLibararyRepository extends CustomRepository<EOGlobalImageLibarary, Long>{
 	
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI INNER JOIN EOGLOBAL_CATEGORY_ITEM GCS ON GCS.ID=  GCI.SUB_CATEGORY_ID WHERE GCI.RECORD_STATUS IN (?) ORDER BY GCS.NAME, GCI.NAME ")
 	List<EOGlobalImageLibarary> findAllByStatus(List<String> status);

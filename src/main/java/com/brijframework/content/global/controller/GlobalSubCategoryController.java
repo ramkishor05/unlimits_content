@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RequestMapping("/api/global/sub/category")
 @CrossOrigin("*")
 @Hidden
-public class GlobalSubCategoryController extends CrudController<UIGlobalSubCategory, EOGlobalSubCategory, Long>{
+public class GlobalSubCategoryController implements CrudController<UIGlobalSubCategory, EOGlobalSubCategory, Long>{
 
 	@Autowired
 	private GlobalSubCategoryService globalSubCategoryService;

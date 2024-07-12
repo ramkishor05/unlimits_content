@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RestController
 @RequestMapping("/api/global/mindset/libarary")
 @Hidden
-public class GlobalMindSetLibararyController extends CrudController<UIGlobalMindSetLibarary, EOGlobalMindSetLibarary, Long>{
+public class GlobalMindSetLibararyController implements CrudController<UIGlobalMindSetLibarary, EOGlobalMindSetLibarary, Long>{
 
 	@Autowired
 	private GlobalMindSetLibararyService globalMindSetLibararyService;

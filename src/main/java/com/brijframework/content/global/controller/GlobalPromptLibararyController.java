@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 @RestController
 @RequestMapping("/api/global/prompt/libarary")
 @Hidden
-public class GlobalPromptLibararyController extends CrudController<UIGlobalPromptLibarary, EOGlobalPromptLibarary, Long> {
+public class GlobalPromptLibararyController implements CrudController<UIGlobalPromptLibarary, EOGlobalPromptLibarary, Long> {
 
 	@Autowired
 	private GlobalPromptLibararyService globalPromptLibararyService;

@@ -34,7 +34,7 @@ public class DeviceTenureServiceImpl extends QueryServiceImpl<UIDeviceTenure, EO
 	}
 	
 	@Override
-	protected List<UIDeviceTenure> postFetch(List<EOGlobalTenure> findObjects) {
+	public List<UIDeviceTenure> postFetch(List<EOGlobalTenure> findObjects) {
 		List<UIDeviceTenure> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
