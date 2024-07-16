@@ -19,6 +19,8 @@ public class UIDeviceItem extends UIModel{
 	private String instructions;
 
 	private String color;
+	
+	private String type;
 
 	public String getIdenNo() {
 		return idenNo;
@@ -66,6 +68,14 @@ public class UIDeviceItem extends UIModel{
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class UIGlobalTagLibarary extends UIGlobalItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private Long subCategoryId;
 
 	public Long getSubCategoryId() {

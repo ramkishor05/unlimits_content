@@ -3,16 +3,16 @@ package com.brijframework.content.client.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.unlimits.rest.repository.CustomRepository;
 
 import com.brijframework.content.client.entites.EOCustCategoryGroup;
 
 @Repository
 @Transactional
-public interface CustCategoryGroupRepository extends JpaRepository<EOCustCategoryGroup, Long>{
+public interface CustCategoryGroupRepository extends CustomRepository<EOCustCategoryGroup, Long>{
 	
 	EOCustCategoryGroup findOneByTypeId(String typeId);
 

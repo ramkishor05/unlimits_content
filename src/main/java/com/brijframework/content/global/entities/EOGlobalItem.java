@@ -6,6 +6,7 @@ import static com.brijframework.content.constants.Constants.IDEN_NO;
 import static com.brijframework.content.constants.Constants.INSTRUCTIONS;
 import static com.brijframework.content.constants.Constants.LOGO_URL;
 import static com.brijframework.content.constants.Constants.NAME;
+import static com.brijframework.content.constants.Constants.TYPE;
 
 import com.brijframework.content.entities.EOEntityObject;
 
@@ -41,6 +42,9 @@ public abstract class EOGlobalItem extends EOEntityObject{
 
 	@Column(name=COLOR)
 	private String color;
+	
+	@Column(name=TYPE)
+	public String type;
 
 	public String getIdenNo() {
 		return idenNo;
@@ -89,5 +93,12 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

@@ -1,8 +1,4 @@
 package com.brijframework.content.device.controller;
-import static com.brijframework.content.constants.ClientConstants.FAILED;
-import static com.brijframework.content.constants.ClientConstants.SUCCESS;
-import static com.brijframework.content.constants.ClientConstants.SUCCESSFULLY_PROCCEED;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.unlimits.rest.crud.beans.Response;
+import org.unlimits.rest.crud.controller.QueryController;
+import org.unlimits.rest.crud.service.QueryService;
 
+import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImageLibararyService;
+import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 
 @RestController
 @RequestMapping("/api/device/image/libarary")
-public class DeviceImageLibararyController {
+public class DeviceImageLibararyController implements QueryController<UIDeviceImageLibarary, EOGlobalImageLibarary, Long>{
 
 	@Autowired
 	private DeviceImageLibararyService deviceImageLibararyService;
+	
+	@Override
+	public QueryService<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> getService() {
+		return deviceImageLibararyService;
+	}
 	
 	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}")
 	public Response search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId){

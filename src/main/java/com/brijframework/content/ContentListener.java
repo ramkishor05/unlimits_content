@@ -123,12 +123,17 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 					eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
 				});
 
-				globalImageLibararyService.init();
+				
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
+		}
+		try {
+			globalImageLibararyService.init();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		export_global_main_category();
 		export_global_sub_category();

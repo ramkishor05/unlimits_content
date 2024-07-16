@@ -10,14 +10,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.CrudServiceImpl;
+import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.DataStatus;
+import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.mapper.GlobalSubCategoryMapper;
 import com.brijframework.content.global.model.UIGlobalSubCategory;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.service.GlobalSubCategoryService;
 import com.brijframework.content.resource.service.ResourceService;
+
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 
 @Service
 public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCategory, EOGlobalSubCategory, Long> implements GlobalSubCategoryService {
@@ -40,6 +47,33 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	@Override
 	public GenericMapper<EOGlobalSubCategory, UIGlobalSubCategory> getMapper() {
 		return globalSubCategoryMapper;
+	}
+
+	{
+		CustomPredicate<EOGlobalSubCategory> mainCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
+			Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
+			Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
+			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
+			Path<Object> subCategoryIdPath = root.get("mainCategory");
+			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+			subCategoryIdIn.value(subquery);
+			return subCategoryIdIn;
+		};
+		
+		CustomPredicate<EOGlobalSubCategory> mainCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
+			Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
+			Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
+			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
+			Path<Object> subCategoryIdPath = root.get("mainCategory");
+			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+			subCategoryIdIn.value(subquery);
+			return subCategoryIdIn;
+		};
+		 
+		addCustomPredicate("mainCategoryId", mainCategoryId);
+		addCustomPredicate("mainCategory.id", mainCategoryId);
+		addCustomPredicate("mainCategoryName", mainCategoryName);
+		addCustomPredicate("mainCategory.name", mainCategoryName);
 	}
 
 	@Override

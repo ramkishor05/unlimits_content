@@ -5,8 +5,18 @@ server:
   resource:
     location: file:C:/app_runs/unlimits-resources/resource
   database:
-    host: 51.79.159.7
+    host: 15.235.207.206
     port: 3306
+    username: unlimits_usr
+    password: JJeV!EhBbuR
+    schema: unlimits_content
+  gateway:
+    host: 51.79.159.7
+    port: 8080
+    endpoint: content
+  eureka:
+    host: 51.79.159.7
+    port: 1111
 springdoc:
   api-docs:
     path: /v3/api-docs
@@ -16,7 +26,7 @@ springdoc:
 eureka:
  client:
    serviceUrl:
-     defaultZone: http://${server.host}:1111/eureka/
+     defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/
 logging:
  level:
   org.hibernate.SQL: DEBUG
@@ -29,7 +39,7 @@ openapi:
  service:
    title: content
    version: 1.0.0
-   url: http://${server.host}:8080/content #api gateway url   
+   url: http://${server.gateway.host}:${server.gateway.port}/${server.gateway.endpoint} #api gateway url   
     
 spring:
    profiles:
@@ -43,9 +53,9 @@ spring:
    sql.init.mode: always
    datasource:
      driverClassName: com.mysql.cj.jdbc.Driver
-     url: jdbc:mysql://${server.database.host}:${server.database.port}/unlimits_content?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
-     username: root
-     password: root
+     url: jdbc:mysql://${server.database.host}:${server.database.port}/${server.database.schema}?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+     username: ${server.database.username}
+     password: ${server.database.password}
      show-sql: true
    jpa: 
      hibernate: 
@@ -70,4 +80,4 @@ spring:
     port: '587'
    db:
      datajson:
-       upload: false
+       upload: true

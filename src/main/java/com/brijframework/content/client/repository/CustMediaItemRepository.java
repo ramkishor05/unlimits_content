@@ -3,16 +3,16 @@ package com.brijframework.content.client.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.unlimits.rest.repository.CustomRepository;
 
 import com.brijframework.content.client.entites.EOCustMediaItem;
 
 @Repository
 @Transactional
-public interface CustMediaItemRepository extends JpaRepository<EOCustMediaItem, Long>{
+public interface CustMediaItemRepository extends CustomRepository<EOCustMediaItem, Long>{
 	
 	EOCustMediaItem findOneByTypeId(String typeId);
 

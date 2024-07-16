@@ -3,7 +3,6 @@ package com.brijframework.content.global.entities;
 import static com.brijframework.content.constants.Constants.EOGLOBAL_TAG_LIBARARY;
 import static com.brijframework.content.constants.Constants.NAME;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -25,9 +24,6 @@ public class EOGlobalTagLibarary extends EOGlobalItem {
 	@JoinColumn(name="SUB_CATEGORY_ID")
 	@ManyToOne(optional = true)
 	public EOGlobalSubCategory subCategory;
-	
-	@Column(name = "TYPE")
-	private String type;
 
 	public EOGlobalSubCategory getSubCategory() {
 		return subCategory;
@@ -37,14 +33,6 @@ public class EOGlobalTagLibarary extends EOGlobalItem {
 		this.subCategory = subCategory;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-	
 	public String getColor() {
 		if(super.getColor()==null) {
 			super.setColor(getSubCategory().getColor());

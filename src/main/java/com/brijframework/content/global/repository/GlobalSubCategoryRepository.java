@@ -3,16 +3,16 @@ package com.brijframework.content.global.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.unlimits.rest.repository.CustomRepository;
 
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 
 @Repository
 @Transactional
-public interface GlobalSubCategoryRepository extends JpaRepository<EOGlobalSubCategory, Long>{
+public interface GlobalSubCategoryRepository extends CustomRepository<EOGlobalSubCategory, Long>{
 	
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.MAIN_CATEGORY_ID WHERE GCI.RECORD_STATUS IN (?) ORDER BY GCG.NAME, GCI.NAME ")
 	List<EOGlobalSubCategory> findAllByStatus(List<String> status);

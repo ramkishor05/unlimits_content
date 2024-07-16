@@ -3,16 +3,16 @@ package com.brijframework.content.client.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.unlimits.rest.repository.CustomRepository;
 
 import com.brijframework.content.client.entites.EOCustTagItem;
 
 @Repository
 @Transactional
-public interface CustTagItemRepository extends JpaRepository<EOCustTagItem, Long>{
+public interface CustTagItemRepository extends CustomRepository<EOCustTagItem, Long>{
 	
 	EOCustTagItem findOneByTypeId(String typeId);
 

@@ -13,6 +13,10 @@ public class UIResource {
 	private String fileName;
 
 	private String fileContent;
+	
+	private String posterName;
+
+	private String posterContent;
 
 	public String getFolderName() {
 		return folderName;
@@ -38,13 +42,29 @@ public class UIResource {
 		this.fileContent = fileContent;
 	}
 	
-	/**
-	 * 
-	 */
-	public String getFileUrl() {
-		return "/resource/"+getFolderName()+"/"+getFileName();
-
+	public String getPosterName() {
+		return posterName;
 	}
 
+	public void setPosterName(String posterName) {
+		this.posterName = posterName;
+	}
+
+	public String getPosterContent() {
+		return posterContent;
+	}
+
+	public void setPosterContent(String posterContent) {
+		this.posterContent = posterContent;
+	}
+
+	public String getFileUrl() {
+		return "/resource/"+getFolderName()+"/"+getFileName();
+	}
+
+	public String getPosterUrl() {
+		return "/resource/"+getFolderName()+"/"+getPosterName();
+
+	}
 
 }

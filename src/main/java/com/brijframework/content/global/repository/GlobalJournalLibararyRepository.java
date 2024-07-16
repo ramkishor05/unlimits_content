@@ -5,16 +5,16 @@ import static com.brijframework.content.constants.Constants.EOGLOBAL_JOURNAL_LIB
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.unlimits.rest.repository.CustomRepository;
 
 import com.brijframework.content.global.entities.EOGlobalJournalLibarary;
 
 @Repository
 @Transactional
-public interface GlobalJournalLibararyRepository extends JpaRepository<EOGlobalJournalLibarary, Long>{
+public interface GlobalJournalLibararyRepository extends CustomRepository<EOGlobalJournalLibarary, Long>{
 
 	/**
 	 * @param idenNo

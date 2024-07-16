@@ -16,15 +16,22 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.unlimits.rest.crud.beans.PageDetail;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
+import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.device.mapper.DeviceImageLibararyMapper;
 import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImageLibararyService;
 import com.brijframework.content.forgin.PexelMediaRepository;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
+import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.repository.GlobalImageLibararyRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
+
+import jakarta.persistence.criteria.CriteriaBuilder.In;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 
 @Service
 public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> implements DeviceImageLibararyService {
@@ -52,6 +59,58 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	@Override
 	public GenericMapper<EOGlobalImageLibarary, UIDeviceImageLibarary> getMapper() {
 		return deviceImageLibararyMapper;
+	}
+	
+	{
+		CustomPredicate<EOGlobalImageLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
+			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
+			Path<Object> subCategoryIdPath = root.get("subCategory");
+			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+			subCategoryIdIn.value(subquery);
+			return subCategoryIdIn;
+		};
+		
+		CustomPredicate<EOGlobalImageLibarary> subCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
+			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
+			Path<Object> subCategoryIdPath = root.get("subCategory");
+			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+			subCategoryIdIn.value(subquery);
+			return subCategoryIdIn;
+		};
+		
+		CustomPredicate<EOGlobalImageLibarary> tagLibararyId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
+			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
+			Path<Object> subCategoryIdPath = root.get("tagLibarary");
+			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+			subCategoryIdIn.value(subquery);
+			return subCategoryIdIn;
+		};
+		
+		CustomPredicate<EOGlobalImageLibarary> tagLibararyName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
+			Subquery<EOGlobalTagLibarary> subquery = criteriaQuery.subquery(EOGlobalTagLibarary.class);
+			Root<EOGlobalTagLibarary> fromProject = subquery.from(EOGlobalTagLibarary.class);
+			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
+			Path<Object> subCategoryIdPath = root.get("tagLibarary");
+			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+			subCategoryIdIn.value(subquery);
+			return subCategoryIdIn;
+		};
+ 
+		addCustomPredicate("subCategoryId", subCategoryId);
+		addCustomPredicate("subCategory.id", subCategoryId);
+		addCustomPredicate("subCategoryName", subCategoryName);
+		addCustomPredicate("subCategory.name", subCategoryName);
+		
+		addCustomPredicate("tagLibararyId", tagLibararyId);
+		addCustomPredicate("tagLibarary.id", tagLibararyId);
+		addCustomPredicate("tagLibararyName", tagLibararyName);
+		addCustomPredicate("tagLibarary.name", tagLibararyName);
 	}
 	
 	@Override
