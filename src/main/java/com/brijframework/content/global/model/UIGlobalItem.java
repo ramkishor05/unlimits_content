@@ -6,6 +6,8 @@ public class UIGlobalItem extends UIModel{
 
 	private String idenNo;
 	
+	private String title;
+	
 	private String name;
 	
 	private String logoUrl;
@@ -32,6 +34,14 @@ public class UIGlobalItem extends UIModel{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getLogoUrl() {

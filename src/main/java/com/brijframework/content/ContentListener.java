@@ -123,23 +123,23 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 					eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
 				});
 
+				try {
+					globalImageLibararyService.init();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				export_global_main_category();
+				export_global_sub_category();
+				export_global_portal_tag_libarary();
 				
+				//copyToAll_global_portal_tag_libarary();
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 		}
-		try {
-			globalImageLibararyService.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		export_global_main_category();
-		export_global_sub_category();
-		export_global_portal_tag_libarary();
 		
-		//copyToAll_global_portal_tag_libarary();
 	}
 
 	protected void copyToAll_global_portal_tag_libarary() {

@@ -11,10 +11,8 @@ import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 
 import com.brijframework.content.device.mapper.DeviceMindSetLibararyMapper;
-import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.model.UIDeviceMindSetLibarary;
 import com.brijframework.content.device.service.DeviceMindSetLibararyService;
-import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalMindSetLibarary;
 import com.brijframework.content.global.repository.GlobalMindSetLibararyRepository;
 
@@ -47,7 +45,8 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 		return uiObjects;
 	}
 	
-	public void postFetch(EOGlobalImageLibarary findObject, UIDeviceImageLibarary dtoObject) {
+	@Override
+	public void postFetch(EOGlobalMindSetLibarary findObject, UIDeviceMindSetLibarary dtoObject) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}

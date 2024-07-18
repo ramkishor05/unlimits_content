@@ -3,7 +3,6 @@ package com.brijframework.content.global.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,6 +19,8 @@ import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.VisualiseType;
+import com.brijframework.content.forgin.model.ResourceFile;
+import com.brijframework.content.forgin.repository.ResourceClient;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
@@ -29,8 +30,6 @@ import com.brijframework.content.global.repository.GlobalImageLibararyRepository
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
-import com.brijframework.content.resource.modal.UIResource;
-import com.brijframework.content.resource.service.ResourceService;
 import com.brijframework.content.util.ResourceUtil;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
@@ -57,12 +56,12 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 
 	@Autowired
 	private GlobalImageLibararyMapper globalImageLibararyMapper;
+	
+	@Autowired
+	private ResourceClient resourceClient;
 
 	@Autowired
 	private ResourceUtil resourceUtil;
-	
-	@Autowired
-	private ResourceService resourceService;
 
 	@Override
 	public JpaRepository<EOGlobalImageLibarary, Long> getRepository() {
@@ -167,11 +166,9 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		globalTagLibararyRepository.findById(data.getTagLibararyId()).ifPresent(globalTagLibarary->{
 			dir.append("/"+globalTagLibarary.getName());
 		});
-		UIResource uiResource=new UIResource();
-		uiResource.setFileContent(data.getContent());
-		uiResource.setFileName(data.getName());
-		uiResource.setFolderName(dir.toString());
-		resourceService.add(uiResource, new HashMap<String, List<String>>());
+		
+		ResourceFile uiResource = resourceClient.add(TAGS_WITH_IMAGES, dir.toString(), data.getName());
+		
 		entity.setUrl(uiResource.getFileUrl());
 	}
 	

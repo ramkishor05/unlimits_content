@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(value = Include.NON_NULL)
-public class UIDeviceMindSetLibarary extends UIDeviceItem implements Serializable {
+public class UIDeviceReProgramLibarary extends UIDeviceItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
