@@ -1,4 +1,4 @@
-package com.brijframework.content.forgin;
+package com.brijframework.content.forgin.repository;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

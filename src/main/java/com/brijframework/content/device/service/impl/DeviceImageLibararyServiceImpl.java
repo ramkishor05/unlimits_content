@@ -21,7 +21,7 @@ import org.unlimits.rest.repository.CustomPredicate;
 import com.brijframework.content.device.mapper.DeviceImageLibararyMapper;
 import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImageLibararyService;
-import com.brijframework.content.forgin.PexelMediaRepository;
+import com.brijframework.content.forgin.repository.PexelMediaRepository;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;

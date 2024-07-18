@@ -1,4 +1,4 @@
-package com.brijframework.content.forgin;
+package com.brijframework.content.forgin.repository;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
