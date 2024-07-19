@@ -173,7 +173,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 
 	@Override
 	public PageDetail search(@RequestHeader(required =false) MultiValueMap<String,String> headers,Long subCategoryId, Long tagLibararyId, int pageNumber, int count) {
-		Map<String, String> filters=new HashMap<String, String>();
+		Map<String, Object> filters=new HashMap<String, Object>();
 		Sort by = Sort.by("name");
 		PageDetail fetchPageObject = fetchPageObject(headers,pageNumber, count, by, filters);
 		if(fetchPageObject!=null && fetchPageObject.getElements().size()>0) {
@@ -184,7 +184,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 
 	@Override
 	public PageDetail search(@RequestHeader(required =false) MultiValueMap<String,String> headers,Long subCategoryId, Long tagLibararyId, String name, int pageNumber, int count) {
-		Map<String, String> filters=new HashMap<String, String>();
+		Map<String, Object> filters=new HashMap<String, Object>();
 		filters.put("name", name);
 		Sort by = Sort.by("name");
 		PageDetail fetchPageObject = fetchPageObject(headers,pageNumber, count, by, filters);
