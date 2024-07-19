@@ -3,6 +3,9 @@
  */
 package com.brijframework.content.constants;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *  @author omnie
  */
@@ -38,4 +41,13 @@ public class ClientConstants {
 	 * 
 	 */
 	public static final String SUCCESS = "1";
+	
+	public static final String UI_DATE_FORMAT_MM_DD_YY = "MM/dd/yy";
+	
+	public static final String UI_DATE_FORMAT_MMMM_DD_YYYY = "MMMM dd, yyyy";
+	
+	public static void main(String[] args) {
+		SimpleDateFormat format=new SimpleDateFormat(UI_DATE_FORMAT_MMMM_DD_YYYY);
+		System.out.println(format.format(new Date()));
+	}
 }
