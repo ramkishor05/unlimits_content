@@ -8,24 +8,33 @@ public class UIGlobalMindSetLibarary extends UIGlobalItem implements Serializabl
 
 	private static final long serialVersionUID = 1L;
 	
-	public UIResource content;
+	public UIResource fileResource;
 	
-	private String url;
+	private String musicUrl;
 	
-	public UIResource getContent() {
-		return content;
+	private String posterUrl;
+
+	public UIResource getFileResource() {
+		return fileResource;
 	}
 
-	public void setContent(UIResource content) {
-		this.content = content;
+	public void setFileResource(UIResource fileResource) {
+		this.fileResource = fileResource;
+	}
+	public String getMusicUrl() {
+		return musicUrl;
 	}
 
-	public String getUrl() {
-		return url;
+	public void setMusicUrl(String musicUrl) {
+		this.musicUrl = musicUrl;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public String getPosterUrl() {
+		return posterUrl;
 	}
-	
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
+
 }

@@ -4,23 +4,44 @@ import com.brijframework.content.resource.modal.UIResource;
 
 public class UIGlobalAffirmationLibarary extends UIGlobalItem {
 
-	private UIResource content;
+	private UIResource fileResource;
+	
+	private Long resourceId;
 
-	private String url;
+	private String musicUrl;
 
-	public UIResource getContent() {
-		return content;
+	private String posterUrl;
+
+	public UIResource getFileResource() {
+		return fileResource;
 	}
 
-	public void setContent(UIResource content) {
-		this.content = content;
+	public void setFileResource(UIResource fileResource) {
+		this.fileResource = fileResource;
 	}
 
-	public String getUrl() {
-		return url;
+	public Long getResourceId() {
+		return resourceId;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
 	}
+
+	public String getMusicUrl() {
+		return musicUrl;
+	}
+
+	public void setMusicUrl(String musicUrl) {
+		this.musicUrl = musicUrl;
+	}
+
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
+
 }

@@ -19,6 +19,16 @@ public class UIGlobalItem extends UIModel{
 	private String color;
 	
 	private String type;
+	
+	private Long resourceId;
+	
+	public Long getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
+	}
 
 	public String getIdenNo() {
 		return idenNo;

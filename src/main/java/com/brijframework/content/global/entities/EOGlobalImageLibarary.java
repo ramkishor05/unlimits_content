@@ -1,13 +1,15 @@
 package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.EOGLOBAL_IMAGE_LIBARARY;
-import static com.brijframework.content.constants.Constants.URL;
+import static com.brijframework.content.constants.Constants.IMAGE_URL;
+import static com.brijframework.content.constants.Constants.RESOURCE_ID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -21,9 +23,12 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Column(name=RESOURCE_ID)
+	private Long resourceId;
 	
-	@Column(name=URL)
-	public String url;
+	@Column(name=IMAGE_URL)
+	@Lob
+	public String imageUrl;
 	
 	@JoinColumn(name="SUB_CATEGORY_ID")
 	@ManyToOne(optional = true)
@@ -33,12 +38,20 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 	@ManyToOne(optional = true)
 	public EOGlobalTagLibarary tagLibarary;
 
-	public String getUrl() {
-		return url;
+	public Long getResourceId() {
+		return resourceId;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public EOGlobalSubCategory getSubCategory() {

@@ -3,10 +3,14 @@
  */
 package com.brijframework.content.resource.modal;
 
+import org.unlimits.rest.model.UIModel;
+
 /**
  * @author omnie
  */
-public class UIResource {
+public class UIResource extends UIModel{
+
+	private Boolean includeId=false;
 
 	private String folderName;
 
@@ -58,13 +62,35 @@ public class UIResource {
 		this.posterContent = posterContent;
 	}
 
+	public Boolean getIncludeId() {
+		return includeId;
+	}
+
+	public void setIncludeId(Boolean includeId) {
+		this.includeId = includeId;
+	}
+
 	public String getFileUrl() {
-		return "/resource/"+getFolderName()+"/"+getFileName();
+		if(getIncludeId() !=null && getIncludeId()) {
+		    return "/resource/"+getFolderName()+"/"+getId()+"/"+getFileName();
+		}else {
+			return "/resource/"+getFolderName()+"/"+getFileName();
+		}
 	}
 
 	public String getPosterUrl() {
-		return "/resource/"+getFolderName()+"/"+getPosterName();
-
+		if(getIncludeId() !=null && getIncludeId()) {
+			return "/resource/"+getFolderName()+"/"+getId()+"/"+getPosterName();
+		}else {
+			return "/resource/"+getFolderName()+"/"+getPosterName();
+		}
 	}
 
+	@Override
+	public String toString() {
+		return "UIResource [folderName=" + folderName + ", fileName=" + fileName + ", fileContent=" + fileContent
+				+ ", posterName=" + posterName + ", posterContent=" + posterContent + "]";
+	}
+
+	
 }

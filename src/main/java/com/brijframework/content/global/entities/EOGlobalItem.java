@@ -6,6 +6,7 @@ import static com.brijframework.content.constants.Constants.IDEN_NO;
 import static com.brijframework.content.constants.Constants.INSTRUCTIONS;
 import static com.brijframework.content.constants.Constants.LOGO_URL;
 import static com.brijframework.content.constants.Constants.NAME;
+import static com.brijframework.content.constants.Constants.TITLE;
 import static com.brijframework.content.constants.Constants.TYPE;
 
 import com.brijframework.content.entities.EOEntityObject;
@@ -27,6 +28,9 @@ public abstract class EOGlobalItem extends EOEntityObject{
 	
 	@Column(name=NAME)
 	private String name;
+	
+	@Column(name=TITLE)
+	private String title;
 	
 	@Column(name=LOGO_URL , columnDefinition = "LONGTEXT")
 	@Lob
@@ -60,6 +64,14 @@ public abstract class EOGlobalItem extends EOEntityObject{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getLogoUrl() {

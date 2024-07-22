@@ -4,23 +4,34 @@ import com.brijframework.content.resource.modal.UIResource;
 
 public class UIGlobalReProgramLibarary extends UIGlobalItem {
 
-	private UIResource content;
+	private UIResource fileResource;
 
-	private String url;
+	private String musicUrl;
 
-	public UIResource getContent() {
-		return content;
+	private String posterUrl;
+
+	public UIResource getFileResource() {
+		return fileResource;
 	}
 
-	public void setContent(UIResource content) {
-		this.content = content;
+	public void setFileResource(UIResource fileResource) {
+		this.fileResource = fileResource;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getMusicUrl() {
+		return musicUrl;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setMusicUrl(String musicUrl) {
+		this.musicUrl = musicUrl;
 	}
+
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
+
 }

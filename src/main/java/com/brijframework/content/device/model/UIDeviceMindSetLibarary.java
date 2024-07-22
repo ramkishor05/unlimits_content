@@ -10,13 +10,23 @@ public class UIDeviceMindSetLibarary extends UIDeviceItem implements Serializabl
 
 	private static final long serialVersionUID = 1L;
 
-	public String url;
+	private String musicUrl;
 
-	public String getUrl() {
-		return url;
+	private String posterUrl;
+
+	public String getMusicUrl() {
+		return musicUrl;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setMusicUrl(String musicUrl) {
+		this.musicUrl = musicUrl;
+	}
+
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
 	}
 }

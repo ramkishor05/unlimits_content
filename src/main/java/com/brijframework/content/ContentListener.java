@@ -123,11 +123,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 					eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
 				});
 
-				try {
-					globalImageLibararyService.init();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				
 				export_global_main_category();
 				export_global_sub_category();
 				export_global_portal_tag_libarary();
@@ -139,7 +135,11 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 			}
 
 		}
-		
+		try {
+			globalImageLibararyService.init();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void copyToAll_global_portal_tag_libarary() {

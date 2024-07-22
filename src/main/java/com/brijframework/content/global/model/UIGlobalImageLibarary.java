@@ -2,6 +2,8 @@ package com.brijframework.content.global.model;
 
 import java.io.Serializable;
 
+import com.brijframework.content.resource.modal.UIResource;
+
 public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -9,10 +11,12 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 	private Long subCategoryId;
 	
 	private Long tagLibararyId;
-	
-	private String url;
-	
-	private String content;
+
+	private UIResource fileResource;
+
+	private String imageUrl;
+
+	private String posterUrl;
 
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -30,20 +34,29 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 		this.tagLibararyId = tagLibararyId;
 	}
 
-	public String getUrl() {
-		return url;
+	public UIResource getFileResource() {
+		return fileResource;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setFileResource(UIResource fileResource) {
+		this.fileResource = fileResource;
 	}
 
-	public String getContent() {
-		return content;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
+
+	public String getPosterUrl() {
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
+
 	
 }

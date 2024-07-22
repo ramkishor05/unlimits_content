@@ -140,7 +140,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 			pexelMediaRepository.getAllFiles(name).forEach(photo->{ 
 				UIDeviceImageLibarary deviceImageLibarary=new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
-				deviceImageLibarary.setUrl(photo.getUrl());
+				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary); 
 			});
 		}catch (Exception e) {
@@ -159,8 +159,8 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}
-		if(StringUtils.isNotEmpty(dtoObject.getUrl())) {
-			dtoObject.setUrl(dtoObject.getUrl().startsWith("/")? serverUrl+""+dtoObject.getUrl() :  serverUrl+"/"+dtoObject.getUrl());
+		if(StringUtils.isNotEmpty(dtoObject.getImageUrl())) {
+			dtoObject.setImageUrl(dtoObject.getImageUrl().startsWith("/")? serverUrl+""+dtoObject.getImageUrl() :  serverUrl+"/"+dtoObject.getImageUrl());
 		}
 	}
 

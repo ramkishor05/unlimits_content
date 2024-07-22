@@ -50,8 +50,12 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}
-		if(StringUtils.isNotEmpty(dtoObject.getUrl())) {
-			dtoObject.setUrl(dtoObject.getUrl().startsWith("/")? serverUrl+""+dtoObject.getUrl() :  serverUrl+"/"+dtoObject.getUrl());
+		if(StringUtils.isNotEmpty(dtoObject.getMusicUrl())) {
+			dtoObject.setMusicUrl(dtoObject.getMusicUrl().startsWith("/")? serverUrl+""+dtoObject.getMusicUrl() :  serverUrl+"/"+dtoObject.getMusicUrl());
+		}
+		
+		if(StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
+			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/")? serverUrl+""+dtoObject.getPosterUrl() :  serverUrl+"/"+dtoObject.getPosterUrl());
 		}
 	}
 }

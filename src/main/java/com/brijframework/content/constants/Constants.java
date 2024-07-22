@@ -83,7 +83,13 @@ public class Constants {
 	public static final String TYPE_ID = "TYPE_ID";
 	public static final String INSTRUCTIONS="INSTRUCTIONS";
 	public static final String TYPE = "TYPE";
-	public static final String URL = "URL";
+	public static final String IMAGE_URL = "IMAGE_URL";
+
+	public static final String RESOURCE_ID = "RESOURCE_ID";
+
+	public static final String MUSIC_URL = "MUSIC_URL";
+	public static final String POSTER_URL = "POSTER_URL";
+
 	public static final String DETAIL = "DETAIL";
 	public static final String PRESENT_ADDRESS = "PRESENT_ADDRESS";
 	public static final String PERMAMENT_ADDRESS = "PERMAMENT_ADDRESS";

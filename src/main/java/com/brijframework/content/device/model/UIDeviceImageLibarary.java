@@ -11,10 +11,10 @@ public class UIDeviceImageLibarary extends UIDeviceItem implements Serializable 
 	private static final long serialVersionUID = 1L;
 
 	private Long subCategoryId;
-	
+
 	private Long tagLibararyId;
-	
-	public String url;
+
+	public String imageUrl;
 
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -32,12 +32,12 @@ public class UIDeviceImageLibarary extends UIDeviceItem implements Serializable 
 		this.tagLibararyId = tagLibararyId;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
-	
+
 }
