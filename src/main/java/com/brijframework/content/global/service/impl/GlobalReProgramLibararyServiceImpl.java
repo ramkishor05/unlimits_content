@@ -91,6 +91,7 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 			resource.setId(find!=null? find.getResourceId(): null);
 			resource.setFolderName(REPROGRAM);
 			UIResource resourceFile= resourceClient.add(resource);
+			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
 			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
 				data.setMusicUrl(resourceFile.getFileUrl());

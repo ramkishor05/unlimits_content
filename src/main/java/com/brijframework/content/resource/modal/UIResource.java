@@ -10,7 +10,7 @@ import org.unlimits.rest.model.UIModel;
  */
 public class UIResource extends UIModel{
 
-	private Boolean includeId=false;
+	private Boolean includeId;
 
 	private String folderName;
 
