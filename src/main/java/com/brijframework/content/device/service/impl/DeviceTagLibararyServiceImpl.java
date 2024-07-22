@@ -1,6 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceTagLibararyMapper;
 import com.brijframework.content.device.model.UIDeviceTagLibarary;
 import com.brijframework.content.device.service.DeviceTagLibararyService;
@@ -24,6 +26,8 @@ import jakarta.persistence.criteria.Subquery;
 
 @Service
 public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLibarary, EOGlobalTagLibarary, Long> implements DeviceTagLibararyService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
@@ -105,6 +109,11 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 		} else {
 			return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId));
 		}
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 
 	@Override

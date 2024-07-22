@@ -1,6 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceTenureMapper;
 import com.brijframework.content.device.model.UIDeviceTenure;
 import com.brijframework.content.device.service.DeviceTenureService;
@@ -16,6 +18,8 @@ import com.brijframework.content.global.repository.GlobalTenureRepository;
 
 @Service
 public class DeviceTenureServiceImpl extends QueryServiceImpl<UIDeviceTenure, EOGlobalTenure, Long> implements DeviceTenureService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalTenureRepository globalTenureRepository;
@@ -31,6 +35,11 @@ public class DeviceTenureServiceImpl extends QueryServiceImpl<UIDeviceTenure, EO
 	@Override
 	public GenericMapper<EOGlobalTenure, UIDeviceTenure> getMapper() {
 		return deviceTenureMapper;
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 	
 	@Override

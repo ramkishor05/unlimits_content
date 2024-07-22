@@ -7,11 +7,14 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.brijframework.content.constants.RecordStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
 
 @MappedSuperclass
 public abstract class EOEntityObject implements Serializable {
@@ -44,6 +47,11 @@ public abstract class EOEntityObject implements Serializable {
 	
 	@Column(name = "ORDER_SEQUENCE")
 	private Double orderSequence;
+	
+	@PrePersist
+	private void init() {
+		this.recordState=RecordStatus.ACTIVETED.getStatus();
+	}
 
 	public Long getId() {
 		return id;

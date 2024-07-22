@@ -129,17 +129,19 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				export_global_portal_tag_libarary();
 				
 				//copyToAll_global_portal_tag_libarary();
+				
+				try {
+					globalImageLibararyService.init();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 		}
-		try {
-			globalImageLibararyService.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	protected void copyToAll_global_portal_tag_libarary() {

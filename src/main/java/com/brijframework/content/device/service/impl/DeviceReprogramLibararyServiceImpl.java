@@ -1,6 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceReProgramLibararyMapper;
 import com.brijframework.content.device.model.UIDeviceReProgramLibarary;
 import com.brijframework.content.device.service.DeviceReProgramLibararyService;
@@ -18,6 +20,8 @@ import com.brijframework.content.global.repository.GlobalReProgramLibararyReposi
 
 @Service
 public class DeviceReprogramLibararyServiceImpl extends QueryServiceImpl<UIDeviceReProgramLibarary, EOGlobalReProgramLibarary, Long> implements DeviceReProgramLibararyService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalReProgramLibararyRepository globalReProgramLibararyRepository;
@@ -36,6 +40,11 @@ public class DeviceReprogramLibararyServiceImpl extends QueryServiceImpl<UIDevic
 	@Override
 	public GenericMapper<EOGlobalReProgramLibarary, UIDeviceReProgramLibarary> getMapper() {
 		return deviceReProgramLibararyMapper;
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 	
 	@Override

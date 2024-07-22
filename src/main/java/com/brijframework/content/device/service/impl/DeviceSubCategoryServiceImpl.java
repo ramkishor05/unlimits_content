@@ -1,6 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceSubCategoryMapper;
 import com.brijframework.content.device.model.UIDeviceSubCategory;
 import com.brijframework.content.device.service.DeviceSubCategoryService;
@@ -25,6 +27,8 @@ import jakarta.persistence.criteria.Subquery;
 
 @Service
 public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCategory, EOGlobalSubCategory, Long> implements DeviceSubCategoryService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalSubCategoryRepository globalCategoryItemRepository;
@@ -77,6 +81,11 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 	@Override
 	public List<UIDeviceSubCategory> findAllByMainCategoryId(Long mainCategoryId) {
 		return postFetch(globalCategoryItemRepository.findAllByMainCategoryId(mainCategoryId));
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 	
 	@Override

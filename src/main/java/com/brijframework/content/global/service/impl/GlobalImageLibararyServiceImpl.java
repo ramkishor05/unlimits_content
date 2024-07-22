@@ -21,6 +21,7 @@ import org.unlimits.rest.crud.service.CrudServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.DataStatus;
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.constants.VisualiseType;
 import com.brijframework.content.forgin.repository.ResourceClient;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
@@ -43,6 +44,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImageLibarary, EOGlobalImageLibarary, Long> implements GlobalImageLibararyService {
 	
+	private static final String RECORD_STATE = "recordState";
+
 	private static final String IMAGE_URL = "imageUrl";
 
 	private static final String POSTER_URL = "posterUrl";
@@ -133,24 +136,15 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		addCustomPredicate("tagLibararyName", tagLibararyName);
 		addCustomPredicate("tagLibarary.name", tagLibararyName);
 	}
-	
 
-	@Override
-	public Boolean delete(Long id) {
-		Optional<EOGlobalImageLibarary> findById = globalImageLibararyRepository.findById(id);
-		if(findById.isPresent()) {
-			EOGlobalImageLibarary eoGlobalImageLibarary = findById.get();
-			eoGlobalImageLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
-			globalImageLibararyRepository.save(eoGlobalImageLibarary);
-			return true;
-		}
-		return false;
-	}
 
 	@Override
 	public void preAdd(UIGlobalImageLibarary data, Map<String, List<String>> headers) {
 		if(data.getType()==null) {
 			data.setType(VisualiseType.VISUALISE_WITH_WORDS.getType());
+		}
+		if(data.getRecordState()==null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
 		if(data.getFileResource()!=null) {
 			saveResource(data , null);
@@ -161,6 +155,9 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	public void preUpdate(UIGlobalImageLibarary data, EOGlobalImageLibarary entity, Map<String, List<String>> headers) {
 		if(data.getType()==null) {
 			data.setType(VisualiseType.VISUALISE_WITH_WORDS.getType());
+		}
+		if(data.getRecordState()==null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
 		if(data.getFileResource()!=null) {
 			saveResource(data, entity);
@@ -198,6 +195,13 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			ignoreProperties().add(IMAGE_URL);
 		}
 	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
+			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
+		}
+	}
 
 	@Override
 	public void postFetch(EOGlobalImageLibarary findObject, UIGlobalImageLibarary dtoObject) {
@@ -219,6 +223,18 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			ignoreProperties=new ArrayList<String>();
 		}
 		return ignoreProperties;
+	}
+	
+	@Override
+	public Boolean delete(Long id) {
+		Optional<EOGlobalImageLibarary> findById = getRepository().findById(id);
+		if(findById.isPresent()) {
+			EOGlobalImageLibarary eoGlobalImageLibarary = findById.get();
+			eoGlobalImageLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
+			getRepository().save(eoGlobalImageLibarary);
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
@@ -285,6 +301,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			EOGlobalTagLibarary eoGlobalTagLibarary= new EOGlobalTagLibarary();
 			eoGlobalTagLibarary.setName(name);
 			eoGlobalTagLibarary.setSubCategory(globalCategoryItem);
+			eoGlobalTagLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
 			eoGlobalTagLibarary.setType(VisualiseType.VISUALISE_WITH_IMAGES.getType());
 			eoGlobalTagLibarary=globalTagLibararyRepository.save(eoGlobalTagLibarary);
 			globalTagLibararyNameMap.put(buildTagId(globalCategoryItem, name), eoGlobalTagLibarary);
@@ -327,6 +344,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			globalImageLibarary.setName(file.getName());
 			globalImageLibarary.setType(VisualiseType.VISUALISE_WITH_IMAGES.getType());
 			globalImageLibarary.setImageUrl(url);
+			globalImageLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
 			globalImageLibarary.setTagLibarary(eoGlobalTagLibarary);
 			globalImageLibarary=globalImageLibararyRepository.save(globalImageLibarary);
 			categoryImgUrlMap.put(url, globalImageLibarary);
@@ -334,6 +352,5 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			e.printStackTrace();
 		}
 	}
-	
 	
 }

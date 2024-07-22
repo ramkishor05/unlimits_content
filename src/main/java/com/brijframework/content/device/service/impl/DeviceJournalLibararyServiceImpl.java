@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,7 @@ import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceJournalLibararyMapper;
 import com.brijframework.content.device.model.UIDeviceJournalLibarary;
 import com.brijframework.content.device.service.DeviceJournalLibararyService;
@@ -26,6 +28,8 @@ import jakarta.persistence.criteria.Path;
 
 @Service
 public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJournalLibarary, EOGlobalJournalLibarary, Long> implements DeviceJournalLibararyService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalJournalLibararyRepository globalJournalLibararyRepository;
@@ -70,6 +74,11 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 	@Override
 	public List<UIDeviceJournalLibarary> findYesterdayJournalLibarary() {
 		return postFetch(globalJournalLibararyRepository.findYesterdayJournalLibarary());
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 	
 	@Override

@@ -15,6 +15,7 @@ import org.unlimits.rest.crud.service.CrudServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.DataStatus;
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.mapper.GlobalSubCategoryMapper;
@@ -32,6 +33,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCategory, EOGlobalSubCategory, Long> implements GlobalSubCategoryService {
 	
+	private static final String RECORD_STATE = "recordState";
+
 	@Autowired
 	private GlobalSubCategoryRepository globalSubCategoryRepository;
 
@@ -83,11 +86,11 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 
 	@Override
 	public Boolean delete(Long id) {
-		Optional<EOGlobalSubCategory> findById = globalSubCategoryRepository.findById(id);
+		Optional<EOGlobalSubCategory> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalSubCategory eoGlobalSubCategory = findById.get();
 			eoGlobalSubCategory.setRecordState(DataStatus.DACTIVETED.getStatus());
-			globalSubCategoryRepository.save(eoGlobalSubCategory);
+			getRepository().save(eoGlobalSubCategory);
 			return true;
 		}
 		return false;
@@ -99,6 +102,9 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 			UIResource resource = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(resource.getFileUrl());
 		}
+		if(data.getRecordState()==null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
 	}
 
 	@Override
@@ -106,6 +112,16 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 		if(data.getContent()!=null) {
 			UIResource resource = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(resource.getFileUrl());
+		}
+		if(data.getRecordState()==null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
+			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	

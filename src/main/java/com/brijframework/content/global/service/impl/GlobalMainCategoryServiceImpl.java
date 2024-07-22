@@ -3,6 +3,7 @@ package com.brijframework.content.global.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.CrudServiceImpl;
 
+import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.mapper.GlobalMainCategoryMapper;
@@ -24,6 +26,8 @@ import com.brijframework.content.resource.service.ResourceService;
 @Service
 public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainCategory, EOGlobalMainCategory, Long> implements GlobalMainCategoryService {
 	
+	private static final String RECORD_STATE = "recordState";
+
 	@Autowired
 	private GlobalMainCategoryRepository globalMainCategoryRepository;
 	
@@ -53,6 +57,9 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	
 	@Override
 	public void preAdd(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
+		if(data.getRecordState()==null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
 		if(data.getContent()!=null) {
 			UIResource add = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(add.getFileUrl());
@@ -61,9 +68,19 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	
 	@Override
 	public void preUpdate(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
+		if(data.getRecordState()==null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
 		if(data.getContent()!=null) {
 			UIResource add = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
 			entity.setLogoUrl(add.getFileUrl());
+		}
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
+			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
@@ -75,5 +92,17 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		if(StringUtils.isNotEmpty(dtoObject.getLogoUrl())) {
 			dtoObject.setLogoUrl(dtoObject.getLogoUrl().startsWith("/")? serverUrl+""+dtoObject.getLogoUrl() :  serverUrl+"/"+dtoObject.getLogoUrl());
 		}
+	}
+	
+	@Override
+	public Boolean delete(Long id) {
+		Optional<EOGlobalMainCategory> findById = getRepository().findById(id);
+		if(findById.isPresent()) {
+			EOGlobalMainCategory eoGlobalMainCategory = findById.get();
+			eoGlobalMainCategory.setRecordState(DataStatus.DACTIVETED.getStatus());
+			getRepository().save(eoGlobalMainCategory);
+			return true;
+		}
+		return false;
 	}
 }

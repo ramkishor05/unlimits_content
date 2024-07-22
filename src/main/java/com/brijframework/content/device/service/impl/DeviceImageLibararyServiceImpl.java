@@ -18,6 +18,7 @@ import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
+import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceImageLibararyMapper;
 import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImageLibararyService;
@@ -35,6 +36,8 @@ import jakarta.persistence.criteria.Subquery;
 
 @Service
 public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> implements DeviceImageLibararyService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalImageLibararyRepository globalImageLibararyRepository;
@@ -162,6 +165,11 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		if(StringUtils.isNotEmpty(dtoObject.getImageUrl())) {
 			dtoObject.setImageUrl(dtoObject.getImageUrl().startsWith("/")? serverUrl+""+dtoObject.getImageUrl() :  serverUrl+"/"+dtoObject.getImageUrl());
 		}
+	}
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 
 	@Override

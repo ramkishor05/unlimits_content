@@ -1,6 +1,7 @@
 package com.brijframework.content.device.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 @Service
 public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMainCategory, EOGlobalMainCategory, Long>
 		implements DeviceMainCategoryService {
+	
+	private static final String RECORD_STATE = "recordState";
 	
 	@Value("${openapi.service.url}")
 	private String serverUrl;
@@ -44,7 +47,12 @@ public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMain
 	public List<UIDeviceMainCategory> getCategoryGroupList(RecordStatus dataStatus) {
 		return postFetch(globalCategoryGroupRepository.getCategoryGroupListByStatus(dataStatus.getStatusIds()));
 	}
-
+	
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
+	}
+	
 	@Override
 	public void postFetch(EOGlobalMainCategory findObject, UIDeviceMainCategory dtoObject) {
 		if(StringUtils.isNotEmpty(dtoObject.getLogoUrl())) {
