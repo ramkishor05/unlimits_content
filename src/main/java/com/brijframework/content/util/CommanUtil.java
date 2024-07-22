@@ -18,4 +18,11 @@ public class CommanUtil {
 	    }
 	    return pattern.matcher(strNum).matches();
 	}
+	
+	public static String replaceSpecialCharsWithUnderscore(String text) {
+		if(text==null) {
+			return null;
+		}
+		return text.replaceAll("[^._a-zA-Z0-9]", "_").replace("__","_").replaceAll("__","_");
+	}
 }
