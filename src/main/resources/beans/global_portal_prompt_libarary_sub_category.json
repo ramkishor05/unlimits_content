@@ -119,7 +119,7 @@
 			"type": "com.brijframework.content.global.entities.EOGlobalPromptLibarary",
 			"name": "Global_Portal_PromptLibarary",
 			"properties": {
-				"name": "Recreation",
+				"name": "Spirituality",
 				"idenNo": "Global_Portal_PromptLibarary_SubCategory_Self_Spirituality",
 				"description": "Create a vision for someone who is living their ideal spiritual life and involved in connecting with a greater purpose and a greater power to evolve and grow. Describe a life with meditation and being in the now, evolving through prayer and gratitude with affirmations that uplift and energize. Where the reader can visualizing maintaining a journal, being surrounded by like minded people and a mastermind, practicing a belief that connects with a greater power. Being guided and seeing the right signs along the way. Knowing the universe is conspiring to make them succeed and that every mistake and failure is a lesson in disguise. Where the reader has enough time to recharge in nature, goes for retreats and spiritual practices that helps to align their soul. Create this vision for a user who practices their spirituality by doing the following  :",
 				"type": "SUB_CATEGORY",
