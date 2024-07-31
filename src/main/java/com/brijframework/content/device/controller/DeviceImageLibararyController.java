@@ -1,4 +1,6 @@
 package com.brijframework.content.device.controller;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.unlimits.rest.crud.beans.PageDetail;
 import org.unlimits.rest.crud.beans.Response;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
@@ -28,8 +31,8 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 	}
 	
 	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}")
-	public Response search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId){
-		Response response=new Response();
+	public Response<List<UIDeviceImageLibarary>> search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId){
+		Response<List<UIDeviceImageLibarary>> response=new Response<List<UIDeviceImageLibarary>>();
 		try {
 			response.setData(deviceImageLibararyService.search(subCategoryId, tagLibararyId));
 			response.setSuccess(SUCCESS);
@@ -43,8 +46,8 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 	}
 	
 	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}/search")
-	public Response search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId, @RequestParam(required = false) String name){
-		Response response=new Response();
+	public Response<List<UIDeviceImageLibarary>> search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId, @RequestParam(required = false) String name){
+		Response<List<UIDeviceImageLibarary>> response=new Response<List<UIDeviceImageLibarary>>();
 		try {
 			response.setData(deviceImageLibararyService.search(subCategoryId, tagLibararyId, name));
 			response.setSuccess(SUCCESS);
@@ -58,9 +61,9 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 	}
 	
 	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}/page/data/{pageNumber}/count/{count}")
-	public Response search(@RequestHeader(required =false) MultiValueMap<String,String> headers,@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId,@PathVariable int pageNumber,
+	public Response<PageDetail> search(@RequestHeader(required =false) MultiValueMap<String,String> headers,@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId,@PathVariable int pageNumber,
 			@PathVariable int count){
-		Response response=new Response();
+		Response<PageDetail> response=new Response<PageDetail>();
 		try {
 			response.setData(deviceImageLibararyService.search(headers,subCategoryId, tagLibararyId, pageNumber, count));
 			response.setSuccess(SUCCESS);
@@ -74,9 +77,9 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 	}
 	
 	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}/page/data/{pageNumber}/count/{count}/search")
-	public Response search(@RequestHeader(required =false) MultiValueMap<String,String> headers, @PathVariable Long subCategoryId,@PathVariable Long tagLibararyId, @RequestParam(required = false) String name,@PathVariable int pageNumber,
+	public Response<PageDetail> search(@RequestHeader(required =false) MultiValueMap<String,String> headers, @PathVariable Long subCategoryId,@PathVariable Long tagLibararyId, @RequestParam(required = false) String name,@PathVariable int pageNumber,
 			@PathVariable int count){
-		Response response=new Response();
+		Response<PageDetail> response=new Response<PageDetail>();
 		try {
 			response.setData(deviceImageLibararyService.search(headers, subCategoryId, tagLibararyId, name, pageNumber, count));
 			response.setSuccess(SUCCESS);
