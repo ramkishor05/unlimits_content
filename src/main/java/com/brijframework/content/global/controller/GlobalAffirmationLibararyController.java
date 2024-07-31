@@ -6,6 +6,7 @@ package com.brijframework.content.global.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.unlimits.rest.crud.controller.CommandController;
 import org.unlimits.rest.crud.controller.CrudController;
 import org.unlimits.rest.crud.service.CrudService;
 
@@ -26,6 +27,10 @@ public class GlobalAffirmationLibararyController implements CrudController<UIGlo
 	@Override
 	public CrudService<UIGlobalAffirmationLibarary, EOGlobalAffirmationLibarary, Long> getService() {
 		return globalAffirmationLibararyService;
+	}
+	
+	static {
+		CommandController.getEndpointMapping().put("add", "/add");
 	}
 
 }
