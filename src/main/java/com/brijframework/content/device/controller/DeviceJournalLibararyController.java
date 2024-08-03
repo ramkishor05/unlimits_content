@@ -1,4 +1,6 @@
 package com.brijframework.content.device.controller;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +26,8 @@ public class DeviceJournalLibararyController implements QueryController<UIDevice
 	}
 	
 	@GetMapping("/today")
-	public Response<Object> findTodayJournalLibarary(){
-		Response<Object> response=new Response<Object>();
+	public Response<List<UIDeviceJournalLibarary>> findTodayJournalLibarary(){
+		Response<List<UIDeviceJournalLibarary>> response=new Response<List<UIDeviceJournalLibarary>>();
 		try {
 			response.setData(deviceJournalLibararyService.findTodayJournalLibarary());
 			response.setSuccess(SUCCESS);

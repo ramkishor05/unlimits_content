@@ -1,5 +1,19 @@
 package com.brijframework.content.global.service.impl;
 
+import static com.brijframework.content.constants.ClientConstants.ID;
+import static com.brijframework.content.constants.ClientConstants.NAME;
+import static com.brijframework.content.constants.ClientConstants.RECORD_STATE;
+import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY;
+import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY_ID;
+import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY_NAME;
+import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY_REL_ID;
+import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY_REL_NAME;
+import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY;
+import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_ID;
+import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_NAME;
+import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_REL_ID;
+import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_REL_NAME;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,34 +45,6 @@ import jakarta.persistence.criteria.Subquery;
 
 @Service
 public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLibarary, EOGlobalTagLibarary, Long> implements GlobalTagLibararyService {
-	
-	private static final String PERCENTAGE = "%";
-
-	private static final String ID = "id";
-
-	private static final String SUB_CATEGORY = "subCategory";
-
-	private static final String NAME = "name";
-
-	private static final String TAG_LIBARARY = "tagLibarary";
-
-	private static final String SUB_CATEGORY_NAME2 = "subCategoryName";
-
-	private static final String SUB_CATEGORY_ID2 = "subCategory.id";
-
-	private static final String SUB_CATEGORY_ID = "subCategoryId";
-
-	private static final String TAG_LIBARARY_NAME2 = "tagLibarary.name";
-
-	private static final String TAG_LIBARARY_NAME = "tagLibararyName";
-
-	private static final String TAG_LIBARARY_ID2 = "tagLibarary.id";
-
-	private static final String TAG_LIBARARY_ID = "tagLibararyId";
-
-	private static final String SUB_CATEGORY_NAME = "subCategory.name";
-
-	private static final String RECORD_STATE = "recordState";
 
 	@Autowired
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
@@ -119,14 +105,14 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 		};
  
 		addCustomPredicate(SUB_CATEGORY_ID, subCategoryId);
-		addCustomPredicate(SUB_CATEGORY_ID2, subCategoryId);
-		addCustomPredicate(SUB_CATEGORY_NAME2, subCategoryName);
+		addCustomPredicate(SUB_CATEGORY_REL_ID, subCategoryId);
+		addCustomPredicate(SUB_CATEGORY_REL_NAME, subCategoryName);
 		addCustomPredicate(SUB_CATEGORY_NAME, subCategoryName);
 		
 		addCustomPredicate(TAG_LIBARARY_ID, tagLibararyId);
-		addCustomPredicate(TAG_LIBARARY_ID2, tagLibararyId);
+		addCustomPredicate(TAG_LIBARARY_REL_ID, tagLibararyId);
 		addCustomPredicate(TAG_LIBARARY_NAME, tagLibararyName);
-		addCustomPredicate(TAG_LIBARARY_NAME2, tagLibararyName);
+		addCustomPredicate(TAG_LIBARARY_REL_NAME, tagLibararyName);
 	}
 	
 	@Override
