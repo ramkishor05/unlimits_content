@@ -1,13 +1,16 @@
 package com.brijframework.content.device.controller;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.unlimits.rest.crud.beans.Response;
+import org.springframework.web.context.request.WebRequest;
+import org.unlimits.rest.crud.controller.CQRSController;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
 
@@ -27,66 +30,10 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 		return deviceImageLibararyService;
 	}
 	
-	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}")
-	public Response search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId){
-		Response response=new Response();
-		try {
-			response.setData(deviceImageLibararyService.search(subCategoryId, tagLibararyId));
-			response.setSuccess(SUCCESS);
-			response.setMessage(SUCCESSFULLY_PROCCEED);
-			return response;
-		}catch (Exception e) {
-			response.setSuccess(FAILED);
-			response.setMessage(e.getMessage());
-			return response;
-		}
+	@GetMapping("/groupby/folder")
+	public Map<String, List<UIDeviceImageLibarary>> getImagesGroupbyFolder(@RequestHeader(required =false) MultiValueMap<String,String> headers, WebRequest webRequest){
+		Map<String, Object> filters = CQRSController.getfilters(webRequest);
+		return deviceImageLibararyService.findAll(headers, filters).stream().collect(Collectors.groupingBy(UIDeviceImageLibarary::getType));
 	}
-	
-	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}/search")
-	public Response search(@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId, @RequestParam(required = false) String name){
-		Response response=new Response();
-		try {
-			response.setData(deviceImageLibararyService.search(subCategoryId, tagLibararyId, name));
-			response.setSuccess(SUCCESS);
-			response.setMessage(SUCCESSFULLY_PROCCEED);
-			return response;
-		}catch (Exception e) {
-			response.setSuccess(FAILED);
-			response.setMessage(e.getMessage());
-			return response;
-		}
-	}
-	
-	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}/page/data/{pageNumber}/count/{count}")
-	public Response search(@RequestHeader(required =false) MultiValueMap<String,String> headers,@PathVariable Long subCategoryId,@PathVariable Long tagLibararyId,@PathVariable int pageNumber,
-			@PathVariable int count){
-		Response response=new Response();
-		try {
-			response.setData(deviceImageLibararyService.search(headers,subCategoryId, tagLibararyId, pageNumber, count));
-			response.setSuccess(SUCCESS);
-			response.setMessage(SUCCESSFULLY_PROCCEED);
-			return response;
-		}catch (Exception e) {
-			response.setSuccess(FAILED);
-			response.setMessage(e.getMessage());
-			return response;
-		}
-	}
-	
-	@GetMapping("/subcategory/{subCategoryId}/taglibarary/{tagLibararyId}/page/data/{pageNumber}/count/{count}/search")
-	public Response search(@RequestHeader(required =false) MultiValueMap<String,String> headers, @PathVariable Long subCategoryId,@PathVariable Long tagLibararyId, @RequestParam(required = false) String name,@PathVariable int pageNumber,
-			@PathVariable int count){
-		Response response=new Response();
-		try {
-			response.setData(deviceImageLibararyService.search(headers, subCategoryId, tagLibararyId, name, pageNumber, count));
-			response.setSuccess(SUCCESS);
-			response.setMessage(SUCCESSFULLY_PROCCEED);
-			return response;
-		}catch (Exception e) {
-			response.setSuccess(FAILED);
-			response.setMessage(e.getMessage());
-			return response;
-		}
-	}
-	
+
 }

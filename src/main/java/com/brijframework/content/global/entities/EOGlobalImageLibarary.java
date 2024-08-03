@@ -33,10 +33,6 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 	@JoinColumn(name="SUB_CATEGORY_ID")
 	@ManyToOne(optional = true)
 	public EOGlobalSubCategory subCategory;
-	
-	@JoinColumn(name="TAG_LIBARARY_ID", nullable = true)
-	@ManyToOne(optional = true)
-	public EOGlobalTagLibarary tagLibarary;
 
 	public Long getResourceId() {
 		return resourceId;
@@ -62,12 +58,5 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 		this.subCategory = subCategory;
 	}
 
-	public EOGlobalTagLibarary getTagLibarary() {
-		return tagLibarary;
-	}
-
-	public void setTagLibarary(EOGlobalTagLibarary tagLibarary) {
-		this.tagLibarary = tagLibarary;
-	}
 
 }

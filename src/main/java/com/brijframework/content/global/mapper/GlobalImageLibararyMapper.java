@@ -14,11 +14,9 @@ public interface GlobalImageLibararyMapper  extends GenericMapper<EOGlobalImageL
 
 	@Override
 	@Mapping(source = "subCategoryId", target = "subCategory.id")
-	@Mapping(source = "tagLibararyId", target = "tagLibarary.id")
 	EOGlobalImageLibarary mapToDAO(UIGlobalImageLibarary uiGlobalCategoryImage);
 	
 	@Override
 	@Mapping(source = "subCategory.id", target = "subCategoryId")
-	@Mapping(source = "tagLibarary.id", target = "tagLibararyId")
 	UIGlobalImageLibarary mapToDTO(EOGlobalImageLibarary eoGlobalCategoryImage);
 }

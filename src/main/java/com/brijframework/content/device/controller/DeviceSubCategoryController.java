@@ -33,8 +33,8 @@ public class DeviceSubCategoryController implements QueryController<UIDeviceSubC
 	}
 	
 	@GetMapping("/findby/maincategory/{mainCategoryId}")
-	public Response getCategoryListByCategoryId(@PathVariable("mainCategoryId") Long mainCategoryId) {
-		Response response=new Response();
+	public Response<Object> getCategoryListByCategoryId(@PathVariable("mainCategoryId") Long mainCategoryId) {
+		Response<Object> response=new Response<Object>();
 		try {
 			response.setData(deviceSubCategoryService.findAllByMainCategoryId(mainCategoryId));
 			response.setSuccess(SUCCESS);
@@ -48,12 +48,12 @@ public class DeviceSubCategoryController implements QueryController<UIDeviceSubC
 	}
 	
 	@GetMapping("/findAll")
-	public Response findAll(@RequestHeader(required =false)  MultiValueMap<String,String> headers, WebRequest webRequest){
+	public Response<Object> findAll(@RequestHeader(required =false)  MultiValueMap<String,String> headers, WebRequest webRequest){
 		Map<String, Object> filters=new HashMap<String, Object>();
 		webRequest.getParameterMap().forEach((key,values)->{
 			filters.put(key, values[0]);
 		});
-		Response response=new Response();
+		Response<Object> response=new Response<>();
 		try {
 			response.setData(deviceSubCategoryService.findAll(headers, filters));
 			response.setSuccess(SUCCESS);

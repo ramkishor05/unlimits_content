@@ -25,8 +25,8 @@ public class DeviceTagLibararyController implements QueryController<UIDeviceTagL
 	}
 	
 	@GetMapping("/findby/subcategory/{subcategoryId}")
-	public Response getTagLibararyList(@PathVariable("subcategoryId") Long subCategoryId) {
-		Response response=new Response();
+	public Response<Object> getTagLibararyList(@PathVariable("subcategoryId") Long subCategoryId) {
+		Response<Object> response=new Response<Object>();
 		try {
 			response.setData(deviceTagLibararyService.findAllBySubCategoryId(subCategoryId));
 			response.setSuccess(SUCCESS);

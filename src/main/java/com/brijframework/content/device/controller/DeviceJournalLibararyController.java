@@ -24,8 +24,8 @@ public class DeviceJournalLibararyController implements QueryController<UIDevice
 	}
 	
 	@GetMapping("/today")
-	public Response findTodayJournalLibarary(){
-		Response response=new Response();
+	public Response<Object> findTodayJournalLibarary(){
+		Response<Object> response=new Response<Object>();
 		try {
 			response.setData(deviceJournalLibararyService.findTodayJournalLibarary());
 			response.setSuccess(SUCCESS);

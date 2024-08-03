@@ -10,8 +10,6 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 	
 	private Long subCategoryId;
 	
-	private Long tagLibararyId;
-
 	private UIResource fileResource;
 
 	private String imageUrl;
@@ -24,14 +22,6 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
-	}
-
-	public Long getTagLibararyId() {
-		return tagLibararyId;
-	}
-
-	public void setTagLibararyId(Long tagLibararyId) {
-		this.tagLibararyId = tagLibararyId;
 	}
 
 	public UIResource getFileResource() {

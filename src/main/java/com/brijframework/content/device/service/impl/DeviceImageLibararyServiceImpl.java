@@ -196,6 +196,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		filters.put("name", name);
 		Sort by = Sort.by("name");
 		PageDetail fetchPageObject = fetchPageObject(headers,pageNumber, count, by, filters);
+		
 		if(fetchPageObject!=null && fetchPageObject.getElements().size()>0) {
 			return fetchPageObject;
 		}
@@ -228,4 +229,6 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		}
 		return null;
 	}
+	
+	
 }
