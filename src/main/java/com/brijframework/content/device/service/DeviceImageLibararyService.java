@@ -11,6 +11,8 @@ import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 
 
 public interface DeviceImageLibararyService extends QueryService<UIDeviceImageLibarary, EOGlobalImageLibarary, Long>{
+	
+	List<String> getTypes(Long subCategoryId);
 
 	List<UIDeviceImageLibarary> search(Long subCategoryId, Long tagLibararyId, String name);
 	

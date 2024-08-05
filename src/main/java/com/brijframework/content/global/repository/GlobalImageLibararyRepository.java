@@ -29,4 +29,7 @@ public interface GlobalImageLibararyRepository extends CustomRepository<EOGlobal
 	
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI WHERE GCI.SUB_CATEGORY_ID=?1 AND GCI.TAG_LIBARARY_ID=?2 and GCI.NAME LIKE (%?3%) ORDER BY GCI.NAME")
 	List<EOGlobalImageLibarary> filter(Long subCategoryId, Long tagLibararyId, String name);
+
+	@Query(nativeQuery = true, value="Select DISTINCT GCI.TYPE from EOGLOBAL_IMAGE_LIBARARY GCI WHERE GCI.SUB_CATEGORY_ID=?1 and GCI.TYPE is not null")
+	List<String> findTypeBySubCategoryId(Long subCategoryId);
 }

@@ -8,6 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.unlimits.rest.crud.controller.CQRSController;
@@ -28,6 +29,11 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 	@Override
 	public QueryService<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> getService() {
 		return deviceImageLibararyService;
+	}
+
+	@GetMapping("/types")
+	public List<String> getTypes(@RequestParam("subCategoryId")Long subCategoryId,  @RequestHeader(required =false) MultiValueMap<String,String> headers, WebRequest webRequest){
+		return deviceImageLibararyService.getTypes(subCategoryId);
 	}
 	
 	@GetMapping("/groupby/folder")

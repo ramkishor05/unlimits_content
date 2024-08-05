@@ -12,8 +12,6 @@ public class UIDeviceImageLibarary extends UIDeviceItem implements Serializable 
 
 	private Long subCategoryId;
 
-	private Long tagLibararyId;
-
 	public String imageUrl;
 
 	public Long getSubCategoryId() {
@@ -22,14 +20,6 @@ public class UIDeviceImageLibarary extends UIDeviceItem implements Serializable 
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
-	}
-
-	public Long getTagLibararyId() {
-		return tagLibararyId;
-	}
-
-	public void setTagLibararyId(Long tagLibararyId) {
-		this.tagLibararyId = tagLibararyId;
 	}
 
 	public String getImageUrl() {
