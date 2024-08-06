@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
+import org.unlimits.rest.crud.beans.Response;
 import org.unlimits.rest.crud.controller.CQRSController;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
@@ -32,14 +33,35 @@ public class DeviceImageLibararyController implements QueryController<UIDeviceIm
 	}
 
 	@GetMapping("/types")
-	public List<String> getTypes(@RequestParam("subCategoryId")Long subCategoryId,  @RequestHeader(required =false) MultiValueMap<String,String> headers, WebRequest webRequest){
-		return deviceImageLibararyService.getTypes(subCategoryId);
+	public Response<List<String>> getTypes(@RequestParam("subCategoryId")Long subCategoryId,  @RequestHeader(required =false) MultiValueMap<String,String> headers, WebRequest webRequest){
+		Response<List<String>> response=new Response<List<String>>();
+		try {
+			response.setData(deviceImageLibararyService.getTypes(subCategoryId));
+			response.setSuccess(SUCCESS);
+			response.setMessage(SUCCESSFULLY_PROCCEED);
+			return response;
+		}catch (Exception e) {
+			response.setSuccess(FAILED);
+			response.setMessage(e.getMessage());
+			return response;
+		}
 	}
 	
 	@GetMapping("/groupby/folder")
-	public Map<String, List<UIDeviceImageLibarary>> getImagesGroupbyFolder(@RequestHeader(required =false) MultiValueMap<String,String> headers, WebRequest webRequest){
+	public Response<Map<String, List<UIDeviceImageLibarary>>> getImagesGroupbyFolder(@RequestHeader(required =false) MultiValueMap<String,String> headers, WebRequest webRequest){
 		Map<String, Object> filters = CQRSController.getfilters(webRequest);
-		return deviceImageLibararyService.findAll(headers, filters).stream().collect(Collectors.groupingBy(UIDeviceImageLibarary::getType));
+	
+		Response<Map<String, List<UIDeviceImageLibarary>>> response=new Response<Map<String, List<UIDeviceImageLibarary>>>();
+		try {
+			response.setData(deviceImageLibararyService.findAll(headers, filters).stream().collect(Collectors.groupingBy(UIDeviceImageLibarary::getType)));
+			response.setSuccess(SUCCESS);
+			response.setMessage(SUCCESSFULLY_PROCCEED);
+			return response;
+		}catch (Exception e) {
+			response.setSuccess(FAILED);
+			response.setMessage(e.getMessage());
+			return response;
+		}
 	}
 
 }

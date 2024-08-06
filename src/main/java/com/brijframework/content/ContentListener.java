@@ -17,11 +17,13 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.brijframework.content.constants.RecordStatus;
+import com.brijframework.content.global.entities.EOGlobalExampleLibarary;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalPromptLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.entities.EOGlobalTenure;
+import com.brijframework.content.global.repository.GlobalExampleLibararyRepository;
 import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 import com.brijframework.content.global.repository.GlobalPromptLibararyRepository;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
@@ -53,6 +55,9 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 
 	@Autowired
 	private GlobalImageLibararyService globalImageLibararyService;
+	
+	@Autowired
+	private GlobalExampleLibararyRepository globalExampleLibararyRepository;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
@@ -101,6 +106,21 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 							.saveAndFlush(findGlobalTagItem);
 					eoGlobalTagItem.setId(eoGlobalTagItemSave.getId());
 				});
+				
+				List<EOGlobalExampleLibarary> eoGlobalExampleItemJson = instance.getAll(EOGlobalExampleLibarary.class);
+
+				eoGlobalExampleItemJson.forEach(eoGlobalExampleItem -> {
+					EOGlobalExampleLibarary findGlobalExampleItem = globalExampleLibararyRepository
+							.findByIdenNo(eoGlobalExampleItem.getIdenNo()).orElse(eoGlobalExampleItem);
+					BeanUtils.copyProperties(eoGlobalExampleItem, findGlobalExampleItem, "id");
+					findGlobalExampleItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
+					findGlobalExampleItem.getExampleItems().forEach(exampleItem->{
+						exampleItem.setExampleLibarary(eoGlobalExampleItem);
+					});
+					EOGlobalExampleLibarary eoGlobalExampleItemSave = globalExampleLibararyRepository
+							.saveAndFlush(findGlobalExampleItem);
+					eoGlobalExampleItem.setId(eoGlobalExampleItemSave.getId());
+				});
 
 				List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
@@ -125,6 +145,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 					eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
 				});
 
+				
 				
 				try {
 					globalImageLibararyService.init();

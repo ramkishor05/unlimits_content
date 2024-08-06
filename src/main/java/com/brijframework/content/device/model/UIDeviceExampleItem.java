@@ -2,24 +2,24 @@ package com.brijframework.content.device.model;
 
 public class UIDeviceExampleItem extends UIDeviceItem{
 
-	private UIDeviceImageLibarary image;
+	private UIDeviceImageLibarary imageLibarary;
 	
-	private UIDeviceImageLibarary tage;
+	private UIDeviceTagLibarary tagLibarary;
 
-	public UIDeviceImageLibarary getImage() {
-		return image;
+	public UIDeviceImageLibarary getImageLibarary() {
+		return imageLibarary;
 	}
 
-	public void setImage(UIDeviceImageLibarary image) {
-		this.image = image;
+	public void setImageLibarary(UIDeviceImageLibarary imageLibarary) {
+		this.imageLibarary = imageLibarary;
 	}
 
-	public UIDeviceImageLibarary getTage() {
-		return tage;
+	public UIDeviceTagLibarary getTagLibarary() {
+		return tagLibarary;
 	}
 
-	public void setTage(UIDeviceImageLibarary tage) {
-		this.tage = tage;
+	public void setTagLibarary(UIDeviceTagLibarary tagLibarary) {
+		this.tagLibarary = tagLibarary;
 	}
 	
 }

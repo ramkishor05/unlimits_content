@@ -1,0 +1,22 @@
+{
+	"id": "Global_Portal_ImageLibarary_Wealth",
+	"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+	"orderSequence": 1.2,
+	"objects": [
+		{
+			"id": "Global_Portal_ImageLibarary_Work_Wealth_finance_shutterstock_413268187",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"orderSequence": 0.0,
+				"subCategory": "LK@Global_Portal_SubCategory_Work_Wealth",
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ImageLibarary_Work_Wealth_finance_shutterstock_413268187",
+				"name": "shutterstock_413268187",
+				"imageUrl": "",
+				"type": "finance"
+			},
+			"relationship": {}
+		}
+	]
+}

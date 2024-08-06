@@ -4,6 +4,7 @@ import static com.brijframework.content.constants.Constants.*;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -20,7 +21,7 @@ public class EOGlobalExampleLibarary extends EOGlobalItem{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "exampleLibarary")
+	@OneToMany(mappedBy = "exampleLibarary", cascade = CascadeType.ALL)
 	private List<EOGlobalExampleItem> exampleItems;
 
 	public List<EOGlobalExampleItem> getExampleItems() {

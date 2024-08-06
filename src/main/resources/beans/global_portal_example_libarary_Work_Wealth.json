@@ -1,0 +1,72 @@
+{
+	"id": "Global_Portal_ExampleLibarary_Wealth",
+	"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
+	"orderSequence": 1.3,
+	"objects": [
+		{
+			"id": "Global_Portal_ExampleLibarary_Work_Wealth_With_Tags",
+			"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
+			"name": "Global_Portal_ExampleLibarary",
+			"properties": {
+				"orderSequence": 0.0,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ExampleLibarary_Work_Wealth_With_Tags",
+				"name": "Example with tags",
+				"type": "EXAMPLE",
+				"exampleItems": [
+					{
+					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+					}
+				]
+			},
+			"relationship": {
+				
+			}
+		},
+		{
+			"id": "Global_Portal_ExampleLibarary_Work_Wealth_With_Images",
+			"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
+			"name": "Global_Portal_ExampleLibarary",
+			"properties": {
+				"orderSequence": 0.0,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ExampleLibarary_Work_Wealth_With_Images",
+				"name": "Example with images",
+				"type": "EXAMPLE",
+				"exampleItems": [
+					{
+					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+					},
+					{
+					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Write_a_bestselling_novel"
+					}
+				]
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ExampleLibarary_Work_Wealth_With_ImagesTags",
+			"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
+			"name": "Global_Portal_ExampleLibarary",
+			"properties": {
+				"orderSequence": 0.0,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ExampleLibarary_Work_Wealth_With_ImagesTags",
+				"name": "Example with images and tags",
+				"type": "EXAMPLE",
+				"exampleItems": [
+					{
+					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+					},
+					{
+					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Write_a_bestselling_novel"
+					},
+					{
+					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Become_a_life_coach"
+					}
+				]
+			},
+			"relationship": {}
+		}
+	]
+}

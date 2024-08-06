@@ -13,7 +13,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Create_a_wellness_blog",
 				"name": "Create a wellness blog",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -27,7 +27,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Write_a_bestselling_novel",
 				"name": "Write a best-selling novel",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -41,7 +41,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Become_a_life_coach",
 				"name": "Become a life coach",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -55,7 +55,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Become_a_venture_capitalist",
 				"name": "Become a venture capitalist",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -69,7 +69,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Revolutionize_the_renewable_energy_sector",
 				"name": "Revolutionize the renewable energy sector",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -83,7 +83,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Lead_a_Fortunate_500_company",
 				"name": "Lead a Fortunate 500 company",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -97,7 +97,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Invent_a_lifechanging_medicine",
 				"name": "Invent a life-changing medicine",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -111,7 +111,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Own_a_cafe",
 				"name": "Own a cafe",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -125,7 +125,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Establish_a_renowned_art_gallery",
 				"name": "Establish a renowned art gallery",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -139,7 +139,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Start_a_global_health_NGO",
 				"name": "Start a global health NGO",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -153,7 +153,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Study_in_a_Ivy_League_University",
 				"name": "Study in a Ivy League University",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -167,7 +167,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Develop_an_awardwinning_documentary",
 				"name": "Develop an award-winning documentary",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -181,7 +181,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Become_a_personal_trainer",
 				"name": "Become a personal trainer",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -195,7 +195,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Study_in_an_innovative_fitness_program",
 				"name": "Study in an innovative fitness program",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -209,7 +209,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Own_a_factory",
 				"name": "Own a factory",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -223,7 +223,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Create_an_innovative_fitness_program",
 				"name": "Create an innovative fitness program",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -237,7 +237,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Become_a_bestselling_author",
 				"name": "Become a best-selling author",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -251,7 +251,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Build_a_chain_of_ecofriendly_resorts",
 				"name": "Build a chain of eco-friendly resorts",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -265,7 +265,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Have_a_global_operation",
 				"name": "Have a global operation",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -279,7 +279,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Become_a_thought_leader",
 				"name": "Become a thought leader",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -293,7 +293,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Start_a_business",
 				"name": "Start a business",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -307,7 +307,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Create_an_ecommerce_store",
 				"name": "Create an e-commerce store",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -321,7 +321,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Get_a_PhD",
 				"name": "Get a PhD",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -335,7 +335,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Get_a_scholarship",
 				"name": "Get a scholarship",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		},
@@ -349,7 +349,7 @@
 				"color": "#eb844c",
 				"idenNo": "Global_Portal_TagLibarary_Self_Self_Growth_Create_a_travel_agency",
 				"name": "Create a travel agency",
-				"type": "VISUALISE_WITH_WORDS"
+				"type": "WORDS"
 			},
 			"relationship": {}
 		}

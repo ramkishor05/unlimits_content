@@ -87,11 +87,7 @@ public class DeviceExampleLibararyServiceImpl extends QueryServiceImpl<UIDeviceE
 		addCustomPredicate("subCategory.name", subCategoryName);
 	}
 	
-	private List<UIDeviceExampleLibarary> findByPexels(Long subCategoryId, Long tagLibararyId, String name) {
-		EOGlobalTagLibarary eoGlobalTagLibarary = globalTagLibararyRepository.getReferenceById(tagLibararyId);
-		if(eoGlobalTagLibarary!=null) {
-			name=eoGlobalTagLibarary.getSubCategory().getName()+" "+eoGlobalTagLibarary.getName();
-		}
+	private List<UIDeviceExampleLibarary> findByPexels(String name) {
 		List<UIDeviceExampleLibarary>deviceExampleLibararies=new ArrayList<UIDeviceExampleLibarary>();
 		try {
 			pexelMediaRepository.getAllFiles(name).forEach(photo->{ 
