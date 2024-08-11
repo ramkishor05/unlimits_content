@@ -5,19 +5,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
 
-import com.brijframework.content.device.model.UIDeviceExampleLibarary;
+import com.brijframework.content.device.model.UIDeviceExampleModel;
 import com.brijframework.content.device.service.DeviceExampleLibararyService;
 import com.brijframework.content.global.entities.EOGlobalExampleLibarary;
 
 @RestController
 @RequestMapping("/api/device/example/libarary")
-public class DeviceExampleLibararyController implements QueryController<UIDeviceExampleLibarary, EOGlobalExampleLibarary, Long>{
+public class DeviceExampleLibararyController implements QueryController<UIDeviceExampleModel, EOGlobalExampleLibarary, Long>{
 	
 	@Autowired
 	private DeviceExampleLibararyService deviceExampleLibararyService;
 
 	@Override
-	public QueryService<UIDeviceExampleLibarary, EOGlobalExampleLibarary, Long> getService() {
+	public QueryService<UIDeviceExampleModel, EOGlobalExampleLibarary, Long> getService() {
 		return deviceExampleLibararyService;
 	}
 

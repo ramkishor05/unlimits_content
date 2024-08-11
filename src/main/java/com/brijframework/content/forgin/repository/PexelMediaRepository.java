@@ -16,6 +16,6 @@ public interface PexelMediaRepository {
 	public List<FileContent> getAllFiles(@PathVariable String fileId);
 	
 	@GetMapping(value = "/api/pexel/media/files/page/data/{pageNumber}/count/{count}/search")
-	public PageDetail getPageDetail(@RequestParam String name, @PathVariable int pageNumber,
+	public PageDetail<FileContent> getPageDetail(@RequestParam String name, @PathVariable int pageNumber,
 			@PathVariable int count);
 }

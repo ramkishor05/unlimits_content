@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	
 	@Autowired
 	private GlobalPromptLibararyMapper globalPromptLibararyMapper;
+	
 	
 	{
 		CustomPredicate<EOGlobalPromptLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
@@ -82,6 +84,20 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	public GenericMapper<EOGlobalPromptLibarary, UIGlobalPromptLibarary> getMapper() {
 		return globalPromptLibararyMapper;
 	}
+	
+	@Override
+	public  void init(List<EOGlobalPromptLibarary> eoGlobalPromptJson) {
+		eoGlobalPromptJson.forEach(eoGlobalPrompt -> {
+			EOGlobalPromptLibarary findGlobalPrompt = globalPromptLibararyRepository
+					.findByIdenNo(eoGlobalPrompt.getIdenNo()).orElse(eoGlobalPrompt);
+			BeanUtils.copyProperties(eoGlobalPrompt, findGlobalPrompt, "id");
+			findGlobalPrompt.setRecordState(RecordStatus.ACTIVETED.getStatus());
+			EOGlobalPromptLibarary eoGlobalPromptSave = globalPromptLibararyRepository
+					.saveAndFlush(findGlobalPrompt);
+			eoGlobalPrompt.setId(eoGlobalPromptSave.getId());
+		});
+	}
+	
 
 	@Override
 	public List<UIGlobalPromptLibarary> findAllByType(String type, MultiValueMap<String, String> headers) {

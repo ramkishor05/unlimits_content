@@ -7,17 +7,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
-import com.brijframework.content.device.model.UIDeviceImageLibarary;
+import com.brijframework.content.device.model.UIDeviceImageModel;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_GLOBAL_PACKAGE_IMPL)
-public interface DeviceImageLibararyMapper  extends GenericMapper<EOGlobalImageLibarary, UIDeviceImageLibarary>{
+public interface DeviceImageLibararyMapper  extends GenericMapper<EOGlobalImageLibarary, UIDeviceImageModel>{
 
 	@Override
 	@Mapping(source = "subCategory.id", target = "subCategoryId")
-	UIDeviceImageLibarary mapToDTO(EOGlobalImageLibarary eoGlobalTagGroup);
+	UIDeviceImageModel mapToDTO(EOGlobalImageLibarary eoGlobalTagGroup);
 	
 	@Override
 	@Mapping(target = "subCategory.id", source = "subCategoryId")
-	EOGlobalImageLibarary mapToDAO(UIDeviceImageLibarary uiDeviceMainTag);
+	EOGlobalImageLibarary mapToDAO(UIDeviceImageModel uiDeviceMainTag);
 }

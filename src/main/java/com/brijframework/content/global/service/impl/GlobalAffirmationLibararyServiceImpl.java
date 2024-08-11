@@ -21,7 +21,7 @@ import com.brijframework.content.global.mapper.GlobalAffirmationLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalAffirmationLibarary;
 import com.brijframework.content.global.repository.GlobalAffirmationLibararyRepository;
 import com.brijframework.content.global.service.GlobalAffirmationLibararyService;
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 @Service
 public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLibararyService {
@@ -75,14 +75,14 @@ public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLi
 	}
 
 	private void saveResource(UIGlobalAffirmationLibarary data, EOGlobalAffirmationLibarary find) {
-		UIResource resource = data.getFileResource();
+		UIResourceModel resource = data.getFileResource();
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
 		if(resource!=null) {
 			resource.setIncludeId(true);
 			resource.setId(find!=null? find.getResourceId(): null);
 			resource.setFolderName(AFFIRMATION);
-			UIResource resourceFile =resourceClient.add(resource);
+			UIResourceModel resourceFile =resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
 			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {

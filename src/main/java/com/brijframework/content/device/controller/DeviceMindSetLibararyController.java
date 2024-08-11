@@ -4,14 +4,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.unlimits.rest.crud.controller.QueryController;
 
-import com.brijframework.content.device.model.UIDeviceMindSetLibarary;
+import com.brijframework.content.device.model.UIDeviceMindSetLibararyModel;
 import com.brijframework.content.device.service.DeviceMindSetLibararyService;
 import com.brijframework.content.global.entities.EOGlobalMindSetLibarary;
 
 
 @RestController
 @RequestMapping("/api/device/mindset/libarary")
-public class DeviceMindSetLibararyController implements QueryController<UIDeviceMindSetLibarary, EOGlobalMindSetLibarary, Long>{
+public class DeviceMindSetLibararyController implements QueryController<UIDeviceMindSetLibararyModel, EOGlobalMindSetLibarary, Long>{
 
 	@Autowired
 	private DeviceMindSetLibararyService deviceMindSetLibararyService;

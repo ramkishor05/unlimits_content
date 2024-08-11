@@ -6,9 +6,9 @@ import org.mapstruct.Mapper;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
 import com.brijframework.content.resource.entities.EOResource;
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_RESOURCE_PACKAGE_IMPL)
-public interface ResourceMapper  extends GenericMapper<EOResource, UIResource>{
+public interface ResourceMapper  extends GenericMapper<EOResource, UIResourceModel>{
 
 }

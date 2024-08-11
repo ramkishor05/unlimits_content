@@ -10,7 +10,12 @@ import com.brijframework.content.util.CommanUtil;
 /**
  * @author omnie
  */
-public class UIResource extends UIModel{
+public class UIResourceModel extends UIModel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Boolean includeId;
 

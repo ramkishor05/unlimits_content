@@ -1,20 +1,23 @@
 package com.brijframework.content.global.model;
 
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 public class UIGlobalReProgramLibarary extends UIGlobalItem {
-
-	private UIResource fileResource;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private UIResourceModel fileResource;
 
 	private String musicUrl;
 
 	private String posterUrl;
 
-	public UIResource getFileResource() {
+	public UIResourceModel getFileResource() {
 		return fileResource;
 	}
 
-	public void setFileResource(UIResource fileResource) {
+	public void setFileResource(UIResourceModel fileResource) {
 		this.fileResource = fileResource;
 	}
 

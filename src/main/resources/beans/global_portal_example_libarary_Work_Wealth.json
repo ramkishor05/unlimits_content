@@ -8,37 +8,94 @@
 			"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
 			"name": "Global_Portal_ExampleLibarary",
 			"properties": {
-				"orderSequence": 0.0,
+				"orderSequence": 1.0,
 				"color": "#4cbbae",
 				"idenNo": "Global_Portal_ExampleLibarary_Work_Wealth_With_Tags",
-				"name": "Example with tags",
+				"name": "Hiren Unlimits",
 				"type": "EXAMPLE",
+				"profileName": "Hiren, Dhamescha",
+				"profilePictureURL": "/resource/visualaize/examples/hiren/profilelog.webp",
+				"profileAge": "25",
+				"profilePosition": "CEO",
+				"profileOrganization": "Unlimits",
+				"posterUrl": "/resource/visualaize/examples/hiren/profilelog.webp",
+				"subCategory": "LK@Global_Portal_SubCategory_Work_Wealth",
 				"exampleItems": [
 					{
-					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Five",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Ten",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+					}
+				],
+				"visualizeItems":[
+					{
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"visualizeRequest": "This is test request for one year",
+						"visualizeResponse": "This is test response for one year"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Five",
+						"visualizeRequest": "This is test request for five years",
+						"visualizeResponse": "This is test response for five years"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Ten",
+						"visualizeRequest": "This is test request for ten years",
+						"visualizeResponse": "This is test response for ten years"
 					}
 				]
 			},
-			"relationship": {
-				
-			}
+			"relationship": {}
 		},
 		{
 			"id": "Global_Portal_ExampleLibarary_Work_Wealth_With_Images",
 			"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
 			"name": "Global_Portal_ExampleLibarary",
 			"properties": {
-				"orderSequence": 0.0,
+				"orderSequence": 2.0,
 				"color": "#4cbbae",
 				"idenNo": "Global_Portal_ExampleLibarary_Work_Wealth_With_Images",
-				"name": "Example with images",
+				"name": "Ram Unlimits",
 				"type": "EXAMPLE",
+				"profileName": "Ram, Kishor",
+				"profilePictureURL": "/resource/visualaize/examples/ramkishor/profilelog.webp",
+				"profileAge": "30",
+				"profilePosition": "Director",
+				"profileOrganization": "Unlimits",
+				"posterUrl": "/resource/visualaize/examples/ramkishor/profilelog.webp",
+				"subCategory": "LK@Global_Portal_SubCategory_Work_Wealth",
 				"exampleItems": [
 					{
-					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
 					},
 					{
-					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Write_a_bestselling_novel"
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Write_a_bestselling_novel"
+					}
+				],
+				"visualizeItems":[
+					{
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"visualizeRequest": "This is test request for one year",
+						"visualizeResponse": "This is test response for one year"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Five",
+						"visualizeRequest": "This is test request for five years",
+						"visualizeResponse": "This is test response for five years"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Ten",
+						"visualizeRequest": "This is test request for ten years",
+						"visualizeResponse": "This is test response for ten years"
 					}
 				]
 			},
@@ -49,20 +106,47 @@
 			"type": "com.brijframework.content.global.entities.EOGlobalExampleLibarary",
 			"name": "Global_Portal_ExampleLibarary",
 			"properties": {
-				"orderSequence": 0.0,
+				"orderSequence": 3.0,
 				"color": "#4cbbae",
 				"idenNo": "Global_Portal_ExampleLibarary_Work_Wealth_With_ImagesTags",
-				"name": "Example with images and tags",
+				"name": "Suman Unlimits",
 				"type": "EXAMPLE",
+				"profileName": "Suman, Kumar",
+				"profilePictureURL": "/resource/visualaize/examples/suman/profilelog.webp",
+				"profileAge": "27",
+				"profilePosition": "Tester",
+				"profileOrganization": "Unlimits",
+				"posterUrl": "/resource/visualaize/examples/suman/profilelog.webp",
+				"subCategory": "LK@Global_Portal_SubCategory_Work_Wealth",
 				"exampleItems": [
 					{
-					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Create_a_wellness_blog"
 					},
 					{
-					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Write_a_bestselling_novel"
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Write_a_bestselling_novel"
 					},
 					{
-					  "tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Become_a_life_coach"
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"tagLibarary": "LK@Global_Portal_TagLibarary_Work_Wealth_Become_a_life_coach"
+					}
+				],
+				"visualizeItems":[
+					{
+						"tenure": "LK@Global_Portal_Tenure_One",
+						"visualizeRequest": "This is test request for one year",
+						"visualizeResponse": "This is test response for one year"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Five",
+						"visualizeRequest": "This is test request for five years",
+						"visualizeResponse": "This is test response for five years"
+					},
+					{
+						"tenure": "LK@Global_Portal_Tenure_Ten",
+						"visualizeRequest": "This is test request for ten years",
+						"visualizeResponse": "This is test response for ten years"
 					}
 				]
 			},

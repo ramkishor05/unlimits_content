@@ -13,13 +13,13 @@ import org.unlimits.rest.crud.service.QueryServiceImpl;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceMindSetLibararyMapper;
-import com.brijframework.content.device.model.UIDeviceMindSetLibarary;
+import com.brijframework.content.device.model.UIDeviceMindSetLibararyModel;
 import com.brijframework.content.device.service.DeviceMindSetLibararyService;
 import com.brijframework.content.global.entities.EOGlobalMindSetLibarary;
 import com.brijframework.content.global.repository.GlobalMindSetLibararyRepository;
 
 @Service
-public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceMindSetLibarary, EOGlobalMindSetLibarary, Long> implements DeviceMindSetLibararyService {
+public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceMindSetLibararyModel, EOGlobalMindSetLibarary, Long> implements DeviceMindSetLibararyService {
 	
 	private static final String RECORD_STATE = "recordState";
 	
@@ -38,7 +38,7 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 	}
 
 	@Override
-	public GenericMapper<EOGlobalMindSetLibarary, UIDeviceMindSetLibarary> getMapper() {
+	public GenericMapper<EOGlobalMindSetLibarary, UIDeviceMindSetLibararyModel> getMapper() {
 		return deviceMindSetLibararyMapper;
 	}
 	
@@ -48,8 +48,8 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 	}
 	
 	@Override
-	public List<UIDeviceMindSetLibarary> postFetch(List<EOGlobalMindSetLibarary> findObjects) {
-		List<UIDeviceMindSetLibarary> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceMindSetLibararyModel> postFetch(List<EOGlobalMindSetLibarary> findObjects) {
+		List<UIDeviceMindSetLibararyModel> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}
@@ -57,7 +57,7 @@ public class DeviceMindSetLibararyServiceImpl extends QueryServiceImpl<UIDeviceM
 	
 	
 	@Override
-	public void postFetch(EOGlobalMindSetLibarary findObject, UIDeviceMindSetLibarary dtoObject) {
+	public void postFetch(EOGlobalMindSetLibarary findObject, UIDeviceMindSetLibararyModel dtoObject) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}

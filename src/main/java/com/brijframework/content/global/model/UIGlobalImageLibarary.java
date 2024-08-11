@@ -2,7 +2,7 @@ package com.brijframework.content.global.model;
 
 import java.io.Serializable;
 
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable {
 
@@ -10,7 +10,7 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 	
 	private Long subCategoryId;
 	
-	private UIResource fileResource;
+	private UIResourceModel fileResource;
 
 	private String imageUrl;
 
@@ -24,11 +24,11 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 		this.subCategoryId = subCategoryId;
 	}
 
-	public UIResource getFileResource() {
+	public UIResourceModel getFileResource() {
 		return fileResource;
 	}
 
-	public void setFileResource(UIResource fileResource) {
+	public void setFileResource(UIResourceModel fileResource) {
 		this.fileResource = fileResource;
 	}
 

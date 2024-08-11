@@ -5,10 +5,10 @@ import java.util.List;
 import org.unlimits.rest.crud.service.QueryService;
 
 import com.brijframework.content.constants.RecordStatus;
-import com.brijframework.content.device.model.UIDeviceMainCategory;
+import com.brijframework.content.device.model.UIDeviceMainCategoryModel;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 
-public interface DeviceMainCategoryService  extends QueryService<UIDeviceMainCategory, EOGlobalMainCategory, Long>{
+public interface DeviceMainCategoryService  extends QueryService<UIDeviceMainCategoryModel, EOGlobalMainCategory, Long>{
 
-	List<UIDeviceMainCategory> getCategoryGroupList(RecordStatus dataStatus);
+	List<UIDeviceMainCategoryModel> getCategoryGroupList(RecordStatus dataStatus);
 }

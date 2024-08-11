@@ -13,13 +13,13 @@ import org.unlimits.rest.crud.service.QueryServiceImpl;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceAffirmationLibararyMapper;
-import com.brijframework.content.device.model.UIDeviceAffirmationLibarary;
+import com.brijframework.content.device.model.UIDeviceAffirmationModel;
 import com.brijframework.content.device.service.DeviceAffirmationLibararyService;
 import com.brijframework.content.global.entities.EOGlobalAffirmationLibarary;
 import com.brijframework.content.global.repository.GlobalAffirmationLibararyRepository;
 
 @Service
-public class DeviceAffirmationLibararyServiceImpl extends QueryServiceImpl<UIDeviceAffirmationLibarary, EOGlobalAffirmationLibarary, Long> implements DeviceAffirmationLibararyService {
+public class DeviceAffirmationLibararyServiceImpl extends QueryServiceImpl<UIDeviceAffirmationModel, EOGlobalAffirmationLibarary, Long> implements DeviceAffirmationLibararyService {
 	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
@@ -37,13 +37,13 @@ public class DeviceAffirmationLibararyServiceImpl extends QueryServiceImpl<UIDev
 	}
 
 	@Override
-	public GenericMapper<EOGlobalAffirmationLibarary, UIDeviceAffirmationLibarary> getMapper() {
+	public GenericMapper<EOGlobalAffirmationLibarary, UIDeviceAffirmationModel> getMapper() {
 		return deviceAffirmationLibararyMapper;
 	}
 	
 	@Override
-	public List<UIDeviceAffirmationLibarary> postFetch(List<EOGlobalAffirmationLibarary> findObjects) {
-		List<UIDeviceAffirmationLibarary> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceAffirmationModel> postFetch(List<EOGlobalAffirmationLibarary> findObjects) {
+		List<UIDeviceAffirmationModel> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}
@@ -54,7 +54,7 @@ public class DeviceAffirmationLibararyServiceImpl extends QueryServiceImpl<UIDev
 	}
 	
 	@Override
-	public void postFetch(EOGlobalAffirmationLibarary findObject, UIDeviceAffirmationLibarary dtoObject) {
+	public void postFetch(EOGlobalAffirmationLibarary findObject, UIDeviceAffirmationModel dtoObject) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}

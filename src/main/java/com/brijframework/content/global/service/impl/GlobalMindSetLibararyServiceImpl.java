@@ -21,7 +21,7 @@ import com.brijframework.content.global.mapper.GlobalMindSetLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalMindSetLibarary;
 import com.brijframework.content.global.repository.GlobalMindSetLibararyRepository;
 import com.brijframework.content.global.service.GlobalMindSetLibararyService;
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 @Service
 public class GlobalMindSetLibararyServiceImpl implements GlobalMindSetLibararyService {
@@ -75,14 +75,14 @@ public class GlobalMindSetLibararyServiceImpl implements GlobalMindSetLibararySe
 	}
 	
 	private void saveResource(UIGlobalMindSetLibarary data, EOGlobalMindSetLibarary find) {
-		UIResource resource = data.getFileResource();
+		UIResourceModel resource = data.getFileResource();
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
 		if(resource!=null) {
 			resource.setIncludeId(true);
 			resource.setId(find!=null? find.getResourceId(): null);
 			resource.setFolderName(MINDSET);
-			UIResource resourceFile= resourceClient.add(resource);
+			UIResourceModel resourceFile= resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
 			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {

@@ -18,7 +18,7 @@ import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceJournalLibararyMapper;
-import com.brijframework.content.device.model.UIDeviceJournalLibarary;
+import com.brijframework.content.device.model.UIDeviceJournalModel;
 import com.brijframework.content.device.service.DeviceJournalLibararyService;
 import com.brijframework.content.global.entities.EOGlobalJournalLibarary;
 import com.brijframework.content.global.repository.GlobalJournalLibararyRepository;
@@ -27,7 +27,7 @@ import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
 
 @Service
-public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJournalLibarary, EOGlobalJournalLibarary, Long> implements DeviceJournalLibararyService {
+public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJournalModel, EOGlobalJournalLibarary, Long> implements DeviceJournalLibararyService {
 	
 	private static final String RECORD_STATE = "recordState";
 	
@@ -62,17 +62,17 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 	}
 
 	@Override
-	public GenericMapper<EOGlobalJournalLibarary, UIDeviceJournalLibarary> getMapper() {
+	public GenericMapper<EOGlobalJournalLibarary, UIDeviceJournalModel> getMapper() {
 		return deviceJournalLibararyMapper;
 	}
 
 	@Override
-	public List<UIDeviceJournalLibarary> findTodayJournalLibarary() {
+	public List<UIDeviceJournalModel> findTodayJournalLibarary() {
 		return postFetch(globalJournalLibararyRepository.findTodayJournalLibarary());
 	}
 	
 	@Override
-	public List<UIDeviceJournalLibarary> findYesterdayJournalLibarary() {
+	public List<UIDeviceJournalModel> findYesterdayJournalLibarary() {
 		return postFetch(globalJournalLibararyRepository.findYesterdayJournalLibarary());
 	}
 	
@@ -82,8 +82,8 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 	}
 	
 	@Override
-	public List<UIDeviceJournalLibarary> postFetch(List<EOGlobalJournalLibarary> findObjects) {
-		List<UIDeviceJournalLibarary> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceJournalModel> postFetch(List<EOGlobalJournalLibarary> findObjects) {
+		List<UIDeviceJournalModel> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}

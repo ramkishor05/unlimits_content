@@ -17,14 +17,14 @@ import org.unlimits.rest.crud.service.CrudServiceImpl;
 
 import com.brijframework.content.resource.entities.EOResource;
 import com.brijframework.content.resource.mapper.ResourceMapper;
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.resource.repository.ResourceRepository;
 import com.brijframework.content.util.ResourceUtil;
 
 import jakarta.xml.bind.DatatypeConverter;
 
 @Service
-public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource, Long> implements ResourceService {
+public class ResourceServiceImpl extends CrudServiceImpl<UIResourceModel, EOResource, Long> implements ResourceService {
 
 	@Autowired
 	private ResourceUtil resourceUtil;
@@ -41,7 +41,7 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource,
 	}
 
 	@Override
-	public GenericMapper<EOResource, UIResource> getMapper() {
+	public GenericMapper<EOResource, UIResourceModel> getMapper() {
 		return resourceMapper;
 	}
 
@@ -56,7 +56,7 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResource, EOResource,
 	}
 
 	@Override
-	public void postAdd(UIResource uiResource, EOResource entityResource) {
+	public void postAdd(UIResourceModel uiResource, EOResource entityResource) {
 		try {
 			uiResource.setId(entityResource.getId());
 			if(StringUtil.isEmpty(uiResource.getFolderName())) {

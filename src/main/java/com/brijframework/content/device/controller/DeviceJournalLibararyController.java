@@ -9,25 +9,25 @@ import org.unlimits.rest.crud.beans.Response;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
 
-import com.brijframework.content.device.model.UIDeviceJournalLibarary;
+import com.brijframework.content.device.model.UIDeviceJournalModel;
 import com.brijframework.content.device.service.DeviceJournalLibararyService;
 import com.brijframework.content.global.entities.EOGlobalJournalLibarary;
 
 @RestController
 @RequestMapping("/api/device/journal/libarary")
-public class DeviceJournalLibararyController implements QueryController<UIDeviceJournalLibarary, EOGlobalJournalLibarary, Long>{
+public class DeviceJournalLibararyController implements QueryController<UIDeviceJournalModel, EOGlobalJournalLibarary, Long>{
 
 	@Autowired
 	private DeviceJournalLibararyService deviceJournalLibararyService;
 	
 	@Override
-	public QueryService<UIDeviceJournalLibarary, EOGlobalJournalLibarary, Long> getService() {
+	public QueryService<UIDeviceJournalModel, EOGlobalJournalLibarary, Long> getService() {
 		return deviceJournalLibararyService;
 	}
 	
 	@GetMapping("/today")
-	public Response<List<UIDeviceJournalLibarary>> findTodayJournalLibarary(){
-		Response<List<UIDeviceJournalLibarary>> response=new Response<List<UIDeviceJournalLibarary>>();
+	public Response<List<UIDeviceJournalModel>> findTodayJournalLibarary(){
+		Response<List<UIDeviceJournalModel>> response=new Response<List<UIDeviceJournalModel>>();
 		try {
 			response.setData(deviceJournalLibararyService.findTodayJournalLibarary());
 			response.setSuccess(SUCCESS);

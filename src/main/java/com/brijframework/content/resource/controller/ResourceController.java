@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.resource.service.ResourceService;
 
 import io.swagger.v3.oas.annotations.Hidden;
@@ -59,7 +59,7 @@ public class ResourceController{
 	}
 	
 	@PostMapping
-	public UIResource addImage(@RequestBody UIResource uiResource) throws IOException {
+	public UIResourceModel addImage(@RequestBody UIResourceModel uiResource) throws IOException {
 		resourceService.add(uiResource, new HashMap<String, List<String>>());
 		return uiResource;
 	}

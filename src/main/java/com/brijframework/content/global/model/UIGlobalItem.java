@@ -2,8 +2,15 @@ package com.brijframework.content.global.model;
 
 import org.unlimits.rest.model.UIModel;
 
-public class UIGlobalItem extends UIModel{
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(content = Include.NON_ABSENT)
+public class UIGlobalItem extends UIModel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String idenNo;
 	
 	private String title;

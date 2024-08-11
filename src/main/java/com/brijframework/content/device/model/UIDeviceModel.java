@@ -5,8 +5,13 @@ import org.unlimits.rest.model.UIModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@JsonInclude(value = Include.NON_NULL)
-public class UIDeviceItem extends UIModel{
+@JsonInclude(content = Include.NON_ABSENT)
+public class UIDeviceModel extends UIModel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String idenNo;
 	
@@ -81,6 +86,9 @@ public class UIDeviceItem extends UIModel{
 	}
 
 	public String getType() {
+		if(type==null) {
+			type="";
+		}
 		return type;
 	}
 

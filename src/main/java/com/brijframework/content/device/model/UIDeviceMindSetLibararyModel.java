@@ -1,12 +1,10 @@
 package com.brijframework.content.device.model;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(value = Include.NON_NULL)
-public class UIDeviceAffirmationLibarary extends UIDeviceItem implements Serializable {
+public class UIDeviceMindSetLibararyModel extends UIDeviceModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,5 +27,4 @@ public class UIDeviceAffirmationLibarary extends UIDeviceItem implements Seriali
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
-
 }

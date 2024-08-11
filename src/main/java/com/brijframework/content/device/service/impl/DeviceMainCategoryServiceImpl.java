@@ -13,13 +13,13 @@ import org.unlimits.rest.crud.service.QueryServiceImpl;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceMainCategoryMapper;
-import com.brijframework.content.device.model.UIDeviceMainCategory;
+import com.brijframework.content.device.model.UIDeviceMainCategoryModel;
 import com.brijframework.content.device.service.DeviceMainCategoryService;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 
 @Service
-public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMainCategory, EOGlobalMainCategory, Long>
+public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMainCategoryModel, EOGlobalMainCategory, Long>
 		implements DeviceMainCategoryService {
 	
 	private static final String RECORD_STATE = "recordState";
@@ -39,12 +39,12 @@ public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMain
 	}
 
 	@Override
-	public GenericMapper<EOGlobalMainCategory, UIDeviceMainCategory> getMapper() {
+	public GenericMapper<EOGlobalMainCategory, UIDeviceMainCategoryModel> getMapper() {
 		return globalCategoryGroupMapper;
 	}
 
 	@Override
-	public List<UIDeviceMainCategory> getCategoryGroupList(RecordStatus dataStatus) {
+	public List<UIDeviceMainCategoryModel> getCategoryGroupList(RecordStatus dataStatus) {
 		return postFetch(globalCategoryGroupRepository.getCategoryGroupListByStatus(dataStatus.getStatusIds()));
 	}
 	
@@ -54,15 +54,15 @@ public class DeviceMainCategoryServiceImpl extends QueryServiceImpl<UIDeviceMain
 	}
 	
 	@Override
-	public void postFetch(EOGlobalMainCategory findObject, UIDeviceMainCategory dtoObject) {
+	public void postFetch(EOGlobalMainCategory findObject, UIDeviceMainCategoryModel dtoObject) {
 		if(StringUtils.isNotEmpty(dtoObject.getLogoUrl())) {
 			dtoObject.setLogoUrl(dtoObject.getLogoUrl().startsWith("/")? serverUrl+""+dtoObject.getLogoUrl() :  serverUrl+"/"+dtoObject.getLogoUrl());
 		}
 	}
 
 	@Override
-	public List<UIDeviceMainCategory> postFetch(List<EOGlobalMainCategory> findObjects) {
-		List<UIDeviceMainCategory> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceMainCategoryModel> postFetch(List<EOGlobalMainCategory> findObjects) {
+		List<UIDeviceMainCategoryModel> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}

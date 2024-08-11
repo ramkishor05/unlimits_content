@@ -12,6 +12,7 @@
 				"description": "1 Year",
 				"logoUrl": "",
 				"color": "#b94447",
+				"year": 1,
 				"orderSequence": 1.0
 			}
 		},
@@ -25,6 +26,7 @@
 				"description": "5 Years",
 				"logoUrl": "",
 				"color": "#b94447",
+				"year": 5,
 				"orderSequence": 3.0
 			}
 		},
@@ -38,6 +40,7 @@
 				"description": "10 Years",
 				"logoUrl": "",
 				"color": "#b94447",
+				"year": 10,
 				"orderSequence": 4.0
 			}
 		}

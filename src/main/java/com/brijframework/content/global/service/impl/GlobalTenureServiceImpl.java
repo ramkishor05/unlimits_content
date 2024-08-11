@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,18 @@ public class GlobalTenureServiceImpl extends CrudServiceImpl<UIGlobalTenure, EOG
 	@Override
 	public GenericMapper<EOGlobalTenure, UIGlobalTenure> getMapper() {
 		return globalTenureMapper;
+	}
+	
+	@Override
+	public  void init(List<EOGlobalTenure> eoGlobalTenureJson) {
+		eoGlobalTenureJson.forEach(eoGlobalTenure -> {
+			EOGlobalTenure findGlobalTenure = globalTenureRepository.findByIdenNo(eoGlobalTenure.getIdenNo())
+					.orElse(eoGlobalTenure);
+			BeanUtils.copyProperties(eoGlobalTenure, findGlobalTenure, "id");
+			findGlobalTenure.setRecordState(RecordStatus.ACTIVETED.getStatus());
+			EOGlobalTenure eoGlobalTenureSave = globalTenureRepository.saveAndFlush(findGlobalTenure);
+			eoGlobalTenure.setId(eoGlobalTenureSave.getId());
+		});
 	}
 	
 	@Override

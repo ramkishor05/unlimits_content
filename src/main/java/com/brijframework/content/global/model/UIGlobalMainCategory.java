@@ -2,7 +2,7 @@ package com.brijframework.content.global.model;
 
 import java.io.Serializable;
 
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 public class UIGlobalMainCategory extends UIGlobalItem implements Serializable {
 
@@ -17,7 +17,7 @@ public class UIGlobalMainCategory extends UIGlobalItem implements Serializable {
 
 	private String description;
 
-	private UIResource content;
+	private UIResourceModel content;
 
 	private String url;
 
@@ -45,11 +45,11 @@ public class UIGlobalMainCategory extends UIGlobalItem implements Serializable {
 		this.description = description;
 	}
 
-	public UIResource getContent() {
+	public UIResourceModel getContent() {
 		return content;
 	}
 
-	public void setContent(UIResource content) {
+	public void setContent(UIResourceModel content) {
 		this.content = content;
 	}
 

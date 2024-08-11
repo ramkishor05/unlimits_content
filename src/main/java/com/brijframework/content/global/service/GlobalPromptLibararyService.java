@@ -18,4 +18,6 @@ public interface GlobalPromptLibararyService extends CrudService<UIGlobalPromptL
 	 */
 	List<UIGlobalPromptLibarary> findAllByType(String type, MultiValueMap<String, String> headers);
 
+	void init(List<EOGlobalPromptLibarary> eoGlobalPromptJson);
+
 }

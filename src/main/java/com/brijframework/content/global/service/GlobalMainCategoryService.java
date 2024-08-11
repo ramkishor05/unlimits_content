@@ -10,6 +10,10 @@ import com.brijframework.content.global.model.UIGlobalMainCategory;
 
 public interface GlobalMainCategoryService  extends CrudService<UIGlobalMainCategory, EOGlobalMainCategory, Long>{
 
+	void init(List<EOGlobalMainCategory> eoGlobalCategoryGroupJson);
+	
 	List<UIGlobalMainCategory> getMainCategoryList(RecordStatus dataStatus);
+
+	void export();
 	
 }

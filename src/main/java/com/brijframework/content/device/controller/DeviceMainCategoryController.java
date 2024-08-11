@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
 
-import com.brijframework.content.device.model.UIDeviceMainCategory;
+import com.brijframework.content.device.model.UIDeviceMainCategoryModel;
 import com.brijframework.content.device.service.DeviceMainCategoryService;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 
 @RestController
 @RequestMapping("api/device/main/category")
 @CrossOrigin("*")
-public class DeviceMainCategoryController implements QueryController<UIDeviceMainCategory, EOGlobalMainCategory, Long>{
+public class DeviceMainCategoryController implements QueryController<UIDeviceMainCategoryModel, EOGlobalMainCategory, Long>{
 
 	@Autowired
 	private DeviceMainCategoryService deviceMainCategoryService;
 	
 	@Override
-	public QueryService<UIDeviceMainCategory, EOGlobalMainCategory, Long> getService() {
+	public QueryService<UIDeviceMainCategoryModel, EOGlobalMainCategory, Long> getService() {
 		return deviceMainCategoryService;
 	}
 

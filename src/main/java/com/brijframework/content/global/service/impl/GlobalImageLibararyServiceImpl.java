@@ -32,7 +32,7 @@ import com.brijframework.content.global.repository.GlobalImageLibararyRepository
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
-import com.brijframework.content.resource.modal.UIResource;
+import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.util.ResourceUtil;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
@@ -135,7 +135,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	private void saveResource(UIGlobalImageLibarary data, EOGlobalImageLibarary find) {
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
-		UIResource resource = data.getFileResource();
+		UIResourceModel resource = data.getFileResource();
 		if(resource!=null) {
 			resource.setId(find!=null? find.getResourceId(): null);
 			StringBuilder dir=new StringBuilder(TAGS_WITH_IMAGES);
@@ -146,7 +146,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 				dir.append("/"+data.getType());
 			};
 			resource.setFolderName(dir.toString());
-			UIResource resourceFile =resourceClient.add(resource);
+			UIResourceModel resourceFile =resourceClient.add(resource);
 			data.setResourceId(resourceFile.getId());
 			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
 				data.setImageUrl(resourceFile.getFileUrl());

@@ -8,17 +8,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
-import com.brijframework.content.device.model.UIDeviceJournalLibarary;
+import com.brijframework.content.device.model.UIDeviceJournalModel;
 import com.brijframework.content.global.entities.EOGlobalJournalLibarary;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_GLOBAL_PACKAGE_IMPL)
-public interface DeviceJournalLibararyMapper  extends GenericMapper<EOGlobalJournalLibarary, UIDeviceJournalLibarary>{
+public interface DeviceJournalLibararyMapper  extends GenericMapper<EOGlobalJournalLibarary, UIDeviceJournalModel>{
 	
 	@Override
 	@Mapping(source = "journalDate", target = "journalDate" ,dateFormat = UI_DATE_FORMAT_MMMM_DD_YYYY)
-	UIDeviceJournalLibarary mapToDTO(EOGlobalJournalLibarary e);
+	UIDeviceJournalModel mapToDTO(EOGlobalJournalLibarary e);
 	
 	@Override
 	@Mapping(source = "journalDate", target = "journalDate" ,dateFormat = UI_DATE_FORMAT_MMMM_DD_YYYY)
-	EOGlobalJournalLibarary mapToDAO(UIDeviceJournalLibarary d);
+	EOGlobalJournalLibarary mapToDAO(UIDeviceJournalModel d);
 }
