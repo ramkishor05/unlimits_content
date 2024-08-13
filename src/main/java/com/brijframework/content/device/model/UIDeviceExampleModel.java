@@ -15,6 +15,10 @@ public class UIDeviceExampleModel extends UIDeviceModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long subCategoryId;
+	private String subCategoryName;
+	
+	private Long mainCategoryId;
+	private String mainCategoryName;
 
 	private String profileName;
 	private String profilePictureURL;
@@ -33,6 +37,30 @@ public class UIDeviceExampleModel extends UIDeviceModel {
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
+	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
+	}
+
+	public Long getMainCategoryId() {
+		return mainCategoryId;
+	}
+
+	public void setMainCategoryId(Long mainCategoryId) {
+		this.mainCategoryId = mainCategoryId;
+	}
+
+	public String getMainCategoryName() {
+		return mainCategoryName;
+	}
+
+	public void setMainCategoryName(String mainCategoryName) {
+		this.mainCategoryName = mainCategoryName;
 	}
 
 	public String getProfileName() {

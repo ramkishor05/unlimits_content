@@ -15,9 +15,15 @@ public interface DeviceExampleLibararyMapper extends GenericMapper<EOGlobalExamp
 
 	@Override
 	@Mapping(source = "subCategory.id", target = "subCategoryId")
+	@Mapping(source = "subCategory.name", target = "subCategoryName")
+	@Mapping(source = "subCategory.mainCategory.id", target = "mainCategoryId")
+	@Mapping(source = "subCategory.mainCategory.id", target = "mainCategoryName")
 	UIDeviceExampleModel mapToDTO(EOGlobalExampleLibarary eoGlobalTagGroup);
 	
 	@Override
 	@Mapping(target = "subCategory.id", source = "subCategoryId")
+	@Mapping(target = "subCategory.name", source = "subCategoryName")
+	@Mapping(target = "subCategory.mainCategory.id", source = "mainCategoryId")
+	@Mapping(target = "subCategory.mainCategory.name", source = "mainCategoryName")
 	EOGlobalExampleLibarary mapToDAO(UIDeviceExampleModel uiDeviceMainTag);
 }
