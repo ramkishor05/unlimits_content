@@ -5,18 +5,23 @@ import java.util.Map;
 
 import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceTagLibararyMapper;
+import com.brijframework.content.device.model.UIDeviceImageModel;
 import com.brijframework.content.device.model.UIDeviceTagLibarary;
 import com.brijframework.content.device.service.DeviceTagLibararyService;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
+import com.brijframework.content.global.entities.EOGlobalTagImageMapping;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
+import com.brijframework.content.global.repository.GlobalTagImageMappingRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
@@ -35,6 +40,12 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 	@Autowired
 	private DeviceTagLibararyMapper deviceTagLibararyMapper;
 
+	@Autowired
+	private GlobalTagImageMappingRepository globalTagImageMappingRepository;
+
+	@Value("${openapi.service.url}")
+	private String serverUrl;
+	
 	@Override
 	public JpaRepository<EOGlobalTagLibarary, Long> getRepository() {
 		return globalTagLibararyRepository;
@@ -114,6 +125,18 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 	@Override
 	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
 		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
+	}
+	
+	@Override
+	public void postFetch(EOGlobalTagLibarary findObject, UIDeviceTagLibarary dtoObject) {
+		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId());
+		if(!CollectionUtils.isEmpty(imageMappingList)) {
+			List<UIDeviceImageModel> tagMappingForImageList = deviceTagLibararyMapper.tagMappingForImageList(imageMappingList);
+			for(UIDeviceImageModel uiDeviceImageModel: tagMappingForImageList) {
+				uiDeviceImageModel.setImageUrl(uiDeviceImageModel.getImageUrl().startsWith("/")? serverUrl+""+uiDeviceImageModel.getImageUrl() :  serverUrl+"/"+uiDeviceImageModel.getImageUrl());
+			}
+			dtoObject.setImageList(tagMappingForImageList);
+		}
 	}
 
 	@Override

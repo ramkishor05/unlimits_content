@@ -8,17 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.device.mapper.DeviceImageLibararyMapper;
-import com.brijframework.content.device.model.UIDeviceImageModel;
+import com.brijframework.content.device.model.UIDeviceImageLibarary;
+import com.brijframework.content.device.model.UIDeviceTagModel;
 import com.brijframework.content.device.service.DeviceImageLibararyService;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
+import com.brijframework.content.global.entities.EOGlobalTagImageMapping;
 import com.brijframework.content.global.repository.GlobalImageLibararyRepository;
+import com.brijframework.content.global.repository.GlobalTagImageMappingRepository;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
@@ -26,12 +30,15 @@ import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
 
 @Service
-public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceImageModel, EOGlobalImageLibarary, Long> implements DeviceImageLibararyService {
+public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> implements DeviceImageLibararyService {
 	
 	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
 	private GlobalImageLibararyRepository globalImageLibararyRepository;
+	
+	@Autowired
+	private GlobalTagImageMappingRepository globalTagImageMappingRepository;
 
 	@Autowired
 	private DeviceImageLibararyMapper deviceImageLibararyMapper;
@@ -45,7 +52,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	}
 
 	@Override
-	public GenericMapper<EOGlobalImageLibarary, UIDeviceImageModel> getMapper() {
+	public GenericMapper<EOGlobalImageLibarary, UIDeviceImageLibarary> getMapper() {
 		return deviceImageLibararyMapper;
 	}
 	
@@ -81,12 +88,17 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		return globalImageLibararyRepository.findTypeBySubCategoryId(subCategoryId);
 	}
 
-	public void postFetch(EOGlobalImageLibarary findObject, UIDeviceImageModel dtoObject) {
+	public void postFetch(EOGlobalImageLibarary findObject, UIDeviceImageLibarary dtoObject) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}
 		if(StringUtils.isNotEmpty(dtoObject.getImageUrl())) {
 			dtoObject.setImageUrl(dtoObject.getImageUrl().startsWith("/")? serverUrl+""+dtoObject.getImageUrl() :  serverUrl+"/"+dtoObject.getImageUrl());
+		}
+		List<EOGlobalTagImageMapping> tagMappingList = globalTagImageMappingRepository.findAllByImageLibararyId(findObject.getId());
+		if(!CollectionUtils.isEmpty(tagMappingList)) {
+			List<UIDeviceTagModel> tagMappingForTagList = deviceImageLibararyMapper.tagMappingForTagList(tagMappingList);
+			dtoObject.setTagList(tagMappingForTagList);
 		}
 	}
 	
@@ -96,8 +108,8 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	}
 
 	@Override
-	public List<UIDeviceImageModel> postFetch(List<EOGlobalImageLibarary> findObjects) {
-		List<UIDeviceImageModel> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceImageLibarary> postFetch(List<EOGlobalImageLibarary> findObjects) {
+		List<UIDeviceImageLibarary> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}

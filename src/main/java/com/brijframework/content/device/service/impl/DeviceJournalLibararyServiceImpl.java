@@ -12,6 +12,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.QueryServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
@@ -68,12 +69,16 @@ public class DeviceJournalLibararyServiceImpl extends QueryServiceImpl<UIDeviceJ
 
 	@Override
 	public List<UIDeviceJournalModel> findTodayJournalLibarary() {
-		return postFetch(globalJournalLibararyRepository.findTodayJournalLibarary());
+		List<EOGlobalJournalLibarary> findTodayJournalLibarary = globalJournalLibararyRepository.findTodayJournalLibarary(RecordStatus.ACTIVETED.getStatusIds());
+		if(CollectionUtils.isEmpty(findTodayJournalLibarary)) {
+			return postFetch(globalJournalLibararyRepository.findLastJournalLibarary(RecordStatus.ACTIVETED.getStatusIds()));
+		}
+		return postFetch(findTodayJournalLibarary);
 	}
 	
 	@Override
 	public List<UIDeviceJournalModel> findYesterdayJournalLibarary() {
-		return postFetch(globalJournalLibararyRepository.findYesterdayJournalLibarary());
+		return postFetch(globalJournalLibararyRepository.findYesterdayJournalLibarary(RecordStatus.ACTIVETED.getStatusIds()));
 	}
 	
 	@Override

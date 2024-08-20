@@ -15,4 +15,6 @@ public interface GlobalImageLibararyService extends CrudService<UIGlobalImageLib
 	 */
 	void init() throws IOException;
 
+	void export();
+
 }

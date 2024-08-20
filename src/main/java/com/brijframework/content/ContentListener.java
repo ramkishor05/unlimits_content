@@ -21,7 +21,7 @@ import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
 import com.brijframework.content.global.service.GlobalPromptLibararyService;
 import com.brijframework.content.global.service.GlobalSubCategoryService;
-import com.brijframework.content.global.service.GlobalTagLibararyService;
+import com.brijframework.content.global.service.GlobalTagResourceService;
 import com.brijframework.content.global.service.GlobalTenureService;
 
 @Component
@@ -34,7 +34,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	private GlobalSubCategoryService globalSubCategoryService;
 
 	@Autowired
-	private GlobalTagLibararyService globalTagLibararyService;
+	private GlobalTagResourceService globalTagResourceService;
 
 	@Autowired
 	private GlobalPromptLibararyService globalPromptLibararyService;
@@ -56,7 +56,6 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 		if (upload) {
 
 			try {
-
 				JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
 				List<EOGlobalMainCategory> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalMainCategory.class);
 
@@ -68,7 +67,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 
 				List<EOGlobalTagLibarary> eoGlobalTagItemJson = instance.getAll(EOGlobalTagLibarary.class);
 
-				globalTagLibararyService.init(eoGlobalTagItemJson);
+				globalTagResourceService.init(eoGlobalTagItemJson);
 				
 				List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
@@ -91,15 +90,15 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				//export_global_main_category();
 				//export_global_sub_category();
 				//export_global_portal_tag_libarary();
-
-				// copyToAll_global_portal_tag_libarary();
-
+				//export_global_portal_tag_libarary();
+				//copyToAll_global_portal_tag_libarary();
+				//globalImageLibararyService.export();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 		}
-
+		
 	}
 	
 }

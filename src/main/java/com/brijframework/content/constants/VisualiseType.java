@@ -2,9 +2,9 @@ package com.brijframework.content.constants;
 
 public enum VisualiseType {
 
-	VISUALISE_WITH_IMAGES ("VISUALISE_WITH_IMAGES"),
-	VISUALISE_WITH_WORDS ("VISUALISE_WITH_WORDS"),
-	VISUALISE_WITH_EXAMPLES ("VISUALISE_WITH_EXAMPLES");
+	IMAGE_PAGE ("Image"),
+	WORDS_PAGE ("Words"),
+	EXAMPLES_PAGE ("Example");
 
 	String type;
 	

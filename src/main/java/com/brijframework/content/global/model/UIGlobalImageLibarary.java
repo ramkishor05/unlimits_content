@@ -1,6 +1,7 @@
 package com.brijframework.content.global.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.brijframework.content.resource.modal.UIResourceModel;
 
@@ -15,6 +16,8 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 	private String imageUrl;
 
 	private String posterUrl;
+	
+	private List<UIGlobalTagLibarary> tagList;
 
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -48,5 +51,12 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 		this.posterUrl = posterUrl;
 	}
 
+	public List<UIGlobalTagLibarary> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<UIGlobalTagLibarary> tagList) {
+		this.tagList = tagList;
+	}
 	
 }

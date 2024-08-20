@@ -26,12 +26,11 @@
 	</properties>
 
 	<dependencies>
-		<!--<dependency>
-			<groupId>com.brijframework</groupId>
-			<artifactId>brijframework-jsonschema</artifactId>
-			<version>1.1</version>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.1</version>
 		</dependency>
--->
 		<dependency>
 			<groupId>com.brijframework</groupId>
 			<artifactId>unlimits-rest</artifactId>

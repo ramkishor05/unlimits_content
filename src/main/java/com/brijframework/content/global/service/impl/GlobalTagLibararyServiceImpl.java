@@ -14,23 +14,18 @@ import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_N
 import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_REL_ID;
 import static com.brijframework.content.constants.ClientConstants.TAG_LIBARARY_REL_NAME;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.brijframework.json.schema.factories.JsonSchemaFile;
-import org.brijframework.json.schema.factories.JsonSchemaObject;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.CrudServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
@@ -39,16 +34,15 @@ import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.constants.VisualiseType;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
+import com.brijframework.content.global.entities.EOGlobalTagImageMapping;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
+import com.brijframework.content.global.mapper.GlobalImageLibararyMapper;
 import com.brijframework.content.global.mapper.GlobalTagLibararyMapper;
+import com.brijframework.content.global.model.UIGlobalImageLibarary;
 import com.brijframework.content.global.model.UIGlobalTagLibarary;
-import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
+import com.brijframework.content.global.repository.GlobalTagImageMappingRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalTagLibararyService;
-import com.brijframework.content.util.IdenUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.io.Files;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
@@ -62,10 +56,13 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
 	
 	@Autowired
-	private GlobalSubCategoryRepository globalSubCategoryRepository;
+	private GlobalTagImageMappingRepository globalTagImageMappingRepository;
 	
 	@Autowired
 	private GlobalTagLibararyMapper globalTagLibararyMapper;
+	
+	@Autowired
+	private GlobalImageLibararyMapper globalImageLibararyMapper;
 
 	@Override
 	public JpaRepository<EOGlobalTagLibarary, Long> getRepository() {
@@ -75,85 +72,6 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	@Override
 	public GenericMapper<EOGlobalTagLibarary, UIGlobalTagLibarary> getMapper() {
 		return globalTagLibararyMapper;
-	}
-	
-	@Override
-	public void init(List<EOGlobalTagLibarary> eoGlobalTagItemJson) {
-
-		eoGlobalTagItemJson.forEach(eoGlobalTagItem -> {
-			EOGlobalTagLibarary findGlobalTagItem = globalTagLibararyRepository
-					.findByIdenNo(eoGlobalTagItem.getIdenNo()).orElse(eoGlobalTagItem);
-			BeanUtils.copyProperties(eoGlobalTagItem, findGlobalTagItem, "id");
-			findGlobalTagItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-			EOGlobalTagLibarary eoGlobalTagItemSave = globalTagLibararyRepository
-					.saveAndFlush(findGlobalTagItem);
-			eoGlobalTagItem.setId(eoGlobalTagItemSave.getId());
-		});
-	}
-	
-	protected void copyToAll() {
-		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_portal_tag_libarary");
-		if (!dirs.exists()) {
-			dirs.mkdirs();
-		}
-		String global_portal_prompt_libarary_file_name = "/global_portal_tag_libarary";
-		globalTagLibararyRepository.findAll().stream()
-		.filter(globalTagLibarary -> globalTagLibarary.getSubCategory() != null)
-		.collect(Collectors.groupingBy(globalTagLibarary -> globalTagLibarary.getSubCategory()))
-		.forEach((subCategory1, globalTagLibararyList) -> {
-			globalSubCategoryRepository.findAll().forEach(subCategory -> {
-				buildTagLibarary(dirs, global_portal_prompt_libarary_file_name, subCategory,
-						globalTagLibararyList);
-			});
-		});
-	}
-	
-
-	protected void export_global_portal_tag_libarary() {
-		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_portal_tag_libarary");
-		if (!dirs.exists()) {
-			dirs.mkdirs();
-		}
-		String global_portal_prompt_libarary_file_name = "/global_portal_tag_libarary";
-		globalTagLibararyRepository.findAll().stream()
-				.collect(Collectors.groupingBy(globalTagLibarary -> globalTagLibarary.getSubCategory()))
-				.forEach((subCategory, globalTagLibararyList) -> {
-					buildTagLibarary(dirs, global_portal_prompt_libarary_file_name, subCategory, globalTagLibararyList);
-				});
-	}
-
-	protected void buildTagLibarary(File dirs, String global_portal_prompt_libarary_file_name,
-			EOGlobalSubCategory subCategory, List<EOGlobalTagLibarary> globalTagLibararyList) {
-		String fileName = global_portal_prompt_libarary_file_name + "_" + subCategory.getMainCategory().getName() + "_"
-				+ IdenUtil.replaceContent(subCategory.getName()) + ".json";
-		JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
-		jsonSchemaFile.setId("Global_Portal_TagLibarary" + "_" + subCategory.getName());
-		jsonSchemaFile.setOrderSequence(subCategory.getOrderSequence());
-		globalTagLibararyList.forEach(globalTagLibarary -> {
-			String idenNo = IdenUtil.buildIdenNo(subCategory, globalTagLibarary);
-			JsonSchemaObject jsonObject = new JsonSchemaObject();
-			jsonObject.setId(idenNo);
-			jsonObject.setName("Global_Portal_TagLibarary");
-			jsonObject.setType(globalTagLibarary.getClass().getName());
-			jsonSchemaFile.setType(globalTagLibarary.getClass().getName());
-			jsonObject.getProperties().put("idenNo", idenNo);
-			jsonObject.getProperties().put("name", globalTagLibarary.getName());
-			jsonObject.getProperties().put("orderSequence", globalTagLibarary.getOrderSequence());
-			jsonObject.getProperties().put("color", subCategory.getColor());
-			jsonObject.getProperties().put("type", globalTagLibarary.getType());
-			jsonObject.getProperties().put("subCategory",
-					"LK@" + IdenUtil.buildIdenNo(subCategory.getMainCategory(), subCategory));
-			jsonSchemaFile.getObjects().add(jsonObject);
-		});
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			Files.write(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonSchemaFile),
-					new File(dirs, fileName), Charset.defaultCharset());
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	{
@@ -211,7 +129,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	@Override
 	public void preAdd(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
 		if(data.getType()==null) {
-			data.setType(VisualiseType.VISUALISE_WITH_WORDS.getType());
+			data.setType(VisualiseType.WORDS_PAGE.getType());
 		}
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
@@ -219,13 +137,38 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
+	public void postAdd(UIGlobalTagLibarary data, EOGlobalTagLibarary entity) {
+		saveTagImageMappingList(data, entity);
+	}
+
+	private void saveTagImageMappingList(UIGlobalTagLibarary data, EOGlobalTagLibarary entity) {
+		List<UIGlobalImageLibarary> uiImageList = data.getImageList();
+		if(!CollectionUtils.isEmpty(uiImageList)) {
+			globalTagImageMappingRepository.deleteAllByTagLibararyId(entity.getId());
+			List<EOGlobalTagImageMapping> eoTagImageList = new ArrayList<EOGlobalTagImageMapping>();
+			uiImageList.forEach(uiImageLibarary->{
+				EOGlobalTagImageMapping globalTagImageMapping=new EOGlobalTagImageMapping();
+				globalTagImageMapping.setImageLibarary(globalImageLibararyMapper.mapToDAO(uiImageLibarary));
+				globalTagImageMapping.setTagLibarary(entity);
+				eoTagImageList.add(globalTagImageMapping);
+			});
+			globalTagImageMappingRepository.saveAllAndFlush(eoTagImageList);
+		}
+	}
+	
+	@Override
 	public void preUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
 		if(data.getType()==null) {
-			data.setType(VisualiseType.VISUALISE_WITH_WORDS.getType());
+			data.setType(VisualiseType.WORDS_PAGE.getType());
 		}
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
+	}
+	
+	@Override
+	public void postUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
+		saveTagImageMappingList(data, entity);
 	}
 	
 	@Override

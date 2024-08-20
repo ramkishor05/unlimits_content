@@ -1,10 +1,15 @@
 package com.brijframework.content.util;
 
+import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 
 public class IdenUtil {
+	
+	public static String buildIdenNo(EOGlobalSubCategory subCategory, EOGlobalImageLibarary globalImageLibarary) {
+		return "Global_Portal_ImageLibarary"+"_"+replaceContent(subCategory.getMainCategory().getName())+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(globalImageLibarary.getName());
+	}
 
 	public static String buildIdenNo(EOGlobalSubCategory subCategory, EOGlobalTagLibarary globalTagLibarary) {
 		return "Global_Portal_TagLibarary"+"_"+replaceContent(subCategory.getMainCategory().getName())+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(globalTagLibarary.getName());

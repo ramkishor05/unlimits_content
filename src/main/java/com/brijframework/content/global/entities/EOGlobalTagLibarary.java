@@ -3,11 +3,15 @@ package com.brijframework.content.global.entities;
 import static com.brijframework.content.constants.Constants.EOGLOBAL_TAG_LIBARARY;
 import static com.brijframework.content.constants.Constants.NAME;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -24,6 +28,9 @@ public class EOGlobalTagLibarary extends EOGlobalItem {
 	@JoinColumn(name="SUB_CATEGORY_ID")
 	@ManyToOne(optional = true)
 	public EOGlobalSubCategory subCategory;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tagLibarary")
+	private List<EOGlobalTagImageMapping> imageList;
 
 	public EOGlobalSubCategory getSubCategory() {
 		return subCategory;
@@ -38,5 +45,13 @@ public class EOGlobalTagLibarary extends EOGlobalItem {
 			super.setColor(getSubCategory().getColor());
 		}
 		return super.getColor();
+	}
+
+	public List<EOGlobalTagImageMapping> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<EOGlobalTagImageMapping> imageList) {
+		this.imageList = imageList;
 	}
 }

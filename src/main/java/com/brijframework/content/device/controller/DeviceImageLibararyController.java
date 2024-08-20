@@ -20,7 +20,7 @@ import org.unlimits.rest.crud.controller.CQRSController;
 import org.unlimits.rest.crud.controller.QueryController;
 import org.unlimits.rest.crud.service.QueryService;
 
-import com.brijframework.content.device.model.UIDeviceImageModel;
+import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImageLibararyService;
 import com.brijframework.content.device.service.DeviceImagePixelService;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
@@ -28,7 +28,7 @@ import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 @RestController
 @RequestMapping("/api/device/image/libarary")
 public class DeviceImageLibararyController
-		implements QueryController<UIDeviceImageModel, EOGlobalImageLibarary, Long> {
+		implements QueryController<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> {
 
 	@Autowired
 	private DeviceImageLibararyService deviceImageLibararyService;
@@ -37,7 +37,7 @@ public class DeviceImageLibararyController
 	private DeviceImagePixelService deviceImagePixelService;
 
 	@Override
-	public QueryService<UIDeviceImageModel, EOGlobalImageLibarary, Long> getService() {
+	public QueryService<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> getService() {
 		return deviceImageLibararyService;
 	}
 
@@ -58,13 +58,13 @@ public class DeviceImageLibararyController
 	}
 
 	@GetMapping("/groupby/folder")
-	public Response<Map<String, List<UIDeviceImageModel>>> getImagesGroupbyFolder(
+	public Response<Map<String, List<UIDeviceImageLibarary>>> getImagesGroupbyFolder(
 			@RequestHeader(required = false) MultiValueMap<String, String> headers, WebRequest webRequest) {
 		Map<String, Object> filters = CQRSController.getfilters(webRequest);
-		Response<Map<String, List<UIDeviceImageModel>>> response = new Response<Map<String, List<UIDeviceImageModel>>>();
+		Response<Map<String, List<UIDeviceImageLibarary>>> response = new Response<Map<String, List<UIDeviceImageLibarary>>>();
 		try {
 			response.setData(deviceImageLibararyService.findAll(headers, filters).stream()
-					.collect(Collectors.groupingBy(UIDeviceImageModel::getType)));
+					.collect(Collectors.groupingBy(UIDeviceImageLibarary::getType)));
 			response.setSuccess(SUCCESS);
 			response.setMessage(SUCCESSFULLY_PROCCEED);
 			return response;
@@ -77,7 +77,7 @@ public class DeviceImageLibararyController
 	}
 
 	@Override
-	public Object customizedResponse(List<UIDeviceImageModel> values, QueryRequest queryRequest) {
+	public Object customizedResponse(List<UIDeviceImageLibarary> values, QueryRequest queryRequest) {
 		if (!CollectionUtils.isEmpty(values)) {
 			return values;
 		}
@@ -114,7 +114,7 @@ public class DeviceImageLibararyController
 	}
 
 	@Override
-	public Object customizedResponse(PageDetail<UIDeviceImageModel> fetchPageObject, QueryRequest queryRequest) {
+	public Object customizedResponse(PageDetail<UIDeviceImageLibarary> fetchPageObject, QueryRequest queryRequest) {
 		if (!CollectionUtils.isEmpty(fetchPageObject.getElements())) {
 			return fetchPageObject;
 		}

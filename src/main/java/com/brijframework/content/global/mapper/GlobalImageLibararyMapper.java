@@ -7,6 +7,8 @@ import org.mapstruct.Mapping;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
+import com.brijframework.content.global.entities.EOGlobalTagImageMapping;
+import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.model.UIGlobalImageLibarary;
 
 @Mapper(componentModel = SPRING, implementationPackage = APP_GLOBAL_PACKAGE_IMPL)
@@ -14,9 +16,16 @@ public interface GlobalImageLibararyMapper  extends GenericMapper<EOGlobalImageL
 
 	@Override
 	@Mapping(source = "subCategoryId", target = "subCategory.id")
+	@Mapping(target = "tagList", ignore = true)
 	EOGlobalImageLibarary mapToDAO(UIGlobalImageLibarary uiGlobalCategoryImage);
 	
 	@Override
 	@Mapping(source = "subCategory.id", target = "subCategoryId")
 	UIGlobalImageLibarary mapToDTO(EOGlobalImageLibarary eoGlobalCategoryImage);
+	
+	default UIGlobalImageLibarary uiGlobalTagLibarary(EOGlobalTagImageMapping globalTagImageMapping ) {
+		return uiGlobalTagLibarary(globalTagImageMapping.getTagLibarary());
+	}
+
+	UIGlobalImageLibarary uiGlobalTagLibarary(EOGlobalTagLibarary tagLibarary);
 }

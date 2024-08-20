@@ -189,6 +189,8 @@ public class Constants {
 	public static final String EOGLOBAL_MANUFACTURER = "EOGLOBAL_MANUFACTURER";
 	public static final String EOGLOBAL_MEDIA_ITEM = "EOGLOBAL_MEDIA_ITEM";
 	public static final String EOGLOBAL_IMAGE_LIBARARY = "EOGLOBAL_IMAGE_LIBARARY";
+	public static final String EOGLOBAL_TAGE_IMAGE_MAPPING = "EOGLOBAL_TAGE_IMAGE_MAPPING";
+
 	public static final String EOGLOBAL_EXAMPLE_LIBARARY="EOGLOBAL_EXAMPLE_LIBARARY";
 	public static final String EOGLOBAL_EXAMPLE_ITEM="EOGLOBAL_EXAMPLE_ITEM";
 	public static final String EOGLOBAL_EXAMPLE_VISUALIZE="EOGLOBAL_EXAMPLE_VISUALIZE";
@@ -202,6 +204,8 @@ public class Constants {
 	public static final String EOCUST_PRODUCT_WHOLE_SALE = "EOCUST_PRODUCT_WHOLE_SALE";
 	public static final String WHOLE_QTN = "WHOLE_QTN";
 	public static final String EOCUST_PRODUCT_RETAIL_SALE = "EOCUST_PRODUCT_RETAIL_SALE";
+	
+	
 
 	public static final String RETAIL_QTN = "RETAIL_QTN";
 

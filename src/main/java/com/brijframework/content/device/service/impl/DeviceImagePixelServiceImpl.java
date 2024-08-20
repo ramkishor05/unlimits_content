@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.beans.PageDetail;
 
-import com.brijframework.content.device.model.UIDeviceImageModel;
+import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImagePixelService;
 import com.brijframework.content.forgin.model.FileContent;
 import com.brijframework.content.forgin.repository.PexelMediaRepository;
@@ -24,7 +24,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	private PexelMediaRepository pexelMediaRepository;
 
 	@Override
-	public List<UIDeviceImageModel> fetchListFromPexels(Long subCategoryId, String type, String name) {
+	public List<UIDeviceImageLibarary> fetchListFromPexels(Long subCategoryId, String type, String name) {
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
 		if (eoGlobalSubCategory != null) {
@@ -36,10 +36,10 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 		if (type != null) {
 			finalSearch.append(name);
 		}
-		List<UIDeviceImageModel> deviceImageLibararies = new ArrayList<UIDeviceImageModel>();
+		List<UIDeviceImageLibarary> deviceImageLibararies = new ArrayList<UIDeviceImageLibarary>();
 		try {
 			pexelMediaRepository.getAllFiles(finalSearch.toString().trim()).forEach(photo -> {
-				UIDeviceImageModel deviceImageLibarary = new UIDeviceImageModel();
+				UIDeviceImageLibarary deviceImageLibarary = new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary);
@@ -51,7 +51,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	}
 
 	@Override
-	public PageDetail<UIDeviceImageModel> fetchPageObjectFromPexels(Long subCategoryId, String type,
+	public PageDetail<UIDeviceImageLibarary> fetchPageObjectFromPexels(Long subCategoryId, String type,
 			Integer pageNumber, Integer count) {
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
@@ -61,13 +61,13 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 		if (type != null) {
 			finalSearch.append(eoGlobalSubCategory.getName());
 		}
-		PageDetail<UIDeviceImageModel> returnPageDetail = new PageDetail<UIDeviceImageModel>();
-		List<UIDeviceImageModel> deviceImageLibararies = new ArrayList<UIDeviceImageModel>();
+		PageDetail<UIDeviceImageLibarary> returnPageDetail = new PageDetail<UIDeviceImageLibarary>();
+		List<UIDeviceImageLibarary> deviceImageLibararies = new ArrayList<UIDeviceImageLibarary>();
 		try {
 			PageDetail<FileContent> pageDetail = pexelMediaRepository.getPageDetail(finalSearch.toString().trim(),
 					pageNumber, count);
 			pageDetail.getElements().forEach(photo -> {
-				UIDeviceImageModel deviceImageLibarary = new UIDeviceImageModel();
+				UIDeviceImageLibarary deviceImageLibarary = new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary);
@@ -83,7 +83,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	}
 
 	@Override
-	public PageDetail<UIDeviceImageModel> fetchPageObjectForPexels(Long subCategoryId, String type, String name,
+	public PageDetail<UIDeviceImageLibarary> fetchPageObjectForPexels(Long subCategoryId, String type, String name,
 			Integer pageNumber, Integer count) {
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
@@ -96,13 +96,13 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 		if (name != null) {
 			finalSearch.append(name + " ");
 		}
-		PageDetail<UIDeviceImageModel> returnPageDetail = new PageDetail<UIDeviceImageModel>();
-		List<UIDeviceImageModel> deviceImageLibararies = new ArrayList<UIDeviceImageModel>();
+		PageDetail<UIDeviceImageLibarary> returnPageDetail = new PageDetail<UIDeviceImageLibarary>();
+		List<UIDeviceImageLibarary> deviceImageLibararies = new ArrayList<UIDeviceImageLibarary>();
 		try {
 			PageDetail<FileContent> pageDetail = pexelMediaRepository.getPageDetail(finalSearch.toString().trim(),
 					pageNumber, count);
 			pageDetail.getElements().forEach(photo -> {
-				UIDeviceImageModel deviceImageLibarary = new UIDeviceImageModel();
+				UIDeviceImageLibarary deviceImageLibarary = new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary);
@@ -118,7 +118,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	}
 
 	@Override
-	public List<UIDeviceImageModel> fetchListFromPexels(Long subCategoryId, String name) {
+	public List<UIDeviceImageLibarary> fetchListFromPexels(Long subCategoryId, String name) {
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
 		if (eoGlobalSubCategory != null) {
@@ -127,10 +127,10 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 		if (name != null) {
 			finalSearch.append(name);
 		}
-		List<UIDeviceImageModel> deviceImageLibararies = new ArrayList<UIDeviceImageModel>();
+		List<UIDeviceImageLibarary> deviceImageLibararies = new ArrayList<UIDeviceImageLibarary>();
 		try {
 			pexelMediaRepository.getAllFiles(finalSearch.toString().trim()).forEach(photo -> {
-				UIDeviceImageModel deviceImageLibarary = new UIDeviceImageModel();
+				UIDeviceImageLibarary deviceImageLibarary = new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary);
@@ -142,7 +142,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	}
 
 	@Override
-	public List<UIDeviceImageModel> fetchPageListFromPexels(Long subCategoryId, String type, Integer pageNumber,
+	public List<UIDeviceImageLibarary> fetchPageListFromPexels(Long subCategoryId, String type, Integer pageNumber,
 			Integer count) {
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
@@ -152,12 +152,12 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 		if (type != null) {
 			finalSearch.append(type + " ");
 		}
-		List<UIDeviceImageModel> deviceImageLibararies = new ArrayList<UIDeviceImageModel>();
+		List<UIDeviceImageLibarary> deviceImageLibararies = new ArrayList<UIDeviceImageLibarary>();
 		try {
 			PageDetail<FileContent> pageDetail = pexelMediaRepository.getPageDetail(finalSearch.toString().trim(),
 					pageNumber, count);
 			pageDetail.getElements().forEach(photo -> {
-				UIDeviceImageModel deviceImageLibarary = new UIDeviceImageModel();
+				UIDeviceImageLibarary deviceImageLibarary = new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary);
@@ -169,7 +169,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	}
 
 	@Override
-	public List<UIDeviceImageModel> fetchPageListFromPexels(Long subCategoryId, String type, String name,
+	public List<UIDeviceImageLibarary> fetchPageListFromPexels(Long subCategoryId, String type, String name,
 			Integer pageNumber, Integer count) {
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
@@ -182,12 +182,12 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 		if (name != null) {
 			finalSearch.append(name + " ");
 		}
-		List<UIDeviceImageModel> deviceImageLibararies = new ArrayList<UIDeviceImageModel>();
+		List<UIDeviceImageLibarary> deviceImageLibararies = new ArrayList<UIDeviceImageLibarary>();
 		try {
 			PageDetail<FileContent> pageDetail = pexelMediaRepository.getPageDetail(finalSearch.toString().trim(),
 					pageNumber, count);
 			pageDetail.getElements().forEach(photo -> {
-				UIDeviceImageModel deviceImageLibarary = new UIDeviceImageModel();
+				UIDeviceImageLibarary deviceImageLibarary = new UIDeviceImageLibarary();
 				deviceImageLibarary.setIdenNo(photo.getId());
 				deviceImageLibarary.setImageUrl(photo.getUrl());
 				deviceImageLibararies.add(deviceImageLibarary);

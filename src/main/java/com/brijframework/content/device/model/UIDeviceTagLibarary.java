@@ -1,6 +1,7 @@
 package com.brijframework.content.device.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -15,6 +16,8 @@ public class UIDeviceTagLibarary extends UIDeviceModel implements Serializable {
 	
 	private Long mainCategoryId;
 	private String mainCategoryName;
+	
+	private List<UIDeviceImageModel> imageList;
 	
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -48,5 +51,12 @@ public class UIDeviceTagLibarary extends UIDeviceModel implements Serializable {
 		this.mainCategoryName = mainCategoryName;
 	}
 
+	public List<UIDeviceImageModel> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<UIDeviceImageModel> imageList) {
+		this.imageList = imageList;
+	}
 	
 }

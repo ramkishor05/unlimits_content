@@ -1,10 +1,12 @@
 package com.brijframework.content.device.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(value = Include.NON_NULL)
-public class UIDeviceImageModel extends UIDeviceModel{
+public class UIDeviceImageLibarary extends UIDeviceModel{
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,6 +17,8 @@ public class UIDeviceImageModel extends UIDeviceModel{
 	private String mainCategoryName;
 
 	public String imageUrl;
+	
+	private List<UIDeviceTagModel> tagList;
 
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -56,4 +60,11 @@ public class UIDeviceImageModel extends UIDeviceModel{
 		this.imageUrl = imageUrl;
 	}
 
+	public List<UIDeviceTagModel> getTagList() {
+		return tagList;
+	}
+
+	public void setTagList(List<UIDeviceTagModel> tagList) {
+		this.tagList = tagList;
+	}
 }

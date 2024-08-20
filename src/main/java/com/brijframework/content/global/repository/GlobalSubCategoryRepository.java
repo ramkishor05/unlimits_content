@@ -25,4 +25,7 @@ public interface GlobalSubCategoryRepository extends CustomRepository<EOGlobalSu
 
 	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI INNER JOIN EOGLOBAL_MAIN_CATEGORY GCG ON GCG.ID=  GCI.MAIN_CATEGORY_ID WHERE GCI.MAIN_CATEGORY_ID IN (?) ORDER BY GCG.NAME, GCI.NAME ")
 	List<EOGlobalSubCategory>  findAllByMainCategoryId(Long mainCategoryId);
+	
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_SUB_CATEGORY GCI WHERE UPPER(GCI.NAME) IN (?) ORDER BY GCI.NAME ")
+	List<EOGlobalSubCategory> findAllBySubCategoryNameIgnoreCaseIn(List<String> subCategoryNameList);
 }

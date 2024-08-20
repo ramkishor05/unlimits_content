@@ -13,7 +13,7 @@ public class UIDeviceExampleItemModel extends UIDeviceModel{
 
 	private Integer year;
 	
-	private UIDeviceImageModel imageLibarary;
+	private UIDeviceImageLibarary imageLibarary;
 	
 	private UIDeviceTagLibarary tagLibarary;
 
@@ -25,11 +25,11 @@ public class UIDeviceExampleItemModel extends UIDeviceModel{
 		this.year = year;
 	}
 
-	public UIDeviceImageModel getImageLibarary() {
+	public UIDeviceImageLibarary getImageLibarary() {
 		return imageLibarary;
 	}
 
-	public void setImageLibarary(UIDeviceImageModel imageLibarary) {
+	public void setImageLibarary(UIDeviceImageLibarary imageLibarary) {
 		this.imageLibarary = imageLibarary;
 	}
 
