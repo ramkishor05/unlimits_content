@@ -1,0 +1,144 @@
+{
+	"id": "Global_Portal_ImageLibarary_Charity",
+	"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+	"orderSequence": 4.3,
+	"objects": [
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_charitypng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_charitypng",
+				"name": "charity.png",
+				"orderSequence": 4.3,
+				"color": "#624464",
+				"type": "children welfare",
+				"imageUrl": "resource/tags_with_images/Charity/children welfare/charity.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity",
+				"tagList":[
+				]
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_selfgrowthcharitypng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_selfgrowthcharitypng",
+				"name": "selfgrowth,charity.png",
+				"orderSequence": 4.3999999999999995,
+				"color": "#624464",
+				"type": "children welfare",
+				"imageUrl": "resource/tags_with_images/Charity/children welfare/selfgrowth,charity.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_selfgrowthrecreationcharitypng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_selfgrowthrecreationcharitypng",
+				"name": "selfgrowth,recreation,charity.png",
+				"orderSequence": 4.499999999999999,
+				"color": "#624464",
+				"type": "children welfare",
+				"imageUrl": "resource/tags_with_images/Charity/children welfare/selfgrowth,recreation,charity.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_slumchildrenhappinesscharitypng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_slumchildrenhappinesscharitypng",
+				"name": "slum,children,happiness,charity.png",
+				"orderSequence": 4.599999999999999,
+				"color": "#624464",
+				"type": "children welfare",
+				"imageUrl": "resource/tags_with_images/Charity/children welfare/slum,children,happiness,charity.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_slumchildrencharitypng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_slumchildrencharitypng",
+				"name": "slumchildren,charity.png",
+				"orderSequence": 4.699999999999998,
+				"color": "#624464",
+				"type": "children welfare",
+				"imageUrl": "resource/tags_with_images/Charity/children welfare/slumchildren,charity.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_slumchildrenhappypng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_slumchildrenhappypng",
+				"name": "slumchildren,happy.png",
+				"orderSequence": 4.799999999999998,
+				"color": "#624464",
+				"type": "children welfare",
+				"imageUrl": "resource/tags_with_images/Charity/children welfare/slumchildren,happy.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_careerrecreationpng",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_careerrecreationpng",
+				"name": "career,recreation.png",
+				"orderSequence": 4.899999999999998,
+				"color": "#624464",
+				"type": "social welfare",
+				"imageUrl": "resource/tags_with_images/Charity/social welfare/career,recreation.png",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_Bucketlistwebp",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_Bucketlistwebp",
+				"name": "Bucketlist.webp",
+				"orderSequence": 4.999999999999997,
+				"color": "#624464",
+				"type": "Start a business",
+				"imageUrl": "resource/tags_with_images/Charity/Start a business/Bucketlist.webp",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		},
+		{
+			"id": "Global_Portal_ImageLibarary_Love_Charity_Healthwebp",
+			"type": "com.brijframework.content.global.entities.EOGlobalImageLibarary",
+			"name": "Global_Portal_ImageLibarary",
+			"properties": {
+				"idenNo": "Global_Portal_ImageLibarary_Love_Charity_Healthwebp",
+				"name": "Health.webp",
+				"orderSequence": 5.099999999999997,
+				"color": "#624464",
+				"type": "Start a business",
+				"imageUrl": "resource/tags_with_images/Charity/Start a business/Health.webp",
+				"subCategory": "LK@Global_Portal_SubCategory_Love_Charity"
+			},
+			"relationship": {}
+		}
+	]
+}
