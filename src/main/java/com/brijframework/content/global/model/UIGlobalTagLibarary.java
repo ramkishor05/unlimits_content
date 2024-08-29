@@ -9,7 +9,7 @@ public class UIGlobalTagLibarary extends UIGlobalItem implements Serializable {
 	
 	private Long subCategoryId;
 	
-	private List<UIGlobalImageLibarary> imageList;
+	private List<UIGlobalImageModel> imageList;
 
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -19,11 +19,11 @@ public class UIGlobalTagLibarary extends UIGlobalItem implements Serializable {
 		this.subCategoryId = subCategoryId;
 	}
 
-	public List<UIGlobalImageLibarary> getImageList() {
+	public List<UIGlobalImageModel> getImageList() {
 		return imageList;
 	}
 
-	public void setImageList(List<UIGlobalImageLibarary> imageList) {
+	public void setImageList(List<UIGlobalImageModel> imageList) {
 		this.imageList = imageList;
 	}
 	

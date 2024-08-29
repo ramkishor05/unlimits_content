@@ -10,9 +10,17 @@ public class IdenUtil {
 	public static String buildIdenNo(EOGlobalSubCategory subCategory, EOGlobalImageLibarary globalImageLibarary) {
 		return "Global_Portal_ImageLibarary"+"_"+replaceContent(subCategory.getMainCategory().getName())+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(globalImageLibarary.getName());
 	}
+	
+	public static String buildImageIdenNo(EOGlobalSubCategory subCategory, String imageName) {
+		return "Global_Portal_ImageLibarary"+"_"+replaceContent(subCategory.getMainCategory().getName())+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(imageName);
+	}
 
 	public static String buildIdenNo(EOGlobalSubCategory subCategory, EOGlobalTagLibarary globalTagLibarary) {
 		return "Global_Portal_TagLibarary"+"_"+replaceContent(subCategory.getMainCategory().getName())+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(globalTagLibarary.getName());
+	}
+	
+	public static String buildTagIdenNo(EOGlobalSubCategory subCategory, String tagName) {
+		return "Global_Portal_TagLibarary"+"_"+replaceContent(subCategory.getMainCategory().getName())+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(tagName);
 	}
 	
 	public static String buildIdenNo(EOGlobalMainCategory mainCategory, EOGlobalSubCategory subCategory) {

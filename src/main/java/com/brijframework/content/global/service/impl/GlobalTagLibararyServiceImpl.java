@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -38,7 +39,7 @@ import com.brijframework.content.global.entities.EOGlobalTagImageMapping;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.mapper.GlobalImageLibararyMapper;
 import com.brijframework.content.global.mapper.GlobalTagLibararyMapper;
-import com.brijframework.content.global.model.UIGlobalImageLibarary;
+import com.brijframework.content.global.model.UIGlobalImageModel;
 import com.brijframework.content.global.model.UIGlobalTagLibarary;
 import com.brijframework.content.global.repository.GlobalTagImageMappingRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
@@ -63,6 +64,9 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	
 	@Autowired
 	private GlobalImageLibararyMapper globalImageLibararyMapper;
+	
+	@Value("${openapi.service.url}")
+	private String serverUrl;
 
 	@Override
 	public JpaRepository<EOGlobalTagLibarary, Long> getRepository() {
@@ -142,13 +146,13 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 
 	private void saveTagImageMappingList(UIGlobalTagLibarary data, EOGlobalTagLibarary entity) {
-		List<UIGlobalImageLibarary> uiImageList = data.getImageList();
+		List<UIGlobalImageModel> uiImageList = data.getImageList();
 		if(!CollectionUtils.isEmpty(uiImageList)) {
 			globalTagImageMappingRepository.deleteAllByTagLibararyId(entity.getId());
 			List<EOGlobalTagImageMapping> eoTagImageList = new ArrayList<EOGlobalTagImageMapping>();
-			uiImageList.forEach(uiImageLibarary->{
+			uiImageList.forEach(uiImageModel->{
 				EOGlobalTagImageMapping globalTagImageMapping=new EOGlobalTagImageMapping();
-				globalTagImageMapping.setImageLibarary(globalImageLibararyMapper.mapToDAO(uiImageLibarary));
+				globalTagImageMapping.setImageLibarary(globalImageLibararyMapper.modelToDAO(uiImageModel));
 				globalTagImageMapping.setTagLibarary(entity);
 				eoTagImageList.add(globalTagImageMapping);
 			});
@@ -183,6 +187,18 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 		List<UIGlobalTagLibarary> uiObjects = super.postFetch(findObjects);
 		uiObjects.sort((uiObject1, uiObject2)->uiObject1.getSubCategoryId().compareTo(uiObject2.getSubCategoryId()));
 		return uiObjects;
+	}
+	
+	@Override
+	public void postFetch(EOGlobalTagLibarary findObject, UIGlobalTagLibarary dtoObject) {
+		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId());
+		if(!CollectionUtils.isEmpty(imageMappingList)) {
+			List<UIGlobalImageModel> tagMappingForImageList = globalTagLibararyMapper.tagMappingForImageList(imageMappingList);
+			for(UIGlobalImageModel uiDeviceImageModel: tagMappingForImageList) {
+				uiDeviceImageModel.setImageUrl(uiDeviceImageModel.getImageUrl().startsWith("/")? serverUrl+""+uiDeviceImageModel.getImageUrl() :  serverUrl+"/"+uiDeviceImageModel.getImageUrl());
+			}
+			dtoObject.setImageList(tagMappingForImageList);
+		}
 	}
 
 	@Override

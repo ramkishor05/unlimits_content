@@ -1,4 +1,4 @@
-package com.brijframework.content.global.model;
+package com.brijframework.content.global.resource;
 
 public class UITagResource {
 	private String name;

@@ -85,7 +85,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	
 	@Override
 	public List<String> getTypes(Long subCategoryId) {
-		return globalImageLibararyRepository.findTypeBySubCategoryId(subCategoryId);
+		return globalImageLibararyRepository.findTypeBySubCategoryId(subCategoryId, RecordStatus.ACTIVETED.getStatusIds());
 	}
 
 	public void postFetch(EOGlobalImageLibarary findObject, UIDeviceImageLibarary dtoObject) {

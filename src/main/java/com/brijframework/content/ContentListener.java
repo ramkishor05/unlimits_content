@@ -59,27 +59,27 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
 				List<EOGlobalMainCategory> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalMainCategory.class);
 
-				globalMainCategoryService.init(eoGlobalCategoryGroupJson);
+				//globalMainCategoryService.init(eoGlobalCategoryGroupJson);
 
 				List<EOGlobalSubCategory> eoGlobalCategoryItemJson = instance.getAll(EOGlobalSubCategory.class);
 
-				globalSubCategoryService.init(eoGlobalCategoryItemJson);
+				//globalSubCategoryService.init(eoGlobalCategoryItemJson);
 
 				List<EOGlobalTagLibarary> eoGlobalTagItemJson = instance.getAll(EOGlobalTagLibarary.class);
 
-				globalTagResourceService.init(eoGlobalTagItemJson);
+				//globalTagResourceService.init(eoGlobalTagItemJson);
 				
 				List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
-				globalTenureService.init(eoGlobalTenureJson);
+				//globalTenureService.init(eoGlobalTenureJson);
 				
 				List<EOGlobalPromptLibarary> eoGlobalPromptJson = instance.getAll(EOGlobalPromptLibarary.class);
 
-				globalPromptLibararyService.init(eoGlobalPromptJson);
+				//globalPromptLibararyService.init(eoGlobalPromptJson);
 
 				List<EOGlobalExampleLibarary> eoGlobalExampleLibararyJson = instance.getAll(EOGlobalExampleLibarary.class);
 
-				globalExampleLibararyService.init(eoGlobalExampleLibararyJson);
+				//globalExampleLibararyService.init(eoGlobalExampleLibararyJson);
 				
 				try {
 					globalImageLibararyService.init();

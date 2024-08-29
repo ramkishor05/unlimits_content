@@ -49,7 +49,7 @@ public abstract class EOEntityObject implements Serializable {
 	private Double orderSequence;
 	
 	@PrePersist
-	private void init() {
+	public void init() {
 		this.recordState=RecordStatus.ACTIVETED.getStatus();
 	}
 

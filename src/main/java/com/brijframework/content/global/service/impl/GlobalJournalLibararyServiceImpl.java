@@ -53,6 +53,13 @@ public class GlobalJournalLibararyServiceImpl  extends CrudServiceImpl<UIGlobalJ
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
 	}
+	
+	@Override
+	public void merge(UIGlobalJournalLibarary dtoObject, EOGlobalJournalLibarary entityObject,
+			UIGlobalJournalLibarary updateDtoObject, EOGlobalJournalLibarary updateEntityObject,
+			Map<String, List<String>> headers) {
+		super.merge(dtoObject, entityObject, updateDtoObject, updateEntityObject, headers);
+	}
 
 	@Override
 	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {

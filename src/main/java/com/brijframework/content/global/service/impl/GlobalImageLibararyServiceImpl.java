@@ -35,7 +35,7 @@ import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.mapper.GlobalImageLibararyMapper;
 import com.brijframework.content.global.mapper.GlobalTagLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalImageLibarary;
-import com.brijframework.content.global.model.UIGlobalTagLibarary;
+import com.brijframework.content.global.model.UIGlobalTagModel;
 import com.brijframework.content.global.repository.GlobalImageLibararyRepository;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTagImageMappingRepository;
@@ -144,6 +144,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	
 	@Override
 	public void postAdd(UIGlobalImageLibarary data, EOGlobalImageLibarary entity) {
+		data.setIdenNo(IdenUtil.buildTagIdenNo(entity.getSubCategory(), data.getName()));
 		saveTagImageMappingList(data, entity);
 	}
 
@@ -164,20 +165,24 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	}
 	
 	private void saveTagImageMappingList(UIGlobalImageLibarary data, EOGlobalImageLibarary entity) {
-		List<UIGlobalTagLibarary> uiTagList = data.getTagList();
+		List<UIGlobalTagModel> uiTagList = data.getTagList();
 		if(!CollectionUtils.isEmpty(uiTagList)) {
 			globalTagImageMappingRepository.deleteAllByImageLibararyId(entity.getId());
 			List<EOGlobalTagImageMapping> eoTagImageList = new ArrayList<EOGlobalTagImageMapping>();
 			uiTagList.forEach(uiTagLibarary->{
 				EOGlobalTagImageMapping globalTagImageMapping=new EOGlobalTagImageMapping();
 				globalTagImageMapping.setImageLibarary(entity);
-				globalTagImageMapping.setTagLibarary(globalTagLibararyMapper.mapToDAO(uiTagLibarary));
+				globalTagImageMapping.setTagLibarary(globalTagLibararyMapper.modelToDAO(uiTagLibarary));
 				eoTagImageList.add(globalTagImageMapping);
 			});
 			globalTagImageMappingRepository.saveAllAndFlush(eoTagImageList);
+		} else {
+			globalTagImageMappingRepository.deleteAllByImageLibararyId(entity.getId());
+			Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap = globalTagLibararyRepository.findAll().stream().collect(Collectors.toMap(globalTagLibarary->buildTagId(globalTagLibarary), Function.identity()));
+			saveImageTagMappings(entity, data.getName(), globalTagLibararyNameMap);
 		}
 	}
-
+	
 	private void saveResource(UIGlobalImageLibarary data, EOGlobalImageLibarary find) {
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
@@ -229,7 +234,13 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		if(StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
 			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/")? serverUrl+""+dtoObject.getPosterUrl() :  serverUrl+"/"+dtoObject.getPosterUrl());
 		}
+		List<EOGlobalTagImageMapping> tagImageMappings = globalTagImageMappingRepository.findAllByImageLibararyId(findObject.getId());
+		if(!CollectionUtils.isEmpty(tagImageMappings)) {
+			List<UIGlobalTagModel> tagMappingForTagList = globalImageLibararyMapper.tagMappingForImageList(tagImageMappings);
+			dtoObject.setTagList(tagMappingForTagList);
+		}
 	}
+
 	
 	@Override
 	public List<String> ignoreProperties() {
@@ -326,6 +337,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	private EOGlobalTagLibarary createTagLibarary(Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap, EOGlobalSubCategory globalCategoryItem, String name){
 		try {
 			EOGlobalTagLibarary eoGlobalTagLibarary= new EOGlobalTagLibarary();
+			eoGlobalTagLibarary.setIdenNo(IdenUtil.buildTagIdenNo(globalCategoryItem, name));
 			eoGlobalTagLibarary.setName(name);
 			eoGlobalTagLibarary.setSubCategory(globalCategoryItem);
 			eoGlobalTagLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
@@ -387,10 +399,12 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 
 	private void saveImageTagMappings(EOGlobalImageLibarary globalImageLibarary, String tagNames, Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap) {
 		Map<String, EOGlobalTagImageMapping> tagMappingMap = globalImageLibarary.getTagList().stream().collect(Collectors.toMap((tagMapping)->tagMapping.getTagLibarary().getName(), (tagMapping)->tagMapping));
-		for(String tagName :tagNames.split(",")) {
-			EOGlobalTagImageMapping globalTagImageMapping = tagMappingMap.getOrDefault(tagName, findOrCreateTagMappingLibarary(globalImageLibarary, tagName, tagMappingMap,  globalTagLibararyNameMap));
+		String finalTags = StringUtil.capitalFirstLetterText(tagNames.replace("_", " "));
+		for(String tagName :finalTags.split(",")) {
+			String finalTag=tagName.trim();
+			EOGlobalTagImageMapping globalTagImageMapping = tagMappingMap.getOrDefault(finalTag, findOrCreateTagMappingLibarary(globalImageLibarary, finalTag, tagMappingMap,  globalTagLibararyNameMap));
 			globalTagImageMapping=globalTagImageMappingRepository.saveAndFlush(globalTagImageMapping);
-			tagMappingMap.put(tagName, globalTagImageMapping);
+			tagMappingMap.put(finalTag, globalTagImageMapping);
 		}
 	}
 	
