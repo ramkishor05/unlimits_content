@@ -16,12 +16,9 @@ import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.model.UIGlobalMainCategory;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
 
-import io.swagger.v3.oas.annotations.Hidden;
-
 @RestController
 @RequestMapping("api/global/main/category")
 @CrossOrigin("*")
-@Hidden
 public class GlobalMainCategoryController implements CrudController<UIGlobalMainCategory, EOGlobalMainCategory, Long> {
 
 	@Autowired

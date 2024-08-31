@@ -9,12 +9,9 @@ import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.model.UIGlobalTagLibarary;
 import com.brijframework.content.global.service.GlobalTagLibararyService;
 
-import io.swagger.v3.oas.annotations.Hidden;
-
 
 @RestController
 @RequestMapping("/api/global/tag/library")
-@Hidden
 public class GlobalTagLibararyController implements CrudController<UIGlobalTagLibarary, EOGlobalTagLibarary, Long>{
 
 	@Autowired

@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.resource.service.ResourceService;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(value="/resource")
-@Hidden
 public class ResourceController{
 
 	@Autowired

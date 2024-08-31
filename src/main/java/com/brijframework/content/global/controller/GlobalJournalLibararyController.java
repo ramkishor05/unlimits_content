@@ -10,13 +10,10 @@ import com.brijframework.content.global.entities.EOGlobalJournalLibarary;
 import com.brijframework.content.global.model.UIGlobalJournalLibarary;
 import com.brijframework.content.global.service.GlobalJournalLibararyService;
 
-import io.swagger.v3.oas.annotations.Hidden;
-
 
 @RestController
 @RequestMapping("/api/global/journal/libarary")
 @CrossOrigin("*")
-@Hidden
 public class GlobalJournalLibararyController implements CrudController<UIGlobalJournalLibarary, EOGlobalJournalLibarary, Long> {
 
 	@Autowired

@@ -10,13 +10,10 @@ import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.model.UIGlobalSubCategory;
 import com.brijframework.content.global.service.GlobalSubCategoryService;
 
-import io.swagger.v3.oas.annotations.Hidden;
-
 
 @RestController
 @RequestMapping("/api/global/sub/category")
 @CrossOrigin("*")
-@Hidden
 public class GlobalSubCategoryController implements CrudController<UIGlobalSubCategory, EOGlobalSubCategory, Long>{
 
 	@Autowired

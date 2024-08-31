@@ -9,12 +9,9 @@ import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.model.UIGlobalTenure;
 import com.brijframework.content.global.service.GlobalTenureService;
 
-import io.swagger.v3.oas.annotations.Hidden;
-
 
 @RestController
 @RequestMapping("/api/global/tenure")
-@Hidden
 public class GlobalTenureController implements CrudController<UIGlobalTenure, EOGlobalTenure, Long>{
 
 	@Autowired
