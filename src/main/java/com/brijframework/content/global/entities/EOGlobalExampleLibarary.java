@@ -23,6 +23,9 @@ public class EOGlobalExampleLibarary extends EOGlobalItem {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name=RESOURCE_ID)
+	private Long resourceId;
 
 	@Column(name = "PROFILE_NAME")
 	private String profileName;
@@ -51,6 +54,14 @@ public class EOGlobalExampleLibarary extends EOGlobalItem {
 	
 	@OneToMany(mappedBy = "exampleLibarary", cascade = CascadeType.ALL)
 	private List<EOGlobalExampleVisualize> visualizeItems;
+
+	public Long getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(Long resourceId) {
+		this.resourceId = resourceId;
+	}
 
 	public String getProfileName() {
 		return profileName;

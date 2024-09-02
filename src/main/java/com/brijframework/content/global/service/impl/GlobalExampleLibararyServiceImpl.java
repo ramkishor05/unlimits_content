@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import org.unlimits.rest.crud.service.CrudServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.RecordStatus;
+import com.brijframework.content.forgin.repository.ResourceClient;
 import com.brijframework.content.global.entities.EOGlobalExampleItem;
 import com.brijframework.content.global.entities.EOGlobalExampleLibarary;
 import com.brijframework.content.global.entities.EOGlobalExampleVisualize;
@@ -34,6 +36,7 @@ import com.brijframework.content.global.repository.GlobalImageLibararyRepository
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
 import com.brijframework.content.global.service.GlobalExampleLibararyService;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
@@ -43,7 +46,16 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalExampleLibarary, EOGlobalExampleLibarary, Long> implements GlobalExampleLibararyService {
 	
+	/**
+	 * 
+	 */
+	private static final String PROFILE_PICTURE_URL = "profilePictureURL";
+
 	private static final String RECORD_STATE = "recordState";
+	
+	private static final String EXAMPLE = "examples";
+
+	private static final String POSTER_URL = "posterUrl";
 	
 	@Autowired
 	private GlobalExampleLibararyRepository globalExampleLibararyRepository;
@@ -74,6 +86,9 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 	
 	@Value("${openapi.service.url}")
 	private String serverUrl;
+	
+	@Autowired
+	private ResourceClient resourceClient;
 	
 	@Override
 	public JpaRepository<EOGlobalExampleLibarary, Long> getRepository() {
@@ -164,12 +179,41 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 	public void preAdd(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
 			Map<String, List<String>> headers) {
 		saveExampleItems(data, entity);
+		saveResource(data, entity);
 	}
 	
 	@Override
 	public void preUpdate(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
 			Map<String, List<String>> headers) {
 		saveExampleItems(data, entity);
+		saveResource(data, entity);
+	}
+	
+	private void saveResource(UIGlobalExampleLibarary data, EOGlobalExampleLibarary find) {
+		UIResourceModel resource = data.getProfileResource();
+		ignoreProperties().clear();
+		ignoreProperties().add(getPrimaryKey());
+		if(resource!=null) {
+			resource.setIncludeId(true);
+			resource.setId(find!=null? find.getResourceId(): null);
+			resource.setFolderName(EXAMPLE+"/"+data.getProfileName().replace(" ", "").toLowerCase());
+			UIResourceModel resourceFile= resourceClient.add(resource);
+			resourceFile.setIncludeId(true);
+			data.setResourceId(resourceFile.getId());
+			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
+				data.setProfilePictureURL(resourceFile.getFileUrl());
+			} else {
+				ignoreProperties().add(PROFILE_PICTURE_URL);
+			}
+			if(StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent())) {
+				data.setPosterUrl(resourceFile.getPosterUrl());
+			} else {
+				ignoreProperties().add(PROFILE_PICTURE_URL);
+			}
+		} else {
+			ignoreProperties().add(POSTER_URL);
+			ignoreProperties().add(PROFILE_PICTURE_URL);
+		}
 	}
 
 	private void saveExampleItems(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity) {

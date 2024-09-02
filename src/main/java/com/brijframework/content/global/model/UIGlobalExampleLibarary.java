@@ -3,6 +3,7 @@ package com.brijframework.content.global.model;
 import java.util.List;
 import java.util.Map;
 
+import com.brijframework.content.resource.modal.UIResourceModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -21,6 +22,7 @@ public class UIGlobalExampleLibarary extends UIGlobalItem {
 	private String profileOrganization;
 	private String posterUrl;
 	
+	private UIResourceModel profileResource;
 	private Map<Integer, UIGlobalExampleVisualize> visualizeMap;
 
 	private List<UIGlobalExampleItem> exampleItems;
@@ -97,4 +99,11 @@ public class UIGlobalExampleLibarary extends UIGlobalItem {
 		this.exampleItems = exampleItems;
 	}
 
+	public UIResourceModel getProfileResource() {
+		return profileResource;
+	}
+
+	public void setProfileResource(UIResourceModel profileResource) {
+		this.profileResource = profileResource;
+	}
 }
