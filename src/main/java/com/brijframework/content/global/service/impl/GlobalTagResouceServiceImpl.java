@@ -51,7 +51,6 @@ public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 		keyMapper.put("Tag Name".toUpperCase(), "name");
 		keyMapper.put("Sub Category".toUpperCase(), "subCategoryName");
 	}
-	
 
 	@Override
 	public void init(List<EOGlobalTagLibarary> eoGlobalTagItemJson) {

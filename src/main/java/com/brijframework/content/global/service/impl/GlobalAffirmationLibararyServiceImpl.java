@@ -60,9 +60,7 @@ public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLi
 	
 	@Override
 	public void preAdd(UIGlobalAffirmationLibarary data,  Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
-			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		}
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		saveResource(data, null);
 	}
 	

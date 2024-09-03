@@ -106,9 +106,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	
 	@Override
 	public void preAdd(UIGlobalPromptLibarary data, Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
-			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		}
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	
 	@Override

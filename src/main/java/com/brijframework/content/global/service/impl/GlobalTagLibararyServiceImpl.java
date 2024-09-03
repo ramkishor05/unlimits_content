@@ -131,6 +131,11 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
+	public void preAdd(UIGlobalTagLibarary data, Map<String, List<String>> headers) {
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+	}
+	
+	@Override
 	public void preAdd(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
 		if(data.getType()==null) {
 			data.setType(VisualiseType.WORDS_PAGE.getType());

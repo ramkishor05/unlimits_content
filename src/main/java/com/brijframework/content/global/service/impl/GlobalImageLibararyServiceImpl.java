@@ -134,9 +134,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 
 	@Override
 	public void preAdd(UIGlobalImageLibarary data, Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
-			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		}
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		if(data.getFileResource()!=null) {
 			saveResource(data , null);
 		}

@@ -7,6 +7,8 @@ import com.brijframework.content.resource.modal.UIResourceModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import jakarta.validation.constraints.NotNull;
+
 @JsonInclude(content = Include.NON_ABSENT)
 public class UIGlobalExampleLibarary extends UIGlobalItem {
 	/**
@@ -15,6 +17,7 @@ public class UIGlobalExampleLibarary extends UIGlobalItem {
 	private static final long serialVersionUID = 1L;
 	private Long subCategoryId;
 
+	@NotNull
 	private String profileName;
 	private String profilePictureURL;
 	private String profileAge;
@@ -23,6 +26,7 @@ public class UIGlobalExampleLibarary extends UIGlobalItem {
 	private String posterUrl;
 	
 	private UIResourceModel profileResource;
+	
 	private Map<Integer, UIGlobalExampleVisualize> visualizeMap;
 
 	private List<UIGlobalExampleItem> exampleItems;

@@ -174,12 +174,24 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 		return exampleVisualize.getTenure().getId()+"";
 	}
 
+	@Override
+	public void preAdd(UIGlobalExampleLibarary data, Map<String, List<String>> headers) {
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		data.setProfilePictureURL(null);
+		data.setPosterUrl(null);
+	}
 	
 	@Override
 	public void preAdd(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
 			Map<String, List<String>> headers) {
 		saveExampleItems(data, entity);
 		saveResource(data, entity);
+	}
+	
+	@Override
+	public void preUpdate(UIGlobalExampleLibarary data, Map<String, List<String>> headers) {
+		data.setProfilePictureURL(null);
+		data.setPosterUrl(null);
 	}
 	
 	@Override

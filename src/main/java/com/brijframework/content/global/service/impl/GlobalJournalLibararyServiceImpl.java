@@ -42,9 +42,7 @@ public class GlobalJournalLibararyServiceImpl  extends CrudServiceImpl<UIGlobalJ
 	
 	@Override
 	public void preAdd(UIGlobalJournalLibarary data, Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
-			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		}
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	
 	@Override

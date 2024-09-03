@@ -116,6 +116,10 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		;
 	}
 	
+	@Override
+	public void preAdd(UIGlobalMainCategory data, Map<String, List<String>> headers) {
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+	}
 	
 	@Override
 	public void preAdd(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {

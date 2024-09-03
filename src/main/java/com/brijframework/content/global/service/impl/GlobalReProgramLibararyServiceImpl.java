@@ -68,9 +68,7 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 	
 	@Override
 	public void preAdd(UIGlobalReProgramLibarary data, Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
-			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		}
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		saveResource(data, null);
 	}
 	
