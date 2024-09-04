@@ -135,13 +135,5 @@ public class EOGlobalExampleLibarary extends EOGlobalItem {
 		this.visualizeItems = visualizeItems;
 	}
 
-	@Override
-	public String toString() {
-		return "EOGlobalExampleLibarary [profileName=" + profileName + ", profilePictureURL=" + profilePictureURL
-				+ ", profileAge=" + profileAge + ", profilePosition=" + profilePosition + ", profileOrganization="
-				+ profileOrganization + ", posterUrl=" + posterUrl + ", subCategory=" + subCategory + ", exampleItems="
-				+ exampleItems + ", visualizeItems=" + visualizeItems + "]";
-	}
-
 	
 }

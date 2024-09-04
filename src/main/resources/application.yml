@@ -80,4 +80,4 @@ spring:
     port: '587'
    db:
      datajson:
-       upload: false
+       upload: true

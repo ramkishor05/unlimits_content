@@ -1,0 +1,79 @@
+{
+	"id": "Global_Portal_ExampleLibarary_Wealth",
+	"type": "com.brijframework.content.global.model.UIGlobalExampleResource",
+	"orderSequence": 1.3,
+	"objects": [
+		{
+			"id": "Global_Portal_ExampleLibarary_Paul",
+			"type": "com.brijframework.content.global.model.UIGlobalExampleResource",
+			"name": "Global_Portal_ExampleLibarary",
+			"properties": {
+				"orderSequence": 1.0,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ExampleLibarary_Paul",
+				"name": "Paul Unlimits",
+				"type": "EXAMPLE",
+				"profileName": "Paul",
+				"profilePictureURL": "/resource/visualaize/examples/paul/ProfileImage.jpg",
+				"profileAge": "42",
+				"profilePosition": "Investor",
+				"profileOrganization": "Investor Unlimits",
+				"posterUrl": "/resource/visualaize/examples/paul/PostarImage.png",
+				"exampleItems": [
+					{
+						"year": "1",
+						"tag": "Sunset In Santorini"
+					}
+				]
+			}
+		},
+		{
+			"id": "Global_Portal_ExampleLibarary_Rahul_Singh",
+			"type": "com.brijframework.content.global.model.UIGlobalExampleResource",
+			"name": "Global_Portal_ExampleLibarary",
+			"properties": {
+				"orderSequence": 2.0,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ExampleLibarary_Rahul_Singh",
+				"name": "Rahul Singh Unlimits",
+				"type": "EXAMPLE",
+				"profileName": "Rahul Singh",
+				"profilePictureURL": "/resource/visualaize/examples/rahulsingh/ProfileImage.jpg",
+				"profileAge": "38",
+				"profilePosition": "Business Owner",
+				"profileOrganization": "Unlimits",
+				"posterUrl": "/resource/visualaize/examples/rahulsingh/PostarImage.png",
+				"exampleItems": [
+					{
+						"year": "5",
+						"tag": "Certified Scuba Diver"
+					}
+				]
+			}
+		},
+		{
+			"id": "Global_Portal_ExampleLibarary_Sajith_Ansar",
+			"type": "com.brijframework.content.global.model.UIGlobalExampleResource",
+			"name": "Global_Portal_ExampleLibarary",
+			"properties": {
+				"orderSequence": 3.0,
+				"color": "#4cbbae",
+				"idenNo": "Global_Portal_ExampleLibarary_Sajith_Ansar",
+				"name": "Sajith Ansar Unlimits",
+				"type": "EXAMPLE",
+				"profileName": "Sajith Ansar",
+				"profilePictureURL": "/resource/visualaize/examples/sajithansar/ProfileImage.png",
+				"profileAge": "48",
+				"profilePosition": "CEO",
+				"profileOrganization": "Unlimits",
+				"posterUrl": "/resource/visualaize/examples/sajithansar/PostarImage.png",
+				"exampleItems": [
+					{
+						"year": "10",
+						"tag": "African Photo Safari"
+					}
+				]
+			}
+		}
+	]
+}

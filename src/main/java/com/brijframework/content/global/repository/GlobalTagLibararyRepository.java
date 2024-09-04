@@ -27,4 +27,6 @@ public interface GlobalTagLibararyRepository extends CustomRepository<EOGlobalTa
 
 	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL INNER JOIN EOGLOBAL_SUB_CATEGORY GSC ON GSC.ID=GTL.SUB_CATEGORY_ID WHERE UPPER(GTL.NAME) IN (?1) ORDER BY GTL.NAME ")
 	List<EOGlobalTagLibarary> findAllBySubCategoryNameIgnoreCaseIn(List<String> subCategoryNameList);
+
+	List<EOGlobalTagLibarary> findAllByName(String tag);
 }

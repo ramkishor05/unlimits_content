@@ -16,7 +16,9 @@ import com.brijframework.content.global.entities.EOGlobalPromptLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.entities.EOGlobalTenure;
+import com.brijframework.content.global.model.UIGlobalExampleResource;
 import com.brijframework.content.global.service.GlobalExampleLibararyService;
+import com.brijframework.content.global.service.GlobalExampleResourceService;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
 import com.brijframework.content.global.service.GlobalPromptLibararyService;
@@ -47,6 +49,9 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	
 	@Autowired
 	private GlobalExampleLibararyService globalExampleLibararyService;
+	
+	@Autowired
+	private GlobalExampleResourceService globalExampleResourceService;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
@@ -77,15 +82,9 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 
 				//globalPromptLibararyService.init(eoGlobalPromptJson);
 
-				List<EOGlobalExampleLibarary> eoGlobalExampleLibararyJson = instance.getAll(EOGlobalExampleLibarary.class);
+				List<UIGlobalExampleResource> globalExampleResources = instance.getAll(UIGlobalExampleResource.class);
 
-				//globalExampleLibararyService.init(eoGlobalExampleLibararyJson);
-				
-				try {
-					globalImageLibararyService.init();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				globalExampleResourceService.init(globalExampleResources);
 
 				//export_global_main_category();
 				//export_global_sub_category();
