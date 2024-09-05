@@ -14,7 +14,7 @@ public class UIGlobalExampleItemResource {
 	private String image;
 
 	private String tag;
-
+	
 	public Integer getYear() {
 		return year;
 	}

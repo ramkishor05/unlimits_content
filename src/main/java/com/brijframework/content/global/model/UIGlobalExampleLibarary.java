@@ -3,6 +3,8 @@ package com.brijframework.content.global.model;
 import java.util.List;
 import java.util.Map;
 
+import org.unlimits.rest.model.UIModel;
+
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -10,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import jakarta.validation.constraints.NotNull;
 
 @JsonInclude(content = Include.NON_ABSENT)
-public class UIGlobalExampleLibarary extends UIGlobalItem {
+public class UIGlobalExampleLibarary extends UIModel {
 	/**
 	 * 
 	 */
@@ -30,6 +32,8 @@ public class UIGlobalExampleLibarary extends UIGlobalItem {
 	private Map<Integer, UIGlobalExampleVisualize> visualizeMap;
 
 	private List<UIGlobalExampleItem> exampleItems;
+	private Long resourceId;
+	private String idenNo;
 
 	public Long getSubCategoryId() {
 		return subCategoryId;
@@ -109,5 +113,21 @@ public class UIGlobalExampleLibarary extends UIGlobalItem {
 
 	public void setProfileResource(UIResourceModel profileResource) {
 		this.profileResource = profileResource;
+	}
+
+	public void setResourceId(Long resourceId) {
+		this.resourceId=resourceId;
+	}
+
+	public Long getResourceId() {
+		return resourceId;
+	}
+
+	public void setIdenNo(String idenNo) {
+		this.idenNo=idenNo;
+	}
+	
+	public String getIdenNo() {
+		return idenNo;
 	}
 }

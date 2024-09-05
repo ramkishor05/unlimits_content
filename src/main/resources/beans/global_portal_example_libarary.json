@@ -19,6 +19,7 @@
 				"profilePosition": "Investor",
 				"profileOrganization": "Investor Unlimits",
 				"posterUrl": "/resource/visualaize/examples/paul/PostarImage.png",
+				"subCategoryName":"Bucketlist",
 				"exampleItems": [
 					{
 						"year": "1",
@@ -43,6 +44,7 @@
 				"profilePosition": "Business Owner",
 				"profileOrganization": "Unlimits",
 				"posterUrl": "/resource/visualaize/examples/rahulsingh/PostarImage.png",
+				"subCategoryName":"Bucketlist",
 				"exampleItems": [
 					{
 						"year": "5",
@@ -67,6 +69,7 @@
 				"profilePosition": "CEO",
 				"profileOrganization": "Unlimits",
 				"posterUrl": "/resource/visualaize/examples/sajithansar/PostarImage.png",
+				"subCategoryName":"Bucketlist",
 				"exampleItems": [
 					{
 						"year": "10",

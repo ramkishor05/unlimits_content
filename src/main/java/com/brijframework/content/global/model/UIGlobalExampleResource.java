@@ -11,7 +11,8 @@ import jakarta.validation.constraints.NotNull;
 
 @JsonInclude(content = Include.NON_ABSENT)
 public class UIGlobalExampleResource {
-	
+
+	private String idenNo;
 	@NotNull
 	private String profileName;
 	private String profilePictureURL;
@@ -19,13 +20,21 @@ public class UIGlobalExampleResource {
 	private String profilePosition;
 	private String profileOrganization;
 	private String posterUrl;
-	
+	private String subCategoryName;
+
 	private UIResourceModel profileResource;
-	
+
 	private Map<Integer, UIGlobalExampleVisualize> visualizeMap;
 
 	private List<UIGlobalExampleItemResource> exampleItems;
-	private String idenNo;
+
+	public String getIdenNo() {
+		return idenNo;
+	}
+
+	public void setIdenNo(String idenNo) {
+		this.idenNo = idenNo;
+	}
 
 	public String getProfileName() {
 		return profileName;
@@ -75,6 +84,22 @@ public class UIGlobalExampleResource {
 		this.posterUrl = posterUrl;
 	}
 
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
+	}
+
+	public UIResourceModel getProfileResource() {
+		return profileResource;
+	}
+
+	public void setProfileResource(UIResourceModel profileResource) {
+		this.profileResource = profileResource;
+	}
+
 	public Map<Integer, UIGlobalExampleVisualize> getVisualizeMap() {
 		return visualizeMap;
 	}
@@ -91,19 +116,4 @@ public class UIGlobalExampleResource {
 		this.exampleItems = exampleItems;
 	}
 
-	public UIResourceModel getProfileResource() {
-		return profileResource;
-	}
-
-	public void setProfileResource(UIResourceModel profileResource) {
-		this.profileResource = profileResource;
-	}
-
-	public String getIdenNo() {
-		return idenNo;
-	}
-	
-	public void setIdenNo(String idenNo) {
-		this.idenNo = idenNo;
-	}
 }

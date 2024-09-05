@@ -1,10 +1,12 @@
 package com.brijframework.content.global.model;
 
+import org.unlimits.rest.model.UIModel;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(content = Include.NON_ABSENT)
-public class UIGlobalExampleItem extends UIGlobalItem {
+public class UIGlobalExampleItem extends UIModel {
 
 	/**
 	 * 

@@ -184,12 +184,12 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 	@Override
 	public void preAdd(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
 			Map<String, List<String>> headers) {
-		saveExampleItems(data, entity);
 		saveResource(data, entity);
 	}
 	
 	@Override
 	public void preUpdate(UIGlobalExampleLibarary data, Map<String, List<String>> headers) {
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		data.setProfilePictureURL(null);
 		data.setPosterUrl(null);
 	}
@@ -197,8 +197,14 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 	@Override
 	public void preUpdate(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
 			Map<String, List<String>> headers) {
-		saveExampleItems(data, entity);
 		saveResource(data, entity);
+	}
+	
+	@Override
+	public void merge(UIGlobalExampleLibarary dtoObject, EOGlobalExampleLibarary entityObject,
+			UIGlobalExampleLibarary updateDtoObject, EOGlobalExampleLibarary updateEntityObject,
+			Map<String, List<String>> headers) {
+		saveExampleItems(dtoObject, updateEntityObject);
 	}
 	
 	private void saveResource(UIGlobalExampleLibarary data, EOGlobalExampleLibarary find) {
@@ -220,7 +226,7 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 			if(StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent())) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
 			} else {
-				ignoreProperties().add(PROFILE_PICTURE_URL);
+				ignoreProperties().add(POSTER_URL);
 			}
 		} else {
 			ignoreProperties().add(POSTER_URL);
@@ -238,7 +244,7 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 				eoGlobalExampleVisualize.setExampleLibarary(entity);
 				eoGlobalExampleVisualizes.add(eoGlobalExampleVisualize);
 			});
-			entity.setVisualizeItems(eoGlobalExampleVisualizes);
+			entity.setVisualizeItems(globalExampleVisualizeRepository.saveAll(eoGlobalExampleVisualizes));
 		}
 		List<UIGlobalExampleItem> exampleItems = data.getExampleItems();
 		if(!CollectionUtils.isEmpty(exampleItems)) {
@@ -257,14 +263,11 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 				eoGlobalExampleItem.setExampleLibarary(entity);
 				eoGlobalExampleItems.add(eoGlobalExampleItem);
 			});
-			entity.setExampleItems(eoGlobalExampleItems);
+			entity.setExampleItems(globalExampleItemRepository.saveAll(eoGlobalExampleItems));
 		}
 	}
 
 	public void postFetch(EOGlobalExampleLibarary findObject, UIGlobalExampleLibarary dtoObject) {
-		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
-			dtoObject.setIdenNo(findObject.getId()+"");
-		}
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}

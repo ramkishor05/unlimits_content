@@ -29,7 +29,7 @@ public interface GlobalJournalLibararyRepository extends CustomRepository<EOGlob
 	@Query(nativeQuery = true , value= "SELECT * FROM "+EOGLOBAL_JOURNAL_LIBARARY+" where JOURNAL_DATE = DATE_SUB(CURRENT_DATE(),INTERVAL 1 DAY) and RECORD_STATUS in (?)")
 	List<EOGlobalJournalLibarary> findYesterdayJournalLibarary(List<String> statusList);
 
-	@Query(nativeQuery = true , value= "SELECT * FROM "+EOGLOBAL_JOURNAL_LIBARARY+" where JOURNAL_DATE = (select max(JOURNAL_DATE) FROM "+EOGLOBAL_JOURNAL_LIBARARY+" and RECORD_STATUS in (?))")
+	@Query(nativeQuery = true , value= "SELECT * FROM "+EOGLOBAL_JOURNAL_LIBARARY+" where JOURNAL_DATE = (select max(JOURNAL_DATE) FROM "+EOGLOBAL_JOURNAL_LIBARARY+" where RECORD_STATUS in (?))")
 	List<EOGlobalJournalLibarary> findLastJournalLibarary(List<String> statusList);
 	
 }

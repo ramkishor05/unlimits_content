@@ -12,17 +12,20 @@ import com.brijframework.content.global.entities.EOGlobalExampleItem;
 import com.brijframework.content.global.entities.EOGlobalExampleLibarary;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
-import com.brijframework.content.global.model.UIGlobalExampleItemResource;
 import com.brijframework.content.global.model.UIGlobalExampleResource;
 import com.brijframework.content.global.repository.GlobalExampleItemRepository;
 import com.brijframework.content.global.repository.GlobalExampleLibararyRepository;
 import com.brijframework.content.global.repository.GlobalImageLibararyRepository;
+import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
 import com.brijframework.content.global.service.GlobalExampleResourceService;
 
 @Service
 public class GlobalExampleResourceServiceImpl implements GlobalExampleResourceService {
+	
+	@Autowired
+	private GlobalSubCategoryRepository globalSubCategoryRepository;
 	
 	@Autowired
 	private GlobalExampleLibararyRepository globalExampleLibararyRepository;
@@ -44,11 +47,11 @@ public class GlobalExampleResourceServiceImpl implements GlobalExampleResourceSe
 		globalExampleResources.forEach(globalExampleResource -> {
 			EOGlobalExampleLibarary findGlobalExampleLibarary = globalExampleLibararyRepository.findByIdenNo(globalExampleResource.getIdenNo()).orElse(new EOGlobalExampleLibarary());
 			BeanUtils.copyProperties(globalExampleResource, findGlobalExampleLibarary, "id","exampleItems");
+			findGlobalExampleLibarary.setSubCategory(globalSubCategoryRepository.findByName(globalExampleResource.getSubCategoryName()).orElse(null));
 			findGlobalExampleLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
 			EOGlobalExampleLibarary eoGlobalExampleItemSave = globalExampleLibararyRepository
 					.saveAndFlush(findGlobalExampleLibarary);
 			globalExampleItemRepository.deleteByExampleLibararyId(eoGlobalExampleItemSave.getId());
-			
 			globalExampleResource.getExampleItems().forEach(globalExampleItemResource->{
 				EOGlobalExampleItem findExampleItem =  new EOGlobalExampleItem();
 				findExampleItem.setExampleLibarary(eoGlobalExampleItemSave);
@@ -72,14 +75,5 @@ public class GlobalExampleResourceServiceImpl implements GlobalExampleResourceSe
 			});
 		});
 	}
-	
-	private String getExampleItemId(UIGlobalExampleItemResource globalExampleItemResource) {
-		return globalExampleItemResource.getYear()+"_"+(globalExampleItemResource.getImage()!=null? globalExampleItemResource.getImage(): "" )+"_"+(globalExampleItemResource.getTag()!=null? globalExampleItemResource.getTag(): "");
-	}
 
-	private String getExampleItemId(EOGlobalExampleItem exampleItem) {
-		return exampleItem.getTenure().getYear()+"_"+(exampleItem.getImageLibarary()!=null? exampleItem.getImageLibarary().getImageUrl(): "" )+"_"+(exampleItem.getTagLibarary()!=null? exampleItem.getTagLibarary().getName(): "");
-	}
-
-	
 }
