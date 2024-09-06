@@ -167,11 +167,19 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 	
 
 	private String getExampleItemId(EOGlobalExampleItem exampleItem) {
-		return exampleItem.getTenure().getId()+"_"+(exampleItem.getImageLibarary()!=null? exampleItem.getImageLibarary().getId(): 0 )+"_"+(exampleItem.getTagLibarary()!=null? exampleItem.getTagLibarary().getId(): 0);
+		return exampleItem.getTenure().getYear()+"_"+(exampleItem.getImageLibarary()!=null? exampleItem.getImageLibarary().getId(): 0 )+"_"+(exampleItem.getTagLibarary()!=null? exampleItem.getTagLibarary().getId(): 0);
 	}
 
+	private Object getExampleItemId(UIGlobalExampleItem exampleItem) {
+		return exampleItem.getYear()+"_"+( exampleItem.getImageLibararyId()!=null? exampleItem.getImageLibararyId() : exampleItem.getTagLibararyId()) ;
+	}
+	
 	private String getExampleVisualizeId(EOGlobalExampleVisualize exampleVisualize) {
-		return exampleVisualize.getTenure().getId()+"";
+		return exampleVisualize.getTenure().getYear()+"";
+	}
+
+	private String getExampleVisualizeId(UIGlobalExampleVisualize exampleVisualize) {
+		return exampleVisualize.getVisualizeYear()+"";
 	}
 
 	@Override
@@ -214,7 +222,7 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 		if(resource!=null) {
 			resource.setIncludeId(true);
 			resource.setId(find!=null? find.getResourceId(): null);
-			resource.setFolderName(EXAMPLE+"/"+data.getProfileName().replace(" ", "").toLowerCase());
+			resource.setFolderName(EXAMPLE);
 			UIResourceModel resourceFile= resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
@@ -236,10 +244,14 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 
 	private void saveExampleItems(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity) {
 		Map<Integer, UIGlobalExampleVisualize> visualizeMap = data.getVisualizeMap();
+		
 		if(!CollectionUtils.isEmpty(visualizeMap)) {
+			globalExampleVisualizeRepository.deleteByExampleLibararyId(entity.getId());
+			Map<String, EOGlobalExampleVisualize> exampleVisualizeMap = globalExampleVisualizeRepository.findAllByExampleLibararyId(entity.getId()).stream().collect(Collectors.toMap((exampleVisualize)->getExampleVisualizeId(exampleVisualize), (exampleVisualize)->exampleVisualize));
 			List<EOGlobalExampleVisualize> eoGlobalExampleVisualizes=new ArrayList<EOGlobalExampleVisualize>();
 			visualizeMap.entrySet().forEach(entry->{
-				EOGlobalExampleVisualize eoGlobalExampleVisualize = globalExampleVisualizeMapper.mapToDAO(entry.getValue());
+				EOGlobalExampleVisualize eoGlobalExampleVisualize = exampleVisualizeMap.getOrDefault(getExampleVisualizeId(entry.getValue()), globalExampleVisualizeMapper.mapToDAO(entry.getValue()));
+				eoGlobalExampleVisualize.setRecordState(RecordStatus.ACTIVETED.getStatus());
 				eoGlobalExampleVisualize.setTenure(globalTenureRepository.findOneByYear(entry.getKey()));
 				eoGlobalExampleVisualize.setExampleLibarary(entity);
 				eoGlobalExampleVisualizes.add(eoGlobalExampleVisualize);
@@ -248,9 +260,11 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 		}
 		List<UIGlobalExampleItem> exampleItems = data.getExampleItems();
 		if(!CollectionUtils.isEmpty(exampleItems)) {
+			globalExampleItemRepository.deleteByExampleLibararyId(entity.getId());
+			Map<String, EOGlobalExampleItem> exampleItemMap = globalExampleItemRepository.findAllByExampleLibararyId(entity.getId()).stream().collect(Collectors.toMap((eoGlobalExampleItem)->getExampleItemId(eoGlobalExampleItem), eoGlobalExampleItem->eoGlobalExampleItem));
 			List<EOGlobalExampleItem> eoGlobalExampleItems=new ArrayList<EOGlobalExampleItem>();
 			exampleItems.forEach(exampleItem->{
-				EOGlobalExampleItem eoGlobalExampleItem = globalExampleItemMapper.mapToDAO(exampleItem);
+				EOGlobalExampleItem eoGlobalExampleItem = exampleItemMap.getOrDefault(getExampleItemId(exampleItem),  globalExampleItemMapper.mapToDAO(exampleItem));
 				if(exampleItem.getYear()!=null) {
 					eoGlobalExampleItem.setTenure(globalTenureRepository.findOneByYear(exampleItem.getYear()));
 				}
@@ -261,6 +275,7 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 					eoGlobalExampleItem.setTagLibarary(globalTagLibararyRepository.getReferenceById(exampleItem.getTagLibararyId()));
 				}
 				eoGlobalExampleItem.setExampleLibarary(entity);
+				eoGlobalExampleItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
 				eoGlobalExampleItems.add(eoGlobalExampleItem);
 			});
 			entity.setExampleItems(globalExampleItemRepository.saveAll(eoGlobalExampleItems));

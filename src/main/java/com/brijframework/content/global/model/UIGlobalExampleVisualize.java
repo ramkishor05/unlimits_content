@@ -1,14 +1,29 @@
 package com.brijframework.content.global.model;
 
+import org.unlimits.rest.model.UIModel;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(content = Include.NON_ABSENT)
-public class UIGlobalExampleVisualize {
+public class UIGlobalExampleVisualize extends UIModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer visualizeYear;
 	private String visualizeDate;
 	private String visualizeRequest;
 	private String visualizeResponse;
+
+	public Integer getVisualizeYear() {
+		return visualizeYear;
+	}
+
+	public void setVisualizeYear(Integer visualizeYear) {
+		this.visualizeYear = visualizeYear;
+	}
 
 	public String getVisualizeDate() {
 		return visualizeDate;
