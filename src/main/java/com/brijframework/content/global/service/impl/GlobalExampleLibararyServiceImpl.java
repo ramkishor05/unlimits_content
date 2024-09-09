@@ -228,11 +228,13 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 			data.setResourceId(resourceFile.getId());
 			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
 				data.setProfilePictureURL(resourceFile.getFileUrl());
+				find.setProfilePictureURL(resourceFile.getFileUrl());			
 			} else {
 				ignoreProperties().add(PROFILE_PICTURE_URL);
 			}
 			if(StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent())) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
+				find.setPosterUrl(resourceFile.getPosterUrl());	
 			} else {
 				ignoreProperties().add(POSTER_URL);
 			}

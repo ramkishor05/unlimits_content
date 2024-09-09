@@ -3,7 +3,6 @@ package com.brijframework.content.global.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +10,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.brijframework.json.schema.factories.JsonSchemaFile;
 import org.brijframework.json.schema.factories.JsonSchemaObject;
+import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,13 +21,13 @@ import org.unlimits.rest.crud.service.CrudServiceImpl;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
+import com.brijframework.content.forgin.repository.ResourceClient;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.mapper.GlobalMainCategoryMapper;
 import com.brijframework.content.global.model.UIGlobalMainCategory;
 import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
 import com.brijframework.content.resource.modal.UIResourceModel;
-import com.brijframework.content.resource.service.ResourceService;
 import com.brijframework.content.util.IdenUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,6 +36,10 @@ import com.google.common.io.Files;
 @Service
 public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainCategory, EOGlobalMainCategory, Long> implements GlobalMainCategoryService {
 	
+	private static final String MAIN_CATEGORY = "main_category";
+
+	private static final String LOGO_URL = "logoUrl";
+
 	private static final String RECORD_STATE = "recordState";
 
 	@Autowired
@@ -48,7 +52,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	private String serverUrl;
 	
 	@Autowired
-	private ResourceService resourceService;
+	private ResourceClient resourceClient;
 
 	@Override
 	public JpaRepository<EOGlobalMainCategory, Long> getRepository() {
@@ -99,7 +103,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 			jsonSchemaFile.setType(globalMainCategory.getClass().getName());
 			jsonObject.getProperties().put("idenNo", IdenUtil.buildIdenNo(globalMainCategory));
 			jsonObject.getProperties().put("name", globalMainCategory.getName());
-			jsonObject.getProperties().put("logoUrl", globalMainCategory.getLogoUrl());
+			jsonObject.getProperties().put(LOGO_URL, globalMainCategory.getLogoUrl());
 			jsonObject.getProperties().put("orderSequence", globalMainCategory.getOrderSequence());
 			jsonObject.getProperties().put("color", globalMainCategory.getColor());
 			jsonSchemaFile.getObjects().add(jsonObject);
@@ -126,10 +130,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
-		if(data.getContent()!=null) {
-			UIResourceModel add = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
-			entity.setLogoUrl(add.getFileUrl());
-		}
+		saveResource(data, entity);
 	}
 	
 	@Override
@@ -137,10 +138,36 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
-		if(data.getContent()!=null) {
-			UIResourceModel add = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
-			entity.setLogoUrl(add.getFileUrl());
+		
+		saveResource(data, entity);
+	}
+	
+	private void saveResource(UIGlobalMainCategory data, EOGlobalMainCategory find) {
+		UIResourceModel resource = data.getContent();
+		ignoreProperties().clear();
+		ignoreProperties().add(getPrimaryKey());
+		if (resource != null) {
+			resource.setIncludeId(true);
+			resource.setFolderName(MAIN_CATEGORY);
+			UIResourceModel resourceFile = resourceClient.add(resource);
+			resourceFile.setIncludeId(false);
+			data.setResourceId(resourceFile.getId());
+			if (StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
+				data.setLogoUrl(resourceFile.getFileUrl());
+				find.setLogoUrl(resourceFile.getFileUrl());
+			} else {
+				ignoreProperties().add(LOGO_URL);
+			}
+		} else {
+			ignoreProperties().add(LOGO_URL);
 		}
+	}
+	
+	@Override
+	public List<String> ignoreProperties() {
+		List<String> ignoreProperties = super.ignoreProperties();
+		ignoreProperties.add(LOGO_URL);
+		return ignoreProperties;
 	}
 	
 	@Override

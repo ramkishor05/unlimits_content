@@ -92,8 +92,6 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	@Value("${openapi.service.url}")
 	private String serverUrl;
 
-	private List<String> ignoreProperties;
-
 	@Override
 	public JpaRepository<EOGlobalImageLibarary, Long> getRepository() {
 		return globalImageLibararyRepository;
@@ -214,6 +212,14 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	}
 	
 	@Override
+	public List<String> ignoreProperties() {
+		List<String> ignoreProperties = super.ignoreProperties();
+		ignoreProperties.add(POSTER_URL);
+		ignoreProperties.add(IMAGE_URL);
+		return ignoreProperties;
+	}
+	
+	@Override
 	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
@@ -239,15 +245,6 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		}
 	}
 
-	
-	@Override
-	public List<String> ignoreProperties() {
-		if(ignoreProperties==null) {
-			ignoreProperties=new ArrayList<String>();
-		}
-		return ignoreProperties;
-	}
-	
 	@Override
 	public Boolean delete(Long id) {
 		Optional<EOGlobalImageLibarary> findById = getRepository().findById(id);

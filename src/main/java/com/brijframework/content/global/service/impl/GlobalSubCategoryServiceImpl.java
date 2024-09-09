@@ -3,7 +3,6 @@ package com.brijframework.content.global.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +11,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.brijframework.json.schema.factories.JsonSchemaFile;
 import org.brijframework.json.schema.factories.JsonSchemaObject;
+import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +23,7 @@ import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
+import com.brijframework.content.forgin.repository.ResourceClient;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.mapper.GlobalSubCategoryMapper;
@@ -30,7 +31,6 @@ import com.brijframework.content.global.model.UIGlobalSubCategory;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.service.GlobalSubCategoryService;
 import com.brijframework.content.resource.modal.UIResourceModel;
-import com.brijframework.content.resource.service.ResourceService;
 import com.brijframework.content.util.IdenUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +45,10 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	
 	private static final String RECORD_STATE = "recordState";
 
+	private static final String SUB_CATEGORY = "sub_category";
+	
+	private static final String LOGO_URL = "logoUrl";
+
 	@Autowired
 	private GlobalSubCategoryRepository globalSubCategoryRepository;
 
@@ -52,7 +56,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	private GlobalSubCategoryMapper globalSubCategoryMapper;
 	
 	@Autowired
-	private ResourceService resourceService;
+	private ResourceClient resourceClient;
 
 	@Value("${openapi.service.url}")
 	private String serverUrl;
@@ -172,23 +176,38 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 
 	@Override
 	public void preAdd(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
-		if(data.getContent()!=null) {
-			UIResourceModel resource = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
-			entity.setLogoUrl(resource.getFileUrl());
-		}
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
+		saveResource(data, entity);
 	}
 	
 	@Override
 	public void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
-		if(data.getContent()!=null) {
-			UIResourceModel resource = resourceService.add(data.getContent(), new HashMap<String, List<String>>());
-			entity.setLogoUrl(resource.getFileUrl());
-		}
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
+		saveResource(data, entity);
+	}
+	
+	private void saveResource(UIGlobalSubCategory data, EOGlobalSubCategory find) {
+		UIResourceModel resource = data.getContent();
+		ignoreProperties().clear();
+		ignoreProperties().add(getPrimaryKey());
+		if (resource != null) {
+			resource.setIncludeId(true);
+			resource.setFolderName(SUB_CATEGORY);
+			UIResourceModel resourceFile = resourceClient.add(resource);
+			resourceFile.setIncludeId(false);
+			data.setResourceId(resourceFile.getId());
+			if (StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
+				data.setLogoUrl(resourceFile.getFileUrl());
+				find.setLogoUrl(resourceFile.getFileUrl());
+			} else {
+				ignoreProperties().add(LOGO_URL);
+			}
+		} else {
+			ignoreProperties().add(LOGO_URL);
 		}
 	}
 	

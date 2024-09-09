@@ -1,6 +1,5 @@
 package com.brijframework.content.global.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.mapper.GenericMapper;
+import org.unlimits.rest.crud.service.CrudServiceImpl;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
@@ -24,7 +24,7 @@ import com.brijframework.content.global.service.GlobalAffirmationLibararyService
 import com.brijframework.content.resource.modal.UIResourceModel;
 
 @Service
-public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLibararyService {
+public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlobalAffirmationLibarary, EOGlobalAffirmationLibarary, Long> implements GlobalAffirmationLibararyService {
 
 	private static final String RECORD_STATE = "recordState";
 
@@ -36,17 +36,15 @@ public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLi
 
 	@Autowired
 	private GlobalAffirmationLibararyRepository clientAffirmationLibararyRepository;
-	
+
 	@Autowired
 	private GlobalAffirmationLibararyMapper clientAffirmationLibararyMapper;
-	
+
 	@Autowired
 	private ResourceClient resourceClient;
-	
+
 	@Value("${openapi.service.url}")
 	private String serverUrl;
-
-	private List<String> ignoreProperties;
 
 	@Override
 	public JpaRepository<EOGlobalAffirmationLibarary, Long> getRepository() {
@@ -57,16 +55,17 @@ public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLi
 	public GenericMapper<EOGlobalAffirmationLibarary, UIGlobalAffirmationLibarary> getMapper() {
 		return clientAffirmationLibararyMapper;
 	}
-	
+
 	@Override
-	public void preAdd(UIGlobalAffirmationLibarary data,  Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalAffirmationLibarary data, Map<String, List<String>> headers) {
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		saveResource(data, null);
 	}
-	
+
 	@Override
-	public void preUpdate(UIGlobalAffirmationLibarary data, EOGlobalAffirmationLibarary find, Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
+	public void preUpdate(UIGlobalAffirmationLibarary data, EOGlobalAffirmationLibarary find,
+			Map<String, List<String>> headers) {
+		if (data.getRecordState() == null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
 		saveResource(data, find);
@@ -76,21 +75,23 @@ public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLi
 		UIResourceModel resource = data.getFileResource();
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
-		if(resource!=null) {
+		if (resource != null) {
 			resource.setIncludeId(true);
-			resource.setId(find!=null? find.getResourceId(): null);
+			resource.setId(find != null ? find.getResourceId() : null);
 			resource.setFolderName(AFFIRMATION);
-			UIResourceModel resourceFile =resourceClient.add(resource);
+			UIResourceModel resourceFile = resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
-			if(StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
+			if (StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
 				data.setMusicUrl(resourceFile.getFileUrl());
-			}else {
+				find.setMusicUrl(resourceFile.getFileUrl());
+			} else {
 				ignoreProperties().add(MUSIC_URL);
 			}
-			if(StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent())) {
+			if (StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent())) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
-			}else {
+				find.setPosterUrl(resourceFile.getPosterUrl());
+			} else {
 				ignoreProperties().add(POSTER_URL);
 			}
 		} else {
@@ -98,40 +99,42 @@ public class GlobalAffirmationLibararyServiceImpl implements GlobalAffirmationLi
 			ignoreProperties().add(MUSIC_URL);
 		}
 	}
-	
+
 	@Override
 	public List<String> ignoreProperties() {
-		if(ignoreProperties==null) {
-			ignoreProperties=new ArrayList<String>();
-		}
+		List<String> ignoreProperties = super.ignoreProperties();
+		ignoreProperties.add(POSTER_URL);
+		ignoreProperties.add(MUSIC_URL);
 		return ignoreProperties;
 	}
-	
+
 	@Override
 	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
-		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
+		if (filters != null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
-	
+
 	@Override
 	public void postFetch(EOGlobalAffirmationLibarary findObject, UIGlobalAffirmationLibarary dtoObject) {
-		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
-			dtoObject.setIdenNo(findObject.getId()+"");
+		if (StringUtils.isEmpty(dtoObject.getIdenNo())) {
+			dtoObject.setIdenNo(findObject.getId() + "");
 		}
-		if(StringUtils.isNotEmpty(dtoObject.getMusicUrl())) {
-			dtoObject.setMusicUrl(dtoObject.getMusicUrl().startsWith("/")? serverUrl+""+dtoObject.getMusicUrl() :  serverUrl+"/"+dtoObject.getMusicUrl());
+		if (StringUtils.isNotEmpty(dtoObject.getMusicUrl())) {
+			dtoObject.setMusicUrl(dtoObject.getMusicUrl().startsWith("/") ? serverUrl + "" + dtoObject.getMusicUrl()
+					: serverUrl + "/" + dtoObject.getMusicUrl());
 		}
-		
-		if(StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
-			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/")? serverUrl+""+dtoObject.getPosterUrl() :  serverUrl+"/"+dtoObject.getPosterUrl());
+
+		if (StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
+			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/") ? serverUrl + "" + dtoObject.getPosterUrl()
+					: serverUrl + "/" + dtoObject.getPosterUrl());
 		}
 	}
 
 	@Override
 	public Boolean delete(Long id) {
 		Optional<EOGlobalAffirmationLibarary> findById = getRepository().findById(id);
-		if(findById.isPresent()) {
+		if (findById.isPresent()) {
 			EOGlobalAffirmationLibarary eoGlobalAffirmationLibarary = findById.get();
 			eoGlobalAffirmationLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
 			getRepository().save(eoGlobalAffirmationLibarary);
