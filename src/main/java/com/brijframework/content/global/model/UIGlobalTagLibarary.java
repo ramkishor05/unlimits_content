@@ -8,6 +8,7 @@ public class UIGlobalTagLibarary extends UIGlobalItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long subCategoryId;
+	private String subCategoryName;
 	
 	private List<UIGlobalImageModel> imageList;
 
@@ -17,6 +18,14 @@ public class UIGlobalTagLibarary extends UIGlobalItem implements Serializable {
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
+	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
 
 	public List<UIGlobalImageModel> getImageList() {

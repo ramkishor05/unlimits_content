@@ -27,6 +27,7 @@ import org.unlimits.rest.repository.CustomPredicate;
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.constants.VisualiseType;
+import com.brijframework.content.exceptions.InvalidParameterException;
 import com.brijframework.content.forgin.repository.ResourceClient;
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
@@ -140,7 +141,8 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	
 	@Override
 	public void postAdd(UIGlobalImageLibarary data, EOGlobalImageLibarary entity) {
-		data.setIdenNo(IdenUtil.buildTagIdenNo(entity.getSubCategory(), data.getName()));
+		EOGlobalSubCategory eoGlobalSubCategory = globalCategoryItemRepository.findById(data.getSubCategoryId()).orElseThrow(()->new InvalidParameterException("Subcategory not found"));
+		data.setIdenNo(IdenUtil.buildTagIdenNo(eoGlobalSubCategory, data.getName()));
 		saveTagImageMappingList(data, entity);
 	}
 

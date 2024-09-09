@@ -8,6 +8,7 @@ public class UIGlobalSubCategory extends UIGlobalItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long mainCategoryId;
+	private String mainCategoryName;
 	private UIResourceModel content;
 
 	public UIResourceModel getContent() {
@@ -26,4 +27,12 @@ public class UIGlobalSubCategory extends UIGlobalItem implements Serializable {
 		this.mainCategoryId = mainCategoryId;
 	}
 
+	public String getMainCategoryName() {
+		return mainCategoryName;
+	}
+
+	public void setMainCategoryName(String mainCategoryName) {
+		this.mainCategoryName = mainCategoryName;
+	}
+	
 }

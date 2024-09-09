@@ -25,6 +25,7 @@ public interface GlobalTagLibararyMapper  extends GenericMapper<EOGlobalTagLibar
 	
 	@Override
 	@Mapping(target = "subCategoryId", source = "subCategory.id")
+	@Mapping(target = "subCategoryName", source = "subCategory.name")
 	@Mapping(target = "imageList", ignore = true)
 	UIGlobalTagLibarary mapToDTO(EOGlobalTagLibarary eoGlobalTagItem);
 	

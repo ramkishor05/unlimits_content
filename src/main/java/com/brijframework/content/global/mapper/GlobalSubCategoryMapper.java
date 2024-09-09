@@ -16,7 +16,9 @@ public interface GlobalSubCategoryMapper  extends GenericMapper<EOGlobalSubCateg
 	@Mapping(source = "mainCategoryId", target = "mainCategory.id")
 	EOGlobalSubCategory mapToDAO(UIGlobalSubCategory uiGlobalCategoryItem);
 	
+	
 	@Override
 	@Mapping(source = "mainCategory.id", target = "mainCategoryId")
+	@Mapping(source = "mainCategory.name", target = "mainCategoryName")
 	UIGlobalSubCategory mapToDTO(EOGlobalSubCategory eoGlobalCategoryItem);
 }

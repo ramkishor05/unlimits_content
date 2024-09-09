@@ -10,6 +10,8 @@ public class UIGlobalImageModel extends UIGlobalItem implements Serializable {
 	
 	private Long subCategoryId;
 	
+	private String subCategoryName;
+	
 	private UIResourceModel fileResource;
 
 	private String imageUrl;
@@ -22,6 +24,14 @@ public class UIGlobalImageModel extends UIGlobalItem implements Serializable {
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
+	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
 
 	public UIResourceModel getFileResource() {

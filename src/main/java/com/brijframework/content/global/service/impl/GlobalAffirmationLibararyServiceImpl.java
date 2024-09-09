@@ -59,7 +59,12 @@ public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlob
 	@Override
 	public void preAdd(UIGlobalAffirmationLibarary data, Map<String, List<String>> headers) {
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		saveResource(data, null);
+	}
+	
+	@Override
+	public void preAdd(UIGlobalAffirmationLibarary data, EOGlobalAffirmationLibarary entity,
+			Map<String, List<String>> headers) {
+		saveResource(data, entity);
 	}
 
 	@Override

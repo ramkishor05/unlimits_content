@@ -18,6 +18,7 @@ public class UIGlobalExampleLibarary extends UIModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long subCategoryId;
+	private String subCategoryName;
 
 	@NotNull
 	private String profileName;
@@ -41,6 +42,14 @@ public class UIGlobalExampleLibarary extends UIModel {
 
 	public void setSubCategoryId(Long subCategoryId) {
 		this.subCategoryId = subCategoryId;
+	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
 
 	public String getProfileName() {

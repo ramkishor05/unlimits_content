@@ -15,6 +15,7 @@ public interface GlobalExampleLibararyMapper extends GenericMapper<EOGlobalExamp
 
 	@Override
 	@Mapping(source = "subCategory.id", target = "subCategoryId")
+	@Mapping(source = "subCategory.name", target = "subCategoryName")
 	UIGlobalExampleLibarary mapToDTO(EOGlobalExampleLibarary eoGlobalTagGroup);
 	
 	@Override

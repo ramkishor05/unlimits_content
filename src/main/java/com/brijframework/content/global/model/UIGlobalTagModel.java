@@ -8,6 +8,8 @@ public class UIGlobalTagModel extends UIGlobalItem implements Serializable {
 	
 	private Long subCategoryId;
 	
+	private String subCategoryName;
+	
 	public Long getSubCategoryId() {
 		return subCategoryId;
 	}
@@ -16,4 +18,12 @@ public class UIGlobalTagModel extends UIGlobalItem implements Serializable {
 		this.subCategoryId = subCategoryId;
 	}
 
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
+	}
+	
 }
