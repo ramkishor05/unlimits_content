@@ -43,7 +43,7 @@ import com.brijframework.content.global.repository.GlobalTagImageMappingReposito
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.resource.modal.UIResourceModel;
-import com.brijframework.content.util.IdenUtil;
+import com.brijframework.content.util.buildImageLibararyIdenNo;
 import com.brijframework.content.util.ResourceUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -142,7 +142,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	@Override
 	public void postAdd(UIGlobalImageLibarary data, EOGlobalImageLibarary entity) {
 		EOGlobalSubCategory eoGlobalSubCategory = globalCategoryItemRepository.findById(data.getSubCategoryId()).orElseThrow(()->new InvalidParameterException("Subcategory not found"));
-		data.setIdenNo(IdenUtil.buildTagIdenNo(eoGlobalSubCategory, data.getName()));
+		data.setIdenNo(buildImageLibararyIdenNo.buildTagLibararyIdenNo(eoGlobalSubCategory, data.getName()));
 		saveTagImageMappingList(data, entity);
 	}
 
@@ -334,7 +334,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	private EOGlobalTagLibarary createTagLibarary(Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap, EOGlobalSubCategory globalCategoryItem, String name){
 		try {
 			EOGlobalTagLibarary eoGlobalTagLibarary= new EOGlobalTagLibarary();
-			eoGlobalTagLibarary.setIdenNo(IdenUtil.buildTagIdenNo(globalCategoryItem, name));
+			eoGlobalTagLibarary.setIdenNo(buildImageLibararyIdenNo.buildTagLibararyIdenNo(globalCategoryItem, name));
 			eoGlobalTagLibarary.setName(name);
 			eoGlobalTagLibarary.setSubCategory(globalCategoryItem);
 			eoGlobalTagLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
@@ -437,13 +437,13 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	protected void buildImageLibarary(File dirs, String global_portal_image_libarary_file_name,
 			EOGlobalSubCategory subCategory, List<EOGlobalImageLibarary> globalImageLibararyList) {
 		String fileName = global_portal_image_libarary_file_name + "_" + subCategory.getMainCategory().getName() + "_"
-				+ IdenUtil.replaceContent(subCategory.getName()) + ".json";
+				+ buildImageLibararyIdenNo.replaceContent(subCategory.getName()) + ".json";
 		JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
 		jsonSchemaFile.setId("Global_Portal_ImageLibarary" + "_" + subCategory.getName());
 		jsonSchemaFile.setOrderSequence(subCategory.getOrderSequence());
 		AtomicDouble counter=new AtomicDouble(subCategory.getOrderSequence());
 		globalImageLibararyList.forEach(globalImageLibarary -> {
-			String idenNo = IdenUtil.buildIdenNo(subCategory, globalImageLibarary);
+			String idenNo = buildImageLibararyIdenNo.buildImageLibararyIdenNo(subCategory, globalImageLibarary);
 			JsonSchemaObject jsonObject = new JsonSchemaObject();
 			jsonObject.setId(idenNo);
 			jsonObject.setName("Global_Portal_ImageLibarary");
@@ -456,7 +456,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			jsonObject.getProperties().put("type", globalImageLibarary.getType());
 			jsonObject.getProperties().put("imageUrl", globalImageLibarary.getImageUrl());
 			jsonObject.getProperties().put("subCategory",
-					"LK@" + IdenUtil.buildIdenNo(subCategory.getMainCategory(), subCategory));
+					"LK@" + buildImageLibararyIdenNo.buildSubCategoryIdenNo(subCategory.getMainCategory(), subCategory));
 			jsonSchemaFile.getObjects().add(jsonObject);
 		});
 		ObjectMapper mapper = new ObjectMapper();

@@ -254,7 +254,7 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 			visualizeMap.entrySet().forEach(entry->{
 				EOGlobalExampleVisualize eoGlobalExampleVisualize = exampleVisualizeMap.getOrDefault(getExampleVisualizeId(entry.getValue()), globalExampleVisualizeMapper.mapToDAO(entry.getValue()));
 				eoGlobalExampleVisualize.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				eoGlobalExampleVisualize.setTenure(globalTenureRepository.findOneByYear(entry.getKey()));
+				eoGlobalExampleVisualize.setTenure(globalTenureRepository.findOneByYear(entry.getKey()).orElse(null));
 				eoGlobalExampleVisualize.setExampleLibarary(entity);
 				eoGlobalExampleVisualizes.add(eoGlobalExampleVisualize);
 			});
@@ -268,7 +268,7 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 			exampleItems.forEach(exampleItem->{
 				EOGlobalExampleItem eoGlobalExampleItem = exampleItemMap.getOrDefault(getExampleItemId(exampleItem),  globalExampleItemMapper.mapToDAO(exampleItem));
 				if(exampleItem.getYear()!=null) {
-					eoGlobalExampleItem.setTenure(globalTenureRepository.findOneByYear(exampleItem.getYear()));
+					eoGlobalExampleItem.setTenure(globalTenureRepository.findOneByYear(exampleItem.getYear()).orElse(null));
 				}
 				if(exampleItem.getImageLibararyId()!=null) {
 					eoGlobalExampleItem.setImageLibarary(globalImageLibararyRepository.getReferenceById(exampleItem.getImageLibararyId()));

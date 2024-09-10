@@ -25,4 +25,9 @@ public interface GlobalPromptLibararyRepository extends CustomRepository<EOGloba
 	 */
 	Optional<EOGlobalPromptLibarary> findByIdenNo(String idenNo);
 	
+	
+	Optional<EOGlobalPromptLibarary> findBySubCategoryId(Long subCategoryId);
+	
+	Optional<EOGlobalPromptLibarary> findByTenureId(Long subCategoryId);
+	
 }

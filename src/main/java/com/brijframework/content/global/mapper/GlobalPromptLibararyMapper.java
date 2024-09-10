@@ -15,10 +15,10 @@ public interface GlobalPromptLibararyMapper  extends GenericMapper<EOGlobalPromp
 	@Override
 	@Mapping(target = "subCategoryId", source = "subCategory.id")
 	@Mapping(target = "tenureId", source = "tenure.id")
+	@Mapping(target = "subCategoryName", source = "subCategory.name")
+	@Mapping(target = "tenureYear", source = "tenure.year")
     UIGlobalPromptLibarary mapToDTO(EOGlobalPromptLibarary e);
 	
 	@Override
-	@Mapping(source = "subCategoryId", target = "subCategory.id")
-	@Mapping(source = "tenureId", target = "tenure.id")
     EOGlobalPromptLibarary mapToDAO(UIGlobalPromptLibarary d) ;
 }

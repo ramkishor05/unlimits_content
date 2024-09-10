@@ -31,7 +31,7 @@ import com.brijframework.content.global.model.UIGlobalSubCategory;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.service.GlobalSubCategoryService;
 import com.brijframework.content.resource.modal.UIResourceModel;
-import com.brijframework.content.util.IdenUtil;
+import com.brijframework.content.util.buildImageLibararyIdenNo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -99,22 +99,22 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 		.collect(Collectors.groupingBy(globalSubCategory -> globalSubCategory.getMainCategory()))
 		.forEach((mainCategory, globalSubCategoryList) -> {
 			String fileName = global_portal_sub_category_file_name + "_"
-					+ IdenUtil.replaceContent(mainCategory.getName()) + ".json";
+					+ buildImageLibararyIdenNo.replaceContent(mainCategory.getName()) + ".json";
 			JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
 			jsonSchemaFile.setId("Global_Portal_SubCategory" + "_" + mainCategory.getName());
 			jsonSchemaFile.setOrderSequence(mainCategory.getOrderSequence());
 			globalSubCategoryList.forEach(globalSubCategory -> {
 				JsonSchemaObject jsonObject = new JsonSchemaObject();
-				jsonObject.setId(IdenUtil.buildIdenNo(mainCategory, globalSubCategory));
+				jsonObject.setId(buildImageLibararyIdenNo.buildSubCategoryIdenNo(mainCategory, globalSubCategory));
 				jsonObject.setName(name);
 				jsonObject.setType(globalSubCategory.getClass().getName());
 				jsonSchemaFile.setType(globalSubCategory.getClass().getName());
-				jsonObject.getProperties().put("idenNo", IdenUtil.buildIdenNo(mainCategory, globalSubCategory));
+				jsonObject.getProperties().put("idenNo", buildImageLibararyIdenNo.buildSubCategoryIdenNo(mainCategory, globalSubCategory));
 				jsonObject.getProperties().put("name", globalSubCategory.getName());
 				jsonObject.getProperties().put("logoUrl", globalSubCategory.getLogoUrl());
 				jsonObject.getProperties().put("orderSequence", globalSubCategory.getOrderSequence());
 				jsonObject.getProperties().put("color", globalSubCategory.getColor());
-				jsonObject.getProperties().put("mainCategory", "LK@" + IdenUtil.buildIdenNo(mainCategory));
+				jsonObject.getProperties().put("mainCategory", "LK@" + buildImageLibararyIdenNo.buildMainCategoryIdenNo(mainCategory));
 				jsonSchemaFile.getObjects().add(jsonObject);
 			});
 			ObjectMapper mapper = new ObjectMapper();

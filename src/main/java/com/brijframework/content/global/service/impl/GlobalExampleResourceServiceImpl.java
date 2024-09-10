@@ -56,7 +56,7 @@ public class GlobalExampleResourceServiceImpl implements GlobalExampleResourceSe
 				EOGlobalExampleItem findExampleItem =  new EOGlobalExampleItem();
 				findExampleItem.setExampleLibarary(eoGlobalExampleItemSave);
 				if(globalExampleItemResource.getYear()!=null) {
-					findExampleItem.setTenure(globalTenureRepository.findOneByYear(globalExampleItemResource.getYear()));
+					findExampleItem.setTenure(globalTenureRepository.findOneByYear(globalExampleItemResource.getYear()).orElse(null));
 				}
 				if(StringUtil.isNonEmpty(globalExampleItemResource.getImage())) {
 					List<EOGlobalImageLibarary> imageLibararies = globalImageLibararyRepository.findAllByImageUrl(globalExampleItemResource.getImage());

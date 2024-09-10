@@ -10,7 +10,11 @@ public class UIGlobalPromptLibarary extends UIGlobalItem implements Serializable
 	
 	private Long subCategoryId;
 	
+	private String subCategoryName;
+	
 	private Long tenureId;
+	
+	private Integer tenureYear;
 
 	public String getType() {
 		return type;
@@ -35,4 +39,21 @@ public class UIGlobalPromptLibarary extends UIGlobalItem implements Serializable
 	public void setTenureId(Long tenureId) {
 		this.tenureId = tenureId;
 	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
+	}
+
+	public Integer getTenureYear() {
+		return tenureYear;
+	}
+
+	public void setTenureYear(Integer tenureYear) {
+		this.tenureYear = tenureYear;
+	}
+	
 }

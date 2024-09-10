@@ -84,7 +84,7 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 
 				List<UIGlobalExampleResource> globalExampleResources = instance.getAll(UIGlobalExampleResource.class);
 
-				globalExampleResourceService.init(globalExampleResources);
+				//globalExampleResourceService.init(globalExampleResources);
 
 				//export_global_main_category();
 				//export_global_sub_category();

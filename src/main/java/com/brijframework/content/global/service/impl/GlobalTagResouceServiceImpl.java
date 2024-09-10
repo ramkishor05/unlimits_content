@@ -29,7 +29,7 @@ import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.resource.UITagResource;
 import com.brijframework.content.global.service.GlobalTagResourceService;
-import com.brijframework.content.util.IdenUtil;
+import com.brijframework.content.util.buildImageLibararyIdenNo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Files;
@@ -102,12 +102,12 @@ public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 	protected void buildTagLibarary(File dirs, String global_portal_prompt_libarary_file_name,
 			EOGlobalSubCategory subCategory, List<EOGlobalTagLibarary> globalTagLibararyList) {
 		String fileName = global_portal_prompt_libarary_file_name + "_" + subCategory.getMainCategory().getName() + "_"
-				+ IdenUtil.replaceContent(subCategory.getName()) + ".json";
+				+ buildImageLibararyIdenNo.replaceContent(subCategory.getName()) + ".json";
 		JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
 		jsonSchemaFile.setId("Global_Portal_TagLibarary" + "_" + subCategory.getName());
 		jsonSchemaFile.setOrderSequence(subCategory.getOrderSequence());
 		globalTagLibararyList.forEach(globalTagLibarary -> {
-			String idenNo = IdenUtil.buildIdenNo(subCategory, globalTagLibarary);
+			String idenNo = buildImageLibararyIdenNo.buildTagLibararyIdenNo(subCategory, globalTagLibarary);
 			JsonSchemaObject jsonObject = new JsonSchemaObject();
 			jsonObject.setId(idenNo);
 			jsonObject.setName("Global_Portal_TagLibarary");
@@ -119,7 +119,7 @@ public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 			jsonObject.getProperties().put("color", subCategory.getColor());
 			jsonObject.getProperties().put("type", globalTagLibarary.getType());
 			jsonObject.getProperties().put("subCategory",
-					"LK@" + IdenUtil.buildIdenNo(subCategory.getMainCategory(), subCategory));
+					"LK@" + buildImageLibararyIdenNo.buildSubCategoryIdenNo(subCategory.getMainCategory(), subCategory));
 			jsonSchemaFile.getObjects().add(jsonObject);
 		});
 		ObjectMapper mapper = new ObjectMapper();
@@ -156,7 +156,7 @@ public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 							eoGlobalTagLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
 							eoGlobalTagLibarary.setColor(eoGlobalSubCategory.getColor());
 							eoGlobalTagLibarary.setSubCategory(eoGlobalSubCategory);
-							eoGlobalTagLibarary.setIdenNo(IdenUtil.buildIdenNo(eoGlobalSubCategory, eoGlobalTagLibarary));
+							eoGlobalTagLibarary.setIdenNo(buildImageLibararyIdenNo.buildTagLibararyIdenNo(eoGlobalSubCategory, eoGlobalTagLibarary));
 							eoGlobalTagLibarary=globalTagLibararyRepository.saveAndFlush(eoGlobalTagLibarary);
 							tagLibararyMap.put(tagId, eoGlobalTagLibarary);
 							dataListBySubCategory.put(tagId, eoGlobalTagLibarary);

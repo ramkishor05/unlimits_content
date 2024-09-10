@@ -1,15 +1,19 @@
 package com.brijframework.content.global.service.impl;
 
 import static com.brijframework.content.constants.ClientConstants.ID;
+import static com.brijframework.content.constants.ClientConstants.NAME;
 import static com.brijframework.content.constants.ClientConstants.RECORD_STATE;
 import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY;
 import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY_ID;
-import static com.brijframework.content.constants.ClientConstants.*;
+import static com.brijframework.content.constants.ClientConstants.SUB_CATEGORY_REL_ID;
+import static com.brijframework.content.constants.ClientConstants.TENURE;
+import static com.brijframework.content.constants.ClientConstants.YEAR;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,13 +25,17 @@ import org.unlimits.rest.repository.CustomPredicate;
 
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
+import com.brijframework.content.exceptions.InvalidParameterException;
 import com.brijframework.content.global.entities.EOGlobalPromptLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.mapper.GlobalPromptLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalPromptLibarary;
 import com.brijframework.content.global.repository.GlobalPromptLibararyRepository;
+import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
+import com.brijframework.content.global.repository.GlobalTenureRepository;
 import com.brijframework.content.global.service.GlobalPromptLibararyService;
+import com.brijframework.content.util.buildImageLibararyIdenNo;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
@@ -41,8 +49,13 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	private GlobalPromptLibararyRepository globalPromptLibararyRepository;
 	
 	@Autowired
-	private GlobalPromptLibararyMapper globalPromptLibararyMapper;
+	private GlobalSubCategoryRepository subCategoryRepository;
 	
+	@Autowired
+	private GlobalTenureRepository globalTenureRepository;
+	
+	@Autowired
+	private GlobalPromptLibararyMapper globalPromptLibararyMapper;
 	
 	{
 		CustomPredicate<EOGlobalPromptLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
@@ -110,10 +123,77 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	}
 	
 	@Override
+	public void preAdd(UIGlobalPromptLibarary data, EOGlobalPromptLibarary entity, Map<String, List<String>> headers) {
+		saveRelation(data, entity);
+	}
+
+	private void saveRelation(UIGlobalPromptLibarary data, EOGlobalPromptLibarary entity) {
+		if(StringUtil.isEmpty(data.getName())) {
+			throw new InvalidParameterException("Name is required!!");
+		}
+		if(StringUtil.isEmpty(data.getDescription())) {
+			throw new InvalidParameterException("Description is required!!");
+		}
+		if(data.getSubCategoryId()!=null) {
+			EOGlobalSubCategory eoGlobalSubCategory = subCategoryRepository.findById(data.getSubCategoryId()).orElseThrow(()-> new InvalidParameterException("Invalid sub category id."));
+			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalSubCategory, data.getName()));
+			entity.setSubCategory(eoGlobalSubCategory);
+			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findBySubCategoryId(eoGlobalSubCategory.getId());
+			if(promptLibararyOptional.isPresent()) {
+				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();
+				data.setId(eoGlobalPromptLibarary.getId());
+				entity.setId(eoGlobalPromptLibarary.getId());
+				BeanUtils.copyProperties(data, eoGlobalPromptLibarary);
+			}
+		} else if(StringUtil.isNonEmpty(data.getSubCategoryName())) {
+			EOGlobalSubCategory eoGlobalSubCategory = subCategoryRepository.findByName(data.getSubCategoryName()).orElseThrow(()-> new InvalidParameterException("Invalid sub category name."));
+			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findBySubCategoryId(eoGlobalSubCategory.getId());
+			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalSubCategory, data.getName()));
+			entity.setSubCategory(eoGlobalSubCategory);
+			if(promptLibararyOptional.isPresent()) {
+				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();
+				data.setId(eoGlobalPromptLibarary.getId());
+				entity.setId(eoGlobalPromptLibarary.getId());
+				BeanUtils.copyProperties(data, eoGlobalPromptLibarary);
+			}
+		} else if(data.getTenureId()!=null) {
+			EOGlobalTenure eoGlobalTenure = globalTenureRepository.findById(data.getTenureId()).orElseThrow(()-> new InvalidParameterException("Invalid tenure id."));
+			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findByTenureId(eoGlobalTenure.getId());
+			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalTenure, data.getName()));
+			entity.setTenure(eoGlobalTenure);
+			if(promptLibararyOptional.isPresent()) {
+				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();
+				data.setId(eoGlobalPromptLibarary.getId());
+				entity.setId(eoGlobalPromptLibarary.getId());
+				BeanUtils.copyProperties(data, eoGlobalPromptLibarary);
+			}
+		} else if(data.getTenureYear()!=null) {
+			EOGlobalTenure eoGlobalTenure = globalTenureRepository.findOneByYear(data.getTenureYear()).orElseThrow(()-> new InvalidParameterException("Invalid tenure year."));
+			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findByTenureId(eoGlobalTenure.getId());
+			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalTenure, data.getName()));
+			entity.setTenure(eoGlobalTenure);
+			if(promptLibararyOptional.isPresent()) {
+				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();
+				data.setId(eoGlobalPromptLibarary.getId());
+				entity.setId(eoGlobalPromptLibarary.getId());
+				BeanUtils.copyProperties(data, eoGlobalPromptLibarary);
+			}
+		} else {
+			throw new InvalidParameterException("Please provide any valid key like : subCategoryId or subCategoryName or tenureId or tenureYear");
+		}
+	}
+	
+	@Override
 	public void preUpdate(UIGlobalPromptLibarary data, Map<String, List<String>> headers) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
+	}
+	
+	@Override
+	public void preUpdate(UIGlobalPromptLibarary data, EOGlobalPromptLibarary entity,
+			Map<String, List<String>> headers) {
+		saveRelation(data, entity);
 	}
 	
 	@Override

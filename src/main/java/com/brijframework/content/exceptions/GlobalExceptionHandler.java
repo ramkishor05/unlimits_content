@@ -32,4 +32,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ex.printStackTrace();
 		return new ResponseEntity<Object>(errorResponse, new HttpHeaders(), HttpStatus.FORBIDDEN);
 	}
+	
+	@ExceptionHandler(value = { InvalidParameterException.class  })
+	protected ResponseEntity<Object> notFoundException(InvalidParameterException ex, WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(),"NOT_ACCEPTABLE", 1406, ex.getMessage());
+		ex.printStackTrace();
+		return new ResponseEntity<Object>(errorResponse, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	
 }
