@@ -95,7 +95,7 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 		if(StringUtils.isNotEmpty(dtoObject.getImageUrl())) {
 			dtoObject.setImageUrl(dtoObject.getImageUrl().startsWith("/")? serverUrl+""+dtoObject.getImageUrl() :  serverUrl+"/"+dtoObject.getImageUrl());
 		}
-		List<EOGlobalTagImageMapping> tagMappingList = globalTagImageMappingRepository.findAllByImageLibararyId(findObject.getId());
+		List<EOGlobalTagImageMapping> tagMappingList = globalTagImageMappingRepository.findAllByImageLibararyId(findObject.getId(),  RecordStatus.ACTIVETED.getStatusIds());
 		if(!CollectionUtils.isEmpty(tagMappingList)) {
 			List<UIDeviceTagModel> tagMappingForTagList = deviceImageLibararyMapper.tagMappingForTagList(tagMappingList);
 			dtoObject.setTagList(tagMappingForTagList);

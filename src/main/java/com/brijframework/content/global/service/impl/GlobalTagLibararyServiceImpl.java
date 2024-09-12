@@ -196,7 +196,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	
 	@Override
 	public void postFetch(EOGlobalTagLibarary findObject, UIGlobalTagLibarary dtoObject) {
-		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId());
+		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId(), RecordStatus.ACTIVETED.getStatusIds());
 		if(!CollectionUtils.isEmpty(imageMappingList)) {
 			List<UIGlobalImageModel> tagMappingForImageList = globalTagLibararyMapper.tagMappingForImageList(imageMappingList);
 			for(UIGlobalImageModel uiDeviceImageModel: tagMappingForImageList) {
@@ -223,6 +223,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 			EOGlobalTagLibarary eoGlobalTagLibarary = findById.get();
 			eoGlobalTagLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
 			getRepository().save(eoGlobalTagLibarary);
+			globalTagImageMappingRepository.deleteAllByTagLibararyId(id);
 			return true;
 		}
 		return false;

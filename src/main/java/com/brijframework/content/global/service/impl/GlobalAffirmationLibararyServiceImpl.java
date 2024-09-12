@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.brijframework.util.text.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,6 +21,7 @@ import com.brijframework.content.global.model.UIGlobalAffirmationLibarary;
 import com.brijframework.content.global.repository.GlobalAffirmationLibararyRepository;
 import com.brijframework.content.global.service.GlobalAffirmationLibararyService;
 import com.brijframework.content.resource.modal.UIResourceModel;
+import com.brijframework.content.util.BuilderUtil;
 
 @Service
 public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlobalAffirmationLibarary, EOGlobalAffirmationLibarary, Long> implements GlobalAffirmationLibararyService {
@@ -80,20 +80,20 @@ public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlob
 		UIResourceModel resource = data.getFileResource();
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
-		if (resource != null) {
+		if (resource != null && BuilderUtil.isValidResource(resource)) {
 			resource.setIncludeId(true);
 			resource.setId(find != null ? find.getResourceId() : null);
 			resource.setFolderName(AFFIRMATION);
 			UIResourceModel resourceFile = resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
-			if (StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent())) {
+			if (BuilderUtil.isValidFile(resource)) {
 				data.setMusicUrl(resourceFile.getFileUrl());
 				find.setMusicUrl(resourceFile.getFileUrl());
 			} else {
 				ignoreProperties().add(MUSIC_URL);
 			}
-			if (StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent())) {
+			if (BuilderUtil.isValidFile(resource)) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
 				find.setPosterUrl(resourceFile.getPosterUrl());
 			} else {

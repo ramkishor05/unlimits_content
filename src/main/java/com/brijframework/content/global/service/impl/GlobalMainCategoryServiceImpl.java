@@ -28,7 +28,7 @@ import com.brijframework.content.global.model.UIGlobalMainCategory;
 import com.brijframework.content.global.repository.GlobalMainCategoryRepository;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
 import com.brijframework.content.resource.modal.UIResourceModel;
-import com.brijframework.content.util.buildImageLibararyIdenNo;
+import com.brijframework.content.util.BuilderUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Files;
@@ -97,11 +97,11 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		jsonSchemaFile.setOrderSequence(1.0);
 		globalMainCategoryRepository.findAll().forEach(globalMainCategory -> {
 			JsonSchemaObject jsonObject = new JsonSchemaObject();
-			jsonObject.setId(buildImageLibararyIdenNo.buildMainCategoryIdenNo(globalMainCategory));
+			jsonObject.setId(BuilderUtil.buildMainCategoryIdenNo(globalMainCategory));
 			jsonObject.setName(name);
 			jsonObject.setType(globalMainCategory.getClass().getName());
 			jsonSchemaFile.setType(globalMainCategory.getClass().getName());
-			jsonObject.getProperties().put("idenNo", buildImageLibararyIdenNo.buildMainCategoryIdenNo(globalMainCategory));
+			jsonObject.getProperties().put("idenNo", BuilderUtil.buildMainCategoryIdenNo(globalMainCategory));
 			jsonObject.getProperties().put("name", globalMainCategory.getName());
 			jsonObject.getProperties().put(LOGO_URL, globalMainCategory.getLogoUrl());
 			jsonObject.getProperties().put("orderSequence", globalMainCategory.getOrderSequence());

@@ -129,7 +129,7 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 	
 	@Override
 	public void postFetch(EOGlobalTagLibarary findObject, UIDeviceTagLibarary dtoObject) {
-		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId());
+		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId(),  RecordStatus.ACTIVETED.getStatusIds());
 		if(!CollectionUtils.isEmpty(imageMappingList)) {
 			List<UIDeviceImageModel> tagMappingForImageList = deviceTagLibararyMapper.tagMappingForImageList(imageMappingList);
 			for(UIDeviceImageModel uiDeviceImageModel: tagMappingForImageList) {

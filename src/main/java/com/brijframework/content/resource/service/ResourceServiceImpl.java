@@ -59,15 +59,12 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResourceModel, EOReso
 	public void postAdd(UIResourceModel uiResource, EOResource entityResource) {
 		try {
 			uiResource.setId(entityResource.getId());
-			if(StringUtil.isEmpty(uiResource.getFolderName())) {
-				return;
-			}
 			Resource resource = resourceUtil.getResource();
 			File resourceFile = resource.getFile();
 			if(!resourceFile.exists()) {
 				resourceFile.mkdirs();
 			}
-			File folderFile = new File(resourceFile, uiResource.getFolderName());
+			File folderFile = getCurrentFolder(resourceFile, uiResource.getFolderName());
 			if(!folderFile.exists()) {
 				folderFile.mkdirs();
 			}
@@ -86,6 +83,17 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResourceModel, EOReso
 		}
 	}
 
+	private static File getCurrentFolder(File resourceFile, String folderNames) {
+		File currentFile=resourceFile;
+		for(String folderName: folderNames.split("/")) {
+			currentFile=new File(currentFile, folderName);
+			if(!currentFile.exists()) {
+				currentFile.mkdirs();
+			}
+		}
+		return currentFile;
+	}
+
 	private void writeFile(File parentFile, String fileName, String base64Content) throws IOException, FileNotFoundException {
 		String[] fileContent = base64Content.split(",");
 		byte[] fileBytes = DatatypeConverter.parseBase64Binary(fileContent[1]);
@@ -93,6 +101,11 @@ public class ResourceServiceImpl extends CrudServiceImpl<UIResourceModel, EOReso
 		try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(dataFile))) {
 			outputStream.write(fileBytes);
 		}
+	}
+	
+	public static void main(String[] args) {
+		String folderName="/ram/kishor";
+		System.out.println(getCurrentFolder(new File("C:\\app_runs\\unlimits-resources\\resource"), folderName).getAbsolutePath());
 	}
 
 }

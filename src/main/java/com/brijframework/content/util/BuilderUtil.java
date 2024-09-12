@@ -1,12 +1,15 @@
 package com.brijframework.content.util;
 
+import org.brijframework.util.text.StringUtil;
+
 import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.entities.EOGlobalTenure;
+import com.brijframework.content.resource.modal.UIResourceModel;
 
-public class buildImageLibararyIdenNo {
+public class BuilderUtil {
 	
 	public static String buildPromptLibararyIdenNo(EOGlobalSubCategory subCategory, String promptName) {
 		return "Global_Portal_PromptLibarary"+"_"+replaceContent(subCategory.getName())+"_"+replaceContent(promptName);
@@ -41,7 +44,19 @@ public class buildImageLibararyIdenNo {
 	}
 	
 	public static String replaceContent(String text){
-		return text.replace(" ", "_").replaceAll("[^a-zA-Z0-9_]+", "");
+		return text.replaceAll("[^._a-zA-Z0-9]+", "_").replace("__","_").replaceAll("__","_");
+	}
+
+	public static boolean isValidResource(UIResourceModel resource) {
+		return isValidFile(resource) || isValidPoster(resource);
+	}
+	
+	public static boolean isValidFile(UIResourceModel resource) {
+		return StringUtil.isNonEmpty(resource.getFileName()) && StringUtil.isNonEmpty(resource.getFileContent());
+	}
+	
+	public static boolean isValidPoster(UIResourceModel resource) {
+		return StringUtil.isNonEmpty(resource.getPosterName()) && StringUtil.isNonEmpty(resource.getPosterContent());
 	}
 
 }

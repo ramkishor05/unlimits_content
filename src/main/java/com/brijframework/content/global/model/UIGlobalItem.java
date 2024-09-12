@@ -5,7 +5,7 @@ import org.unlimits.rest.model.UIModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@JsonInclude(content = Include.NON_ABSENT)
+@JsonInclude(value=Include.NON_NULL)
 public class UIGlobalItem extends UIModel{
 	/**
 	 * 

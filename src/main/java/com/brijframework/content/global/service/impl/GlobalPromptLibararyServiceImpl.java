@@ -35,7 +35,7 @@ import com.brijframework.content.global.repository.GlobalPromptLibararyRepositor
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTenureRepository;
 import com.brijframework.content.global.service.GlobalPromptLibararyService;
-import com.brijframework.content.util.buildImageLibararyIdenNo;
+import com.brijframework.content.util.BuilderUtil;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
@@ -136,7 +136,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 		}
 		if(data.getSubCategoryId()!=null) {
 			EOGlobalSubCategory eoGlobalSubCategory = subCategoryRepository.findById(data.getSubCategoryId()).orElseThrow(()-> new InvalidParameterException("Invalid sub category id."));
-			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalSubCategory, data.getName()));
+			entity.setIdenNo(BuilderUtil.buildPromptLibararyIdenNo(eoGlobalSubCategory, data.getName()));
 			entity.setSubCategory(eoGlobalSubCategory);
 			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findBySubCategoryId(eoGlobalSubCategory.getId());
 			if(promptLibararyOptional.isPresent()) {
@@ -148,7 +148,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 		} else if(StringUtil.isNonEmpty(data.getSubCategoryName())) {
 			EOGlobalSubCategory eoGlobalSubCategory = subCategoryRepository.findByName(data.getSubCategoryName()).orElseThrow(()-> new InvalidParameterException("Invalid sub category name."));
 			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findBySubCategoryId(eoGlobalSubCategory.getId());
-			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalSubCategory, data.getName()));
+			entity.setIdenNo(BuilderUtil.buildPromptLibararyIdenNo(eoGlobalSubCategory, data.getName()));
 			entity.setSubCategory(eoGlobalSubCategory);
 			if(promptLibararyOptional.isPresent()) {
 				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();
@@ -159,7 +159,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 		} else if(data.getTenureId()!=null) {
 			EOGlobalTenure eoGlobalTenure = globalTenureRepository.findById(data.getTenureId()).orElseThrow(()-> new InvalidParameterException("Invalid tenure id."));
 			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findByTenureId(eoGlobalTenure.getId());
-			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalTenure, data.getName()));
+			entity.setIdenNo(BuilderUtil.buildPromptLibararyIdenNo(eoGlobalTenure, data.getName()));
 			entity.setTenure(eoGlobalTenure);
 			if(promptLibararyOptional.isPresent()) {
 				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();
@@ -170,7 +170,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 		} else if(data.getTenureYear()!=null) {
 			EOGlobalTenure eoGlobalTenure = globalTenureRepository.findOneByYear(data.getTenureYear()).orElseThrow(()-> new InvalidParameterException("Invalid tenure year."));
 			Optional<EOGlobalPromptLibarary> promptLibararyOptional = globalPromptLibararyRepository.findByTenureId(eoGlobalTenure.getId());
-			entity.setIdenNo(buildImageLibararyIdenNo.buildPromptLibararyIdenNo(eoGlobalTenure, data.getName()));
+			entity.setIdenNo(BuilderUtil.buildPromptLibararyIdenNo(eoGlobalTenure, data.getName()));
 			entity.setTenure(eoGlobalTenure);
 			if(promptLibararyOptional.isPresent()) {
 				EOGlobalPromptLibarary eoGlobalPromptLibarary = promptLibararyOptional.get();

@@ -2,6 +2,8 @@ package com.brijframework.content.global.mapper;
 import static com.brijframework.content.constants.Constants.APP_GLOBAL_PACKAGE_IMPL;
 import static com.brijframework.content.constants.Constants.SPRING;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.mapstruct.Mapper;
@@ -34,7 +36,19 @@ public interface GlobalImageLibararyMapper  extends GenericMapper<EOGlobalImageL
 
 	UIGlobalTagModel uiGlobalTagLibarary(EOGlobalTagLibarary tagLibarary);
 
-	List<UIGlobalTagModel> tagMappingForImageList(List<EOGlobalTagImageMapping> tagImageMappings);
+	public default List<UIGlobalTagModel> tagMappingForImageList(List<EOGlobalTagImageMapping> tagImageMappings) {
+        if ( tagImageMappings == null ) {
+            return Collections.emptyList();
+        }
+        List<UIGlobalTagModel> list = new ArrayList<UIGlobalTagModel>( tagImageMappings.size() );
+        for ( EOGlobalTagImageMapping eOGlobalTagImageMapping : tagImageMappings ) {
+        	UIGlobalTagModel uiGlobalTagLibarary = uiGlobalTagLibarary( eOGlobalTagImageMapping );
+        	if(uiGlobalTagLibarary!=null)
+            list.add( uiGlobalTagLibarary );
+        }
+        return list;
+    }
+
 
 	EOGlobalImageLibarary modelToDAO(UIGlobalImageModel uiImageModel);
 

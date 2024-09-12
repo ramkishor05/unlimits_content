@@ -5,8 +5,6 @@ package com.brijframework.content.resource.modal;
 
 import org.unlimits.rest.model.UIModel;
 
-import com.brijframework.content.util.CommanUtil;
-
 /**
  * @author omnie
  */
@@ -30,7 +28,7 @@ public class UIResourceModel extends UIModel{
 	private String posterContent;
 
 	public String getFolderName() {
-		return CommanUtil.replaceSpecialCharsWithUnderscore(folderName);
+		return folderName;
 	}
 
 	public void setFolderName(String folderName) {
@@ -38,7 +36,7 @@ public class UIResourceModel extends UIModel{
 	}
 
 	public String getFileName() {
-		return CommanUtil.replaceSpecialCharsWithUnderscore(fileName);
+		return fileName;
 	}
 
 	public void setFileName(String fileName) {
@@ -54,7 +52,7 @@ public class UIResourceModel extends UIModel{
 	}
 	
 	public String getPosterName() {
-		return CommanUtil.replaceSpecialCharsWithUnderscore(posterName);
+		return posterName;
 	}
 
 	public void setPosterName(String posterName) {
