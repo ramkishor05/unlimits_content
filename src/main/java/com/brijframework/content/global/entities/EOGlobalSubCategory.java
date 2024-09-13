@@ -5,8 +5,6 @@ import static com.brijframework.content.constants.Constants.EOGLOBAL_SUB_CATEGOR
 import static com.brijframework.content.constants.Constants.MAIN_CATEGORY_ID;
 import static com.brijframework.content.constants.Constants.NAME;
 
-import java.util.Objects;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -57,7 +55,7 @@ public class EOGlobalSubCategory extends EOGlobalItem {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId());
+		return getId().hashCode();
 	}
 
 	@Override
@@ -69,7 +67,7 @@ public class EOGlobalSubCategory extends EOGlobalItem {
 		if (getClass() != obj.getClass())
 			return false;
 		EOGlobalSubCategory other = (EOGlobalSubCategory) obj;
-		return Objects.equals(getId(), other.getId());
+		return getId().equals(other.getId());
 	}
 	
 	

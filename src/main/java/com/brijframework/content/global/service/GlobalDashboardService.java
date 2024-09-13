@@ -1,4 +1,4 @@
-package com.brijframework.content.global.service.impl;
+package com.brijframework.content.global.service;
 
 import com.brijframework.content.global.model.UIGlobalDashboard;
 

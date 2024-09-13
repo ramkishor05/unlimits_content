@@ -184,6 +184,9 @@ public class GlobalExampleLibararyServiceImpl extends CrudServiceImpl<UIGlobalEx
 
 	@Override
 	public void preAdd(UIGlobalExampleLibarary data, Map<String, List<String>> headers) {
+		globalExampleLibararyRepository.findBySubCategoryIdAndProfileName(data.getSubCategoryId(), data.getProfileName()).ifPresent(globalSubCategory->{
+			data.setId(globalSubCategory.getId());
+		});
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		data.setProfilePictureURL(null);
 		data.setPosterUrl(null);

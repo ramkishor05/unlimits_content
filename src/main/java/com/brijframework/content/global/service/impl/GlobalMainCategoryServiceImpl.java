@@ -122,6 +122,9 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	
 	@Override
 	public void preAdd(UIGlobalMainCategory data, Map<String, List<String>> headers) {
+		globalMainCategoryRepository.findByName(data.getName()).ifPresent(globalMainCategory->{
+			data.setId(globalMainCategory.getId());
+		});
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	

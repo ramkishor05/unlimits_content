@@ -12,4 +12,6 @@ public interface GlobalExampleLibararyRepository  extends CustomRepository<EOGlo
 
 	Optional<EOGlobalExampleLibarary> findByIdenNo(String idenNo);
 
+	Optional<EOGlobalExampleLibarary> findBySubCategoryIdAndProfileName(Long subCategoryId, String profileName);
+
 }

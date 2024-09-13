@@ -14,6 +14,7 @@ public interface GlobalTenureRepository extends CustomRepository<EOGlobalTenure,
 
 	Optional<EOGlobalTenure> findByIdenNo(String idenNo);
 
-	Optional<EOGlobalTenure> findOneByYear(Integer key);
+	Optional<EOGlobalTenure> findOneByYear(Integer year);
+
 
 }

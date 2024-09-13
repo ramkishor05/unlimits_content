@@ -8,6 +8,7 @@ import com.brijframework.content.global.repository.GlobalAffirmationLibararyRepo
 import com.brijframework.content.global.repository.GlobalJournalLibararyRepository;
 import com.brijframework.content.global.repository.GlobalMindSetLibararyRepository;
 import com.brijframework.content.global.repository.GlobalReProgramLibararyRepository;
+import com.brijframework.content.global.service.GlobalDashboardService;
 
 @Service
 public class GlobalDashboardServiceImpl implements GlobalDashboardService {

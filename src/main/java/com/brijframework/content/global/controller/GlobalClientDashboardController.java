@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brijframework.content.global.model.UIGlobalDashboard;
-import com.brijframework.content.global.service.impl.GlobalDashboardService;
+import com.brijframework.content.global.service.GlobalDashboardService;
 
 /**
  *  @author ram kishor

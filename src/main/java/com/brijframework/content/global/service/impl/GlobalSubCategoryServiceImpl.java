@@ -171,6 +171,9 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	
 	@Override
 	public void preAdd(UIGlobalSubCategory data, Map<String, List<String>> headers) {
+		globalSubCategoryRepository.findByMainCategoryIdAndName(data.getMainCategoryId(), data.getName()).ifPresent(globalSubCategory->{
+			data.setId(globalSubCategory.getId());
+		});
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 

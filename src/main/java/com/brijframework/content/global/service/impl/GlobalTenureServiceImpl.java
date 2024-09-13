@@ -54,6 +54,9 @@ public class GlobalTenureServiceImpl extends CrudServiceImpl<UIGlobalTenure, EOG
 	
 	@Override
 	public void preAdd(UIGlobalTenure data, Map<String, List<String>> headers) {
+		globalTenureRepository.findOneByYear(data.getYear()).ifPresent(globalSubCategory->{
+			data.setId(globalSubCategory.getId());
+		});
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}

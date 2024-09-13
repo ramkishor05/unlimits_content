@@ -2,7 +2,6 @@ package com.brijframework.content.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -111,7 +110,7 @@ public abstract class EOEntityObject implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return id==null ?0 :id.hashCode();
 	}
 
 	@Override
@@ -123,7 +122,7 @@ public abstract class EOEntityObject implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		EOEntityObject other = (EOEntityObject) obj;
-		return Objects.equals(id, other.id);
+		return id.equals(other.id);
 	}
 	
 }

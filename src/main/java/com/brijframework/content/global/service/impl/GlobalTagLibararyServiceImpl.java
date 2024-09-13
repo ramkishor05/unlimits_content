@@ -132,6 +132,9 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	
 	@Override
 	public void preAdd(UIGlobalTagLibarary data, Map<String, List<String>> headers) {
+		globalTagLibararyRepository.findBySubCategoryIdAndName(data.getSubCategoryId(), data.getName()).ifPresent(globalSubCategory->{
+			data.setId(globalSubCategory.getId());
+		});
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	

@@ -1,6 +1,5 @@
 package com.brijframework.content;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.brijframework.json.schema.factories.JsonSchemaDataFactory;
@@ -10,7 +9,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.brijframework.content.global.entities.EOGlobalExampleLibarary;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalPromptLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
