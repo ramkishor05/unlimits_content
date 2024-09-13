@@ -9,7 +9,7 @@ import org.unlimits.rest.crud.beans.PageDetail;
 
 import com.brijframework.content.forgin.model.FileContent;
 
-@FeignClient(name= "UNLIMITS-INTEGRATION" , url = "http://localhost:4444")
+@FeignClient(name= "UNLIMITS-INTEGRATION" , url = "http://${server.eureka.host}:${server.eureka.port}/integration")
 public interface PexelMediaRepository {
 
 	@GetMapping(value = "/api/pexel/media/files/{fileId}")

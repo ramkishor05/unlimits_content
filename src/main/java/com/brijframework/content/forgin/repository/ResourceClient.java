@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.resource.service.ResourceService;
 
-//@FeignClient(name= "UNLIMITS-CONTENT" , url = "http://localhost:3333")
+//@FeignClient(name= "UNLIMITS-CONTENT" , url = "http://${server.eureka.host}:${server.eureka.port}/client")
 @Component
 public class ResourceClient {
 
