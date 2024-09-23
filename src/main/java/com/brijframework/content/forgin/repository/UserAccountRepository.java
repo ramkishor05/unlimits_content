@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.brijframework.content.constants.Constants;
 import com.brijframework.content.modal.UIUserAccount;
 
-@FeignClient(name= "UNLIMITS-AUTH" , url = "http://${server.eureka.host}:${server.eureka.port}/auth")
+@FeignClient(name= "UNLIMITS-AUTH" , url = "http://${server.gateway.host}:${server.gateway.port}/auth")
 public interface UserAccountRepository {
 
 	@GetMapping(value = "/api/device/authentication")

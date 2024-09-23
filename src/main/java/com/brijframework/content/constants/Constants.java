@@ -196,6 +196,8 @@ public class Constants {
 	public static final String EOGLOBAL_EXAMPLE_VISUALIZE="EOGLOBAL_EXAMPLE_VISUALIZE";
 	
 	public static final String EOGLOBAL_MINDSET_LIBARARY = "EOGLOBAL_MINDSET_LIBARARY";
+	public static final String EOGLOBAL_MINDSET_ITEM = "EOGLOBAL_MINDSET_ITEM";
+
 	public static final String EOGLOBAL_CURRENCY_ITEM = "EOGLOBAL_CURRENCY_ITEM";
 	public static final String EOGLOBAL_CURRENCY_GROUP = "EOGLOBAL_CURRENCY_GROUP";
 	public static final String UNIT_GROUP = "unitGroup";

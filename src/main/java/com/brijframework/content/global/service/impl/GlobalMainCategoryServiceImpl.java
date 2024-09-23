@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.brijframework.json.schema.factories.JsonSchemaFile;
 import org.brijframework.json.schema.factories.JsonSchemaObject;
 import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +38,8 @@ import com.google.common.io.Files;
 @Service
 public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainCategory, EOGlobalMainCategory, Long> implements GlobalMainCategoryService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalMainCategoryServiceImpl.class);
+
 	private static final String MAIN_CATEGORY = "main_category";
 
 	private static final String LOGO_URL = "logoUrl";
@@ -71,7 +75,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	
 	@Override
 	public void init(List<EOGlobalMainCategory> eoGlobalCategoryGroupJson) {
-
+        LOGGER.info("init started");
 		eoGlobalCategoryGroupJson.forEach(eoGlobalCategoryGroup -> {
 			EOGlobalMainCategory findGlobalCategoryGroup = globalMainCategoryRepository
 					.findByIdenNo(eoGlobalCategoryGroup.getIdenNo()).orElse(eoGlobalCategoryGroup);
@@ -121,7 +125,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	public void preAdd(UIGlobalMainCategory data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalMainCategory data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		globalMainCategoryRepository.findByName(data.getName()).ifPresent(globalMainCategory->{
 			data.setId(globalMainCategory.getId());
 		});
@@ -129,7 +133,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	public void preAdd(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -137,7 +141,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	public void preUpdate(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalMainCategory data, EOGlobalMainCategory entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -174,14 +178,14 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
 	@Override
-	public void postFetch(EOGlobalMainCategory findObject, UIGlobalMainCategory dtoObject) {
+	public void postFetch(EOGlobalMainCategory findObject, UIGlobalMainCategory dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}
@@ -191,7 +195,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 	}
 	
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalMainCategory> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalMainCategory eoGlobalMainCategory = findById.get();

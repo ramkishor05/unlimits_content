@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.brijframework.json.schema.factories.JsonSchemaFile;
 import org.brijframework.json.schema.factories.JsonSchemaObject;
 import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +45,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCategory, EOGlobalSubCategory, Long> implements GlobalSubCategoryService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalSubCategoryServiceImpl.class);
+
 	private static final String RECORD_STATE = "recordState";
 
 	private static final String SUB_CATEGORY = "sub_category";
@@ -73,7 +77,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	
 	@Override
 	public void init(List<EOGlobalSubCategory> eoGlobalCategoryItemJson){
-
+        LOGGER.info("init");
 		eoGlobalCategoryItemJson.forEach(eoGlobalCategoryItem -> {
 			EOGlobalSubCategory findGlobalCategoryItem = globalSubCategoryRepository
 					.findByMainCategoryIdAndName(eoGlobalCategoryItem.getMainCategory().getId(),
@@ -134,7 +138,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 		CustomPredicate<EOGlobalSubCategory> mainCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
 			Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
 			Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
+			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id").as(String.class), filter.getColumnValue().toString()));
 			Path<Object> subCategoryIdPath = root.get("mainCategory");
 			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
 			subCategoryIdIn.value(subquery);
@@ -144,7 +148,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 		CustomPredicate<EOGlobalSubCategory> mainCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
 			Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
 			Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
+			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name").as(String.class), "%"+filter.getColumnValue()+"%"));
 			Path<Object> subCategoryIdPath = root.get("mainCategory");
 			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
 			subCategoryIdIn.value(subquery);
@@ -158,7 +162,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalSubCategory> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalSubCategory eoGlobalSubCategory = findById.get();
@@ -170,7 +174,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 	
 	@Override
-	public void preAdd(UIGlobalSubCategory data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalSubCategory data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		globalSubCategoryRepository.findByMainCategoryIdAndName(data.getMainCategoryId(), data.getName()).ifPresent(globalSubCategory->{
 			data.setId(globalSubCategory.getId());
 		});
@@ -178,7 +182,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 
 	@Override
-	public void preAdd(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -186,7 +190,7 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 	
 	@Override
-	public void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -216,14 +220,14 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
 	@Override
-	public void postFetch(EOGlobalSubCategory findObject, UIGlobalSubCategory dtoObject) {
+	public void postFetch(EOGlobalSubCategory findObject, UIGlobalSubCategory dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}

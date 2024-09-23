@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,6 +30,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCategory, EOGlobalSubCategory, Long> implements DeviceSubCategoryService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(DeviceSubCategoryServiceImpl.class);
+
 	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
@@ -52,23 +56,33 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 
 	{
 		CustomPredicate<EOGlobalSubCategory> mainCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
-			Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
-			Path<Object> subCategoryIdPath = root.get("mainCategory");
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
+				Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id").as(String.class), filter.getColumnValue().toString()));
+				Path<Object> subCategoryIdPath = root.get("mainCategory");
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for mainCategoryId: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		CustomPredicate<EOGlobalSubCategory> mainCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
-			Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
-			Path<Object> subCategoryIdPath = root.get("mainCategory");
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalMainCategory> subquery = criteriaQuery.subquery(EOGlobalMainCategory.class);
+				Root<EOGlobalMainCategory> fromProject = subquery.from(EOGlobalMainCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name").as(String.class), "%"+filter.getColumnValue()+"%"));
+				Path<Object> subCategoryIdPath = root.get("mainCategory");
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for mainCategoryName: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		 
 		addCustomPredicate("mainCategoryId", mainCategoryId);
@@ -79,25 +93,25 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 	
 
 	@Override
-	public List<UIDeviceSubCategory> findAllByMainCategoryId(Long mainCategoryId) {
-		return postFetch(globalCategoryItemRepository.findAllByMainCategoryId(mainCategoryId));
+	public List<UIDeviceSubCategory> findAllByMainCategoryId(Long mainCategoryId, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
+		return postFetch(globalCategoryItemRepository.findAllByMainCategoryId(mainCategoryId), headers, filters, actions);
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 	
 	@Override
-	public void postFetch(EOGlobalSubCategory findObject, UIDeviceSubCategory dtoObject) {
+	public void postFetch(EOGlobalSubCategory findObject, UIDeviceSubCategory dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(StringUtils.isNotEmpty(dtoObject.getLogoUrl())) {
 			dtoObject.setLogoUrl(dtoObject.getLogoUrl().startsWith("/")? serverUrl+""+dtoObject.getLogoUrl() :  serverUrl+"/"+dtoObject.getLogoUrl());
 		}
 	}
 
 	@Override
-	public List<UIDeviceSubCategory> postFetch(List<EOGlobalSubCategory> findObjects) {
-		List<UIDeviceSubCategory> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceSubCategory> postFetch(List<EOGlobalSubCategory> findObjects, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
+		List<UIDeviceSubCategory> uiObjects = super.postFetch(findObjects, headers, filters, actions);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}

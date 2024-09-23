@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,6 +34,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> implements DeviceImageLibararyService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(DeviceImageLibararyServiceImpl.class);
+
 	private static final String RECORD_STATE = "recordState";
 	
 	@Autowired
@@ -58,23 +62,33 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	
 	{
 		CustomPredicate<EOGlobalImageLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
-			Path<Object> subCategoryIdPath = root.get("subCategory");
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id").as(String.class), filter.getColumnValue().toString()));
+				Path<Object> subCategoryIdPath = root.get("subCategory");
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryId: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		CustomPredicate<EOGlobalImageLibarary> subCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
-			Path<Object> subCategoryIdPath = root.get("subCategory");
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name").as(String.class), "%"+filter.getColumnValue()+"%"));
+				Path<Object> subCategoryIdPath = root.get("subCategory");
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryName: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		addCustomPredicate("subCategoryId", subCategoryId);
@@ -103,13 +117,13 @@ public class DeviceImageLibararyServiceImpl extends QueryServiceImpl<UIDeviceIma
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 	}
 
 	@Override
-	public List<UIDeviceImageLibarary> postFetch(List<EOGlobalImageLibarary> findObjects) {
-		List<UIDeviceImageLibarary> uiObjects = super.postFetch(findObjects);
+	public List<UIDeviceImageLibarary> postFetch(List<EOGlobalImageLibarary> findObjects, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
+		List<UIDeviceImageLibarary> uiObjects = super.postFetch(findObjects, headers, filters, actions);
 		uiObjects.sort((op1,op2)->op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}

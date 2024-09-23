@@ -1,6 +1,7 @@
 package com.brijframework.content.device.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,6 +14,8 @@ public class UIDeviceReProgramLibarary extends UIDeviceModel implements Serializ
 	private String musicUrl;
 
 	private String posterUrl;
+
+	private List<UIDeviceReProgramItem> reProgramItems;
 
 	public String getMusicUrl() {
 		return musicUrl;
@@ -29,4 +32,13 @@ public class UIDeviceReProgramLibarary extends UIDeviceModel implements Serializ
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
+
+	public List<UIDeviceReProgramItem> getReProgramItems() {
+		return reProgramItems;
+	}
+
+	public void setReProgramItems(List<UIDeviceReProgramItem> reProgramItems) {
+		this.reProgramItems = reProgramItems;
+	}
+
 }

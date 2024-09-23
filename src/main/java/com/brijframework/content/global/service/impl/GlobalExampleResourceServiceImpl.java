@@ -3,6 +3,8 @@ package com.brijframework.content.global.service.impl;
 import java.util.List;
 
 import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ import com.brijframework.content.global.service.GlobalExampleResourceService;
 @Service
 public class GlobalExampleResourceServiceImpl implements GlobalExampleResourceService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalExampleResourceServiceImpl.class);
+
 	@Autowired
 	private GlobalSubCategoryRepository globalSubCategoryRepository;
 	
@@ -44,6 +48,7 @@ public class GlobalExampleResourceServiceImpl implements GlobalExampleResourceSe
 	
 	@Override
 	public void init(List<UIGlobalExampleResource> globalExampleResources) {
+		LOGGER.info("init started");
 		globalExampleResources.forEach(globalExampleResource -> {
 			EOGlobalExampleLibarary findGlobalExampleLibarary = globalExampleLibararyRepository.findByIdenNo(globalExampleResource.getIdenNo()).orElse(new EOGlobalExampleLibarary());
 			BeanUtils.copyProperties(globalExampleResource, findGlobalExampleLibarary, "id","exampleItems");

@@ -14,7 +14,7 @@ import com.brijframework.content.global.service.GlobalDashboardService;
 @RestController
 @RequestMapping(value = "/api/global/dashboard")
 @CrossOrigin("*")
-public class GlobalClientDashboardController {
+public class GlobalDashboardController {
 	
 	private GlobalDashboardService globalDashboardService;
 	

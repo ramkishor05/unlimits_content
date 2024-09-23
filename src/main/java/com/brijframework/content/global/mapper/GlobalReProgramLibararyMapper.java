@@ -4,6 +4,7 @@ import static com.brijframework.content.constants.Constants.APP_GLOBAL_PACKAGE_I
 import static com.brijframework.content.constants.Constants.SPRING;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 
@@ -14,5 +15,10 @@ import com.brijframework.content.global.model.UIGlobalReProgramLibarary;
 public interface GlobalReProgramLibararyMapper extends GenericMapper<EOGlobalReProgramLibarary, UIGlobalReProgramLibarary>{
 
 	@Override
+	@Mapping(target = "reProgramItems", ignore = true)
 	EOGlobalReProgramLibarary mapToDAO(UIGlobalReProgramLibarary d);
+	
+	@Override
+	@Mapping(target = "reProgramItems", ignore = true)
+	UIGlobalReProgramLibarary mapToDTO(EOGlobalReProgramLibarary entityObject);
 }

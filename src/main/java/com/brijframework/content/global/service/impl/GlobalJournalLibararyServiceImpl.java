@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ import com.brijframework.content.global.service.GlobalJournalLibararyService;
 @Service
 public class GlobalJournalLibararyServiceImpl  extends CrudServiceImpl<UIGlobalJournalLibarary, EOGlobalJournalLibarary, Long> implements GlobalJournalLibararyService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalJournalLibararyServiceImpl.class);
+
 	private static final String RECORD_STATE = "recordState";
 
 	@Autowired
@@ -41,12 +45,13 @@ public class GlobalJournalLibararyServiceImpl  extends CrudServiceImpl<UIGlobalJ
 	}
 	
 	@Override
-	public void preAdd(UIGlobalJournalLibarary data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalJournalLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
+		LOGGER.info("pre add");
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	
 	@Override
-	public void preUpdate(UIGlobalJournalLibarary data, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalJournalLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -60,14 +65,14 @@ public class GlobalJournalLibararyServiceImpl  extends CrudServiceImpl<UIGlobalJ
 	}
 
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalJournalLibarary> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalJournalLibarary eoGlobalJournalLibarary = findById.get();

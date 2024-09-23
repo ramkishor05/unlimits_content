@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -53,6 +55,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLibarary, EOGlobalTagLibarary, Long> implements GlobalTagLibararyService {
 
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalTagLibararyServiceImpl.class);
+
 	@Autowired
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
 	
@@ -80,43 +84,63 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 
 	{
 		CustomPredicate<EOGlobalTagLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get(ID), filter.getColumnValue()));
-			Path<Object> subCategoryIdPath = root.get(SUB_CATEGORY);
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get(ID).as(String.class), filter.getColumnValue().toString()));
+				Path<Object> subCategoryIdPath = root.get(SUB_CATEGORY);
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryId: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		CustomPredicate<EOGlobalTagLibarary> subCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get(NAME), PERCENTAGE+filter.getColumnValue()+PERCENTAGE));
-			Path<Object> subCategoryIdPath = root.get(SUB_CATEGORY);
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get(NAME).as(String.class), PERCENTAGE+filter.getColumnValue()+PERCENTAGE));
+				Path<Object> subCategoryIdPath = root.get(SUB_CATEGORY);
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryName: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		CustomPredicate<EOGlobalTagLibarary> tagLibararyId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalTagLibarary> subquery = criteriaQuery.subquery(EOGlobalTagLibarary.class);
-			Root<EOGlobalTagLibarary> fromProject = subquery.from(EOGlobalTagLibarary.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get(ID), filter.getColumnValue()));
-			Path<Object> subCategoryIdPath = root.get(TAG_LIBARARY);
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalTagLibarary> subquery = criteriaQuery.subquery(EOGlobalTagLibarary.class);
+				Root<EOGlobalTagLibarary> fromProject = subquery.from(EOGlobalTagLibarary.class);
+				subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get(ID).as(String.class), filter.getColumnValue().toString()));
+				Path<Object> subCategoryIdPath = root.get(TAG_LIBARARY);
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for tagLibararyId: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		CustomPredicate<EOGlobalTagLibarary> tagLibararyName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalTagLibarary> subquery = criteriaQuery.subquery(EOGlobalTagLibarary.class);
-			Root<EOGlobalTagLibarary> fromProject = subquery.from(EOGlobalTagLibarary.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get(NAME), PERCENTAGE+filter.getColumnValue()+PERCENTAGE));
-			Path<Object> subCategoryIdPath = root.get(TAG_LIBARARY);
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalTagLibarary> subquery = criteriaQuery.subquery(EOGlobalTagLibarary.class);
+				Root<EOGlobalTagLibarary> fromProject = subquery.from(EOGlobalTagLibarary.class);
+				subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get(NAME).as(String.class), PERCENTAGE+filter.getColumnValue()+PERCENTAGE));
+				Path<Object> subCategoryIdPath = root.get(TAG_LIBARARY);
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for tagLibararyName: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
  
 		addCustomPredicate(SUB_CATEGORY_ID, subCategoryId);
@@ -131,7 +155,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
-	public void preAdd(UIGlobalTagLibarary data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalTagLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		globalTagLibararyRepository.findBySubCategoryIdAndName(data.getSubCategoryId(), data.getName()).ifPresent(globalSubCategory->{
 			data.setId(globalSubCategory.getId());
 		});
@@ -139,7 +163,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
-	public void preAdd(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getType()==null) {
 			data.setType(VisualiseType.WORDS_PAGE.getType());
 		}
@@ -169,7 +193,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
-	public void preUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getType()==null) {
 			data.setType(VisualiseType.WORDS_PAGE.getType());
 		}
@@ -179,26 +203,26 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
-	public void postUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers) {
+	public void postUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		saveTagImageMappingList(data, entity);
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
 	@Override
-	public List<UIGlobalTagLibarary> postFetch(List<EOGlobalTagLibarary> findObjects) {
-		List<UIGlobalTagLibarary> uiObjects = super.postFetch(findObjects);
+	public List<UIGlobalTagLibarary> postFetch(List<EOGlobalTagLibarary> findObjects, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
+		List<UIGlobalTagLibarary> uiObjects = super.postFetch(findObjects, headers, filters, actions);
 		uiObjects.sort((uiObject1, uiObject2)->uiObject1.getSubCategoryId().compareTo(uiObject2.getSubCategoryId()));
 		return uiObjects;
 	}
 	
 	@Override
-	public void postFetch(EOGlobalTagLibarary findObject, UIGlobalTagLibarary dtoObject) {
+	public void postFetch(EOGlobalTagLibarary findObject, UIGlobalTagLibarary dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		List<EOGlobalTagImageMapping> imageMappingList = globalTagImageMappingRepository.findAllByTagLibararyId(findObject.getId(), RecordStatus.ACTIVETED.getStatusIds());
 		if(!CollectionUtils.isEmpty(imageMappingList)) {
 			List<UIGlobalImageModel> tagMappingForImageList = globalTagLibararyMapper.tagMappingForImageList(imageMappingList);
@@ -220,7 +244,7 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalTagLibarary> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalTagLibarary eoGlobalTagLibarary = findById.get();

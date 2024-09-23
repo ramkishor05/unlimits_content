@@ -1,0 +1,83 @@
+# HTTP Server (Tomcat) Port
+server: 
+  host: 51.79.159.7
+  port: 3003
+  resource:
+    location: file:C:/app_runs/unlimits-resources/resource
+  database:
+    host: 15.235.207.206
+    port: 3306
+    username: unlimits_usr
+    password: JJeV!EhBbuR
+    schema: unlimits_content_stage
+  gateway:
+    host: 51.79.159.7
+    port: 8083
+    endpoint: content
+  eureka:
+    host: 51.79.159.7
+    port: 1003
+spring:
+   config:
+     activate:
+        on-profile: stage
+   application:
+     name: unlimits_content
+   main:
+     allow-bean-definition-overriding: true
+   resources:
+     static-locations: classpath:/ 
+   sql.init.mode: always
+   datasource:
+     driverClassName: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://${server.database.host}:${server.database.port}/${server.database.schema}?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+     username: ${server.database.username}
+     password: ${server.database.password}
+     show-sql: true
+   jpa: 
+     hibernate: 
+       dialect: org.hibernate.dialect.MySQLDialect
+       ddl-auto: update
+       format_sql: true
+       show_sql: true
+       naming: 
+         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+   mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: nikhilraj0123467@gmail.com
+    protocol: smtp
+    password: keqx xjod sicl qtzy
+    test-connection: 'false'
+    port: '587'
+   db:
+     datajson:
+       upload: true
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /api/swagger-ui.html
+# Discovery Server Access
+eureka:
+ client:
+   serviceUrl:
+     defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/
+logging:
+ level:
+  org.hibernate.SQL: DEBUG
+  org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+error:
+ whitelabel:
+   enabled: true
+openapi:
+ service:
+   title: content
+   version: 1.0.0
+   url: http://${server.gateway.host}:${server.gateway.port}/${server.gateway.endpoint} #api gateway url   

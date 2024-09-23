@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +26,11 @@ import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.util.BuilderUtil;
 
 @Service
-public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlobalAffirmationLibarary, EOGlobalAffirmationLibarary, Long> implements GlobalAffirmationLibararyService {
+public class GlobalAffirmationLibararyServiceImpl
+		extends CrudServiceImpl<UIGlobalAffirmationLibarary, EOGlobalAffirmationLibarary, Long>
+		implements GlobalAffirmationLibararyService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(GlobalAffirmationLibararyServiceImpl.class);
 
 	private static final String RECORD_STATE = "recordState";
 
@@ -57,19 +63,21 @@ public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlob
 	}
 
 	@Override
-	public void preAdd(UIGlobalAffirmationLibarary data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalAffirmationLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,
+			Map<String, Object> actions) {
+		LOGGER.warn("pre add: {}", headers);
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
-	
+
 	@Override
 	public void preAdd(UIGlobalAffirmationLibarary data, EOGlobalAffirmationLibarary entity,
-			Map<String, List<String>> headers) {
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
 		saveResource(data, entity);
 	}
 
 	@Override
 	public void preUpdate(UIGlobalAffirmationLibarary data, EOGlobalAffirmationLibarary find,
-			Map<String, List<String>> headers) {
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
 		if (data.getRecordState() == null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -93,7 +101,7 @@ public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlob
 			} else {
 				ignoreProperties().add(MUSIC_URL);
 			}
-			if (BuilderUtil.isValidFile(resource)) {
+			if (BuilderUtil.isValidPoster(resource)) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
 				find.setPosterUrl(resourceFile.getPosterUrl());
 			} else {
@@ -114,14 +122,15 @@ public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlob
 	}
 
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
 		if (filters != null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 
 	@Override
-	public void postFetch(EOGlobalAffirmationLibarary findObject, UIGlobalAffirmationLibarary dtoObject) {
+	public void postFetch(EOGlobalAffirmationLibarary findObject, UIGlobalAffirmationLibarary dtoObject,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
 		if (StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId() + "");
 		}
@@ -137,7 +146,7 @@ public class GlobalAffirmationLibararyServiceImpl extends CrudServiceImpl<UIGlob
 	}
 
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalAffirmationLibarary> findById = getRepository().findById(id);
 		if (findById.isPresent()) {
 			EOGlobalAffirmationLibarary eoGlobalAffirmationLibarary = findById.get();

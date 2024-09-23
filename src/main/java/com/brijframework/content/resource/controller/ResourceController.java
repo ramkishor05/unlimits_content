@@ -58,7 +58,7 @@ public class ResourceController{
 	
 	@PostMapping
 	public UIResourceModel addImage(@RequestBody UIResourceModel uiResource) throws IOException {
-		resourceService.add(uiResource, new HashMap<String, List<String>>());
+		resourceService.add(uiResource, new HashMap<String, List<String>>(), new HashMap<String, Object>(), new HashMap<String, Object>());
 		return uiResource;
 	}
 

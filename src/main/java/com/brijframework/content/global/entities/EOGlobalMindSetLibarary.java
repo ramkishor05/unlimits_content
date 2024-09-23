@@ -2,11 +2,15 @@ package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.*;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +33,9 @@ public class EOGlobalMindSetLibarary extends EOGlobalItem {
 	@Column(name = POSTER_URL)
 	@Lob
 	private String posterUrl;
+	
+	@OneToMany(mappedBy = "mindSetLibarary", cascade = CascadeType.ALL)
+	private List<EOGlobalMindSetItem> mindSetItems;
 	
 	public Long getResourceId() {
 		return resourceId;
@@ -54,4 +61,12 @@ public class EOGlobalMindSetLibarary extends EOGlobalItem {
 		this.posterUrl = posterUrl;
 	}
 
+	public List<EOGlobalMindSetItem> getMindSetItems() {
+		return mindSetItems;
+	}
+
+	public void setMindSetItems(List<EOGlobalMindSetItem> mindSetItems) {
+		this.mindSetItems = mindSetItems;
+	}
+	
 }

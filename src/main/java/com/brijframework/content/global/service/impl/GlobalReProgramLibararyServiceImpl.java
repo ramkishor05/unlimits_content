@@ -3,16 +3,20 @@
  */
 package com.brijframework.content.global.service.impl;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.unlimits.rest.constants.RestConstant;
 import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.CrudServiceImpl;
 
@@ -23,6 +27,7 @@ import com.brijframework.content.global.entities.EOGlobalReProgramLibarary;
 import com.brijframework.content.global.mapper.GlobalReProgramLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalReProgramLibarary;
 import com.brijframework.content.global.repository.GlobalReProgramLibararyRepository;
+import com.brijframework.content.global.service.GlobalReProgramItemService;
 import com.brijframework.content.global.service.GlobalReProgramLibararyService;
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.util.BuilderUtil;
@@ -33,6 +38,12 @@ import com.brijframework.content.util.BuilderUtil;
 @Service
 public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobalReProgramLibarary, EOGlobalReProgramLibarary, Long>
 		implements GlobalReProgramLibararyService {
+
+	private static final String RE_PROGRAM_ITEMS = "reProgramItems";
+
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalReProgramLibararyServiceImpl.class);
+	
+	private static final String RE_PROGRAM_LIBARARY_ID = "reProgramLibararyId";
 
 	private static final String RECORD_STATE = "recordState";
 
@@ -49,12 +60,13 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 	private GlobalReProgramLibararyMapper globalReProgramLibararyMapper;
 	
 	@Autowired
+	private GlobalReProgramItemService globalReProgramItemService;
+	
+	@Autowired
 	private ResourceClient resourceClient;
 	
 	@Value("${openapi.service.url}")
 	private String serverUrl;
-
-	private List<String> ignoreProperties;
 
 	@Override
 	public JpaRepository<EOGlobalReProgramLibarary, Long> getRepository() {
@@ -68,6 +80,7 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 	
 	@Override
 	public void preAdd(UIGlobalReProgramLibarary data, Map<String, List<String>> headers) {
+		LOGGER.info("pre add");
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		saveResource(data, null);
 	}
@@ -96,10 +109,10 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 			} else {
 				ignoreProperties().add(MUSIC_URL);
 			}
-			if(BuilderUtil.isValidFile(resource)) {
+			if(BuilderUtil.isValidPoster(resource)) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
 			} else {
-				ignoreProperties().add(MUSIC_URL);
+				ignoreProperties().add(POSTER_URL);
 			}
 		} else {
 			ignoreProperties().add(POSTER_URL);
@@ -108,22 +121,35 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 	}
 	
 	@Override
-	public List<String> ignoreProperties() {
-		if(ignoreProperties==null) {
-			ignoreProperties=new ArrayList<String>();
-		}
-		return ignoreProperties;
+	public void merge(UIGlobalReProgramLibarary dtoObject, EOGlobalReProgramLibarary entityObject,
+			UIGlobalReProgramLibarary updateDtoObject, EOGlobalReProgramLibarary updateEntityObject,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		saveItems(dtoObject, updateEntityObject, actions);
 	}
-	
+
+	private void saveItems(UIGlobalReProgramLibarary data, EOGlobalReProgramLibarary entity, Map<String, Object> actions) {
+		if(!RestConstant.isExcludeKey(actions, RE_PROGRAM_ITEMS) && RestConstant.isIncludeKey(actions, RE_PROGRAM_ITEMS)) {
+			
+			List<Long> ids = data.getReProgramItems().stream().filter(reProgramItem->!StringUtil.isEmpty(reProgramItem.getId())).map(reProgramItem->reProgramItem.getId()).toList();
+			globalReProgramItemService.deleteByReProgramLibararyIdAndIdNotIn(entity.getId(), ids);
+			
+			Map<String, List<String>> headers=new HashMap<String, List<String>>();
+			Map<String, Object> filters=new HashMap<String,Object>();
+			filters.put(RE_PROGRAM_LIBARARY_ID, entity.getId());
+			data.getReProgramItems().forEach(item->item.setReProgramLibararyId(entity.getId()));
+			data.setReProgramItems(globalReProgramItemService.updateAll(data.getReProgramItems(), headers, filters, actions));
+		}
+	}
+
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
 	@Override
-	public void postFetch(EOGlobalReProgramLibarary findObject, UIGlobalReProgramLibarary dtoObject) {
+	public void postFetch(EOGlobalReProgramLibarary findObject, UIGlobalReProgramLibarary dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}
@@ -137,7 +163,7 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 	}
 
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalReProgramLibarary> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalReProgramLibarary eoGlobalReProgramLibarary = findById.get();

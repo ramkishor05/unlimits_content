@@ -30,6 +30,12 @@ import com.brijframework.content.global.entities.EOGlobalImageLibarary;
 public class DeviceImageLibararyController
 		implements QueryController<UIDeviceImageLibarary, EOGlobalImageLibarary, Long> {
 
+	private static final String NAME = "name";
+
+	private static final String TYPE = "type";
+
+	private static final String SUB_CATEGORY_ID = "subCategoryId";
+
 	@Autowired
 	private DeviceImageLibararyService deviceImageLibararyService;
 
@@ -42,7 +48,7 @@ public class DeviceImageLibararyController
 	}
 
 	@GetMapping("/types")
-	public Response<List<String>> getTypes(@RequestParam("subCategoryId") Long subCategoryId,
+	public Response<List<String>> getTypes(@RequestParam(SUB_CATEGORY_ID) Long subCategoryId,
 			@RequestHeader(required = false) MultiValueMap<String, String> headers, WebRequest webRequest) {
 		Response<List<String>> response = new Response<List<String>>();
 		try {
@@ -61,9 +67,10 @@ public class DeviceImageLibararyController
 	public Response<Map<String, List<UIDeviceImageLibarary>>> getImagesGroupbyFolder(
 			@RequestHeader(required = false) MultiValueMap<String, String> headers, WebRequest webRequest) {
 		Map<String, Object> filters = CQRSController.getfilters(webRequest);
+		Map<String, Object> actions = CQRSController.getActions(webRequest);
 		Response<Map<String, List<UIDeviceImageLibarary>>> response = new Response<Map<String, List<UIDeviceImageLibarary>>>();
 		try {
-			response.setData(deviceImageLibararyService.findAll(headers, filters).stream()
+			response.setData(deviceImageLibararyService.findAll(headers, filters, actions).stream()
 					.collect(Collectors.groupingBy(UIDeviceImageLibarary::getType)));
 			response.setSuccess(SUCCESS);
 			response.setMessage(SUCCESSFULLY_PROCCEED);
@@ -84,9 +91,9 @@ public class DeviceImageLibararyController
 		if (PAGE_LIST.equalsIgnoreCase(queryRequest.getType())) {
 			Integer pageNumber = (Integer) queryRequest.getParams().get(PARAM_PAGE_NUMBER);
 			Integer pageCount = (Integer) queryRequest.getParams().get(PARAM_PAGE_COUNT);
-			Object subCategoryIdData = queryRequest.getParams().get("subCategoryId");
-			Object type = queryRequest.getParams().get("type");
-			Object name = queryRequest.getParams().get("name");
+			Object subCategoryIdData = queryRequest.getFilters().get(SUB_CATEGORY_ID);
+			Object type = queryRequest.getFilters().get(TYPE);
+			Object name = queryRequest.getFilters().get(NAME);
 			if (subCategoryIdData != null
 					&& org.apache.commons.lang.math.NumberUtils.isNumber(subCategoryIdData.toString())
 					&& name != null) {
@@ -97,9 +104,9 @@ public class DeviceImageLibararyController
 					return deviceImagePixelService.fetchPageListFromPexels(subCategoryId, name.toString(), pageNumber, pageCount);
 			}
 		} else if (FIND_ALL.equalsIgnoreCase(queryRequest.getType())) {
-			Object subCategoryIdData = queryRequest.getParams().get("subCategoryId");
-			Object type = queryRequest.getParams().get("type");
-			Object name = queryRequest.getParams().get("name");
+			Object subCategoryIdData = queryRequest.getFilters().get(SUB_CATEGORY_ID);
+			Object type = queryRequest.getFilters().get(TYPE);
+			Object name = queryRequest.getFilters().get(NAME);
 			if (subCategoryIdData != null
 					&& org.apache.commons.lang.math.NumberUtils.isNumber(subCategoryIdData.toString())
 					&& name != null) {
@@ -121,9 +128,9 @@ public class DeviceImageLibararyController
 		if (PAGE_DATA.equalsIgnoreCase(queryRequest.getType())) {
 			Integer pageNumber = (Integer) queryRequest.getParams().get(PARAM_PAGE_NUMBER);
 			Integer pageCount = (Integer) queryRequest.getParams().get(PARAM_PAGE_COUNT);
-			Object subCategoryIdData = queryRequest.getParams().get("subCategoryId");
-			Object type = queryRequest.getParams().get("type");
-			Object name = queryRequest.getParams().get("name");
+			Object subCategoryIdData = queryRequest.getFilters().get(SUB_CATEGORY_ID);
+			Object type = queryRequest.getFilters().get(TYPE);
+			Object name = queryRequest.getFilters().get(NAME);
 			if (subCategoryIdData != null
 					&& org.apache.commons.lang.math.NumberUtils.isNumber(subCategoryIdData.toString())
 					&& name != null) {

@@ -15,7 +15,6 @@ import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.model.UIGlobalExampleResource;
-import com.brijframework.content.global.service.GlobalExampleLibararyService;
 import com.brijframework.content.global.service.GlobalExampleResourceService;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
@@ -46,9 +45,6 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	private GlobalImageLibararyService globalImageLibararyService;
 	
 	@Autowired
-	private GlobalExampleLibararyService globalExampleLibararyService;
-	
-	@Autowired
 	private GlobalExampleResourceService globalExampleResourceService;
 
 	@Value("${spring.db.datajson.upload}")
@@ -62,27 +58,27 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
 				List<EOGlobalMainCategory> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalMainCategory.class);
 
-				//globalMainCategoryService.init(eoGlobalCategoryGroupJson);
+				globalMainCategoryService.init(eoGlobalCategoryGroupJson);
 
 				List<EOGlobalSubCategory> eoGlobalCategoryItemJson = instance.getAll(EOGlobalSubCategory.class);
 
-				//globalSubCategoryService.init(eoGlobalCategoryItemJson);
+				globalSubCategoryService.init(eoGlobalCategoryItemJson);
 
 				List<EOGlobalTagLibarary> eoGlobalTagItemJson = instance.getAll(EOGlobalTagLibarary.class);
 
-				//globalTagResourceService.init(eoGlobalTagItemJson);
+				globalTagResourceService.init(eoGlobalTagItemJson);
 				
 				List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
-				//globalTenureService.init(eoGlobalTenureJson);
+				globalTenureService.init(eoGlobalTenureJson);
 				
 				List<EOGlobalPromptLibarary> eoGlobalPromptJson = instance.getAll(EOGlobalPromptLibarary.class);
 
-				//globalPromptLibararyService.init(eoGlobalPromptJson);
+				globalPromptLibararyService.init(eoGlobalPromptJson);
 
 				List<UIGlobalExampleResource> globalExampleResources = instance.getAll(UIGlobalExampleResource.class);
 
-				//globalExampleResourceService.init(globalExampleResources);
+				globalExampleResourceService.init(globalExampleResources);
 				
 				globalImageLibararyService.init();
 

@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -45,6 +47,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPromptLibarary, EOGlobalPromptLibarary, Long> implements GlobalPromptLibararyService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalPromptLibararyServiceImpl.class);
+
 	@Autowired
 	private GlobalPromptLibararyRepository globalPromptLibararyRepository;
 	
@@ -59,13 +63,18 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	
 	{
 		CustomPredicate<EOGlobalPromptLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get(ID), filter.getColumnValue()));
-			Path<Object> subCategoryPath = root.get(SUB_CATEGORY);
-			In<Object> subCategoryIn = criteriaBuilder.in(subCategoryPath);
-			subCategoryIn.value(subquery);
-			return subCategoryIn;
+			try {	
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get(ID).as(String.class), filter.getColumnValue().toString()));
+				Path<Object> subCategoryPath = root.get(SUB_CATEGORY);
+				In<Object> subCategoryIn = criteriaBuilder.in(subCategoryPath);
+				subCategoryIn.value(subquery);
+				return subCategoryIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryId: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		addCustomPredicate(SUB_CATEGORY_ID, subCategoryId);
@@ -75,13 +84,18 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 		addCustomPredicate(SUB_CATEGORY, subCategoryId);
 		
 		CustomPredicate<EOGlobalPromptLibarary> year = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalTenure> subquery = criteriaQuery.subquery(EOGlobalTenure.class);
-			Root<EOGlobalTenure> fromProject = subquery.from(EOGlobalTenure.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get(NAME), PERCENTAGE+filter.getColumnValue()+PERCENTAGE));
-			Path<Object> tenurePath = root.get(TENURE);
-			In<Object> tenureIn = criteriaBuilder.in(tenurePath);
-			tenureIn.value(subquery);
-			return tenureIn;
+			try {
+				Subquery<EOGlobalTenure> subquery = criteriaQuery.subquery(EOGlobalTenure.class);
+				Root<EOGlobalTenure> fromProject = subquery.from(EOGlobalTenure.class);
+				subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get(NAME).as(String.class), PERCENTAGE+filter.getColumnValue()+PERCENTAGE));
+				Path<Object> tenurePath = root.get(TENURE);
+				In<Object> tenureIn = criteriaBuilder.in(tenurePath);
+				tenureIn.value(subquery);
+				return tenureIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for year: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		addCustomPredicate(YEAR, year);
@@ -118,12 +132,12 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	}
 	
 	@Override
-	public void preAdd(UIGlobalPromptLibarary data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalPromptLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	
 	@Override
-	public void preAdd(UIGlobalPromptLibarary data, EOGlobalPromptLibarary entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalPromptLibarary data, EOGlobalPromptLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		saveRelation(data, entity);
 	}
 
@@ -184,7 +198,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	}
 	
 	@Override
-	public void preUpdate(UIGlobalPromptLibarary data, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalPromptLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -192,19 +206,19 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	
 	@Override
 	public void preUpdate(UIGlobalPromptLibarary data, EOGlobalPromptLibarary entity,
-			Map<String, List<String>> headers) {
+			Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		saveRelation(data, entity);
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 	
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalPromptLibarary> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalPromptLibarary eoGlobalPromptLibarary = findById.get();

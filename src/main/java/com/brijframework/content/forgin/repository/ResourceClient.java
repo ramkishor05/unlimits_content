@@ -18,7 +18,7 @@ public class ResourceClient {
 
 	//@PostMapping(value = "/resource/{type}/{name}")
 	public UIResourceModel add(UIResourceModel uiResource) {
-		return resourceService.add(uiResource, new HashMap<String, List<String>>());
+		return resourceService.add(uiResource, new HashMap<String, List<String>>(), new HashMap<String, Object>(), new HashMap<String, Object>());
 	}
 	
 }

@@ -3,6 +3,8 @@ package com.brijframework.content.global.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.beans.PageDetail;
@@ -16,6 +18,8 @@ import com.brijframework.content.global.service.GlobalImagePixelService;
 
 @Service
 public class GlobalImagePixelServiceImpl implements GlobalImagePixelService{
+
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalImagePixelServiceImpl.class);
 
 	@Autowired
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
@@ -34,7 +38,7 @@ public class GlobalImagePixelServiceImpl implements GlobalImagePixelService{
 				globalImageLibararies.add(globalImageLibarary); 
 			});
 		}catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("WARN: unexpected exception for findByPexels ", e);
 		}
 		return globalImageLibararies;
 	}
@@ -61,7 +65,7 @@ public class GlobalImagePixelServiceImpl implements GlobalImagePixelService{
 			returnPageDetail.setTotalCount(pageDetail.getTotalCount());
 			returnPageDetail.setTotalPages(pageDetail.getTotalPages());
 		}catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("WARN: unexpected exception for findByPexels ", e);
 		}
 		return returnPageDetail;
 	}
@@ -87,7 +91,7 @@ public class GlobalImagePixelServiceImpl implements GlobalImagePixelService{
 			returnPageDetail.setTotalCount(pageDetail.getTotalCount());
 			returnPageDetail.setTotalPages(pageDetail.getTotalPages());
 		}catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("WARN: unexpected exception for findByPexels ", e);
 		}
 		return returnPageDetail;
 	}

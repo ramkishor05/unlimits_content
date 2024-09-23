@@ -5,11 +5,16 @@ package com.brijframework.content.global.entities;
 
 import static com.brijframework.content.constants.Constants.POSTER_URL;
 import static com.brijframework.content.constants.Constants.RESOURCE_ID;
+
+import java.util.List;
+
 import static com.brijframework.content.constants.Constants.MUSIC_URL;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -35,6 +40,9 @@ public class EOGlobalReProgramLibarary extends EOGlobalItem {
 	@Lob
 	private String posterUrl;
 
+	@OneToMany(mappedBy = "reProgramLibarary", cascade = CascadeType.ALL)
+	private List<EOGlobalReProgramItem> reProgramItems;
+	
 	public Long getResourceId() {
 		return resourceId;
 	}
@@ -57,5 +65,13 @@ public class EOGlobalReProgramLibarary extends EOGlobalItem {
 
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
+	}
+
+	public List<EOGlobalReProgramItem> getReProgramItems() {
+		return reProgramItems;
+	}
+
+	public void setReProgramItems(List<EOGlobalReProgramItem> reProgramItems) {
+		this.reProgramItems = reProgramItems;
 	}
 }

@@ -14,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.brijframework.json.schema.factories.JsonSchemaFile;
 import org.brijframework.json.schema.factories.JsonSchemaObject;
 import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -58,6 +60,8 @@ import jakarta.persistence.criteria.Subquery;
 @Service
 public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImageLibarary, EOGlobalImageLibarary, Long> implements GlobalImageLibararyService {
 	
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalImageLibararyServiceImpl.class);
+
 	private static final String RECORD_STATE = "recordState";
 
 	private static final String IMAGE_URL = "imageUrl";
@@ -105,23 +109,33 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	
 	{
 		CustomPredicate<EOGlobalImageLibarary> subCategoryId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id"), filter.getColumnValue()));
-			Path<Object> subCategoryIdPath = root.get("subCategory");
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.equal(fromProject.get("id").as(String.class), filter.getColumnValue().toString()));
+				Path<Object> subCategoryIdPath = root.get("subCategory");
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryId: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		CustomPredicate<EOGlobalImageLibarary> subCategoryName= (type, root, criteriaQuery, criteriaBuilder, filter) -> {
-			Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
-			Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
-			subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name"), "%"+filter.getColumnValue()+"%"));
-			Path<Object> subCategoryIdPath = root.get("subCategory");
-			In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
-			subCategoryIdIn.value(subquery);
-			return subCategoryIdIn;
+			try {
+				Subquery<EOGlobalSubCategory> subquery = criteriaQuery.subquery(EOGlobalSubCategory.class);
+				Root<EOGlobalSubCategory> fromProject = subquery.from(EOGlobalSubCategory.class);
+				subquery.select(fromProject).where(criteriaBuilder.like(fromProject.get("name").as(String.class), "%"+filter.getColumnValue()+"%"));
+				Path<Object> subCategoryIdPath = root.get("subCategory");
+				In<Object> subCategoryIdIn = criteriaBuilder.in(subCategoryIdPath);
+				subCategoryIdIn.value(subquery);
+				return subCategoryIdIn;
+			}catch (Exception e) {
+				LOGGER.error("WARN: unexpected exception for subCategoryName: " + filter.getColumnValue(), e);
+				return null;
+			}
 		};
 		
 		addCustomPredicate("subCategoryId", subCategoryId);
@@ -132,12 +146,12 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 
 
 	@Override
-	public void preAdd(UIGlobalImageLibarary data, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalImageLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	
 	@Override
-	public void preAdd(UIGlobalImageLibarary data, EOGlobalImageLibarary entity, Map<String, List<String>> headers) {
+	public void preAdd(UIGlobalImageLibarary data, EOGlobalImageLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		saveResource(data, entity);
 	}
 	
@@ -149,7 +163,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	}
 
 	@Override
-	public void preUpdate(UIGlobalImageLibarary data, EOGlobalImageLibarary entity, Map<String, List<String>> headers) {
+	public void preUpdate(UIGlobalImageLibarary data, EOGlobalImageLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
@@ -224,14 +238,14 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	}
 	
 	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters) {
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
 			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
 		}
 	}
 
 	@Override
-	public void postFetch(EOGlobalImageLibarary findObject, UIGlobalImageLibarary dtoObject) {
+	public void postFetch(EOGlobalImageLibarary findObject, UIGlobalImageLibarary dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
 			dtoObject.setIdenNo(findObject.getId()+"");
 		}
@@ -250,7 +264,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	}
 
 	@Override
-	public Boolean delete(Long id) {
+	public Boolean deleteById(Long id) {
 		Optional<EOGlobalImageLibarary> findById = getRepository().findById(id);
 		if(findById.isPresent()) {
 			EOGlobalImageLibarary eoGlobalImageLibarary = findById.get();

@@ -15,6 +15,8 @@ import org.brijframework.util.accessor.PropertyAccessorUtil;
 import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.ReflectionAccess;
 import org.brijframework.util.text.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,8 @@ import com.google.common.io.Files;
 @Service
 public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 
+	private static final Logger LOGGER= LoggerFactory.getLogger(GlobalTagResouceServiceImpl.class);
+
 	@Autowired
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
 	
@@ -54,7 +58,7 @@ public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 
 	@Override
 	public void init(List<EOGlobalTagLibarary> eoGlobalTagItemJson) {
-
+        LOGGER.info("INIT");
 		eoGlobalTagItemJson.forEach(eoGlobalTagItem -> {
 			EOGlobalTagLibarary findGlobalTagItem = globalTagLibararyRepository
 					.findByIdenNo(eoGlobalTagItem.getIdenNo()).orElse(eoGlobalTagItem);

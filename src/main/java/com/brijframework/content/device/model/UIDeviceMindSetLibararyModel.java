@@ -1,5 +1,7 @@
 package com.brijframework.content.device.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -11,6 +13,8 @@ public class UIDeviceMindSetLibararyModel extends UIDeviceModel {
 	private String musicUrl;
 
 	private String posterUrl;
+
+	private List<UIDeviceMindSetItemModel> mindSetItems;
 
 	public String getMusicUrl() {
 		return musicUrl;
@@ -27,4 +31,13 @@ public class UIDeviceMindSetLibararyModel extends UIDeviceModel {
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
+
+	public List<UIDeviceMindSetItemModel> getMindSetItems() {
+		return mindSetItems;
+	}
+
+	public void setMindSetItems(List<UIDeviceMindSetItemModel> mindSetItems) {
+		this.mindSetItems = mindSetItems;
+	}
+
 }

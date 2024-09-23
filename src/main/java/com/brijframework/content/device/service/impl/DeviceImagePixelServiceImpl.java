@@ -3,6 +3,8 @@ package com.brijframework.content.device.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.beans.PageDetail;
@@ -17,6 +19,8 @@ import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 @Service
 public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 
+	private static final Logger LOGGER= LoggerFactory.getLogger(DeviceImagePixelServiceImpl.class);
+
 	@Autowired
 	private GlobalSubCategoryRepository globalSubCategoryRepository;
 
@@ -25,6 +29,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 
 	@Override
 	public List<UIDeviceImageLibarary> fetchListFromPexels(Long subCategoryId, String type, String name) {
+		LOGGER.warn("INFO");
 		StringBuffer finalSearch = new StringBuffer();
 		EOGlobalSubCategory eoGlobalSubCategory = globalSubCategoryRepository.getReferenceById(subCategoryId);
 		if (eoGlobalSubCategory != null) {
