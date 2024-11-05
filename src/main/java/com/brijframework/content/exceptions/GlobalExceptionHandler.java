@@ -12,9 +12,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
+	@ExceptionHandler(value = { Exception.class, RuntimeException.class })
 	protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),"Conflict", 5001, ex.getMessage());
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),"internal server error", 5001, ex.getMessage());
 		ex.printStackTrace();
 		return handleExceptionInternal(ex, errorResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
 	}
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(value = { InvalidParameterException.class  })
 	protected ResponseEntity<Object> notFoundException(InvalidParameterException ex, WebRequest request) {
-		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(),"NOT_ACCEPTABLE", 1406, ex.getMessage());
+		ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_ACCEPTABLE.value(),"not acceptable", 1406, ex.getMessage());
 		ex.printStackTrace();
 		return new ResponseEntity<Object>(errorResponse, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
 	}

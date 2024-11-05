@@ -94,10 +94,10 @@ public class GlobalReProgramItemServiceImpl extends CrudServiceImpl<UIGlobalRePr
 	}
 	
 	@Override
-	public void preAdd(UIGlobalReProgramItem data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
+	public void preAdd(UIGlobalReProgramItem data,EOGlobalReProgramItem find, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		LOGGER.info("pre add");
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		saveResource(data, null);
+		saveResource(data, find);
 	}
 	
 	@Override

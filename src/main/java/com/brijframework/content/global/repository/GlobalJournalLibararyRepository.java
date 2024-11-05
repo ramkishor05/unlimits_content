@@ -31,5 +31,7 @@ public interface GlobalJournalLibararyRepository extends CustomRepository<EOGlob
 
 	@Query(nativeQuery = true , value= "SELECT * FROM "+EOGLOBAL_JOURNAL_LIBARARY+" where JOURNAL_DATE = (select max(JOURNAL_DATE) FROM "+EOGLOBAL_JOURNAL_LIBARARY+" where RECORD_STATUS in (?))")
 	List<EOGlobalJournalLibarary> findLastJournalLibarary(List<String> statusList);
+
+	long countByRecordStateIn(List<String> statusIds);
 	
 }

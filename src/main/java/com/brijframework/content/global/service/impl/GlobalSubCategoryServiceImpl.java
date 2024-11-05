@@ -186,6 +186,9 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
+		if(data.getOrderSequence()==null) {
+			data.setOrderSequence(globalSubCategoryRepository.count()+1d);	
+		}
 		saveResource(data, entity);
 	}
 	
@@ -193,6 +196,9 @@ public class GlobalSubCategoryServiceImpl extends CrudServiceImpl<UIGlobalSubCat
 	public void preUpdate(UIGlobalSubCategory data, EOGlobalSubCategory entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
+		if(data.getOrderSequence()==null) {
+			data.setOrderSequence(globalSubCategoryRepository.count()+1d);	
 		}
 		saveResource(data, entity);
 	}

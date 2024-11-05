@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.unlimits.rest.crud.beans.PageDetail;
 
 import com.brijframework.content.forgin.model.FileContent;
-import com.brijframework.content.forgin.repository.PexelMediaRepository;
+import com.brijframework.content.forgin.repository.PexelClient;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.model.UIGlobalImageLibarary;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
@@ -25,7 +25,7 @@ public class GlobalImagePixelServiceImpl implements GlobalImagePixelService{
 	private GlobalTagLibararyRepository globalTagLibararyRepository;
 
 	@Autowired
-	private PexelMediaRepository pexelMediaRepository;
+	private PexelClient pexelMediaRepository;
 	
 	@Override
 	public List<UIGlobalImageLibarary> findByPexels(String name) {

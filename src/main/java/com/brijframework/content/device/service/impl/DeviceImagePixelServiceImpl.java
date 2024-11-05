@@ -12,7 +12,7 @@ import org.unlimits.rest.crud.beans.PageDetail;
 import com.brijframework.content.device.model.UIDeviceImageLibarary;
 import com.brijframework.content.device.service.DeviceImagePixelService;
 import com.brijframework.content.forgin.model.FileContent;
-import com.brijframework.content.forgin.repository.PexelMediaRepository;
+import com.brijframework.content.forgin.repository.PexelClient;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 
@@ -25,7 +25,7 @@ public class DeviceImagePixelServiceImpl implements DeviceImagePixelService {
 	private GlobalSubCategoryRepository globalSubCategoryRepository;
 
 	@Autowired
-	private PexelMediaRepository pexelMediaRepository;
+	private PexelClient pexelMediaRepository;
 
 	@Override
 	public List<UIDeviceImageLibarary> fetchListFromPexels(Long subCategoryId, String type, String name) {

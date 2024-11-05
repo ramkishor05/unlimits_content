@@ -1,5 +1,6 @@
 package com.brijframework.content.global.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,7 @@ public interface GlobalExampleLibararyRepository  extends CustomRepository<EOGlo
 	Optional<EOGlobalExampleLibarary> findByIdenNo(String idenNo);
 
 	Optional<EOGlobalExampleLibarary> findBySubCategoryIdAndProfileName(Long subCategoryId, String profileName);
+
+	long countByRecordStateIn(List<String> statusIds);
 
 }

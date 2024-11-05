@@ -29,5 +29,7 @@ public interface GlobalPromptLibararyRepository extends CustomRepository<EOGloba
 	Optional<EOGlobalPromptLibarary> findBySubCategoryId(Long subCategoryId);
 	
 	Optional<EOGlobalPromptLibarary> findByTenureId(Long subCategoryId);
+
+	long countByRecordStateIn(List<String> statusIds);
 	
 }

@@ -5,7 +5,7 @@ import org.unlimits.rest.model.UIModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@JsonInclude(content = Include.NON_ABSENT)
+@JsonInclude(content = Include.NON_NULL)
 public class UIGlobalExampleItem extends UIModel {
 
 	/**
@@ -18,6 +18,8 @@ public class UIGlobalExampleItem extends UIModel {
 	private Long imageLibararyId;
 
 	private Long tagLibararyId;
+	
+	private Long exampleLibararyId;
 
 	public Integer getYear() {
 		return year;
@@ -41,6 +43,14 @@ public class UIGlobalExampleItem extends UIModel {
 
 	public void setTagLibararyId(Long tagLibararyId) {
 		this.tagLibararyId = tagLibararyId;
+	}
+
+	public Long getExampleLibararyId() {
+		return exampleLibararyId;
+	}
+
+	public void setExampleLibararyId(Long exampleLibararyId) {
+		this.exampleLibararyId = exampleLibararyId;
 	}
 
 }

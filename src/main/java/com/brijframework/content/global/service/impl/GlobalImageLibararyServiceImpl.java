@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -46,7 +44,6 @@ import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.util.BuilderUtil;
-import com.brijframework.content.util.ResourceUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Files;
@@ -90,9 +87,6 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	
 	@Autowired
 	private ResourceClient resourceClient;
-
-	@Autowired
-	private ResourceUtil resourceUtil;
 	
 	@Value("${openapi.service.url}")
 	private String serverUrl;
@@ -276,76 +270,6 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		return false;
 	}
 	
-	@Override
-	public void init () throws IOException {
-		Resource resource = resourceUtil.getResource(TAGS_WITH_IMAGES);
-		File resourceFile = resource.getFile();
-		if(!resourceFile.exists()) {
-			return;
-		}
-		List<EOGlobalSubCategory> globalCategoryItems = globalCategoryItemRepository.findAll();
-		Map<String, EOGlobalSubCategory> globalCategoryNameMap = globalCategoryItems.stream().collect(Collectors.toMap(globalSubCategory->globalSubCategory.getName().toUpperCase(), Function.identity()));
-		List<EOGlobalImageLibarary> globalImageLibararys = globalImageLibararyRepository.findAll();
-		Map<Long, List<EOGlobalImageLibarary>> globalCategoryImgMap = globalImageLibararys.stream().collect(Collectors.groupingBy(ImageLibarary->ImageLibarary.getSubCategory().getId()));
-		Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap = globalTagLibararyRepository.findAll().stream().collect(Collectors.toMap(globalTagLibarary->buildTagId(globalTagLibarary), Function.identity()));
-		loadResourceSubCategory(resourceFile, globalCategoryNameMap, globalCategoryImgMap, globalTagLibararyNameMap);
-	}
-
-	private String buildTagId(EOGlobalTagLibarary globalTagLibarary) {
-		return buildTagId(globalTagLibarary.getSubCategory(), globalTagLibarary.getName());
-	}
-	
-	private String buildTagId(EOGlobalSubCategory globalSubCategory, String name) {
-		return globalSubCategory.getId()+"_"+name;
-	}
-	
-	private void loadResourceSubCategory(File resourceFile, Map<String, EOGlobalSubCategory> globalCategoryNameMap, Map<Long, List<EOGlobalImageLibarary>> globalCategoryImgMap, Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap) {
-		File[] subCategoryFolders = resourceFile.listFiles();
-		for (File subCategoryFolder :  subCategoryFolders) {
-			EOGlobalSubCategory globalCategoryItem = globalCategoryNameMap.get(subCategoryFolder.getName().trim().toUpperCase());
-			if(globalCategoryItem==null) {
-				continue;
-			}
-			if(!globalCategoryItem.getName().equals("Relations")) {
-				continue;
-			}
-			Map<String, EOGlobalImageLibarary> categoryImgUrlMap = globalCategoryImgMap.getOrDefault(globalCategoryItem.getId(), new ArrayList<EOGlobalImageLibarary>()).stream().collect(Collectors.toMap(EOGlobalImageLibarary::getImageUrl, Function.identity()));
-			File[] tagFiles = subCategoryFolder.listFiles();
-			for(File tagFile:  tagFiles) {
-				if(tagFile.isDirectory()) {
-					loadResourceTag(tagFile, globalCategoryItem, tagFile.getName(), categoryImgUrlMap, globalTagLibararyNameMap);
-				} else {
-					loadResourceFile(tagFile, globalCategoryItem, null, categoryImgUrlMap, globalTagLibararyNameMap);
-				}
-			}
-		}
-	}
-	
-	private void loadResourceTag(File tageFolder, EOGlobalSubCategory globalCategoryItem, String string, Map<String, EOGlobalImageLibarary> categoryImgUrlMap, Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap) {
-		File[] tageFiles = tageFolder.listFiles();
-		for (File file :  tageFiles) {
-			if(file.isDirectory()) {
-				loadResourceDir(file, globalCategoryItem, tageFolder.getName(), categoryImgUrlMap, globalTagLibararyNameMap);
-			} else {
-				loadResourceFile(file, globalCategoryItem, tageFolder.getName(), categoryImgUrlMap, globalTagLibararyNameMap);
-			}
-		}
-	}
-	
-	/*
-	private void loadResourceTag(File tageFile, EOGlobalSubCategory globalCategoryItem, Map<String, EOGlobalImageLibarary> categoryImgUrlMap, Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap) {
-		EOGlobalTagLibarary eoGlobalTagLibarary = findOrCreateTagLibarary(globalCategoryItem, tageFile.getName(), globalTagLibararyNameMap);
-		File[] tageFiles = tageFile.listFiles();
-		for (File file :  tageFiles) {
-			if(file.isDirectory()) {
-				loadResourceDir(file, globalCategoryItem, eoGlobalTagLibarary, categoryImgUrlMap);
-			} else {
-				loadResourceFile(file, globalCategoryItem, eoGlobalTagLibarary, categoryImgUrlMap);
-			}
-		}
-	}
-	*/
-	
 	private EOGlobalTagLibarary findOrCreateTagLibarary(EOGlobalSubCategory globalCategoryItem, String tagName) {
 		EOGlobalTagLibarary tag = globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem, tagName);
 		if(tag!=null) {
@@ -374,48 +298,6 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			return eoGlobalTagLibarary;
 		}
 	}
-
-	private void loadResourceDir(File resourceFile, EOGlobalSubCategory globalCategoryItem, String tageFolder, Map<String, EOGlobalImageLibarary> categoryImgUrlMap, Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap) {
-		File[] listFiles = resourceFile.listFiles();
-		for (File file :  listFiles) {
-			if(file.isDirectory()) {
-				loadResourceDir(file, globalCategoryItem, tageFolder, categoryImgUrlMap, globalTagLibararyNameMap);
-			} else {
-				loadResourceFile(file, globalCategoryItem,tageFolder, categoryImgUrlMap, globalTagLibararyNameMap);
-			}
-		}
-	}
-
-	/**
-	 * @param file
-	 * @param tageFolder 
-	 * @param eoGlobalTagLibarary 
-	 * @param globalCategoryItem 
-	 * @param categoryImgUrlMap 
-	 * @param globalTagLibararyNameMap 
-	 */
-	private void loadResourceFile(File file, EOGlobalSubCategory subCategory,  String tageFolder, Map<String, EOGlobalImageLibarary> categoryImgUrlMap, Map<String, EOGlobalTagLibarary> globalTagLibararyNameMap) {
-		try {
-			String url = "resource/"+TAGS_WITH_IMAGES+file.getAbsolutePath().split(TAGS_WITH_IMAGES)[1].replace("\\", "/");
-			String title=file.getName().split("\\.")[0];
-			EOGlobalImageLibarary globalImageLibarary = categoryImgUrlMap.getOrDefault(url, new EOGlobalImageLibarary());
-			globalImageLibarary.setIdenNo(url.replace("/", "_").replace(",", "_").toUpperCase().split("\\.")[0].replaceFirst("_", ""));
-			globalImageLibarary.setSubCategory(subCategory);
-			globalImageLibarary.setName(file.getName());
-			globalImageLibarary.setTitle(title);
-			globalImageLibarary.setType(tageFolder);
-			globalImageLibarary.setImageUrl(url);
-			globalImageLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
-			globalImageLibarary=globalImageLibararyRepository.save(globalImageLibarary);
-			
-			saveImageTagMappings(subCategory, globalImageLibarary, title);
-			
-			categoryImgUrlMap.put(url, globalImageLibarary);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void saveImageTagMappings(EOGlobalSubCategory subCategory, EOGlobalImageLibarary globalImageLibarary, String tagNames) {
 		String finalTags = StringUtil.capitalFirstLetterText(tagNames.replace("_", " "));
 		for(String tagName :finalTags.split(",")) {

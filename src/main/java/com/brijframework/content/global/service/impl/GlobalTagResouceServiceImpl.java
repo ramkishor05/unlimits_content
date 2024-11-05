@@ -142,14 +142,14 @@ public class GlobalTagResouceServiceImpl implements GlobalTagResourceService {
 	public List<UIGlobalTagLibarary> importCsv(String csvData) {
 		List<UITagResource> csvList = loadFromCsvBuffer(csvData, UITagResource.class, keyMapper);
 		List<String> subCategoryNameList = csvList.stream().filter(csvObject->StringUtil.isNonEmpty(csvObject.getSubCategoryName())).map(csvObject->csvObject.getSubCategoryName().toUpperCase()).distinct().toList();
-		Map<String, EOGlobalSubCategory> subCategoryNameMap = globalSubCategoryRepository.findAllBySubCategoryNameIgnoreCaseIn(subCategoryNameList).stream().collect(Collectors.toMap(subCategory->subCategory.getName().toUpperCase(), subCategory->subCategory));
+		Map<String, EOGlobalSubCategory> subCategoryNameMap = globalSubCategoryRepository.findAllBySubCategoryNameIgnoreCaseIn(subCategoryNameList, RecordStatus.ALL.getStatusIds()).stream().collect(Collectors.toMap(subCategory->subCategory.getName().toUpperCase(), subCategory->subCategory));
 		final List<EOGlobalTagLibarary> dataList=new ArrayList<EOGlobalTagLibarary>();
 		Map<String, List<UITagResource>> tagListGroupBySubCategoryName=csvList.stream().filter(csvObject->StringUtil.isNonEmpty(csvObject.getSubCategoryName())).collect(Collectors.groupingBy(UITagResource::getSubCategoryName));
 		tagListGroupBySubCategoryName.forEach((subCategoryName, tagList)->{
 			try {
 				EOGlobalSubCategory eoGlobalSubCategory = subCategoryNameMap.get(subCategoryName.toUpperCase());
 				if(eoGlobalSubCategory!=null) {
-					Map<String, EOGlobalTagLibarary> tagLibararyMap = globalTagLibararyRepository.findAllBSubCategoryId(eoGlobalSubCategory.getId()).stream().collect(Collectors.toMap(tagLibarary->buildTagId(tagLibarary.getName(),tagLibarary.getSubCategory().getName()), tagLibarary->tagLibarary));
+					Map<String, EOGlobalTagLibarary> tagLibararyMap = globalTagLibararyRepository.findAllBSubCategoryId(eoGlobalSubCategory.getId(), RecordStatus.ALL.getStatusIds()).stream().collect(Collectors.toMap(tagLibarary->buildTagId(tagLibarary.getName(),tagLibarary.getSubCategory().getName()), tagLibarary->tagLibarary));
 					Map<String, EOGlobalTagLibarary> dataListBySubCategory=new HashMap<String, EOGlobalTagLibarary>();
 					for(UITagResource uiTagResource: csvList) {
 						try {

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import jakarta.validation.constraints.NotNull;
 
-@JsonInclude(content = Include.NON_ABSENT)
+@JsonInclude(content = Include.NON_NULL)
 public class UIGlobalExampleLibarary extends UIModel {
 	/**
 	 * 

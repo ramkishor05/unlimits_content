@@ -16,7 +16,7 @@ import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 import com.brijframework.content.global.entities.EOGlobalTenure;
 import com.brijframework.content.global.model.UIGlobalExampleResource;
 import com.brijframework.content.global.service.GlobalExampleResourceService;
-import com.brijframework.content.global.service.GlobalImageLibararyService;
+import com.brijframework.content.global.service.GlobalImageResourceService;
 import com.brijframework.content.global.service.GlobalMainCategoryService;
 import com.brijframework.content.global.service.GlobalPromptLibararyService;
 import com.brijframework.content.global.service.GlobalSubCategoryService;
@@ -27,29 +27,30 @@ import com.brijframework.content.global.service.GlobalTenureService;
 public class ContentListener implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private GlobalMainCategoryService globalMainCategoryService;
+	GlobalMainCategoryService globalMainCategoryService;
 
 	@Autowired
-	private GlobalSubCategoryService globalSubCategoryService;
+	GlobalSubCategoryService globalSubCategoryService;
 
 	@Autowired
-	private GlobalTagResourceService globalTagResourceService;
+	GlobalTagResourceService globalTagResourceService;
 
 	@Autowired
-	private GlobalPromptLibararyService globalPromptLibararyService;
+	GlobalPromptLibararyService globalPromptLibararyService;
 
 	@Autowired
-	private GlobalTenureService globalTenureService;
+	GlobalTenureService globalTenureService;
 
 	@Autowired
-	private GlobalImageLibararyService globalImageLibararyService;
+	GlobalImageResourceService globalImageResourceService;
 	
 	@Autowired
-	private GlobalExampleResourceService globalExampleResourceService;
+	GlobalExampleResourceService globalExampleResourceService;
 
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
 
+	@SuppressWarnings("unused")
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
 		if (upload) {
@@ -58,29 +59,29 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 				JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
 				List<EOGlobalMainCategory> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalMainCategory.class);
 
-				globalMainCategoryService.init(eoGlobalCategoryGroupJson);
+				//globalMainCategoryService.init(eoGlobalCategoryGroupJson);
 
 				List<EOGlobalSubCategory> eoGlobalCategoryItemJson = instance.getAll(EOGlobalSubCategory.class);
 
-				globalSubCategoryService.init(eoGlobalCategoryItemJson);
+				//globalSubCategoryService.init(eoGlobalCategoryItemJson);
 
 				List<EOGlobalTagLibarary> eoGlobalTagItemJson = instance.getAll(EOGlobalTagLibarary.class);
 
-				globalTagResourceService.init(eoGlobalTagItemJson);
+				//globalTagResourceService.init(eoGlobalTagItemJson);
 				
 				List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
-				globalTenureService.init(eoGlobalTenureJson);
+				//globalTenureService.init(eoGlobalTenureJson);
 				
 				List<EOGlobalPromptLibarary> eoGlobalPromptJson = instance.getAll(EOGlobalPromptLibarary.class);
 
-				globalPromptLibararyService.init(eoGlobalPromptJson);
+				//globalPromptLibararyService.init(eoGlobalPromptJson);
 
+				globalImageResourceService.init();
+				
 				List<UIGlobalExampleResource> globalExampleResources = instance.getAll(UIGlobalExampleResource.class);
 
 				globalExampleResourceService.init(globalExampleResources);
-				
-				globalImageLibararyService.init();
 
 				//export_global_main_category();
 				//export_global_sub_category();
@@ -91,7 +92,6 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 		
 	}

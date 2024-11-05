@@ -89,12 +89,17 @@ public class DeviceSubCategoryServiceImpl extends QueryServiceImpl<UIDeviceSubCa
 		addCustomPredicate("mainCategory.id", mainCategoryId);
 		addCustomPredicate("mainCategoryName", mainCategoryName);
 		addCustomPredicate("mainCategory.name", mainCategoryName);
+		
+		addCustomPredicate("categoryId", mainCategoryId);
+		addCustomPredicate("category.id", mainCategoryId);
+		addCustomPredicate("categoryName", mainCategoryName);
+		addCustomPredicate("category.name", mainCategoryName);
 	}
 	
 
 	@Override
 	public List<UIDeviceSubCategory> findAllByMainCategoryId(Long mainCategoryId, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
-		return postFetch(globalCategoryItemRepository.findAllByMainCategoryId(mainCategoryId), headers, filters, actions);
+		return postFetch(globalCategoryItemRepository.findAllByMainCategoryId(mainCategoryId,  RecordStatus.ACTIVETED.getStatusIds()), headers, filters, actions);
 	}
 	
 	@Override

@@ -7,6 +7,8 @@ import static com.brijframework.content.constants.Constants.RESOURCE_ID;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.brijframework.content.constants.ResourceType;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,12 +30,17 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final String RESOURCE_TYPE = "RESOURCE_TYPE";
+
 	@Column(name=RESOURCE_ID)
 	private Long resourceId;
 	
 	@Column(name=IMAGE_URL)
 	@Lob
 	public String imageUrl;
+	
+	@Column(name=RESOURCE_TYPE)
+	private String resourceType;
 	
 	@JoinColumn(name="SUB_CATEGORY_ID")
 	@ManyToOne(optional = true)
@@ -76,5 +83,18 @@ public class EOGlobalImageLibarary extends EOGlobalItem{
 	public void setTagList(List<EOGlobalTagImageMapping> tagList) {
 		this.tagList = tagList;
 	}
+
+	public String getResourceType() {
+		if(resourceType==null) {
+			resourceType=ResourceType.PORTAL.toString();
+		}
+		return resourceType;
+	}
+
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
+	}
+	
+	
 
 }

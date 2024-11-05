@@ -36,4 +36,6 @@ public interface GlobalImageLibararyRepository extends CustomRepository<EOGlobal
 	List<EOGlobalImageLibarary> findAllByImageUrl(String image);
 
 	Optional<EOGlobalImageLibarary> findBySubCategoryIdAndName(Long subCategoryId, String name);
+
+	long countByRecordStateIn(List<String> statusIds);
 }

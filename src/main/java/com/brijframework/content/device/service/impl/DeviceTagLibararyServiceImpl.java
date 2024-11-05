@@ -134,15 +134,15 @@ public class DeviceTagLibararyServiceImpl extends QueryServiceImpl<UIDeviceTagLi
 
 	@Override
 	public List<UIDeviceTagLibarary> findAllBySubCategoryId(Long subCategoryId, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
-		return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId), headers, filters, actions);
+		return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId,  RecordStatus.ACTIVETED.getStatusIds()), headers, filters, actions);
 	}
 
 	@Override
 	public List<UIDeviceTagLibarary> search(Long subCategoryId, String name, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(StringUtil.isNonEmpty(name)) {
-			return postFetch(globalTagLibararyRepository.search(subCategoryId, name), headers, filters, actions);
+			return postFetch(globalTagLibararyRepository.search(subCategoryId, name,  RecordStatus.ACTIVETED.getStatusIds()), headers, filters, actions);
 		} else {
-			return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId), headers, filters, actions);
+			return postFetch(globalTagLibararyRepository.findAllBSubCategoryId(subCategoryId,  RecordStatus.ACTIVETED.getStatusIds()), headers, filters, actions);
 		}
 	}
 	

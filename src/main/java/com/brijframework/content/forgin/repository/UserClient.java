@@ -8,7 +8,7 @@ import com.brijframework.content.constants.Constants;
 import com.brijframework.content.modal.UIUserAccount;
 
 @FeignClient(name= "UNLIMITS-AUTH" , url = "http://${server.gateway.host}:${server.gateway.port}/auth")
-public interface UserAccountRepository {
+public interface UserClient {
 
 	@GetMapping(value = "/api/device/authentication")
 	public UIUserAccount findByToken(@RequestHeader(Constants.AUTHORIZATION) String token) ;;

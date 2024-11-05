@@ -17,18 +17,20 @@ public interface GlobalTagLibararyRepository extends CustomRepository<EOGlobalTa
 
 	Optional<EOGlobalTagLibarary> findByIdenNo(String idenNo);
 
-	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?1) ORDER BY GTL.NAME ")
-	List<EOGlobalTagLibarary> findAllBSubCategoryId(Long subCategoryId);
+	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?1) and GTL.RECORD_STATUS in (?2) ORDER BY GTL.NAME ")
+	List<EOGlobalTagLibarary> findAllBSubCategoryId(Long subCategoryId, List<String> statusIds);
 
-	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?1) and GTL.NAME LIKE (%?2%) ORDER BY GTL.NAME ")
-	List<EOGlobalTagLibarary> search(Long subCategoryId, String name);
+	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?1) and GTL.NAME LIKE (%?2%) and GTL.RECORD_STATUS in (?3) ORDER BY GTL.NAME ")
+	List<EOGlobalTagLibarary> search(Long subCategoryId, String name, List<String> statusIds);
 
 	EOGlobalTagLibarary findBySubCategoryAndName(EOGlobalSubCategory globalCategoryItem, String name);
 	
 	Optional<EOGlobalTagLibarary> findBySubCategoryIdAndName(Long globalCategoryId, String name);
 
-	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL INNER JOIN EOGLOBAL_SUB_CATEGORY GSC ON GSC.ID=GTL.SUB_CATEGORY_ID WHERE UPPER(GTL.NAME) IN (?1) ORDER BY GTL.NAME ")
-	List<EOGlobalTagLibarary> findAllBySubCategoryNameIgnoreCaseIn(List<String> subCategoryNameList);
+	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL INNER JOIN EOGLOBAL_SUB_CATEGORY GSC ON GSC.ID=GTL.SUB_CATEGORY_ID WHERE UPPER(GTL.NAME) IN (?1) and GTL.RECORD_STATUS in (?2) ORDER BY GTL.NAME ")
+	List<EOGlobalTagLibarary> findAllBySubCategoryNameIgnoreCaseIn(List<String> subCategoryNameList, List<String> statusIds);
 
 	List<EOGlobalTagLibarary> findAllByName(String tag);
+
+	long countByRecordStateIn(List<String> statusIds);
 }

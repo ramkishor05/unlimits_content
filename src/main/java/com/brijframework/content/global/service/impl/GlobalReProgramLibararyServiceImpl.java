@@ -79,15 +79,22 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 	}
 	
 	@Override
-	public void preAdd(UIGlobalReProgramLibarary data, Map<String, List<String>> headers) {
-		LOGGER.info("pre add");
+	public void preAdd(UIGlobalReProgramLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,
+			Map<String, Object> actions) {
+		LOGGER.warn("pre add: {}", headers);
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		saveResource(data, null);
 	}
-	
+
 	@Override
-	public void preUpdate(UIGlobalReProgramLibarary data, EOGlobalReProgramLibarary find, Map<String, List<String>> headers) {
-		if(data.getRecordState()==null) {
+	public void preAdd(UIGlobalReProgramLibarary data, EOGlobalReProgramLibarary entity,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		saveResource(data, entity);
+	}
+
+	@Override
+	public void preUpdate(UIGlobalReProgramLibarary data, EOGlobalReProgramLibarary find,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		if (data.getRecordState() == null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
 		saveResource(data, find);
@@ -97,20 +104,22 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 		UIResourceModel resource = data.getFileResource();
 		ignoreProperties().clear();
 		ignoreProperties().add(getPrimaryKey());
-		if(resource!=null && BuilderUtil.isValidResource(resource)) {
+		if (resource != null && BuilderUtil.isValidResource(resource)) {
 			resource.setIncludeId(true);
-			resource.setId(find!=null? find.getResourceId(): null);
+			resource.setId(find != null ? find.getResourceId() : null);
 			resource.setFolderName(REPROGRAM);
-			UIResourceModel resourceFile= resourceClient.add(resource);
+			UIResourceModel resourceFile = resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
-			if(BuilderUtil.isValidFile(resource)) {
+			if (BuilderUtil.isValidFile(resource)) {
 				data.setMusicUrl(resourceFile.getFileUrl());
+				find.setMusicUrl(resourceFile.getFileUrl());
 			} else {
 				ignoreProperties().add(MUSIC_URL);
 			}
-			if(BuilderUtil.isValidPoster(resource)) {
+			if (BuilderUtil.isValidPoster(resource)) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
+				find.setPosterUrl(resourceFile.getPosterUrl());
 			} else {
 				ignoreProperties().add(POSTER_URL);
 			}
@@ -119,15 +128,53 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 			ignoreProperties().add(MUSIC_URL);
 		}
 	}
-	
+
 	@Override
-	public void merge(UIGlobalReProgramLibarary dtoObject, EOGlobalReProgramLibarary entityObject,
-			UIGlobalReProgramLibarary updateDtoObject, EOGlobalReProgramLibarary updateEntityObject,
-			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
-		saveItems(dtoObject, updateEntityObject, actions);
+	public List<String> ignoreProperties() {
+		List<String> ignoreProperties = super.ignoreProperties();
+		ignoreProperties.add(POSTER_URL);
+		ignoreProperties.add(MUSIC_URL);
+		return ignoreProperties;
 	}
 
-	private void saveItems(UIGlobalReProgramLibarary data, EOGlobalReProgramLibarary entity, Map<String, Object> actions) {
+	@Override
+	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		if (filters != null && !filters.containsKey(RECORD_STATE)) {
+			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
+		}
+	}
+
+	@Override
+	public void postFetch(EOGlobalReProgramLibarary findObject, UIGlobalReProgramLibarary dtoObject,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		if (StringUtils.isEmpty(dtoObject.getIdenNo())) {
+			dtoObject.setIdenNo(findObject.getId() + "");
+		}
+		if (StringUtils.isNotEmpty(dtoObject.getMusicUrl())) {
+			dtoObject.setMusicUrl(dtoObject.getMusicUrl().startsWith("/") ? serverUrl + "" + dtoObject.getMusicUrl()
+					: serverUrl + "/" + dtoObject.getMusicUrl());
+		}
+
+		if (StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
+			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/") ? serverUrl + "" + dtoObject.getPosterUrl()
+					: serverUrl + "/" + dtoObject.getPosterUrl());
+		}
+	}
+
+	@Override
+	public Boolean deleteById(Long id) {
+		Optional<EOGlobalReProgramLibarary> findById = getRepository().findById(id);
+		if (findById.isPresent()) {
+			EOGlobalReProgramLibarary eoGlobalReprogramLibarary = findById.get();
+			eoGlobalReprogramLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
+			getRepository().save(eoGlobalReprogramLibarary);
+			return true;
+		}
+		return false;
+	}
+	
+
+	protected void saveItems(UIGlobalReProgramLibarary data, EOGlobalReProgramLibarary entity, Map<String, Object> actions) {
 		if(!RestConstant.isExcludeKey(actions, RE_PROGRAM_ITEMS) && RestConstant.isIncludeKey(actions, RE_PROGRAM_ITEMS)) {
 			
 			List<Long> ids = data.getReProgramItems().stream().filter(reProgramItem->!StringUtil.isEmpty(reProgramItem.getId())).map(reProgramItem->reProgramItem.getId()).toList();
@@ -141,36 +188,4 @@ public class GlobalReProgramLibararyServiceImpl extends CrudServiceImpl<UIGlobal
 		}
 	}
 
-	@Override
-	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
-		if(filters!=null && !filters.containsKey(RECORD_STATE)) {
-			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
-		}
-	}
-	
-	@Override
-	public void postFetch(EOGlobalReProgramLibarary findObject, UIGlobalReProgramLibarary dtoObject, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
-		if(StringUtils.isEmpty(dtoObject.getIdenNo())) {
-			dtoObject.setIdenNo(findObject.getId()+"");
-		}
-		if(StringUtils.isNotEmpty(dtoObject.getMusicUrl())) {
-			dtoObject.setMusicUrl(dtoObject.getMusicUrl().startsWith("/")? serverUrl+""+dtoObject.getMusicUrl() :  serverUrl+"/"+dtoObject.getMusicUrl());
-		}
-		
-		if(StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
-			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/")? serverUrl+""+dtoObject.getPosterUrl() :  serverUrl+"/"+dtoObject.getPosterUrl());
-		}
-	}
-
-	@Override
-	public Boolean deleteById(Long id) {
-		Optional<EOGlobalReProgramLibarary> findById = getRepository().findById(id);
-		if(findById.isPresent()) {
-			EOGlobalReProgramLibarary eoGlobalReProgramLibarary = findById.get();
-			eoGlobalReProgramLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
-			getRepository().save(eoGlobalReProgramLibarary);
-			return true;
-		}
-		return false;
-	}
 }

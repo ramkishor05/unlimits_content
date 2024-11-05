@@ -137,6 +137,9 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
+		if(data.getOrderSequence()==null) {
+			data.setOrderSequence(globalMainCategoryRepository.count()+1d);	
+		}
 		saveResource(data, entity);
 	}
 	
@@ -145,7 +148,9 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
 		if(data.getRecordState()==null) {
 			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 		}
-		
+		if(data.getOrderSequence()==null) {
+			data.setOrderSequence(globalMainCategoryRepository.count()+1d);	
+		}
 		saveResource(data, entity);
 	}
 	

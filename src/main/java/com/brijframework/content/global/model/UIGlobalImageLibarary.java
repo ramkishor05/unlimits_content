@@ -10,7 +10,10 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 	private static final long serialVersionUID = 1L;
 	
 	private Long subCategoryId;
+	
 	private String subCategoryName;
+	
+	private String resourceType;
 	
 	private UIResourceModel fileResource;
 
@@ -66,6 +69,14 @@ public class UIGlobalImageLibarary extends UIGlobalItem implements Serializable 
 
 	public void setTagList(List<UIGlobalTagModel> tagList) {
 		this.tagList = tagList;
+	}
+
+	public String getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
 	}
 	
 }

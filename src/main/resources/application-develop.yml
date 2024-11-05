@@ -57,7 +57,7 @@ spring:
     port: '587'
    db:
      datajson:
-       upload: false
+       upload: true
 springdoc:
   api-docs:
     path: /v3/api-docs

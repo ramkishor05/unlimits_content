@@ -10,7 +10,7 @@ import org.unlimits.rest.crud.beans.PageDetail;
 import com.brijframework.content.forgin.model.FileContent;
 
 @FeignClient(name= "UNLIMITS-INTEGRATION" , url = "http://${server.gateway.host}:${server.gateway.port}/integration")
-public interface PexelMediaRepository {
+public interface PexelClient {
 
 	@GetMapping(value = "/api/pexel/media/files/{fileId}")
 	public List<FileContent> getAllFiles(@PathVariable String fileId);

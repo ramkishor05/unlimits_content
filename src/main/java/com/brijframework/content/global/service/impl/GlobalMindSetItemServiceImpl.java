@@ -45,7 +45,7 @@ implements GlobalMindSetItemService {
 
 	private static final String POSTER_URL = "posterUrl";
 
-	private static final String MINDSET = "mindset";
+	private static final String MINDSET = "mindset_items";
 
 	@Autowired
 	private GlobalMindSetItemRepository globalMindSetItemRepository;
@@ -68,7 +68,6 @@ implements GlobalMindSetItemService {
 	public GenericMapper<EOGlobalMindSetItem, UIGlobalMindSetItem> getMapper() {
 		return globalMindSetItemMapper;
 	}
-	
 
 	{
 		CustomPredicate<EOGlobalMindSetItem> mindSetLibararyId = (type, root, criteriaQuery, criteriaBuilder, filter) -> {
@@ -96,8 +95,14 @@ implements GlobalMindSetItemService {
 	}
 	
 	@Override
-	public void postAdd(UIGlobalMindSetItem data, EOGlobalMindSetItem entity) {
+	public void preAdd(UIGlobalMindSetItem data, EOGlobalMindSetItem entity, Map<String, List<String>> headers) {
 		saveResource(data, entity);
+	}
+	
+	@Override
+	public void preUpdate(UIGlobalMindSetItem data, Map<String, List<String>> headers) {
+		LOGGER.info("pre add");
+		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
 	}
 	
 	@Override
@@ -119,13 +124,16 @@ implements GlobalMindSetItemService {
 			UIResourceModel resourceFile= resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
+			find.setResourceId(resourceFile.getId());
 			if(BuilderUtil.isValidFile(resource)) {
 				data.setMusicUrl(resourceFile.getFileUrl());
+				find.setMusicUrl(resourceFile.getFileUrl());
 			} else {
 				ignoreProperties().add(MUSIC_URL);
 			}
 			if(BuilderUtil.isValidPoster(resource)) {
 				data.setPosterUrl(resourceFile.getPosterUrl());
+				find.setPosterUrl(resourceFile.getPosterUrl());
 			} else {
 				ignoreProperties().add(POSTER_URL);
 			}
@@ -133,6 +141,14 @@ implements GlobalMindSetItemService {
 			ignoreProperties().add(POSTER_URL);
 			ignoreProperties().add(MUSIC_URL);
 		}
+	}
+	
+	@Override
+	public List<String> ignoreProperties() {
+		List<String> ignoreProperties = super.ignoreProperties();
+		ignoreProperties.add(POSTER_URL);
+		ignoreProperties.add(MUSIC_URL);
+		return ignoreProperties;
 	}
 
 	@Override

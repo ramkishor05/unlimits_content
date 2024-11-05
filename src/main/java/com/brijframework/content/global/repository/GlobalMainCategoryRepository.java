@@ -20,4 +20,6 @@ public interface GlobalMainCategoryRepository extends CustomRepository<EOGlobalM
 	Optional<EOGlobalMainCategory> findByName(String name);
 
 	Optional<EOGlobalMainCategory> findByIdenNo(String idenNo);
+
+	long countByRecordStateIn(List<String> statusIds);
 }

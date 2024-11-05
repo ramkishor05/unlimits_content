@@ -1,7 +1,10 @@
 package com.brijframework.content.global.repository;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.unlimits.rest.repository.CustomRepository;
@@ -14,6 +17,13 @@ public interface GlobalExampleItemRepository  extends CustomRepository<EOGlobalE
 
 	List<EOGlobalExampleItem> findAllByExampleLibararyId(Long id);
 
+	@Modifying
+	@Query(nativeQuery = true, value = "delete from EOGLOBAL_EXAMPLE_ITEM where EXAMPLE_LIBARARY_ID=?1")
 	void deleteByExampleLibararyId(Long id);
+
+	Optional<EOGlobalExampleItem> findByExampleLibararyIdAndImageLibararyId(Long exampleLibararyId, Long imageLibararyId);
+	
+	Optional<EOGlobalExampleItem> findByExampleLibararyIdAndTagLibararyId(Long exampleLibararyId, Long tagLibararyId);
+
 
 }

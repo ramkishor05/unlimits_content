@@ -16,6 +16,7 @@ public class UIGlobalExampleVisualize extends UIModel {
 	private String visualizeDate;
 	private String visualizeRequest;
 	private String visualizeResponse;
+	private Long exampleLibararyId;
 
 	public Integer getVisualizeYear() {
 		return visualizeYear;
@@ -49,4 +50,11 @@ public class UIGlobalExampleVisualize extends UIModel {
 		this.visualizeResponse = visualizeResponse;
 	}
 
+	public Long getExampleLibararyId() {
+		return exampleLibararyId;
+	}
+
+	public void setExampleLibararyId(Long exampleLibararyId) {
+		this.exampleLibararyId = exampleLibararyId;
+	}
 }

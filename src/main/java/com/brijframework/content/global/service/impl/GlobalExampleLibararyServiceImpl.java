@@ -1,14 +1,16 @@
 package com.brijframework.content.global.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,25 +20,19 @@ import org.unlimits.rest.crud.mapper.GenericMapper;
 import org.unlimits.rest.crud.service.CrudServiceImpl;
 import org.unlimits.rest.repository.CustomPredicate;
 
+import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.forgin.repository.ResourceClient;
-import com.brijframework.content.global.entities.EOGlobalExampleItem;
 import com.brijframework.content.global.entities.EOGlobalExampleLibarary;
-import com.brijframework.content.global.entities.EOGlobalExampleVisualize;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
-import com.brijframework.content.global.mapper.GlobalExampleItemMapper;
 import com.brijframework.content.global.mapper.GlobalExampleLibararyMapper;
-import com.brijframework.content.global.mapper.GlobalExampleVisualizeMapper;
 import com.brijframework.content.global.model.UIGlobalExampleItem;
 import com.brijframework.content.global.model.UIGlobalExampleLibarary;
 import com.brijframework.content.global.model.UIGlobalExampleVisualize;
-import com.brijframework.content.global.repository.GlobalExampleItemRepository;
 import com.brijframework.content.global.repository.GlobalExampleLibararyRepository;
-import com.brijframework.content.global.repository.GlobalExampleVisualizeRepository;
-import com.brijframework.content.global.repository.GlobalImageLibararyRepository;
-import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
-import com.brijframework.content.global.repository.GlobalTenureRepository;
+import com.brijframework.content.global.service.GlobalExampleItemService;
 import com.brijframework.content.global.service.GlobalExampleLibararyService;
+import com.brijframework.content.global.service.GlobalExampleVisualizeService;
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.util.BuilderUtil;
 
@@ -49,12 +45,11 @@ import jakarta.persistence.criteria.Subquery;
 public class GlobalExampleLibararyServiceImpl
 		extends CrudServiceImpl<UIGlobalExampleLibarary, EOGlobalExampleLibarary, Long>
 		implements GlobalExampleLibararyService {
-
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExampleLibararyServiceImpl.class);
 
-	/**
-	 * 
-	 */
+	private static final String EXAMPLE_LIBARARY_ID = "exampleLibararyId";
+
 	private static final String PROFILE_PICTURE_URL = "profilePictureURL";
 
 	private static final String RECORD_STATE = "recordState";
@@ -70,25 +65,10 @@ public class GlobalExampleLibararyServiceImpl
 	private GlobalExampleLibararyMapper globalExampleLibararyMapper;
 
 	@Autowired
-	private GlobalExampleVisualizeMapper globalExampleVisualizeMapper;
+	private GlobalExampleVisualizeService globalExampleVisualizeService;
 
 	@Autowired
-	private GlobalExampleItemMapper globalExampleItemMapper;
-
-	@Autowired
-	private GlobalTenureRepository globalTenureRepository;
-
-	@Autowired
-	private GlobalImageLibararyRepository globalImageLibararyRepository;
-
-	@Autowired
-	private GlobalTagLibararyRepository globalTagLibararyRepository;
-
-	@Autowired
-	private GlobalExampleItemRepository globalExampleItemRepository;
-
-	@Autowired
-	private GlobalExampleVisualizeRepository globalExampleVisualizeRepository;
+	private GlobalExampleItemService globalExampleItemService;
 
 	@Value("${openapi.service.url}")
 	private String serverUrl;
@@ -146,112 +126,32 @@ public class GlobalExampleLibararyServiceImpl
 		addCustomPredicate("subCategoryName", subCategoryName);
 		addCustomPredicate("subCategory.name", subCategoryName);
 	}
-
-	@Override
-	public void init(List<EOGlobalExampleLibarary> eoGlobalExampleLibararyJson) {
-
-		eoGlobalExampleLibararyJson.forEach(eoGlobalExampleLibarary -> {
-			List<EOGlobalExampleItem> exampleItems = new ArrayList<EOGlobalExampleItem>(
-					eoGlobalExampleLibarary.getExampleItems());
-			eoGlobalExampleLibarary.getExampleItems().clear();
-
-			List<EOGlobalExampleVisualize> exampleVisualizes = new ArrayList<EOGlobalExampleVisualize>(
-					eoGlobalExampleLibarary.getVisualizeItems());
-			eoGlobalExampleLibarary.getVisualizeItems().clear();
-
-			EOGlobalExampleLibarary findGlobalExampleLibarary = globalExampleLibararyRepository
-					.findByIdenNo(eoGlobalExampleLibarary.getIdenNo()).orElse(eoGlobalExampleLibarary);
-			BeanUtils.copyProperties(eoGlobalExampleLibarary, findGlobalExampleLibarary, "id");
-			findGlobalExampleLibarary.setRecordState(RecordStatus.ACTIVETED.getStatus());
-			EOGlobalExampleLibarary eoGlobalExampleItemSave = globalExampleLibararyRepository
-					.saveAndFlush(findGlobalExampleLibarary);
-			eoGlobalExampleLibarary.setId(eoGlobalExampleItemSave.getId());
-			Map<String, EOGlobalExampleItem> exampleItemMap = globalExampleItemRepository
-					.findAllByExampleLibararyId(eoGlobalExampleItemSave.getId()).stream()
-					.collect(Collectors.toMap((eoGlobalExampleItem) -> getExampleItemId(eoGlobalExampleItem),
-							eoGlobalExampleItem -> eoGlobalExampleItem));
-
-			exampleItems.forEach(eoExampleItem -> {
-				EOGlobalExampleItem findExampleItem = exampleItemMap.getOrDefault(getExampleItemId(eoExampleItem),
-						eoExampleItem);
-				BeanUtils.copyProperties(eoExampleItem, findExampleItem, "id");
-				findExampleItem.setExampleLibarary(eoGlobalExampleItemSave);
-				findExampleItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				globalExampleItemRepository.saveAndFlush(findExampleItem);
-			});
-
-			Map<String, EOGlobalExampleVisualize> exampleVisualizeMap = globalExampleVisualizeRepository
-					.findAllByExampleLibararyId(eoGlobalExampleItemSave.getId()).stream()
-					.collect(Collectors.toMap((exampleVisualize) -> getExampleVisualizeId(exampleVisualize),
-							(exampleVisualize) -> exampleVisualize));
-			exampleVisualizes.forEach(eoVisualizeItem -> {
-				EOGlobalExampleVisualize findVisualizeItem = exampleVisualizeMap
-						.getOrDefault(getExampleVisualizeId(eoVisualizeItem), eoVisualizeItem);
-				BeanUtils.copyProperties(eoVisualizeItem, findVisualizeItem, "id");
-				findVisualizeItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				findVisualizeItem.setExampleLibarary(eoGlobalExampleItemSave);
-				globalExampleVisualizeRepository.saveAndFlush(findVisualizeItem);
-			});
-		});
-	}
-
-	private String getExampleItemId(EOGlobalExampleItem exampleItem) {
-		return exampleItem.getTenure().getYear() + "_"
-				+ (exampleItem.getImageLibarary() != null ? exampleItem.getImageLibarary().getId() : 0) + "_"
-				+ (exampleItem.getTagLibarary() != null ? exampleItem.getTagLibarary().getId() : 0);
-	}
-
-	private Object getExampleItemId(UIGlobalExampleItem exampleItem) {
-		return exampleItem.getYear() + "_"
-				+ (exampleItem.getImageLibararyId() != null ? exampleItem.getImageLibararyId()
-						: exampleItem.getTagLibararyId());
-	}
-
-	private String getExampleVisualizeId(EOGlobalExampleVisualize exampleVisualize) {
-		return exampleVisualize.getTenure().getYear() + "";
-	}
-
-	private String getExampleVisualizeId(UIGlobalExampleVisualize exampleVisualize) {
-		return exampleVisualize.getVisualizeYear() + "";
-	}
-
+	
 	@Override
 	public void preAdd(UIGlobalExampleLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,
 			Map<String, Object> actions) {
+		LOGGER.warn("pre add: {}", headers);
 		globalExampleLibararyRepository
-				.findBySubCategoryIdAndProfileName(data.getSubCategoryId(), data.getProfileName())
-				.ifPresent(globalSubCategory -> {
-					data.setId(globalSubCategory.getId());
-				});
+		.findBySubCategoryIdAndProfileName(data.getSubCategoryId(), data.getProfileName())
+		.ifPresent(globalSubCategory -> {
+			data.setId(globalSubCategory.getId());
+		});
 		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		data.setProfilePictureURL(null);
-		data.setPosterUrl(null);
 	}
 
 	@Override
-	public void preAdd(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity, Map<String, List<String>> headers,
-			Map<String, Object> filters, Map<String, Object> actions) {
+	public void preAdd(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
 		saveResource(data, entity);
 	}
 
 	@Override
-	public void preUpdate(UIGlobalExampleLibarary data, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
-		data.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		data.setProfilePictureURL(null);
-		data.setPosterUrl(null);
-	}
-
-	@Override
-	public void preUpdate(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity,
-			Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
-		saveResource(data, entity);
-	}
-
-	@Override
-	public void merge(UIGlobalExampleLibarary dtoObject, EOGlobalExampleLibarary entityObject,
-			UIGlobalExampleLibarary updateDtoObject, EOGlobalExampleLibarary updateEntityObject,
-			Map<String, List<String>> headers) {
-		saveExampleItems(dtoObject, updateEntityObject);
+	public void preUpdate(UIGlobalExampleLibarary data, EOGlobalExampleLibarary find,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		if (data.getRecordState() == null) {
+			data.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		}
+		saveResource(data, find);
 	}
 
 	private void saveResource(UIGlobalExampleLibarary data, EOGlobalExampleLibarary find) {
@@ -265,7 +165,6 @@ public class GlobalExampleLibararyServiceImpl
 			UIResourceModel resourceFile = resourceClient.add(resource);
 			resourceFile.setIncludeId(true);
 			data.setResourceId(resourceFile.getId());
-			find.setResourceId(resourceFile.getId());
 			if (BuilderUtil.isValidFile(resource)) {
 				data.setProfilePictureURL(resourceFile.getFileUrl());
 				find.setProfilePictureURL(resourceFile.getFileUrl());
@@ -284,96 +183,57 @@ public class GlobalExampleLibararyServiceImpl
 		}
 	}
 
-	private void saveExampleItems(UIGlobalExampleLibarary data, EOGlobalExampleLibarary entity) {
-		Map<Integer, UIGlobalExampleVisualize> visualizeMap = data.getVisualizeMap();
-
-		if (!CollectionUtils.isEmpty(visualizeMap)) {
-			globalExampleVisualizeRepository.deleteByExampleLibararyId(entity.getId());
-			Map<String, EOGlobalExampleVisualize> exampleVisualizeMap = globalExampleVisualizeRepository
-					.findAllByExampleLibararyId(entity.getId()).stream()
-					.collect(Collectors.toMap((exampleVisualize) -> getExampleVisualizeId(exampleVisualize),
-							(exampleVisualize) -> exampleVisualize));
-			List<EOGlobalExampleVisualize> eoGlobalExampleVisualizes = new ArrayList<EOGlobalExampleVisualize>();
-			visualizeMap.entrySet().forEach(entry -> {
-				EOGlobalExampleVisualize eoGlobalExampleVisualize = exampleVisualizeMap.getOrDefault(
-						getExampleVisualizeId(entry.getValue()),
-						globalExampleVisualizeMapper.mapToDAO(entry.getValue()));
-				eoGlobalExampleVisualize.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				eoGlobalExampleVisualize.setTenure(globalTenureRepository.findOneByYear(entry.getKey()).orElse(null));
-				eoGlobalExampleVisualize.setExampleLibarary(entity);
-				eoGlobalExampleVisualizes.add(eoGlobalExampleVisualize);
-			});
-			entity.setVisualizeItems(globalExampleVisualizeRepository.saveAll(eoGlobalExampleVisualizes));
-		}
-		List<UIGlobalExampleItem> exampleItems = data.getExampleItems();
-		if (!CollectionUtils.isEmpty(exampleItems)) {
-			globalExampleItemRepository.deleteByExampleLibararyId(entity.getId());
-			Map<String, EOGlobalExampleItem> exampleItemMap = globalExampleItemRepository
-					.findAllByExampleLibararyId(entity.getId()).stream()
-					.collect(Collectors.toMap((eoGlobalExampleItem) -> getExampleItemId(eoGlobalExampleItem),
-							eoGlobalExampleItem -> eoGlobalExampleItem));
-			List<EOGlobalExampleItem> eoGlobalExampleItems = new ArrayList<EOGlobalExampleItem>();
-			exampleItems.forEach(exampleItem -> {
-				EOGlobalExampleItem eoGlobalExampleItem = exampleItemMap.getOrDefault(getExampleItemId(exampleItem),
-						globalExampleItemMapper.mapToDAO(exampleItem));
-				if (exampleItem.getYear() != null) {
-					eoGlobalExampleItem
-							.setTenure(globalTenureRepository.findOneByYear(exampleItem.getYear()).orElse(null));
-				}
-				if (exampleItem.getImageLibararyId() != null) {
-					eoGlobalExampleItem.setImageLibarary(
-							globalImageLibararyRepository.getReferenceById(exampleItem.getImageLibararyId()));
-				}
-				if (exampleItem.getTagLibararyId() != null) {
-					eoGlobalExampleItem.setTagLibarary(
-							globalTagLibararyRepository.getReferenceById(exampleItem.getTagLibararyId()));
-				}
-				eoGlobalExampleItem.setExampleLibarary(entity);
-				eoGlobalExampleItem.setRecordState(RecordStatus.ACTIVETED.getStatus());
-				eoGlobalExampleItems.add(eoGlobalExampleItem);
-			});
-			entity.setExampleItems(globalExampleItemRepository.saveAll(eoGlobalExampleItems));
-		}
+	@Override
+	public List<String> ignoreProperties() {
+		List<String> ignoreProperties = super.ignoreProperties();
+		ignoreProperties.add(POSTER_URL);
+		ignoreProperties.add(PROFILE_PICTURE_URL);
+		return ignoreProperties;
 	}
 
-	public void postFetch(EOGlobalExampleLibarary findObject, UIGlobalExampleLibarary dtoObject) {
-		if (StringUtils.isEmpty(findObject.getIdenNo())) {
-			dtoObject.setIdenNo(findObject.getId() + "");
+	@Override
+	public Boolean deleteById(Long id) {
+		Optional<EOGlobalExampleLibarary> findById = getRepository().findById(id);
+		if (findById.isPresent()) {
+			EOGlobalExampleLibarary eoGlobalReprogramLibarary = findById.get();
+			eoGlobalReprogramLibarary.setRecordState(DataStatus.DACTIVETED.getStatus());
+			getRepository().save(eoGlobalReprogramLibarary);
+			return true;
 		}
-		if (StringUtils.isNotEmpty(findObject.getPosterUrl())) {
-			dtoObject
-					.setPosterUrl(findObject.getPosterUrl().startsWith("/") ? serverUrl + "" + findObject.getPosterUrl()
-							: serverUrl + "/" + findObject.getPosterUrl());
-		}
-		if (StringUtils.isNotEmpty(findObject.getProfilePictureURL())) {
-			dtoObject.setProfilePictureURL(findObject.getProfilePictureURL().startsWith("/")
-					? serverUrl + "" + findObject.getProfilePictureURL()
-					: serverUrl + "/" + findObject.getProfilePictureURL());
-		}
-		List<EOGlobalExampleVisualize> visualizeItems = findObject.getVisualizeItems();
-		if (!CollectionUtils.isEmpty(visualizeItems)) {
-			Map<Integer, UIGlobalExampleVisualize> visualizeMap = visualizeItems.stream()
-					.collect(Collectors.toMap(visualizeItem -> visualizeItem.getTenure().getYear(),
-							(visualizeItem) -> globalExampleVisualizeMapper.mapToDTO(visualizeItem)));
-			dtoObject.setVisualizeMap(visualizeMap);
-		}
+		return false;
+	}
+	
+	@Override
+	public void merge(UIGlobalExampleLibarary dtoObject, EOGlobalExampleLibarary entityObject,
+			UIGlobalExampleLibarary updateDtoObject, EOGlobalExampleLibarary updateEntityObject,Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		saveExampleItems(dtoObject, updateEntityObject);
+	}
 
-		List<EOGlobalExampleItem> exampleItems = findObject.getExampleItems();
+	private void saveExampleItems(UIGlobalExampleLibarary dtoObject, EOGlobalExampleLibarary entity) {
+		Map<Integer, UIGlobalExampleVisualize> visualizeDTOMap = dtoObject.getVisualizeMap();
+		globalExampleVisualizeService.deleteByExampleLibararyId(entity.getId());
+		if (!CollectionUtils.isEmpty(visualizeDTOMap)) {
+			List<UIGlobalExampleVisualize> exampleVisualizes=new ArrayList<UIGlobalExampleVisualize>(visualizeDTOMap.values());
+			if(exampleVisualizes!=null) {
+				exampleVisualizes.forEach(exampleVisualize-> exampleVisualize.setExampleLibararyId(entity.getId()));
+				List<UIGlobalExampleVisualize> updateAll = globalExampleVisualizeService.updateAll(exampleVisualizes, new HashMap<String, List<String>>(), new HashMap<String, Object>(), new HashMap<String, Object>());
+				Map<Integer, UIGlobalExampleVisualize> visualizeMap=updateAll.stream().collect(Collectors.toMap(globalExampleVisualize->globalExampleVisualize.getVisualizeYear(), Function.identity()));
+				dtoObject.setVisualizeMap(visualizeMap);
+			}
+		}
+		List<UIGlobalExampleItem> exampleItems = dtoObject.getExampleItems();
+		globalExampleItemService.deleteByExampleLibararyId(entity.getId());
 		if (!CollectionUtils.isEmpty(exampleItems)) {
-			List<UIGlobalExampleItem> exampleDTOItems = exampleItems.stream().map(exampleItem -> {
-				UIGlobalExampleItem uiGlobalExampleItem = globalExampleItemMapper.mapToDTO(exampleItem);
-				if (exampleItem.getTenure() != null) {
-					uiGlobalExampleItem.setYear(exampleItem.getTenure().getYear());
-				}
-				return uiGlobalExampleItem;
-			}).toList();
-			dtoObject.setExampleItems(exampleDTOItems);
+			exampleItems.forEach(exampleItem->exampleItem.setExampleLibararyId(entity.getId()));
+			globalExampleItemService.updateAll(exampleItems, new HashMap<String, List<String>>(), new HashMap<String, Object>(), new HashMap<String, Object>());
 		}
 	}
 
 	@Override
 	public void preFetch(Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
-		filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
+		if (filters != null && !filters.containsKey(RECORD_STATE)) {
+			filters.put(RECORD_STATE, RecordStatus.ACTIVETED.getStatusIds());
+		}
 	}
 
 	@Override
@@ -383,5 +243,33 @@ public class GlobalExampleLibararyServiceImpl
 		uiObjects.sort((op1, op2) -> op1.getOrderSequence().compareTo(op2.getOrderSequence()));
 		return uiObjects;
 	}
+
+	@Override
+	public void postFetch(EOGlobalExampleLibarary findObject, UIGlobalExampleLibarary dtoObject,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		if (StringUtils.isEmpty(dtoObject.getIdenNo())) {
+			dtoObject.setIdenNo(findObject.getId() + "");
+		}
+		if (StringUtils.isNotEmpty(dtoObject.getProfilePictureURL())) {
+			dtoObject.setProfilePictureURL(dtoObject.getProfilePictureURL().startsWith("/") ? serverUrl + "" + dtoObject.getProfilePictureURL()
+					: serverUrl + "/" + dtoObject.getProfilePictureURL());
+		}
+		if (StringUtils.isNotEmpty(dtoObject.getPosterUrl())) {
+			dtoObject.setPosterUrl(dtoObject.getPosterUrl().startsWith("/") ? serverUrl + "" + dtoObject.getPosterUrl()
+					: serverUrl + "/" + dtoObject.getPosterUrl());
+		}
+		filters.clear();
+		filters.put(EXAMPLE_LIBARARY_ID, findObject.getId());
+		List<UIGlobalExampleVisualize> visualizeItems = globalExampleVisualizeService.findAll(headers, filters, actions);
+		if (!CollectionUtils.isEmpty(visualizeItems)) {
+			Map<Integer, UIGlobalExampleVisualize> visualizeMap = visualizeItems.stream().collect(Collectors.toMap(visualizeItem -> visualizeItem.getVisualizeYear(),(visualizeItem) -> visualizeItem));
+			dtoObject.setVisualizeMap(visualizeMap);
+		} else {
+			dtoObject.setVisualizeMap(new HashMap<Integer, UIGlobalExampleVisualize>());
+		}
+		List<UIGlobalExampleItem> exampleItems = globalExampleItemService.findAll(headers, filters, actions);
+		dtoObject.setExampleItems(exampleItems);
+	}
+
 
 }
