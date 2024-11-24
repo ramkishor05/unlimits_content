@@ -36,6 +36,7 @@ import org.unlimits.rest.repository.CustomPredicate;
 import com.brijframework.content.constants.DataStatus;
 import com.brijframework.content.constants.RecordStatus;
 import com.brijframework.content.constants.VisualiseType;
+import com.brijframework.content.exceptions.InvalidParameterException;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagImageMapping;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
@@ -43,6 +44,7 @@ import com.brijframework.content.global.mapper.GlobalImageLibararyMapper;
 import com.brijframework.content.global.mapper.GlobalTagLibararyMapper;
 import com.brijframework.content.global.model.UIGlobalImageModel;
 import com.brijframework.content.global.model.UIGlobalTagLibarary;
+import com.brijframework.content.global.repository.GlobalSubCategoryRepository;
 import com.brijframework.content.global.repository.GlobalTagImageMappingRepository;
 import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalTagLibararyService;
@@ -71,6 +73,9 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	
 	@Value("${openapi.service.url}")
 	private String serverUrl;
+
+	@Autowired
+	private GlobalSubCategoryRepository globalCategoryItemRepository;
 
 	@Override
 	public JpaRepository<EOGlobalTagLibarary, Long> getRepository() {
@@ -173,10 +178,34 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 	}
 	
 	@Override
-	public void postAdd(UIGlobalTagLibarary data, EOGlobalTagLibarary entity) {
-		saveTagImageMappingList(data, entity);
+	public void merge(UIGlobalTagLibarary dtoObject, EOGlobalTagLibarary entityObject,
+			UIGlobalTagLibarary updateDtoObject, EOGlobalTagLibarary updateEntityObject,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
 	}
-
+	
+	@Override
+	public void merge(UIGlobalTagLibarary dtoObject, EOGlobalTagLibarary entityObject,
+			UIGlobalTagLibarary updateDtoObject, EOGlobalTagLibarary updateEntityObject,
+			Map<String, List<String>> headers, Map<String, Object> filters) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
+	}
+	
+	
+	@Override
+	public void merge(UIGlobalTagLibarary dtoObject, EOGlobalTagLibarary entityObject,
+			UIGlobalTagLibarary updateDtoObject, EOGlobalTagLibarary updateEntityObject,
+			Map<String, List<String>> headers) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
+	}
+	
+	@Override
+	public void merge(UIGlobalTagLibarary dtoObject, EOGlobalTagLibarary entityObject,
+			UIGlobalTagLibarary updateDtoObject, EOGlobalTagLibarary updateEntityObject) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
+	}
+	
+	
 	private void saveTagImageMappingList(UIGlobalTagLibarary data, EOGlobalTagLibarary entity) {
 		List<UIGlobalImageModel> uiImageList = data.getImageList();
 		if(!CollectionUtils.isEmpty(uiImageList)) {
@@ -189,9 +218,18 @@ public class GlobalTagLibararyServiceImpl extends CrudServiceImpl<UIGlobalTagLib
 				eoTagImageList.add(globalTagImageMapping);
 			});
 			globalTagImageMappingRepository.saveAllAndFlush(eoTagImageList);
+		} else {
+			globalTagImageMappingRepository.deleteAllByTagLibararyId(entity.getId());
+			EOGlobalSubCategory eoGlobalSubCategory = globalCategoryItemRepository.findById(data.getSubCategoryId()).orElseThrow(()->new InvalidParameterException("SubCategoryId is required!!"));
+			saveImageTagMappings(eoGlobalSubCategory, entity, data.getName());
 		}
 	}
 	
+	private void saveImageTagMappings(EOGlobalSubCategory eoGlobalSubCategory, EOGlobalTagLibarary entity,
+			String name) {
+		
+	}
+
 	@Override
 	public void preUpdate(UIGlobalTagLibarary data, EOGlobalTagLibarary entity, Map<String, List<String>> headers, Map<String, Object> filters,  Map<String, Object> actions) {
 		if(data.getType()==null) {

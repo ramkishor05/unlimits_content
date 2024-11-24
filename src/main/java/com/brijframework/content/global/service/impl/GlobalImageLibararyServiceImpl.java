@@ -1,17 +1,11 @@
 package com.brijframework.content.global.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.brijframework.json.schema.factories.JsonSchemaFile;
-import org.brijframework.json.schema.factories.JsonSchemaObject;
 import org.brijframework.util.text.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,10 +38,7 @@ import com.brijframework.content.global.repository.GlobalTagLibararyRepository;
 import com.brijframework.content.global.service.GlobalImageLibararyService;
 import com.brijframework.content.resource.modal.UIResourceModel;
 import com.brijframework.content.util.BuilderUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.io.Files;
-import com.google.common.util.concurrent.AtomicDouble;
+import com.brijframework.content.util.CommanUtil;
 
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Path;
@@ -165,10 +156,32 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 	}
 	
 	@Override
-	public void postUpdate(UIGlobalImageLibarary data, EOGlobalImageLibarary entity,
-			Map<String, List<String>> headers) {
-		saveTagImageMappingList(data, entity);
+	public void merge(UIGlobalImageLibarary dtoObject, EOGlobalImageLibarary entityObject,
+			UIGlobalImageLibarary updateDtoObject, EOGlobalImageLibarary updateEntityObject,
+			Map<String, List<String>> headers, Map<String, Object> filters, Map<String, Object> actions) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
 	}
+	
+	@Override
+	public void merge(UIGlobalImageLibarary dtoObject, EOGlobalImageLibarary entityObject,
+			UIGlobalImageLibarary updateDtoObject, EOGlobalImageLibarary updateEntityObject,
+			Map<String, List<String>> headers, Map<String, Object> filters) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
+	}
+	
+	@Override
+	public void merge(UIGlobalImageLibarary dtoObject, EOGlobalImageLibarary entityObject,
+			UIGlobalImageLibarary updateDtoObject, EOGlobalImageLibarary updateEntityObject,
+			Map<String, List<String>> headers) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
+	}
+	
+	@Override
+	public void merge(UIGlobalImageLibarary dtoObject, EOGlobalImageLibarary entityObject,
+			UIGlobalImageLibarary updateDtoObject, EOGlobalImageLibarary updateEntityObject) {
+		saveTagImageMappingList(dtoObject, updateEntityObject);
+	}
+	
 	
 	private void saveTagImageMappingList(UIGlobalImageLibarary data, EOGlobalImageLibarary entity) {
 		List<UIGlobalTagModel> uiTagList = data.getTagList();
@@ -185,7 +198,7 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		} else {
 			globalTagImageMappingRepository.deleteAllByImageLibararyId(entity.getId());
 			EOGlobalSubCategory eoGlobalSubCategory = globalCategoryItemRepository.findById(data.getSubCategoryId()).orElseThrow(()->new InvalidParameterException("SubCategoryId is required!!"));
-			saveImageTagMappings(eoGlobalSubCategory, entity, data.getName());
+			saveImageTagMappings(eoGlobalSubCategory, entity, data.getTitle());
 		}
 	}
 	
@@ -194,6 +207,12 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		ignoreProperties().add(getPrimaryKey());
 		UIResourceModel resource = data.getFileResource();
 		if(resource!=null && BuilderUtil.isValidResource(resource)) {
+			if(StringUtil.isEmpty(data.getName())) {
+				data.setName(resource.getFileName());
+				find.setName(resource.getFileName());
+				data.setTitle(resource.getFileName().split("\\.")[0]);
+				find.setTitle(resource.getFileName().split("\\.")[0]);
+			}
 			resource.setId(find!=null? find.getResourceId(): null);
 			StringBuilder dir=new StringBuilder(TAGS_WITH_IMAGES);
 			globalCategoryItemRepository.findById(data.getSubCategoryId()).ifPresent(globalCategoryItem->{
@@ -269,11 +288,27 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 		}
 		return false;
 	}
-	
+
+
+	@Override
+	public void saveImageTagMappings(EOGlobalSubCategory subCategory, EOGlobalImageLibarary globalImageLibarary, String tagNames) {
+		String finalTags = CommanUtil.ignoreEndWithNumber(StringUtil.capitalFirstLetterText(tagNames.replace("_", " ")));
+		createTagMappingLibarary(subCategory, globalImageLibarary, finalTags);
+	}
+
+	private EOGlobalTagImageMapping createTagMappingLibarary(EOGlobalSubCategory subCategory, EOGlobalImageLibarary imageLibarary, String name) {
+		EOGlobalTagLibarary tagLibarary = findOrCreateTagLibarary(subCategory, name);
+		EOGlobalTagImageMapping globalTagImageMapping = globalTagImageMappingRepository.findOneByImageLibararyIdAndTagLibararyId(imageLibarary.getId(),tagLibarary.getId()).orElse(new EOGlobalTagImageMapping());
+		globalTagImageMapping.setImageLibarary(imageLibarary);
+		globalTagImageMapping.setTagLibarary(tagLibarary);
+		globalTagImageMapping.setRecordState(RecordStatus.ACTIVETED.getStatus());
+		return globalTagImageMappingRepository.saveAndFlush(globalTagImageMapping);
+	}
+
 	private EOGlobalTagLibarary findOrCreateTagLibarary(EOGlobalSubCategory globalCategoryItem, String tagName) {
-		EOGlobalTagLibarary tag = globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem, tagName);
-		if(tag!=null) {
-			return tag;
+		List<EOGlobalTagLibarary> tags = globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem.getId(), tagName);
+		if(!CollectionUtils.isEmpty(tags)) {
+			return tags.get(0);
 		}
 		return createTagLibarary(globalCategoryItem, tagName);
 	}
@@ -290,77 +325,17 @@ public class GlobalImageLibararyServiceImpl extends CrudServiceImpl<UIGlobalImag
 			return eoGlobalTagLibarary;
 		}catch (RuntimeException e) {
 			e.printStackTrace();
-			EOGlobalTagLibarary eoGlobalTagLibarary=globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem, name);
-			return eoGlobalTagLibarary;
+			List<EOGlobalTagLibarary> tags = globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem.getId(), name);
+			if(!CollectionUtils.isEmpty(tags)) {
+				return tags.get(0);
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			EOGlobalTagLibarary eoGlobalTagLibarary=globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem, name);
-			return eoGlobalTagLibarary;
+			List<EOGlobalTagLibarary> tags = globalTagLibararyRepository.findBySubCategoryAndName(globalCategoryItem.getId(), name);
+			if(!CollectionUtils.isEmpty(tags)) {
+				return tags.get(0);
+			}
 		}
-	}
-	private void saveImageTagMappings(EOGlobalSubCategory subCategory, EOGlobalImageLibarary globalImageLibarary, String tagNames) {
-		String finalTags = StringUtil.capitalFirstLetterText(tagNames.replace("_", " "));
-		for(String tagName :finalTags.split(",")) {
-			String finalTag=tagName.trim();
-			createTagMappingLibarary(subCategory, globalImageLibarary, finalTag);
-		}
-	}
-
-	private EOGlobalTagImageMapping createTagMappingLibarary(EOGlobalSubCategory subCategory, EOGlobalImageLibarary imageLibarary, String name) {
-		EOGlobalTagLibarary tagLibarary = findOrCreateTagLibarary(subCategory, name);
-		EOGlobalTagImageMapping globalTagImageMapping = globalTagImageMappingRepository.findOneByImageLibararyIdAndTagLibararyId(imageLibarary.getId(),tagLibarary.getId()).orElse(new EOGlobalTagImageMapping());
-		globalTagImageMapping.setImageLibarary(imageLibarary);
-		globalTagImageMapping.setTagLibarary(tagLibarary);
-		globalTagImageMapping.setRecordState(RecordStatus.ACTIVETED.getStatus());
-		return globalTagImageMappingRepository.saveAndFlush(globalTagImageMapping);
-	}
-	
-	public void export() {
-		File dirs = new File("C:/app_runs/unlimits-resources/resource/global_portal_image_libarary");
-		if (!dirs.exists()) {
-			dirs.mkdirs();
-		}
-		String global_portal_image_libarary_file_name = "/global_portal_image_libarary";
-		globalImageLibararyRepository.findAll().stream()
-		.collect(Collectors.groupingBy(globalTagLibarary -> globalTagLibarary.getSubCategory()))
-		.forEach((subCategory, globalTagLibararyList) -> {
-			buildImageLibarary(dirs, global_portal_image_libarary_file_name, subCategory, globalTagLibararyList);
-		});
-	}
-	
-	protected void buildImageLibarary(File dirs, String global_portal_image_libarary_file_name,
-			EOGlobalSubCategory subCategory, List<EOGlobalImageLibarary> globalImageLibararyList) {
-		String fileName = global_portal_image_libarary_file_name + "_" + subCategory.getMainCategory().getName() + "_"
-				+ BuilderUtil.replaceContent(subCategory.getName()) + ".json";
-		JsonSchemaFile jsonSchemaFile = new JsonSchemaFile();
-		jsonSchemaFile.setId("Global_Portal_ImageLibarary" + "_" + subCategory.getName());
-		jsonSchemaFile.setOrderSequence(subCategory.getOrderSequence());
-		AtomicDouble counter=new AtomicDouble(subCategory.getOrderSequence());
-		globalImageLibararyList.forEach(globalImageLibarary -> {
-			String idenNo = BuilderUtil.buildImageLibararyIdenNo(subCategory, globalImageLibarary);
-			JsonSchemaObject jsonObject = new JsonSchemaObject();
-			jsonObject.setId(idenNo);
-			jsonObject.setName("Global_Portal_ImageLibarary");
-			jsonObject.setType(globalImageLibarary.getClass().getName());
-			jsonSchemaFile.setType(globalImageLibarary.getClass().getName());
-			jsonObject.getProperties().put("idenNo", idenNo);
-			jsonObject.getProperties().put("name", globalImageLibarary.getName());
-			jsonObject.getProperties().put("orderSequence", counter.getAndAdd(0.1));
-			jsonObject.getProperties().put("color", subCategory.getColor());
-			jsonObject.getProperties().put("type", globalImageLibarary.getType());
-			jsonObject.getProperties().put("imageUrl", globalImageLibarary.getImageUrl());
-			jsonObject.getProperties().put("subCategory",
-					"LK@" + BuilderUtil.buildSubCategoryIdenNo(subCategory.getMainCategory(), subCategory));
-			jsonSchemaFile.getObjects().add(jsonObject);
-		});
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			Files.write(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonSchemaFile),
-					new File(dirs, fileName), Charset.defaultCharset());
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		return null;
 	}
 }

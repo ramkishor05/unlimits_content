@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.unlimits.rest.repository.CustomRepository;
 
-import com.brijframework.content.global.entities.EOGlobalSubCategory;
 import com.brijframework.content.global.entities.EOGlobalTagLibarary;
 
 @Repository
@@ -23,7 +22,8 @@ public interface GlobalTagLibararyRepository extends CustomRepository<EOGlobalTa
 	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL WHERE GTL.SUB_CATEGORY_ID IN (?1) and GTL.NAME LIKE (%?2%) and GTL.RECORD_STATUS in (?3) ORDER BY GTL.NAME ")
 	List<EOGlobalTagLibarary> search(Long subCategoryId, String name, List<String> statusIds);
 
-	EOGlobalTagLibarary findBySubCategoryAndName(EOGlobalSubCategory globalCategoryItem, String name);
+	@Query(nativeQuery = true, value="Select GTL.* from EOGLOBAL_TAG_LIBARARY GTL INNER JOIN EOGLOBAL_SUB_CATEGORY GSC ON GSC.ID=GTL.SUB_CATEGORY_ID WHERE GSC.ID IN (?1) AND GTL.NAME IN (?2) ORDER BY GTL.NAME ")
+	List<EOGlobalTagLibarary> findBySubCategoryAndName(Long globalSubCategoryId, String name);
 	
 	Optional<EOGlobalTagLibarary> findBySubCategoryIdAndName(Long globalCategoryId, String name);
 

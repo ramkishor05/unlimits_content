@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.brijframework.content.constants.ResourceType;
 import com.brijframework.content.global.entities.EOGlobalMainCategory;
 import com.brijframework.content.global.entities.EOGlobalPromptLibarary;
 import com.brijframework.content.global.entities.EOGlobalSubCategory;
@@ -50,34 +51,34 @@ public class ContentListener implements ApplicationListener<ContextRefreshedEven
 	@Value("${spring.db.datajson.upload}")
 	boolean upload;
 
-	@SuppressWarnings("unused")
 	@Override
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
 		if (upload) {
 
 			try {
 				JsonSchemaDataFactory instance = JsonSchemaDataFactory.getInstance();
+				
 				List<EOGlobalMainCategory> eoGlobalCategoryGroupJson = instance.getAll(EOGlobalMainCategory.class);
 
-				//globalMainCategoryService.init(eoGlobalCategoryGroupJson);
+				globalMainCategoryService.init(eoGlobalCategoryGroupJson);
 
 				List<EOGlobalSubCategory> eoGlobalCategoryItemJson = instance.getAll(EOGlobalSubCategory.class);
 
-				//globalSubCategoryService.init(eoGlobalCategoryItemJson);
+				globalSubCategoryService.init(eoGlobalCategoryItemJson);
 
 				List<EOGlobalTagLibarary> eoGlobalTagItemJson = instance.getAll(EOGlobalTagLibarary.class);
 
-				//globalTagResourceService.init(eoGlobalTagItemJson);
+				globalTagResourceService.init(eoGlobalTagItemJson);
 				
 				List<EOGlobalTenure> eoGlobalTenureJson = instance.getAll(EOGlobalTenure.class);
 
-				//globalTenureService.init(eoGlobalTenureJson);
+				globalTenureService.init(eoGlobalTenureJson);
 				
 				List<EOGlobalPromptLibarary> eoGlobalPromptJson = instance.getAll(EOGlobalPromptLibarary.class);
 
-				//globalPromptLibararyService.init(eoGlobalPromptJson);
+				globalPromptLibararyService.init(eoGlobalPromptJson);
 
-				globalImageResourceService.init();
+				globalImageResourceService.importData(ResourceType.FILE);
 				
 				List<UIGlobalExampleResource> globalExampleResources = instance.getAll(UIGlobalExampleResource.class);
 

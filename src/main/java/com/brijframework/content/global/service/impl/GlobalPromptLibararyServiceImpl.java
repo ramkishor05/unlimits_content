@@ -116,7 +116,7 @@ public class GlobalPromptLibararyServiceImpl  extends CrudServiceImpl<UIGlobalPr
 	public  void init(List<EOGlobalPromptLibarary> eoGlobalPromptJson) {
 		eoGlobalPromptJson.forEach(eoGlobalPrompt -> {
 			EOGlobalPromptLibarary findGlobalPrompt = globalPromptLibararyRepository
-					.findByIdenNo(eoGlobalPrompt.getIdenNo()).orElse(eoGlobalPrompt);
+					.findByName(eoGlobalPrompt.getName()).orElse(eoGlobalPrompt);
 			BeanUtils.copyProperties(eoGlobalPrompt, findGlobalPrompt, "id");
 			findGlobalPrompt.setRecordState(RecordStatus.ACTIVETED.getStatus());
 			EOGlobalPromptLibarary eoGlobalPromptSave = globalPromptLibararyRepository

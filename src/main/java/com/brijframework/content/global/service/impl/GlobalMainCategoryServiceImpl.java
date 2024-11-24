@@ -78,7 +78,7 @@ public class GlobalMainCategoryServiceImpl extends CrudServiceImpl<UIGlobalMainC
         LOGGER.info("init started");
 		eoGlobalCategoryGroupJson.forEach(eoGlobalCategoryGroup -> {
 			EOGlobalMainCategory findGlobalCategoryGroup = globalMainCategoryRepository
-					.findByIdenNo(eoGlobalCategoryGroup.getIdenNo()).orElse(eoGlobalCategoryGroup);
+					.findByName(eoGlobalCategoryGroup.getName()).orElse(eoGlobalCategoryGroup);
 			BeanUtils.copyProperties(eoGlobalCategoryGroup, findGlobalCategoryGroup, "id");
 			findGlobalCategoryGroup.setRecordState(RecordStatus.ACTIVETED.getStatus());
 			EOGlobalMainCategory eoGlobalCategoryGroupSave = globalMainCategoryRepository

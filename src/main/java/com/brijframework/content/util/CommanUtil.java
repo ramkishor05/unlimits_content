@@ -24,5 +24,29 @@ public class CommanUtil {
 			return null;
 		}
 		return text.replaceAll("[^._a-zA-Z0-9]", "_").replace("__","_").replaceAll("__","_");
+	}public static int indexOfEndWithNumber(String str) {
+		int n = str.length();
+		int index = -1;
+		for (int i = n - 1; i >= 0; i--) {
+			char ch=str.charAt(i);
+			if (isNumber(ch)) {
+				index=i;
+			} else {
+				break;
+			}
+		}
+		return index;
+	}
+
+	public static boolean isNumber(char ch) {
+		return '0' <=ch  && ch <= '9';
+	}
+	
+	public static String ignoreEndWithNumber(String str) {
+		int lastIndex = indexOfEndWithNumber(str);
+		if(lastIndex==-1) {
+			return str;
+		}
+		return str.substring(0, lastIndex);
 	}
 }

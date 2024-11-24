@@ -38,4 +38,7 @@ public interface GlobalImageLibararyRepository extends CustomRepository<EOGlobal
 	Optional<EOGlobalImageLibarary> findBySubCategoryIdAndName(Long subCategoryId, String name);
 
 	long countByRecordStateIn(List<String> statusIds);
+
+	@Query(nativeQuery = true, value="Select GCI.* from EOGLOBAL_IMAGE_LIBARARY GCI WHERE GCI.RESOURCE_TYPE IN (?1) ORDER BY GCI.NAME ")
+	List<EOGlobalImageLibarary> findAll(String resourceType);
 }
